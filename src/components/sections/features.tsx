@@ -351,7 +351,8 @@ function ProfitSplitArtwork() {
 function RewardVaultArtwork() {
   return (
     <div className="absolute inset-0 overflow-hidden">
-      <div className="absolute left-1/2 top-[53%] h-64 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#D4AF37]/10 blur-[100px]" />
+      {/* SOFT AMBIENT GLOW */}
+      <div className="pointer-events-none absolute left-1/2 top-[56%] h-[230px] w-[280px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#D4AF37]/[0.09] blur-[85px]" />
 
       <svg
         viewBox="0 0 520 390"
@@ -361,207 +362,290 @@ function RewardVaultArtwork() {
       >
         <defs>
           <linearGradient
-            id="vaultMetal"
-            x1="110"
-            y1="50"
-            x2="390"
-            y2="345"
-            gradientUnits="userSpaceOnUse"
-          >
-            <stop stopColor="#242424" />
-            <stop offset=".09" stopColor="#F2F2F2" />
-            <stop offset=".21" stopColor="#656565" />
-            <stop offset=".38" stopColor="#EAEAEA" />
-            <stop offset=".55" stopColor="#3E3E3E" />
-            <stop offset=".73" stopColor="#BDBDBD" />
-            <stop offset=".88" stopColor="#323232" />
-            <stop offset="1" stopColor="#111" />
-          </linearGradient>
-
-          <linearGradient
-            id="vaultGold"
+            id="rewardCardGold"
             x1="0"
             y1="0"
             x2="1"
             y2="1"
           >
-            <stop stopColor="#5A3B03" />
-            <stop offset=".18" stopColor="#DBB13E" />
-            <stop offset=".35" stopColor="#FFF0A0" />
-            <stop offset=".53" stopColor="#A87512" />
-            <stop offset=".73" stopColor="#F0CE65" />
-            <stop offset="1" stopColor="#4B3003" />
+            <stop stopColor="#FFF0A0" />
+            <stop offset=".32" stopColor="#D9B13C" />
+            <stop offset=".68" stopColor="#A57412" />
+            <stop offset="1" stopColor="#5C3B04" />
+          </linearGradient>
+
+          <linearGradient
+            id="rewardArrowGold"
+            x1="0"
+            y1="0"
+            x2="1"
+            y2="1"
+          >
+            <stop stopColor="#FFF2A7" />
+            <stop offset=".45" stopColor="#D4AF37" />
+            <stop offset="1" stopColor="#8B6210" />
           </linearGradient>
 
           <filter
-            id="vaultShadow"
-            x="-100%"
-            y="-100%"
-            width="300%"
-            height="320%"
+            id="rewardSimpleShadow"
+            x="-50%"
+            y="-50%"
+            width="200%"
+            height="220%"
           >
             <feDropShadow
               dx="0"
-              dy="20"
-              stdDeviation="16"
+              dy="16"
+              stdDeviation="14"
               floodColor="#000"
-              floodOpacity=".88"
+              floodOpacity=".6"
             />
           </filter>
         </defs>
 
+        {/* FLOOR */}
         <ellipse
-          cx="270"
-          cy="329"
-          rx="155"
-          ry="24"
+          cx="260"
+          cy="318"
+          rx="145"
+          ry="18"
           fill="#000"
-          opacity=".7"
+          opacity=".45"
         />
 
-        {/* SAFE */}
-        <g filter="url(#vaultShadow)">
-          <rect
-            x="165"
-            y="101"
-            width="185"
-            height="193"
-            rx="31"
-            fill="url(#vaultMetal)"
-          />
+        {/* SUBTLE BACK RING */}
+        <circle
+          cx="260"
+          cy="205"
+          r="126"
+          stroke="#D4AF37"
+          strokeOpacity=".07"
+        />
 
-          <rect
-            x="178"
-            y="114"
-            width="159"
-            height="167"
-            rx="24"
-            fill="#09090A"
-          />
+        <circle
+          cx="260"
+          cy="205"
+          r="102"
+          stroke="white"
+          strokeOpacity=".035"
+          strokeDasharray="4 9"
+        />
 
+        {/* =================================================
+            MAIN REWARD CARD
+        ================================================= */}
+
+        <g filter="url(#rewardSimpleShadow)">
           <rect
-            x="190"
-            y="126"
-            width="135"
-            height="143"
-            rx="18"
+            x="132"
+            y="118"
+            width="256"
+            height="172"
+            rx="30"
+            fill="#0C0C0D"
             stroke="white"
-            strokeOpacity=".06"
+            strokeOpacity=".09"
           />
-        </g>
 
-        {/* OPEN DOOR */}
-        <g
-          transform="translate(148 117)"
-          filter="url(#vaultShadow)"
-        >
+          {/* GOLD TOP EDGE */}
           <path
-            d="M0 0 61 20v153L0 191V0Z"
-            fill="url(#vaultMetal)"
+            d="M163 119H357"
+            stroke="url(#rewardCardGold)"
+            strokeWidth="2"
+            strokeLinecap="round"
           />
 
-          <path
-            d="M10 17 50 30v128l-40 15V17Z"
-            fill="#151516"
+          {/* LABEL */}
+          <text
+            x="164"
+            y="155"
+            fill="white"
+            fillOpacity=".28"
+            fontSize="8"
+            fontWeight="800"
+            letterSpacing="2"
+          >
+            REWARD PROGRESS
+          </text>
+
+          {/* MAIN VALUE */}
+          <text
+            x="164"
+            y="191"
+            fill="white"
+            fillOpacity=".92"
+            fontSize="27"
+            fontWeight="900"
+            letterSpacing="-1.5"
+          >
+            READY
+          </text>
+
+          {/* PROGRESS BACKGROUND */}
+          <rect
+            x="164"
+            y="215"
+            width="176"
+            height="7"
+            rx="3.5"
+            fill="white"
+            fillOpacity=".06"
           />
 
+          {/* PROGRESS */}
+          <rect
+            x="164"
+            y="215"
+            width="142"
+            height="7"
+            rx="3.5"
+            fill="url(#rewardCardGold)"
+          />
+
+          {/* SMALL META */}
           <circle
-            cx="30"
-            cy="96"
-            r="10"
-            fill="url(#vaultGold)"
-          />
-        </g>
-
-        {/* SAFE DIAL */}
-        <g transform="translate(258 184)">
-          <circle
-            r="45"
-            fill="#080808"
-            stroke="url(#vaultGold)"
-            strokeWidth="4"
-          />
-
-          <circle
-            r="32"
-            stroke="white"
-            strokeOpacity=".07"
-          />
-
-          <circle
-            r="7"
+            cx="169"
+            cy="251"
+            r="4"
             fill="#D4AF37"
           />
 
-          {[0, 45, 90, 135].map((angle) => (
-            <line
-              key={angle}
-              x1="0"
-              y1="-12"
-              x2="0"
-              y2="-29"
-              transform={`rotate(${angle})`}
-              stroke="#D4AF37"
-              strokeOpacity=".65"
-              strokeWidth="3"
-              strokeLinecap="round"
-            />
-          ))}
+          <text
+            x="181"
+            y="254"
+            fill="white"
+            fillOpacity=".35"
+            fontSize="8"
+            fontWeight="700"
+          >
+            REWARD FLOW
+          </text>
         </g>
 
-        {/* BP TOKENS */}
-        {[0, 1, 2, 3].map((item) => (
-          <g
-            key={item}
-            transform={`translate(${226 + item * 27} ${243 - item * 13})`}
+        {/* =================================================
+            BP COIN
+        ================================================= */}
+
+        <g
+          transform="translate(350 170)"
+          filter="url(#rewardSimpleShadow)"
+        >
+          <circle
+            cy="5"
+            r="43"
+            fill="#614006"
+          />
+
+          <circle
+            r="43"
+            fill="url(#rewardCardGold)"
+          />
+
+          <circle
+            r="33"
+            fill="#101011"
+          />
+
+          <circle
+            r="27"
+            stroke="#D4AF37"
+            strokeOpacity=".32"
+          />
+
+          <text
+            y="7"
+            textAnchor="middle"
+            fill="#E2BD4F"
+            fontSize="18"
+            fontWeight="900"
+            letterSpacing="-1"
           >
-            <circle
-              cy="4"
-              r="23"
-              fill="#664407"
-            />
+            BP
+          </text>
+        </g>
 
-            <circle
-              r="23"
-              fill="url(#vaultGold)"
-            />
+        {/* =================================================
+            FORWARD FLOW
+        ================================================= */}
 
-            <circle
-              r="16"
-              fill="#151515"
-            />
-
-            <text
-              y="5"
-              textAnchor="middle"
-              fill="#DAB246"
-              fontSize="11"
-              fontWeight="900"
-            >
-              BP
-            </text>
-          </g>
-        ))}
-
-        {/* LIGHT TRAJECTORY */}
         <path
-          d="M92 253C140 220 172 232 206 200C237 170 271 139 310 148C353 158 383 125 434 103"
+          d="M105 276C157 283 194 275 226 259"
           stroke="#D4AF37"
-          strokeOpacity=".1"
-          strokeWidth="14"
+          strokeOpacity=".10"
+          strokeWidth="9"
           strokeLinecap="round"
         />
 
         <path
-          d="M92 253C140 220 172 232 206 200C237 170 271 139 310 148C353 158 383 125 434 103"
-          stroke="#E7C45C"
-          strokeWidth="2"
+          d="M105 276C157 283 194 275 226 259"
+          stroke="#D4AF37"
+          strokeOpacity=".55"
+          strokeWidth="1.5"
           strokeLinecap="round"
+        />
+
+        {/* FAST ARROW */}
+        <g transform="translate(382 247)">
+          <circle
+            cx="0"
+            cy="0"
+            r="27"
+            fill="#101011"
+            stroke="#D4AF37"
+            strokeOpacity=".18"
+          />
+
+          <path
+            d="M-9 0H9M3-7l7 7-7 7"
+            stroke="url(#rewardArrowGold)"
+            strokeWidth="3"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </g>
+
+        {/* =================================================
+            DECORATIVE DOTS
+        ================================================= */}
+
+        <circle
+          cx="112"
+          cy="185"
+          r="3"
+          fill="#D4AF37"
+          opacity=".55"
+        />
+
+        <circle
+          cx="411"
+          cy="133"
+          r="2.5"
+          fill="#D4AF37"
+          opacity=".75"
+        />
+
+        <circle
+          cx="420"
+          cy="294"
+          r="2"
+          fill="white"
+          opacity=".22"
+        />
+
+        <circle
+          cx="126"
+          cy="306"
+          r="2"
+          fill="white"
+          opacity=".16"
         />
       </svg>
 
-      <div className="absolute right-[8%] top-[12%] rounded-full border border-[#D4AF37]/15 bg-black/35 px-3 py-1.5 text-[7px] font-black uppercase tracking-[0.17em] text-[#DEBD54] backdrop-blur-xl">
-        Reward secured
+      {/* SIMPLE BADGE */}
+      <div className="absolute right-[8%] top-[10%] rounded-full border border-[#D4AF37]/15 bg-[#0B0B0C]/80 px-3 py-1.5">
+        <span className="text-[7px] font-black uppercase tracking-[0.17em] text-[#DDBB50]">
+          Reward flow
+        </span>
       </div>
     </div>
   );
