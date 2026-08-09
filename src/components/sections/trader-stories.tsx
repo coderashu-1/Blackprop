@@ -290,7 +290,6 @@ function TradingChart({
 }) {
   return (
     <div className="relative h-full w-full overflow-hidden">
-      {/* GRID */}
       <div
         className="absolute inset-0 opacity-40"
         style={{
@@ -367,7 +366,6 @@ function Laptop({
     <div className={`relative ${className}`}>
       <div className="relative aspect-[1.58] rounded-t-[16px] bg-[linear-gradient(135deg,#787874,#292929_38%,#898984_67%,#393936)] p-[5px] shadow-[0_28px_45px_rgba(36,29,17,.27)]">
         <div className="relative h-full overflow-hidden rounded-t-[11px] bg-[#070708]">
-          {/* TOPBAR */}
           <div className="absolute inset-x-0 top-0 z-10 flex h-7 items-center justify-between border-b border-white/[0.05] px-3">
             <div className="flex items-center gap-1.5">
               <span className="h-1.5 w-1.5 rounded-full bg-[#D4AF37]" />
@@ -386,12 +384,10 @@ function Laptop({
             <TradingChart />
           </div>
 
-          {/* SCREEN REFLECTION */}
           <div className="pointer-events-none absolute -left-3 top-0 h-[140%] w-[18%] -rotate-[13deg] bg-white/[0.04] blur-sm" />
         </div>
       </div>
 
-      {/* BASE */}
       <div
         className="relative -left-[7%] h-[27px] w-[114%] origin-top rounded-b-xl bg-[linear-gradient(180deg,#AAAAA5,#63635F_43%,#292927)] shadow-[0_12px_20px_rgba(29,24,17,.2)]"
         style={{
@@ -470,11 +466,8 @@ function Plant() {
 
       <div className="absolute bottom-4 left-1/2 h-12 w-10 -translate-x-1/2">
         <span className="absolute bottom-0 left-[42%] h-11 w-2.5 origin-bottom -rotate-[30deg] rounded-full bg-[#53654F]" />
-
         <span className="absolute bottom-0 left-[44%] h-12 w-2.5 origin-bottom rotate-[28deg] rounded-full bg-[#61735C]" />
-
         <span className="absolute bottom-0 left-[42%] h-10 w-2.5 origin-bottom -rotate-[10deg] rounded-full bg-[#73816A]" />
-
         <span className="absolute bottom-0 left-[44%] h-10 w-2.5 origin-bottom rotate-[9deg] rounded-full bg-[#69775F]" />
       </div>
     </div>
@@ -524,7 +517,6 @@ function CertificatePreview({
           <span>BlackProp</span>
         </div>
 
-        {/* GLASS */}
         <div className="pointer-events-none absolute -left-10 top-0 h-full w-16 rotate-[15deg] bg-white/[0.04] blur-sm" />
       </div>
     </div>
@@ -532,75 +524,47 @@ function CertificatePreview({
 }
 
 /* =========================================================
-   FIXED REALISTIC TRADER
-   Fully inside frame — no cut neck/head.
+   REALISTIC TRADER
 ========================================================= */
 
 function SeatedTrader() {
   return (
     <div className="pointer-events-none absolute bottom-0 left-[-6%] z-30 h-[78%] w-[65%]">
-      {/* REALISTIC TRADER IMAGE */}
       <div className="relative h-full w-full">
-
-        {/* AMBIENT SHADOW */}
         <div className="absolute bottom-[4%] left-[20%] h-[30%] w-[65%] rounded-full bg-black/30 blur-[45px]" />
 
-        {/* GOLD LIGHT REFLECTION */}
         <div className="absolute left-[35%] top-[15%] h-[35%] w-[35%] rounded-full bg-[#D4AF37]/10 blur-[70px]" />
 
         <img
           src="/images/trader-back.png"
           alt="Trader working at a workstation"
-          className="
-            relative
-            h-full
-            w-full
-            object-contain
-            object-bottom
-            drop-shadow-[0_35px_45px_rgba(0,0,0,.35)]
-          "
+          className="relative h-full w-full object-contain object-bottom drop-shadow-[0_35px_45px_rgba(0,0,0,.35)]"
         />
 
-        {/* SCREEN LIGHT ON PERSON */}
-        <div className="
-          pointer-events-none
-          absolute
-          bottom-[15%]
-          right-[10%]
-          h-[35%]
-          w-[18%]
-          rounded-full
-          bg-blue-300/10
-          blur-[45px]
-        "/>
-
+        <div className="pointer-events-none absolute bottom-[15%] right-[10%] h-[35%] w-[18%] rounded-full bg-blue-300/10 blur-[45px]" />
       </div>
     </div>
   );
 }
+
 /* =========================================================
    OFFICE SCENE
+   KEPT UNCHANGED
 ========================================================= */
 
 function OfficeScene() {
   return (
     <div className="relative h-full overflow-hidden bg-[#D8D3C9]">
-      {/* WALL */}
       <div className="absolute inset-x-0 top-0 h-[42%] bg-[linear-gradient(180deg,#DDD9D0,#CAC3B7)]" />
 
-      {/* WINDOW / CABINET */}
       <div className="absolute left-[4%] top-[6%] h-[24%] w-[92%] overflow-hidden rounded-xl bg-[#E9E5DD] shadow-[inset_0_1px_0_white]">
         <div className="absolute left-[7%] top-[12%] h-2 w-16 rounded-full bg-white/80 blur-[1px]" />
-
         <div className="absolute left-[42%] top-[12%] h-2 w-16 rounded-full bg-white/70 blur-[1px]" />
-
         <div className="absolute right-[7%] top-[12%] h-2 w-16 rounded-full bg-white/70 blur-[1px]" />
       </div>
 
-      {/* WARM LIGHT */}
       <div className="absolute right-[12%] top-[11%] h-24 w-24 rounded-full bg-[#D4AF37]/10 blur-[35px]" />
 
-      {/* PLANTS */}
       <div className="absolute inset-x-[2%] top-[28%] z-10 flex items-end justify-around">
         <Plant />
         <Plant />
@@ -609,7 +573,6 @@ function OfficeScene() {
         <Plant />
       </div>
 
-      {/* DESK */}
       <div
         className="absolute -left-[10%] bottom-[-3%] h-[52%] w-[120%] bg-[linear-gradient(120deg,#806343,#C2A174_43%,#A17E58_72%,#725638)] shadow-[0_-5px_20px_rgba(59,45,25,.13)]"
         style={{
@@ -618,17 +581,13 @@ function OfficeScene() {
         }}
       />
 
-      {/* WOOD LINES */}
       <div className="absolute bottom-[29%] left-[-5%] h-px w-[110%] -rotate-[5deg] bg-white/14" />
-
       <div className="absolute bottom-[17%] left-[-5%] h-px w-[110%] -rotate-[5deg] bg-black/[0.06]" />
 
-      {/* LAPTOP */}
       <div className="absolute bottom-[19%] right-[5%] z-20 w-[62%]">
         <Laptop />
       </div>
 
-      {/* PHONE */}
       <div
         className="absolute bottom-[3%] right-[27%] z-20"
         style={{
@@ -639,7 +598,6 @@ function OfficeScene() {
         <TradingPhone />
       </div>
 
-      {/* COFFEE */}
       <div
         className="absolute bottom-[4%] right-[3%] z-20"
         style={{
@@ -649,10 +607,8 @@ function OfficeScene() {
         <CoffeeCup />
       </div>
 
-      {/* FULL TRADER */}
       <SeatedTrader />
 
-      {/* CAMERA DEPTH */}
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_56%_44%,transparent_43%,rgba(52,41,25,.1)_100%)]" />
 
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[18%] bg-gradient-to-t from-black/10 to-transparent" />
@@ -666,247 +622,282 @@ function OfficeScene() {
 
 function PerformanceScene() {
   return (
-    <div className="relative h-full overflow-hidden bg-[#BFB6A6]">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_75%_8%,rgba(255,255,255,.45),transparent_30%),linear-gradient(145deg,#CEC5B6,#A99E8D)]" />
+    <div className="relative h-full overflow-hidden bg-[#C9C1B4]">
+      <div className="absolute inset-0 bg-[linear-gradient(145deg,#E2DDD4_0%,#C9C0B3_54%,#ACA292_100%)]" />
 
-      {/* DESK PERSPECTIVE */}
+      <div className="absolute right-[7%] top-[6%] h-[25%] w-[44%] overflow-hidden rounded-[18px] border border-white/40 bg-white/25">
+        <div className="absolute left-1/2 top-0 h-full w-px -translate-x-1/2 bg-black/[0.035]" />
+        <div className="absolute left-0 top-1/2 h-px w-full -translate-y-1/2 bg-black/[0.035]" />
+      </div>
+
+      <div className="absolute right-[8%] top-[8%] h-52 w-52 rounded-full bg-[#D4AF37]/10 blur-[65px]" />
+
       <div
-        className="absolute inset-x-[-17%] bottom-[-6%] h-[78%] bg-[linear-gradient(120deg,#674A34,#B5895E_42%,#896143_70%,#58402E)]"
-        style={{
-          transform:
-            "perspective(720px) rotateX(57deg) translateY(30%) scale(1.22)",
-          transformOrigin: "bottom",
-        }}
-      />
-
-      {/* LAPTOP */}
-      <div
-        className="absolute left-[5%] top-[10%] z-20 w-[80%]"
-        style={{
-          transform:
-            "perspective(900px) rotateZ(3deg) rotateY(-4deg)",
-        }}
-      >
-        <Laptop />
-      </div>
-
-      {/* CERTIFICATE */}
-      <div
-        className="absolute bottom-[7%] left-[27%] z-30"
-        style={{
-          transform:
-            "rotate(-10deg) scale(.88)",
-        }}
-      >
-        <CertificatePreview amount="$3,740" />
-      </div>
-
-      {/* PHONE */}
-      <div
-        className="absolute bottom-[1%] left-[4%] z-30"
-        style={{
-          transform:
-            "rotate(12deg) scale(.75)",
-        }}
-      >
-        <TradingPhone />
-      </div>
-
-      {/* COFFEE */}
-      <div className="absolute bottom-[26%] right-[4%] z-20">
-        <CoffeeCup />
-      </div>
-
-      {/* HEADPHONES */}
-      <div className="absolute bottom-[2%] right-[3%] z-20 h-[110px] w-[125px] rotate-[-15deg]">
-        <div className="absolute left-3 top-0 h-[96px] w-[96px] rounded-[50%] border-[10px] border-[#252729] border-b-transparent" />
-
-        <div className="absolute bottom-0 left-0 h-12 w-8 rounded-xl bg-[#292C2F]" />
-
-        <div className="absolute bottom-2 right-0 h-12 w-8 rounded-xl bg-[#292C2F]" />
-      </div>
-
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_48%_48%,transparent_50%,rgba(36,27,15,.16)_100%)]" />
-    </div>
-  );
-}
-
-/* =========================================================
-   REWARD SCENE
-========================================================= */
-
-function RewardScene() {
-  return (
-    <div className="relative h-full overflow-hidden bg-[#D8D2C7]">
-      {/* OFFICE */}
-      <div className="absolute inset-x-0 top-0 h-[42%] bg-[linear-gradient(180deg,#D8D3CB,#C4BDB1)]" />
-
-      <div className="absolute left-[4%] top-[6%] h-[22%] w-[92%] rounded-xl bg-[#EAE6DE]" />
-
-      {/* PLANTS */}
-      <div className="absolute inset-x-[3%] top-[28%] flex items-end justify-around">
-        <Plant />
-        <Plant />
-        <Plant />
-        <Plant />
-      </div>
-
-      {/* DESK */}
-      <div
-        className="absolute inset-x-[-8%] bottom-[-2%] h-[55%] bg-[linear-gradient(125deg,#785B40,#B08A61_44%,#96714D_70%,#674C34)]"
-        style={{
-          clipPath:
-            "polygon(0 15%,100% 0,100% 100%,0 100%)",
-        }}
-      />
-
-      {/* LAPTOP */}
-      <div className="absolute bottom-[20%] left-[3%] z-20 w-[65%]">
-        <Laptop />
-      </div>
-
-      {/* PAYOUT CERTIFICATE */}
-      <div
-        className="absolute bottom-[5%] right-[3%] z-30"
-        style={{
-          transform:
-            "rotate(5deg) scale(.86)",
-        }}
-      >
-        <CertificatePreview amount="$5,600" />
-      </div>
-
-      {/* COFFEE */}
-      <div
-        className="absolute bottom-[4%] left-[2%] z-30"
-        style={{
-          transform: "scale(.73)",
-        }}
-      >
-        <CoffeeCup />
-      </div>
-
-      {/* SLEEVE */}
-      <div className="absolute -bottom-5 left-[27%] z-30 h-[27%] w-[57%] rotate-[-7deg] rounded-[50%_50%_0_0] bg-[linear-gradient(145deg,#222A30,#12181C)]" />
-
-      {/* HAND */}
-      <div className="absolute bottom-[14%] left-[61%] z-30 h-[10%] w-[21%] rotate-[16deg] rounded-[45%] bg-[linear-gradient(135deg,#AE7353,#D59970)]" />
-
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_51%_46%,transparent_45%,rgba(52,42,27,.12)_100%)]" />
-    </div>
-  );
-}
-
-/* =========================================================
-   MOBILE SCENE
-========================================================= */
-
-function MobileScene() {
-  return (
-    <div className="relative h-full overflow-hidden bg-[#D9D4CA]">
-      <div className="absolute inset-x-0 top-0 h-[45%] bg-[linear-gradient(145deg,#ECE9E2,#BEB6A8)]" />
-
-      <div className="absolute -right-16 -top-14 h-72 w-72 rounded-full bg-[#D4AF37]/10 blur-[75px]" />
-
-      {/* TABLE */}
-      <div
-        className="absolute inset-x-[-15%] bottom-[-8%] h-[59%] bg-[linear-gradient(115deg,#856546,#B69265_45%,#75573D)]"
-        style={{
-          transform:
-            "perspective(600px) rotateX(53deg) translateY(17%) scale(1.15)",
-          transformOrigin: "bottom",
-        }}
-      />
-
-      {/* HERO PHONE */}
-      <div
-        className="absolute left-1/2 top-[13%] z-20"
-        style={{
-          transform:
-            "translateX(-50%) rotate(-4deg) scale(1.8)",
-        }}
-      >
-        <TradingPhone />
-      </div>
-
-      {/* COFFEE */}
-      <div className="absolute bottom-[7%] right-[7%] z-20">
-        <CoffeeCup />
-      </div>
-
-      {/* BLACKPROP CARD */}
-      <div className="absolute bottom-[5%] left-[18%] z-20 h-[92px] w-[145px] rotate-[7deg] overflow-hidden rounded-xl bg-[#101011] shadow-[0_18px_35px_rgba(41,32,16,.24)]">
-        <div className="absolute left-4 top-4 h-6 w-8 rounded bg-[linear-gradient(135deg,#F0CF64,#91650D)]" />
-
-        <p className="absolute bottom-5 left-4 text-[8px] font-black tracking-[0.12em] text-white/80">
-          BLACKPROP
-        </p>
-
-        <div className="absolute -right-4 -top-7 h-24 w-24 rounded-full border border-[#D4AF37]/20" />
-      </div>
-
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_42%,transparent_47%,rgba(46,38,25,.12)_100%)]" />
-    </div>
-  );
-}
-
-/* =========================================================
-   NIGHT SCENE
-========================================================= */
-
-function NightScene() {
-  return (
-    <div className="relative h-full overflow-hidden bg-[#101113]">
-      {/* LIGHTS */}
-      <div className="absolute right-[4%] top-[3%] h-64 w-64 rounded-full bg-[#D4AF37]/10 blur-[100px]" />
-
-      <div className="absolute inset-x-0 top-0 h-[48%] bg-[linear-gradient(180deg,#17191C,#101113)]" />
-
-      {/* LEFT MONITOR */}
-      <div
-        className="absolute left-[4%] top-[12%] z-10 w-[47%]"
-        style={{
-          transform:
-            "perspective(700px) rotateY(7deg)",
-        }}
-      >
-        <div className="aspect-[1.55] rounded-xl bg-[linear-gradient(145deg,#595B5E,#242528)] p-[5px] shadow-[0_25px_45px_rgba(0,0,0,.55)]">
-          <div className="relative h-full overflow-hidden rounded-lg bg-[#060708] p-3">
-            <TradingChart />
-          </div>
-        </div>
-      </div>
-
-      {/* RIGHT MONITOR */}
-      <div
-        className="absolute right-[4%] top-[8%] z-10 w-[47%]"
-        style={{
-          transform:
-            "perspective(700px) rotateY(-8deg)",
-        }}
-      >
-        <div className="aspect-[1.55] rounded-xl bg-[linear-gradient(145deg,#595B5E,#222326)] p-[5px] shadow-[0_25px_45px_rgba(0,0,0,.55)]">
-          <div className="relative h-full overflow-hidden rounded-lg bg-[#060708] p-3">
-            <TradingChart />
-          </div>
-        </div>
-      </div>
-
-      {/* DESK */}
-      <div
-        className="absolute inset-x-[-12%] bottom-[-5%] h-[49%] bg-[linear-gradient(120deg,#29221B,#4A3827_50%,#271F19)]"
+        className="absolute inset-x-[-10%] bottom-[-4%] h-[48%] bg-[linear-gradient(115deg,#6E5139,#B3865E_45%,#856043_76%,#604630)]"
         style={{
           clipPath:
             "polygon(0 14%,100% 0,100% 100%,0 100%)",
         }}
       />
 
-      {/* KEYBOARD */}
+      <div className="absolute left-1/2 top-[16%] z-20 w-[78%] max-w-[430px] -translate-x-1/2">
+        <Laptop />
+      </div>
+
+      <div className="absolute bottom-[7%] right-[6%] z-30 w-[150px] rounded-[18px] border border-white/[0.07] bg-[#0D0D0E] p-4 shadow-[0_18px_38px_rgba(34,27,17,.24)]">
+        <div className="flex items-center justify-between">
+          <span className="text-[6px] font-black uppercase tracking-[0.15em] text-white/28">
+            Performance
+          </span>
+
+          <span className="h-1.5 w-1.5 rounded-full bg-[#D4AF37]" />
+        </div>
+
+        <p className="mt-3 text-[24px] font-black tracking-[-0.06em] text-white">
+          +6.84%
+        </p>
+
+        <p className="mt-1 text-[7px] font-bold uppercase tracking-[0.1em] text-[#D4AF37]">
+          Current cycle
+        </p>
+
+        <div className="mt-3 h-1 overflow-hidden rounded-full bg-white/[0.07]">
+          <div className="h-full w-[68%] rounded-full bg-[linear-gradient(90deg,#9A7017,#E6C45C)]" />
+        </div>
+      </div>
+
       <div
-        className="absolute bottom-[8%] left-1/2 z-20 h-[93px] w-[250px] rounded-xl bg-[#1C1D20] p-3 shadow-[0_18px_35px_rgba(0,0,0,.45)]"
+        className="absolute bottom-[4%] left-[4%] z-20"
+        style={{
+          transform: "scale(.68)",
+        }}
+      >
+        <CoffeeCup />
+      </div>
+
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_42%,transparent_48%,rgba(42,32,20,.12)_100%)]" />
+    </div>
+  );
+}
+
+/* =========================================================
+   REWARD APPROVED SCENE
+========================================================= */
+
+function RewardScene() {
+  return (
+    <div className="relative h-full overflow-hidden bg-[#D8D3C9]">
+      <div className="absolute inset-0 bg-[linear-gradient(145deg,#E9E5DE_0%,#D4CDC2_55%,#B7ADA0_100%)]" />
+
+      <div className="absolute left-[7%] top-[6%] h-[23%] w-[86%] rounded-[18px] border border-white/40 bg-white/25" />
+
+      <div className="absolute left-1/2 top-[38%] h-64 w-64 -translate-x-1/2 rounded-full bg-[#D4AF37]/12 blur-[75px]" />
+
+      <div
+        className="absolute inset-x-[-8%] bottom-[-5%] h-[43%] bg-[linear-gradient(120deg,#6E5139,#AE835C_45%,#876142_76%,#604630)]"
+        style={{
+          clipPath:
+            "polygon(0 14%,100% 0,100% 100%,0 100%)",
+        }}
+      />
+
+      <div className="absolute left-1/2 top-[23%] z-30 w-[78%] max-w-[350px] -translate-x-1/2">
+        <div className="relative overflow-hidden rounded-[26px] border border-[#D4AF37]/20 bg-[#0D0D0E] p-5 shadow-[0_28px_55px_rgba(45,34,15,.28)] sm:p-6">
+          <div className="absolute inset-x-[22%] top-0 h-px bg-gradient-to-r from-transparent via-[#E5C45D] to-transparent" />
+
+          <div className="pointer-events-none absolute -right-14 -top-14 h-36 w-36 rounded-full bg-[#D4AF37]/10 blur-[45px]" />
+
+          <div className="relative">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-[6px] font-black uppercase tracking-[0.18em] text-white/28">
+                  BlackProp Rewards
+                </p>
+
+                <p className="mt-1 text-[8px] font-bold text-white/48">
+                  Reward status
+                </p>
+              </div>
+
+              <div className="grid h-9 w-9 place-items-center rounded-full border border-[#D4AF37]/20 bg-[#D4AF37]/10 text-[9px] font-black text-[#E2BE52]">
+                BP
+              </div>
+            </div>
+
+            <div className="mt-7 flex justify-center">
+              <div className="grid h-20 w-20 place-items-center rounded-full border border-emerald-400/20 bg-emerald-400/[0.07]">
+                <div className="grid h-12 w-12 place-items-center rounded-full bg-emerald-400 text-[#07110D] shadow-[0_0_28px_rgba(74,222,128,.18)]">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    className="h-6 w-6"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="m6 12.5 4 4L18.5 8"
+                      stroke="currentColor"
+                      strokeWidth="2.4"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-5 text-center">
+              <p className="text-[24px] font-black tracking-[-0.055em] text-white">
+                Reward Approved
+              </p>
+
+              <p className="mt-2 text-[8px] font-semibold uppercase tracking-[0.13em] text-emerald-400/75">
+                Payout status confirmed
+              </p>
+            </div>
+
+            <div className="my-5 h-px bg-white/[0.06]" />
+
+            <div className="flex items-center justify-between">
+              <span className="text-[7px] font-bold uppercase tracking-[0.12em] text-white/26">
+                Status
+              </span>
+
+              <div className="flex items-center gap-2">
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+
+                <span className="text-[7px] font-black uppercase tracking-[0.12em] text-white/60">
+                  Approved
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <span className="absolute bottom-[13%] left-[12%] z-20 h-2 w-2 rounded-full bg-[#D4AF37]/65" />
+
+      <span className="absolute bottom-[18%] right-[12%] z-20 h-1.5 w-1.5 rounded-full bg-black/20" />
+
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_46%,transparent_48%,rgba(48,37,23,.11)_100%)]" />
+    </div>
+  );
+}
+
+/* =========================================================
+   MOBILE / FREEDOM SCENE
+========================================================= */
+
+function MobileScene() {
+  return (
+    <div className="relative h-full overflow-hidden bg-[#D9D4CA]">
+      <div className="absolute inset-0 bg-[linear-gradient(145deg,#ECE9E2_0%,#D3CCC0_55%,#BEB4A5_100%)]" />
+
+      <div className="absolute inset-x-[7%] top-[6%] h-[29%] overflow-hidden rounded-[20px] border border-white/40 bg-[#F2EFE9]/90">
+        <div className="absolute bottom-0 left-[8%] h-[55%] w-[22%] rounded-t-full bg-[#A8B39D]/30" />
+
+        <div className="absolute bottom-0 right-[13%] h-[45%] w-[20%] rounded-t-full bg-[#B2B99E]/24" />
+
+        <div className="absolute right-[8%] top-[10%] h-16 w-16 rounded-full bg-[#D4AF37]/10 blur-[22px]" />
+      </div>
+
+      <div
+        className="absolute inset-x-[-12%] bottom-[-9%] h-[50%] bg-[linear-gradient(115deg,#805F42,#B58D64_48%,#77573D)]"
+        style={{
+          clipPath:
+            "polygon(0 14%,100% 0,100% 100%,0 100%)",
+        }}
+      />
+
+      <div
+        className="absolute left-1/2 top-[22%] z-30"
         style={{
           transform:
-            "translateX(-50%) perspective(400px) rotateX(48deg)",
+            "translateX(-50%) rotate(-3deg) scale(2)",
+        }}
+      >
+        <TradingPhone />
+      </div>
+
+      <div className="absolute bottom-[11%] left-[7%] z-30 rounded-[15px] border border-black/[0.06] bg-[#F4F1EA]/90 px-4 py-3 shadow-[0_15px_30px_rgba(55,43,24,.13)]">
+        <div className="flex items-center gap-2">
+          <span className="h-2 w-2 rounded-full bg-emerald-500" />
+
+          <span className="text-[7px] font-black uppercase tracking-[0.13em] text-black/55">
+            Account online
+          </span>
+        </div>
+
+        <p className="mt-1.5 text-[6px] font-semibold text-black/30">
+          Trading environment active
+        </p>
+      </div>
+
+      <div
+        className="absolute bottom-[4%] right-[5%] z-20"
+        style={{
+          transform: "scale(.72)",
+        }}
+      >
+        <CoffeeCup />
+      </div>
+
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_45%,transparent_48%,rgba(46,36,22,.1)_100%)]" />
+    </div>
+  );
+}
+
+/* =========================================================
+   NIGHT / FOCUS SCENE
+========================================================= */
+
+function NightScene() {
+  return (
+    <div className="relative h-full overflow-hidden bg-[#0E1012]">
+      <div className="absolute inset-0 bg-[linear-gradient(145deg,#17191C_0%,#0F1113_55%,#090A0C_100%)]" />
+
+      <div className="absolute right-[10%] top-[7%] h-56 w-56 rounded-full bg-[#D4AF37]/8 blur-[85px]" />
+
+      <div
+        className="absolute inset-x-[-10%] bottom-[-5%] h-[42%] bg-[linear-gradient(120deg,#201A15,#493827_48%,#241C16)]"
+        style={{
+          clipPath:
+            "polygon(0 15%,100% 0,100% 100%,0 100%)",
+        }}
+      />
+
+      <div className="absolute left-1/2 top-[12%] z-20 w-[78%] -translate-x-1/2">
+        <div className="aspect-[1.65] rounded-[16px] bg-[linear-gradient(145deg,#55585C,#242629_50%,#626468)] p-[5px] shadow-[0_28px_55px_rgba(0,0,0,.6)]">
+          <div className="relative h-full overflow-hidden rounded-[11px] bg-[#060708]">
+            <div className="absolute inset-x-0 top-0 z-10 flex h-8 items-center justify-between border-b border-white/[0.05] px-3">
+              <div className="flex items-center gap-2">
+                <span className="h-1.5 w-1.5 rounded-full bg-[#D4AF37]" />
+
+                <span className="text-[5px] font-black tracking-[0.15em] text-white/40">
+                  BLACKPROP
+                </span>
+              </div>
+
+              <span className="text-[5px] font-bold uppercase tracking-[0.1em] text-white/25">
+                Focus session
+              </span>
+            </div>
+
+            <div className="absolute inset-x-3 bottom-3 top-10">
+              <TradingChart />
+            </div>
+          </div>
+        </div>
+
+        <div className="mx-auto h-10 w-5 bg-[linear-gradient(90deg,#303236,#63666A,#282A2D)]" />
+
+        <div className="mx-auto h-2 w-24 rounded-full bg-[#333538]" />
+      </div>
+
+      <div
+        className="absolute bottom-[5%] left-1/2 z-20 h-[76px] w-[220px] rounded-[10px] bg-[#191B1E] p-2.5 shadow-[0_15px_30px_rgba(0,0,0,.5)]"
+        style={{
+          transform:
+            "translateX(-50%) perspective(420px) rotateX(54deg)",
         }}
       >
         <div className="grid h-full grid-cols-12 gap-1">
@@ -915,24 +906,27 @@ function NightScene() {
           }).map((_, index) => (
             <span
               key={index}
-              className={`rounded-[2px] ${
-                index % 13 === 0
-                  ? "bg-[#D4AF37]/45"
-                  : "bg-white/[0.08]"
-              }`}
+              className={
+                index % 17 === 0
+                  ? "rounded-[2px] bg-[#D4AF37]/40"
+                  : "rounded-[2px] bg-white/[0.07]"
+              }
             />
           ))}
         </div>
       </div>
 
-      {/* BP LIGHT */}
-      <div className="absolute bottom-[7%] left-[5%] z-20 grid h-14 w-14 place-items-center rounded-full border border-[#D4AF37]/25 bg-[#D4AF37]/5 shadow-[0_0_35px_rgba(212,175,55,.15)]">
-        <span className="text-[12px] font-black text-[#D4AF37]">
-          BP
-        </span>
+      <div className="absolute bottom-[7%] left-[5%] z-30 rounded-[14px] border border-white/[0.06] bg-[#0C0D0F] px-3.5 py-2.5">
+        <div className="flex items-center gap-2">
+          <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+
+          <span className="text-[6px] font-black uppercase tracking-[0.13em] text-white/45">
+            Risk healthy
+          </span>
+        </div>
       </div>
 
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_42%,transparent_37%,rgba(0,0,0,.36)_100%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_42%,transparent_42%,rgba(0,0,0,.42)_100%)]" />
     </div>
   );
 }
@@ -1025,11 +1019,8 @@ function StoryCard({
       }`}
     >
       <div className="relative aspect-[0.76/1] overflow-hidden bg-[#D6D0C5]">
-        <TraderScene
-          scene={story.scene}
-        />
+        <TraderScene scene={story.scene} />
 
-        {/* QUOTE */}
         <div
           className={`absolute z-40 max-w-[220px] rounded-2xl border border-black/[0.06] bg-white/[0.92] px-4 py-3 shadow-[0_15px_38px_rgba(49,41,20,.14)] backdrop-blur-xl ${
             active
@@ -1048,7 +1039,6 @@ function StoryCard({
         />
       </div>
 
-      {/* FOOTER */}
       <div className="border-t border-black/[0.05] bg-[#F7F5F0] px-5 py-5 sm:px-6">
         <p className="text-[8px] font-black uppercase tracking-[0.19em] text-[#987117]">
           {story.kicker}
@@ -1073,11 +1063,9 @@ function PayoutProofCard({
 }) {
   return (
     <article className="group relative min-h-[180px] overflow-hidden rounded-[25px] border border-black/[0.055] bg-[#F3F2EF] p-5 transition duration-300 hover:-translate-y-1 hover:border-[#B58A24]/20 hover:bg-white hover:shadow-[0_22px_55px_rgba(68,54,20,.08)] sm:p-6">
-      {/* AMBIENT */}
       <div className="pointer-events-none absolute -right-14 -top-14 h-36 w-36 rounded-full bg-[#D4AF37]/[0.07] blur-[50px]" />
 
       <div className="relative flex h-full items-start justify-between gap-5">
-        {/* INFO */}
         <div className="flex min-h-[128px] flex-col">
           <p className="text-2xl font-black tracking-[-0.055em] text-[#080808] sm:text-[1.75rem]">
             {item.amount}
@@ -1100,7 +1088,6 @@ function PayoutProofCard({
           </div>
         </div>
 
-        {/* CERTIFICATE */}
         <div
           className="shrink-0 origin-top-right"
           style={{
@@ -1115,7 +1102,6 @@ function PayoutProofCard({
         </div>
       </div>
 
-      {/* HOVER LINE */}
       <div className="absolute inset-x-[14%] bottom-0 h-px bg-gradient-to-r from-transparent via-[#B58A24]/0 to-transparent transition group-hover:via-[#B58A24]/35" />
     </article>
   );
@@ -1177,9 +1163,7 @@ export function TraderStories() {
     );
   }
 
-  function getPosition(
-    index: number
-  ) {
+  function getPosition(index: number) {
     let difference =
       index - activeIndex;
 
@@ -1202,11 +1186,6 @@ export function TraderStories() {
 
   return (
     <section className="relative overflow-hidden bg-[#FBFAF7] py-24 text-black sm:py-28 lg:py-36">
-
-      {/* =====================================================
-          BACKGROUND
-      ====================================================== */}
-
       <div className="pointer-events-none absolute left-1/2 top-[3%] h-[700px] w-[1100px] -translate-x-1/2 rounded-full bg-[#D4AF37]/[0.045] blur-[180px]" />
 
       <div
@@ -1221,15 +1200,8 @@ export function TraderStories() {
       />
 
       <div className="relative mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
-
-        {/* =====================================================
-            HEADER
-        ====================================================== */}
-
         <div className="mx-auto max-w-[950px] text-center">
-
           <div className="inline-flex items-center gap-2 rounded-full border border-black/[0.055] bg-[#F0EFEA] px-3.5 py-2 shadow-[inset_0_1px_0_white]">
-
             <span className="text-[#A37A17]">
               <UsersIcon />
             </span>
@@ -1237,12 +1209,9 @@ export function TraderStories() {
             <span className="text-[8px] font-black uppercase tracking-[0.2em] text-black/43">
               Built around serious traders
             </span>
-
           </div>
 
-          {/* GRADIENT HEADING */}
           <h2 className="mt-7 text-[3.35rem] font-black uppercase leading-[0.9] tracking-[-0.07em] sm:text-[4.9rem] lg:text-[6rem]">
-
             <span className="text-[#070707]">
               Traders who
             </span>
@@ -1250,7 +1219,6 @@ export function TraderStories() {
             <span className="block bg-[linear-gradient(100deg,#080808_0%,#303030_25%,#79756A_48%,#C29A31_72%,#6F4D08_100%)] bg-clip-text text-transparent">
               set the standard.
             </span>
-
           </h2>
 
           <p className="mx-auto mt-7 max-w-[650px] text-sm leading-7 text-black/47 sm:text-base sm:leading-8">
@@ -1258,17 +1226,10 @@ export function TraderStories() {
             BlackProp is being built for traders who approach
             performance like a professional craft.
           </p>
-
         </div>
 
-        {/* =====================================================
-            CAROUSEL
-        ====================================================== */}
-
         <div className="relative mt-14 sm:mt-16 lg:mt-20">
-
           <div className="relative mx-auto h-[690px] max-w-[1160px] sm:h-[720px] lg:h-[760px]">
-
             {stories.map(
               (story, index) => {
                 const position =
@@ -1318,10 +1279,8 @@ export function TraderStories() {
                 );
               }
             )}
-
           </div>
 
-          {/* LEFT */}
           <button
             type="button"
             onClick={previous}
@@ -1331,7 +1290,6 @@ export function TraderStories() {
             <ArrowLeft />
           </button>
 
-          {/* RIGHT */}
           <button
             type="button"
             onClick={next}
@@ -1341,42 +1299,30 @@ export function TraderStories() {
             <ArrowRight />
           </button>
 
-          {/* DOTS */}
           <div className="mt-1 flex items-center justify-center gap-2">
-
             {stories.map(
               (story, index) => (
                 <button
                   key={story.id}
                   type="button"
                   onClick={() =>
-                    setActiveIndex(
-                      index
-                    )
+                    setActiveIndex(index)
                   }
                   aria-label={`View story ${
                     index + 1
                   }`}
                   className={`h-1.5 rounded-full transition-all duration-300 ${
-                    activeIndex ===
-                    index
+                    activeIndex === index
                       ? "w-9 bg-[#AC8120]"
                       : "w-1.5 bg-black/15 hover:bg-black/30"
                   }`}
                 />
               )
             )}
-
           </div>
-
         </div>
 
-        {/* =====================================================
-            CTA
-        ====================================================== */}
-
         <div className="mt-12 flex flex-col items-center sm:mt-14">
-
           <p className="text-sm font-semibold text-black/48">
             Your trading story starts with the first challenge.
           </p>
@@ -1391,26 +1337,13 @@ export function TraderStories() {
 
             <span className="absolute inset-y-0 -left-20 w-12 skew-x-[-20deg] bg-white/45 blur-md transition-all duration-700 group-hover:left-[125%]" />
           </a>
-
         </div>
-
-        {/* =====================================================
-            DIVIDER
-        ====================================================== */}
 
         <div className="my-20 h-px bg-gradient-to-r from-transparent via-black/[0.07] to-transparent sm:my-24" />
 
-        {/* =====================================================
-            PAYOUT WALL
-        ====================================================== */}
-
         <div>
-
-          {/* HEADER */}
           <div className="mx-auto max-w-[820px] text-center">
-
             <div className="inline-flex items-center gap-2 rounded-full border border-[#B38A26]/15 bg-[#D4AF37]/[0.055] px-3 py-1.5">
-
               <span className="text-[#9C7419]">
                 <TrophyIcon />
               </span>
@@ -1418,11 +1351,11 @@ export function TraderStories() {
               <span className="text-[8px] font-black uppercase tracking-[0.2em] text-[#8D6814]">
                 Trader milestones
               </span>
-
             </div>
 
             <h3 className="mt-6 text-4xl font-black leading-[0.96] tracking-[-0.06em] text-[#080808] sm:text-5xl lg:text-[4.7rem]">
               Progress deserves
+
               <span className="block bg-[linear-gradient(100deg,#121212_0%,#4D4D4D_32%,#C59B31_72%,#75510A_100%)] bg-clip-text text-transparent">
                 recognition.
               </span>
@@ -1433,12 +1366,9 @@ export function TraderStories() {
               objectives and reward moments from across the
               BlackProp community.
             </p>
-
           </div>
 
-          {/* GRID LIKE REFERENCE — UPGRADED */}
           <div className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-
             {payoutItems.map(
               (item, index) => (
                 <PayoutProofCard
@@ -1449,14 +1379,10 @@ export function TraderStories() {
             )}
 
             <MoreTradersCard />
-
           </div>
 
-          {/* BOTTOM INFO */}
           <div className="mt-7 flex flex-col items-center justify-between gap-4 rounded-[20px] border border-black/[0.055] bg-white/50 px-5 py-4 sm:flex-row">
-
             <div className="flex items-center gap-3">
-
               <div className="grid h-9 w-9 place-items-center rounded-full border border-[#D4AF37]/15 bg-[#D4AF37]/[0.06] text-[#A17918]">
                 <UsersIcon />
               </div>
@@ -1470,7 +1396,6 @@ export function TraderStories() {
                   Forex · Futures · Crypto
                 </p>
               </div>
-
             </div>
 
             <a
@@ -1483,14 +1408,8 @@ export function TraderStories() {
                 <ArrowRight />
               </span>
             </a>
-
           </div>
-
         </div>
-
-        {/* =====================================================
-            DISCLAIMER
-        ====================================================== */}
 
         <p className="mx-auto mt-7 max-w-3xl text-center text-[9px] leading-4 text-black/23">
           Trader environments, payout certificates, names, locations
@@ -1498,7 +1417,6 @@ export function TraderStories() {
           content. Replace them with verified BlackProp customer and
           payout data before production launch.
         </p>
-
       </div>
     </section>
   );
