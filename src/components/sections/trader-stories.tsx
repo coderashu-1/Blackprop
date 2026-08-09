@@ -644,7 +644,7 @@ function PerformanceScene() {
         <Laptop />
       </div>
 
-      <div className="absolute bottom-[7%] right-[6%] z-30 w-[150px] rounded-[18px] border border-white/[0.07] bg-[#0D0D0E] p-4 shadow-[0_18px_38px_rgba(34,27,17,.24)]">
+      <div className="absolute bottom-[18%] right-[6%] z-30 w-[150px] rounded-[18px] border border-white/[0.07] bg-[#0D0D0E] p-4 shadow-[0_18px_38px_rgba(34,27,17,.24)]">
         <div className="flex items-center justify-between">
           <span className="text-[6px] font-black uppercase tracking-[0.15em] text-white/28">
             Performance
@@ -816,20 +816,6 @@ function MobileScene() {
         }}
       >
         <TradingPhone />
-      </div>
-
-      <div className="absolute bottom-[11%] left-[7%] z-30 rounded-[15px] border border-black/[0.06] bg-[#F4F1EA]/90 px-4 py-3 shadow-[0_15px_30px_rgba(55,43,24,.13)]">
-        <div className="flex items-center gap-2">
-          <span className="h-2 w-2 rounded-full bg-emerald-500" />
-
-          <span className="text-[7px] font-black uppercase tracking-[0.13em] text-black/55">
-            Account online
-          </span>
-        </div>
-
-        <p className="mt-1.5 text-[6px] font-semibold text-black/30">
-          Trading environment active
-        </p>
       </div>
 
       <div
