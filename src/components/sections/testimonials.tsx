@@ -1,11 +1,16 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ReactNode } from "react";
+
+/* =========================================================
+   DATA
+========================================================= */
 
 const testimonials = [
   {
     name: "Arjun",
     country: "India",
+    code: "IN",
     flag: "🇮🇳",
     title: "Clear from day one.",
     quote:
@@ -14,6 +19,7 @@ const testimonials = [
   {
     name: "Daniel",
     country: "United Kingdom",
+    code: "GB",
     flag: "🇬🇧",
     title: "Built around the trader.",
     quote:
@@ -22,6 +28,7 @@ const testimonials = [
   {
     name: "Marcus",
     country: "United States",
+    code: "US",
     flag: "🇺🇸",
     title: "A premium experience.",
     quote:
@@ -30,6 +37,7 @@ const testimonials = [
   {
     name: "Sara",
     country: "UAE",
+    code: "AE",
     flag: "🇦🇪",
     title: "Simple. Focused. Efficient.",
     quote:
@@ -38,6 +46,7 @@ const testimonials = [
   {
     name: "Lucas",
     country: "Brazil",
+    code: "BR",
     flag: "🇧🇷",
     title: "Everything in one place.",
     quote:
@@ -45,37 +54,26 @@ const testimonials = [
   },
 ];
 
-function StarIcon() {
-  return (
-    <svg
-      viewBox="0 0 20 20"
-      fill="currentColor"
-      className="h-4 w-4"
-      aria-hidden="true"
-    >
-      <path d="M10 1.8 12.4 7l5.6.7-4.1 4 1 5.6-4.9-2.7-5 2.7 1-5.6-4.1-4L7.6 7 10 1.8Z" />
-    </svg>
-  );
-}
+/* =========================================================
+   ICONS
+========================================================= */
 
-function ShieldIcon() {
+function ArrowRight({
+  className = "h-4 w-4",
+}: {
+  className?: string;
+}) {
   return (
     <svg
       viewBox="0 0 20 20"
       fill="none"
-      className="h-4 w-4"
+      className={className}
       aria-hidden="true"
     >
       <path
-        d="M10 2.2 16 4.7v4.8c0 4-2.5 6.4-6 8-3.5-1.6-6-4-6-8V4.7L10 2.2Z"
+        d="M3.5 10h12M11.5 6l4 4-4 4"
         stroke="currentColor"
-        strokeWidth="1.4"
-      />
-
-      <path
-        d="m7.2 10 1.8 1.8 3.8-3.8"
-        stroke="currentColor"
-        strokeWidth="1.4"
+        strokeWidth="1.6"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
@@ -92,9 +90,9 @@ function ArrowLeft() {
       aria-hidden="true"
     >
       <path
-        d="M16 10H4M9 5l-5 5 5 5"
+        d="M16.5 10h-12M8.5 6l-4 4 4 4"
         stroke="currentColor"
-        strokeWidth="1.5"
+        strokeWidth="1.6"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
@@ -102,16 +100,49 @@ function ArrowLeft() {
   );
 }
 
-function ArrowRight() {
+function GlobeIcon() {
   return (
     <svg
-      viewBox="0 0 20 20"
+      viewBox="0 0 24 24"
       fill="none"
-      className="h-4 w-4"
+      className="h-5 w-5"
+      aria-hidden="true"
+    >
+      <circle
+        cx="12"
+        cy="12"
+        r="8.5"
+        stroke="currentColor"
+        strokeWidth="1.45"
+      />
+
+      <path
+        d="M3.8 12h16.4M12 3.5c2.3 2.3 3.5 5.1 3.5 8.5S14.3 18.2 12 20.5M12 3.5C9.7 5.8 8.5 8.6 8.5 12s1.2 6.2 3.5 8.5"
+        stroke="currentColor"
+        strokeWidth="1.35"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+function ShieldIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      className="h-5 w-5"
       aria-hidden="true"
     >
       <path
-        d="M4 10h12M11 5l5 5-5 5"
+        d="M12 3 19 6v5.4c0 4.2-2.7 7.4-7 9.3-4.3-1.9-7-5.1-7-9.3V6l7-3Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinejoin="round"
+      />
+
+      <path
+        d="m8.5 12 2.2 2.2 4.8-4.8"
         stroke="currentColor"
         strokeWidth="1.5"
         strokeLinecap="round"
@@ -124,15 +155,28 @@ function ArrowRight() {
 function QuoteIcon() {
   return (
     <svg
-      viewBox="0 0 34 28"
+      viewBox="0 0 40 32"
       fill="none"
-      className="h-7 w-8"
+      className="h-8 w-10"
       aria-hidden="true"
     >
       <path
-        d="M3 26V15.8C3 7.6 7.2 3.1 14.3 2v5.2c-3.6.8-5.3 2.9-5.6 6.1H14V26H3Zm17 0V15.8C20 7.6 24.2 3.1 31.3 2v5.2c-3.6.8-5.3 2.9-5.6 6.1H31V26H20Z"
+        d="M3 29V17C3 8.5 7.5 3.8 15 2.5v5.8c-3.8.8-5.7 3-6 6.3h6V29H3Zm21 0V17c0-8.5 4.5-13.2 12-14.5v5.8c-3.8.8-5.7 3-6 6.3h6V29H24Z"
         fill="currentColor"
       />
+    </svg>
+  );
+}
+
+function StarIcon() {
+  return (
+    <svg
+      viewBox="0 0 20 20"
+      fill="currentColor"
+      className="h-4 w-4"
+      aria-hidden="true"
+    >
+      <path d="M10 1.8 12.4 7l5.6.7-4.1 4 1 5.6-4.9-2.7-5 2.7 1-5.6-4.1-4L7.6 7 10 1.8Z" />
     </svg>
   );
 }
@@ -147,278 +191,818 @@ function Stars() {
   );
 }
 
-type Position = "left" | "center" | "right" | "hidden";
+/* =========================================================
+   COUNTRY SELECTOR
+========================================================= */
 
-function TestimonialCard({
+function CountryButton({
   testimonial,
-  position,
+  active,
+  onClick,
 }: {
   testimonial: (typeof testimonials)[number];
-  position: Position;
+  active: boolean;
+  onClick: () => void;
 }) {
-  const desktopTransform = {
-    left: "translate(calc(-50% - 390px), -50%) scale(.82) rotate(-3deg)",
-    center: "translate(-50%, -50%) scale(1) rotate(0deg)",
-    right: "translate(calc(-50% + 390px), -50%) scale(.82) rotate(3deg)",
-    hidden: "translate(-50%, -50%) scale(.7)",
-  }[position];
-
   return (
-    <article
-      className={`testimonial-card absolute left-1/2 top-1/2 w-[92%] max-w-[470px] transition-all duration-700 ease-[cubic-bezier(.22,1,.36,1)] ${
-        position === "center"
-          ? "z-30 opacity-100"
-          : position === "hidden"
-            ? "pointer-events-none z-0 opacity-0"
-            : "pointer-events-none z-10 opacity-30"
+    <button
+      type="button"
+      onClick={onClick}
+      className={`group relative overflow-hidden rounded-[18px] border px-3 py-3 text-left transition duration-300 sm:px-4 ${
+        active
+          ? "border-[#D4AF37]/45 bg-[#D4AF37]/10 shadow-[0_0_35px_rgba(212,175,55,.08)]"
+          : "border-white/10 bg-white/[0.035] hover:border-[#D4AF37]/25 hover:bg-[#D4AF37]/[0.05]"
       }`}
-      style={
-        {
-          "--desktop-transform": desktopTransform,
-        } as React.CSSProperties
-      }
     >
-      <div className="relative overflow-hidden rounded-[30px] border border-white/[0.09] bg-[linear-gradient(145deg,#121213_0%,#080808_68%,#100E08_100%)] p-6 shadow-[0_35px_100px_rgba(0,0,0,.6)] sm:p-8">
-        {/* GOLD GLOW */}
-        <div className="pointer-events-none absolute -right-16 -top-20 h-56 w-56 rounded-full bg-[#D4AF37]/[0.075] blur-[75px]" />
+      {active && (
+        <span className="absolute inset-x-[15%] top-0 h-px bg-gradient-to-r from-transparent via-[#F0D16A] to-transparent" />
+      )}
 
-        {/* TOP METALLIC LINE */}
-        <div className="pointer-events-none absolute left-[12%] top-0 h-px w-[50%] bg-gradient-to-r from-transparent via-[#D4AF37]/55 to-transparent" />
+      <div className="flex items-center gap-3">
+        <div
+          className={`grid h-11 w-11 shrink-0 place-items-center rounded-[13px] border text-2xl ${
+            active
+              ? "border-[#D4AF37]/30 bg-[#0A0A0B]"
+              : "border-white/10 bg-[#0B0B0C]"
+          }`}
+        >
+          {testimonial.flag}
+        </div>
 
-        <div className="relative flex items-start justify-between">
-          <Stars />
+        <div className="min-w-0">
+          <p
+            className={`text-[7px] font-black tracking-[0.17em] ${
+              active
+                ? "text-[#D4AF37]"
+                : "text-white"
+            }`}
+          >
+            {testimonial.code}
+          </p>
 
-          <span className="text-[#D4AF37]/18">
-            <QuoteIcon />
+          <p className="mt-1 truncate text-[10px] font-black text-white">
+            {testimonial.country}
+          </p>
+        </div>
+
+        {active && (
+          <span className="bp-country-arrow ml-auto hidden text-[#F0D16A] sm:block">
+            <ArrowRight />
           </span>
-        </div>
-
-        <div className="relative mt-8">
-          <p className="text-[10px] font-black uppercase tracking-[0.16em] text-[#D4AF37]/55">
-            Trader Experience
-          </p>
-
-          <h3 className="mt-2 text-xl font-black tracking-[-0.04em] text-white sm:text-2xl">
-            {testimonial.title}
-          </h3>
-
-          <p className="mt-4 min-h-[118px] text-sm leading-7 text-white/46">
-            “{testimonial.quote}”
-          </p>
-        </div>
-
-        <div className="relative mt-7 flex items-center justify-between border-t border-white/[0.07] pt-5">
-          <div className="flex items-center gap-3">
-            <div className="grid h-12 w-12 place-items-center rounded-2xl border border-white/[0.09] bg-white/[0.045] text-[26px] shadow-[inset_0_1px_0_rgba(255,255,255,.05)]">
-              {testimonial.flag}
-            </div>
-
-            <div>
-              <p className="text-sm font-bold text-white">
-                {testimonial.name}
-              </p>
-
-              <p className="mt-1 text-[8px] font-bold uppercase tracking-[0.13em] text-white/28">
-                {testimonial.country}
-              </p>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-1.5 rounded-full border border-[#D4AF37]/15 bg-[#D4AF37]/[0.05] px-3 py-1.5 text-[#D4AF37]">
-            <ShieldIcon />
-
-            <span className="text-[7px] font-black uppercase tracking-[0.13em] text-[#D4AF37]/70">
-              Preview
-            </span>
-          </div>
-        </div>
+        )}
       </div>
-    </article>
+    </button>
   );
 }
 
+/* =========================================================
+   GLOBAL NETWORK
+========================================================= */
+
+function CountryNetwork({
+  active,
+}: {
+  active: number;
+}) {
+  const current = testimonials[active];
+
+  return (
+    <div className="relative h-[360px] overflow-hidden rounded-[28px] border border-[#D4AF37]/20 bg-[#080809] sm:h-[400px]">
+      {/* AMBIENCE */}
+
+      <div className="absolute left-1/2 top-1/2 h-[280px] w-[280px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#D4AF37]/10 blur-[80px]" />
+
+      <div className="absolute inset-x-[16%] top-0 h-px bg-gradient-to-r from-transparent via-[#D4AF37]/70 to-transparent" />
+
+      {/* NETWORK SVG */}
+
+      <svg
+        viewBox="0 0 500 420"
+        fill="none"
+        className="absolute inset-0 h-full w-full"
+        aria-hidden="true"
+      >
+        <circle
+          cx="250"
+          cy="215"
+          r="137"
+          stroke="#D4AF37"
+          strokeOpacity=".12"
+        />
+
+        <circle
+          cx="250"
+          cy="215"
+          r="104"
+          stroke="white"
+          strokeOpacity=".12"
+          strokeDasharray="5 10"
+          className="bp-network-ring"
+        />
+
+        <ellipse
+          cx="250"
+          cy="215"
+          rx="166"
+          ry="72"
+          stroke="#D4AF37"
+          strokeOpacity=".14"
+          transform="rotate(-12 250 215)"
+        />
+
+        <ellipse
+          cx="250"
+          cy="215"
+          rx="76"
+          ry="156"
+          stroke="white"
+          strokeOpacity=".08"
+          transform="rotate(42 250 215)"
+        />
+
+        <path
+          d="M86 190C136 136 185 152 249 214C312 275 363 269 418 207"
+          stroke="#D4AF37"
+          strokeOpacity=".25"
+          strokeWidth="1.5"
+          strokeDasharray="6 8"
+          className="bp-network-path"
+        />
+
+        <path
+          d="M111 282C163 253 194 266 249 215C298 169 345 155 400 128"
+          stroke="white"
+          strokeOpacity=".10"
+          strokeDasharray="4 9"
+        />
+
+        <circle
+          cx="86"
+          cy="190"
+          r="4"
+          fill="#D4AF37"
+        />
+
+        <circle
+          cx="418"
+          cy="207"
+          r="4"
+          fill="#D4AF37"
+        />
+
+        <circle
+          cx="111"
+          cy="282"
+          r="3"
+          fill="white"
+        />
+
+        <circle
+          cx="400"
+          cy="128"
+          r="3"
+          fill="white"
+        />
+      </svg>
+
+      {/* ORBITING GOLD NODE */}
+
+      <div className="bp-network-orbit absolute left-1/2 top-1/2 h-[246px] w-[246px] -translate-x-1/2 -translate-y-1/2 rounded-full">
+        <span className="absolute left-1/2 top-[-4px] h-2.5 w-2.5 -translate-x-1/2 rounded-full bg-[#F2D56F] shadow-[0_0_20px_rgba(212,175,55,.85)]" />
+      </div>
+
+      {/* CENTER COUNTRY */}
+
+      <div
+        key={current.country}
+        className="bp-country-enter absolute left-1/2 top-1/2 z-20 -translate-x-1/2 -translate-y-1/2"
+      >
+        <div className="relative grid h-[145px] w-[145px] place-items-center rounded-full border border-[#D4AF37]/30 bg-[#09090A] shadow-[0_0_65px_rgba(212,175,55,.15)]">
+          <div className="absolute inset-2 rounded-full border border-white/10" />
+
+          <div className="text-center">
+            <div className="text-[3rem] leading-none">
+              {current.flag}
+            </div>
+
+            <p className="mt-3 text-[8px] font-black tracking-[0.18em] text-[#D4AF37]">
+              {current.code}
+            </p>
+
+            <p className="mt-1 max-w-[100px] text-[10px] font-black leading-4 text-white">
+              {current.country}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* COUNTRY NODES */}
+
+      <div className="absolute left-[7%] top-[22%] hidden items-center gap-2 rounded-full border border-white/10 bg-[#0B0B0C]/90 px-3 py-2 sm:flex">
+        <span className="text-base">
+          🇮🇳
+        </span>
+
+        <span className="text-[6px] font-black tracking-[0.12em] text-white">
+          INDIA
+        </span>
+      </div>
+
+      <div className="absolute right-[7%] top-[17%] hidden items-center gap-2 rounded-full border border-white/10 bg-[#0B0B0C]/90 px-3 py-2 sm:flex">
+        <span className="text-base">
+          🇬🇧
+        </span>
+
+        <span className="text-[6px] font-black tracking-[0.12em] text-white">
+          UK
+        </span>
+      </div>
+
+      <div className="absolute bottom-[15%] left-[7%] hidden items-center gap-2 rounded-full border border-white/10 bg-[#0B0B0C]/90 px-3 py-2 sm:flex">
+        <span className="text-base">
+          🇺🇸
+        </span>
+
+        <span className="text-[6px] font-black tracking-[0.12em] text-white">
+          USA
+        </span>
+      </div>
+
+      <div className="absolute bottom-[11%] right-[8%] hidden items-center gap-2 rounded-full border border-white/10 bg-[#0B0B0C]/90 px-3 py-2 sm:flex">
+        <span className="text-base">
+          🇧🇷
+        </span>
+
+        <span className="text-[6px] font-black tracking-[0.12em] text-white">
+          BRAZIL
+        </span>
+      </div>
+
+      <div className="absolute right-[5%] top-[49%] hidden items-center gap-2 rounded-full border border-[#D4AF37]/20 bg-[#D4AF37]/10 px-3 py-2 sm:flex">
+        <span className="text-base">
+          🇦🇪
+        </span>
+
+        <span className="text-[6px] font-black tracking-[0.12em] text-[#F0D16A]">
+          UAE
+        </span>
+      </div>
+
+      {/* LABEL */}
+
+      <div className="absolute left-4 top-4 flex items-center gap-2 rounded-full border border-[#D4AF37]/20 bg-[#D4AF37]/10 px-3 py-2">
+        <span className="bp-country-pulse h-1.5 w-1.5 rounded-full bg-[#D4AF37]" />
+
+        <span className="text-[6px] font-black tracking-[0.16em] text-[#F0D16A]">
+          GLOBAL SIGNAL
+        </span>
+      </div>
+    </div>
+  );
+}
+
+/* =========================================================
+   STAT
+========================================================= */
+
+function SmallStat({
+  value,
+  label,
+}: {
+  value: string;
+  label: string;
+}) {
+  return (
+    <div>
+      <p className="text-lg font-black text-white">
+        {value}
+      </p>
+
+      <p className="mt-1 text-[7px] font-black tracking-[0.15em] text-[#D4AF37]">
+        {label}
+      </p>
+    </div>
+  );
+}
+
+/* =========================================================
+   MAIN
+========================================================= */
+
 export function Testimonials() {
-  const [active, setActive] = useState(0);
+  const [active, setActive] =
+    useState(0);
 
-  const previous = () => {
+  const testimonial =
+    testimonials[active];
+
+  function previous() {
     setActive((current) =>
-      current === 0 ? testimonials.length - 1 : current - 1,
+      current === 0
+        ? testimonials.length - 1
+        : current - 1,
     );
-  };
+  }
 
-  const next = () => {
-    setActive((current) => (current + 1) % testimonials.length);
-  };
+  function next() {
+    setActive(
+      (current) =>
+        (current + 1) % testimonials.length,
+    );
+  }
 
   useEffect(() => {
-    const timer = window.setInterval(() => {
-      setActive((current) => (current + 1) % testimonials.length);
-    }, 6000);
+    const timer =
+      window.setInterval(() => {
+        setActive(
+          (current) =>
+            (current + 1) %
+            testimonials.length,
+        );
+      }, 7000);
 
-    return () => window.clearInterval(timer);
+    return () =>
+      window.clearInterval(timer);
   }, []);
-
-  const getPosition = (index: number): Position => {
-    const previousIndex =
-      active === 0 ? testimonials.length - 1 : active - 1;
-
-    const nextIndex =
-      active === testimonials.length - 1 ? 0 : active + 1;
-
-    if (index === active) return "center";
-    if (index === previousIndex) return "left";
-    if (index === nextIndex) return "right";
-
-    return "hidden";
-  };
 
   return (
     <section
       id="testimonials"
-      className="relative overflow-hidden bg-[#030303] py-24 sm:py-28 lg:py-36"
+      className="relative overflow-hidden bg-[#030303] py-20 sm:py-24 lg:py-28"
     >
-      {/* BACKGROUND */}
-      <div className="pointer-events-none absolute left-1/2 top-[38%] h-[800px] w-[1100px] -translate-x-1/2 rounded-full bg-[#D4AF37]/[0.055] blur-[190px]" />
+      {/* =====================================================
+          BACKGROUND
+      ====================================================== */}
 
-      <div
-        className="pointer-events-none absolute inset-0 opacity-[0.18]"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(255,255,255,.021) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.021) 1px, transparent 1px)",
-          backgroundSize: "78px 78px",
-          maskImage:
-            "linear-gradient(to bottom, transparent, black 12%, black 88%, transparent)",
-        }}
-      />
+      <div className="pointer-events-none absolute left-1/2 top-[15%] h-[800px] w-[1200px] max-w-full -translate-x-1/2 rounded-full bg-[#D4AF37]/[0.04] blur-[190px]" />
 
-      <div className="pointer-events-none absolute left-1/2 top-0 h-px w-[75%] -translate-x-1/2 bg-gradient-to-r from-transparent via-white/[0.07] to-transparent" />
+      <div className="pointer-events-none absolute -left-48 top-[30%] hidden h-[390px] w-[390px] rounded-full border border-[#D4AF37]/[0.05] lg:block" />
 
-      <div className="relative mx-auto max-w-[1320px] px-4 sm:px-6 lg:px-8">
-        {/* HEADER */}
-        <div className="mx-auto max-w-[850px] text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-[#D4AF37]/15 bg-[#D4AF37]/[0.045] px-4 py-2">
-            <span className="text-[#D4AF37]">
-              <ShieldIcon />
-            </span>
+      <div className="pointer-events-none absolute -right-48 top-[50%] hidden h-[390px] w-[390px] rounded-full border border-white/[0.04] lg:block" />
 
-            <span className="text-[8px] font-black uppercase tracking-[0.2em] text-[#D7B64C]">
-              BlackProp Community
-            </span>
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#D4AF37]/25 to-transparent" />
+
+      {/* =====================================================
+          CONTENT
+      ====================================================== */}
+
+      <div className="relative mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
+        {/* =====================================================
+            HEADER
+        ====================================================== */}
+
+        <div className="grid gap-8 lg:grid-cols-[1.05fr_.95fr] lg:items-end">
+          <div>
+            <div className="inline-flex items-center gap-2 rounded-full border border-[#D4AF37]/20 bg-[#D4AF37]/10 px-3.5 py-2">
+              <span className="text-[#F0D16A]">
+                <GlobeIcon />
+              </span>
+
+              <span className="text-[8px] font-black uppercase tracking-[0.2em] text-[#F0D16A]">
+                GLOBAL TRADER VOICES
+              </span>
+            </div>
+
+            <h2 className="mt-6 max-w-[720px] text-[2.8rem] font-black uppercase leading-[0.92] tracking-[-0.06em] text-white sm:text-[3.8rem] lg:text-[4.7rem]">
+              DIFFERENT COUNTRIES.
+              <span className="block text-[#D4AF37]">
+                ONE STANDARD.
+              </span>
+            </h2>
           </div>
 
-          <h2 className="mt-7 text-[3.2rem] font-black leading-[0.92] tracking-[-0.065em] text-white sm:text-[4.7rem] lg:text-[5.5rem]">
-            Built for traders
-            <span className="block bg-[linear-gradient(100deg,#FFFFFF_0%,#CBCBC8_32%,#E4C15B_70%,#87600F_100%)] bg-clip-text text-transparent">
-              who expect more.
-            </span>
-          </h2>
+          <div className="lg:pb-1">
+            <div className="max-w-[500px] border-l-2 border-[#D4AF37] pl-5 lg:ml-auto">
+              <p className="text-sm font-medium leading-7 text-white sm:text-base">
+                A BlackProp experience designed for traders
+                across markets, styles and locations — while
+                keeping the same focus on clarity and
+                performance.
+              </p>
+            </div>
+          </div>
+        </div>
 
-          <p className="mx-auto mt-6 max-w-[600px] text-sm leading-7 text-white/38 sm:text-base">
-            A premium trading experience shaped around clarity,
-            discipline and performance.
+        {/* =====================================================
+            COUNTRY SELECTORS
+        ====================================================== */}
+
+        <div className="mt-10 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-5">
+          {testimonials.map(
+            (item, index) => (
+              <CountryButton
+                key={item.country}
+                testimonial={item}
+                active={active === index}
+                onClick={() =>
+                  setActive(index)
+                }
+              />
+            ),
+          )}
+        </div>
+
+        {/* =====================================================
+            MAIN EXPERIENCE
+        ====================================================== */}
+
+        <div className="mt-4 grid gap-4 lg:grid-cols-[1.08fr_.92fr]">
+          {/* =================================================
+              TESTIMONIAL
+          ================================================= */}
+
+          <article className="relative overflow-hidden rounded-[30px] border border-[#D4AF37]/20 bg-[linear-gradient(145deg,#111112,#070708)] p-5 sm:p-7 lg:p-8">
+            <div className="absolute inset-x-[15%] top-0 h-px bg-gradient-to-r from-transparent via-[#D4AF37]/75 to-transparent" />
+
+            <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-[#D4AF37]/10 blur-[90px]" />
+
+            {/* TOP */}
+
+            <div className="relative flex items-start justify-between gap-5">
+              <div>
+                <Stars />
+
+                <div className="mt-5 flex items-center gap-3">
+                  <div className="grid h-12 w-12 place-items-center rounded-[14px] border border-[#D4AF37]/25 bg-[#0A0A0B] text-2xl">
+                    {testimonial.flag}
+                  </div>
+
+                  <div>
+                    <p className="text-[7px] font-black tracking-[0.17em] text-[#D4AF37]">
+                      TRADER VOICE / {testimonial.code}
+                    </p>
+
+                    <p className="mt-1 text-sm font-black text-white">
+                      {testimonial.country}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <span className="text-[#D4AF37]/40">
+                <QuoteIcon />
+              </span>
+            </div>
+
+            {/* QUOTE */}
+
+            <div
+              key={`${testimonial.name}-${active}`}
+              className="bp-testimonial-enter relative mt-9"
+            >
+              <p className="text-[8px] font-black uppercase tracking-[0.19em] text-[#D4AF37]">
+                TRADER EXPERIENCE
+              </p>
+
+              <h3 className="mt-3 max-w-[620px] text-[2rem] font-black tracking-[-0.05em] text-white sm:text-[2.5rem]">
+                {testimonial.title}
+              </h3>
+
+              <p className="mt-6 max-w-[650px] text-base font-medium leading-8 text-white sm:text-lg">
+                “{testimonial.quote}”
+              </p>
+            </div>
+
+            {/* PERSON */}
+
+            <div className="relative mt-9 flex flex-col gap-5 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
+              <div className="flex items-center gap-3">
+                <div className="grid h-11 w-11 place-items-center rounded-full bg-[linear-gradient(135deg,#F1D16A,#A57414)] text-sm font-black text-black">
+                  {testimonial.name.charAt(0)}
+                </div>
+
+                <div>
+                  <p className="text-sm font-black text-white">
+                    {testimonial.name}
+                  </p>
+
+                  <div className="mt-1 flex items-center gap-2">
+                    <span className="text-base">
+                      {testimonial.flag}
+                    </span>
+
+                    <span className="text-[8px] font-black uppercase tracking-[0.12em] text-white">
+                      {testimonial.country}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* CONTROLS */}
+
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={previous}
+                  aria-label="Previous testimonial"
+                  className="grid h-10 w-10 place-items-center rounded-xl border border-white/15 bg-white/[0.04] text-white transition hover:border-[#D4AF37]/35 hover:bg-[#D4AF37]/10 hover:text-[#F0D16A]"
+                >
+                  <ArrowLeft />
+                </button>
+
+                <div className="min-w-[72px] text-center text-[9px] font-black tracking-[0.14em] text-white">
+                  0{active + 1}
+                  <span className="mx-1 text-[#D4AF37]">
+                    /
+                  </span>
+                  0{testimonials.length}
+                </div>
+
+                <button
+                  type="button"
+                  onClick={next}
+                  aria-label="Next testimonial"
+                  className="group grid h-10 w-10 place-items-center rounded-xl border border-[#D4AF37]/30 bg-[#D4AF37]/10 text-[#F0D16A] transition hover:bg-[#D4AF37]/15"
+                >
+                  <span className="bp-next-arrow">
+                    <ArrowRight />
+                  </span>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          {/* =================================================
+              COUNTRY NETWORK
+          ================================================= */}
+
+          <CountryNetwork
+            active={active}
+          />
+        </div>
+
+        {/* =====================================================
+            COUNTRY STRIP
+        ====================================================== */}
+
+        <div className="mt-4 overflow-hidden rounded-[22px] border border-white/10 bg-[#080809]">
+          <div className="grid divide-y divide-white/10 sm:grid-cols-5 sm:divide-x sm:divide-y-0">
+            {testimonials.map(
+              (item, index) => (
+                <button
+                  key={item.code}
+                  type="button"
+                  onClick={() =>
+                    setActive(index)
+                  }
+                  className={`group relative flex items-center justify-center gap-3 px-4 py-4 transition ${
+                    active === index
+                      ? "bg-[#D4AF37]/10"
+                      : "hover:bg-white/[0.04]"
+                  }`}
+                >
+                  {active === index && (
+                    <span className="absolute inset-x-[20%] top-0 h-px bg-[#D4AF37]" />
+                  )}
+
+                  <span className="text-xl">
+                    {item.flag}
+                  </span>
+
+                  <div className="text-left">
+                    <p
+                      className={`text-[7px] font-black tracking-[0.15em] ${
+                        active === index
+                          ? "text-[#D4AF37]"
+                          : "text-white"
+                      }`}
+                    >
+                      {item.code}
+                    </p>
+
+                    <p className="mt-1 text-[9px] font-black text-white">
+                      {item.country}
+                    </p>
+                  </div>
+                </button>
+              ),
+            )}
+          </div>
+        </div>
+
+        {/* =====================================================
+            GLOBAL STATEMENT
+        ====================================================== */}
+
+        <div className="relative mt-16 overflow-hidden rounded-[28px] border border-[#D4AF37]/20 bg-[#0A0A0B] px-5 py-7 sm:px-7 lg:px-8">
+          <div className="pointer-events-none absolute right-[10%] top-1/2 h-56 w-56 -translate-y-1/2 rounded-full bg-[#D4AF37]/10 blur-[80px]" />
+
+          <div className="absolute inset-x-[15%] top-0 h-px bg-gradient-to-r from-transparent via-[#D4AF37]/70 to-transparent" />
+
+          <div className="relative grid gap-7 lg:grid-cols-[1fr_auto] lg:items-center">
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="text-[#F0D16A]">
+                  <GlobeIcon />
+                </span>
+
+                <span className="text-[8px] font-black uppercase tracking-[0.18em] text-[#D4AF37]">
+                  ONE GLOBAL EXPERIENCE
+                </span>
+              </div>
+
+              <h3 className="mt-4 text-[1.9rem] font-black uppercase leading-[1] tracking-[-0.05em] text-white sm:text-[2.4rem]">
+                YOUR LOCATION CHANGES.
+                <span className="block text-[#D4AF37]">
+                  THE STANDARD DOESN&apos;T.
+                </span>
+              </h3>
+
+              <div className="mt-6 flex flex-wrap items-center gap-6">
+                <SmallStat
+                  value="5"
+                  label="PREVIEW COUNTRIES"
+                />
+
+                <div className="h-10 w-px bg-white/15" />
+
+                <SmallStat
+                  value="3"
+                  label="MARKET TYPES"
+                />
+
+                <div className="hidden h-10 w-px bg-white/15 sm:block" />
+
+                <SmallStat
+                  value="ONE"
+                  label="BLACKPROP EXPERIENCE"
+                />
+              </div>
+            </div>
+
+            <a
+              href="#challenges"
+              className="group relative inline-flex min-w-[200px] items-center justify-center gap-2 overflow-hidden rounded-xl bg-[linear-gradient(135deg,#F6DE82,#D4AF37_50%,#956A11)] px-6 py-3.5 text-sm font-black uppercase text-black shadow-[0_16px_45px_rgba(212,175,55,.17)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_22px_55px_rgba(212,175,55,.27)]"
+            >
+              GET FUNDED
+
+              <span className="bp-next-arrow">
+                <ArrowRight />
+              </span>
+
+              <span className="absolute inset-y-0 -left-20 w-12 skew-x-[-20deg] bg-white/45 blur-md transition-all duration-700 group-hover:left-[125%]" />
+            </a>
+          </div>
+        </div>
+
+        {/* =====================================================
+            DISCLAIMER
+        ====================================================== */}
+
+        <div className="mx-auto mt-7 flex max-w-3xl items-start justify-center gap-2 text-center">
+          <span className="mt-0.5 shrink-0 text-[#D4AF37]">
+            <ShieldIcon />
+          </span>
+
+          <p className="text-[9px] font-medium leading-4 text-white">
+            Testimonials shown are sample content for design
+            preview. Replace names, countries and quotes with
+            genuine BlackProp customer reviews before
+            production launch.
           </p>
         </div>
-
-        {/* TRUST PILL */}
-        <div className="mx-auto mt-9 flex w-fit items-center gap-4 rounded-full border border-white/[0.08] bg-white/[0.025] px-5 py-3 backdrop-blur-xl">
-          <Stars />
-
-          <span className="h-4 w-px bg-white/[0.09]" />
-
-          <span className="text-[9px] font-bold text-white/40">
-            Trader experience preview
-          </span>
-        </div>
-
-        {/* PERFECTLY CENTERED CAROUSEL */}
-        <div className="relative mx-auto mt-12 h-[410px] w-full max-w-[1180px] sm:h-[420px] lg:mt-16">
-          {/* CENTER AXIS */}
-          <div className="pointer-events-none absolute left-1/2 top-1/2 h-[62%] w-[42%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#D4AF37]/10 blur-[105px]" />
-
-          {testimonials.map((testimonial, index) => (
-            <TestimonialCard
-              key={`${testimonial.name}-${testimonial.country}`}
-              testimonial={testimonial}
-              position={getPosition(index)}
-            />
-          ))}
-        </div>
-
-        {/* CONTROLS */}
-        <div className="mt-3 flex items-center justify-center gap-5">
-          <button
-            type="button"
-            onClick={previous}
-            aria-label="Previous testimonial"
-            className="grid h-11 w-11 place-items-center rounded-full border border-white/[0.08] bg-white/[0.025] text-white/45 transition hover:border-[#D4AF37]/25 hover:bg-[#D4AF37]/[0.06] hover:text-[#D4AF37]"
-          >
-            <ArrowLeft />
-          </button>
-
-          <div className="flex items-center gap-2">
-            {testimonials.map((testimonial, index) => (
-              <button
-                key={testimonial.name}
-                type="button"
-                onClick={() => setActive(index)}
-                aria-label={`Show testimonial ${index + 1}`}
-                className={`h-1.5 rounded-full transition-all duration-300 ${
-                  active === index
-                    ? "w-8 bg-[#D4AF37]"
-                    : "w-1.5 bg-white/20 hover:bg-white/40"
-                }`}
-              />
-            ))}
-          </div>
-
-          <button
-            type="button"
-            onClick={next}
-            aria-label="Next testimonial"
-            className="grid h-11 w-11 place-items-center rounded-full border border-white/[0.08] bg-white/[0.025] text-white/45 transition hover:border-[#D4AF37]/25 hover:bg-[#D4AF37]/[0.06] hover:text-[#D4AF37]"
-          >
-            <ArrowRight />
-          </button>
-        </div>
-
-        {/* CTA */}
-        <div className="mx-auto mt-12 max-w-[760px] rounded-[28px] border border-white/[0.07] bg-white/[0.022] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,.03)] sm:flex sm:items-center sm:justify-between sm:px-7 sm:py-6">
-          <div className="text-center sm:text-left">
-            <p className="text-[8px] font-black uppercase tracking-[0.18em] text-[#D4AF37]">
-              Your turn
-            </p>
-
-            <p className="mt-2 text-lg font-black tracking-[-0.035em] text-white">
-              Ready to build your BlackProp journey?
-            </p>
-          </div>
-
-          <a
-            href="#challenges"
-            className="gold-button group mx-auto mt-5 flex h-12 w-fit min-w-[155px] items-center justify-center gap-3 rounded-xl px-6 text-[11px] font-black text-black sm:mx-0 sm:mt-0"
-          >
-            Get Funded
-
-            <span className="transition-transform duration-300 group-hover:translate-x-1">
-              <ArrowRight />
-            </span>
-          </a>
-        </div>
-
-        <p className="mx-auto mt-6 max-w-2xl text-center text-[9px] leading-4 text-white/18">
-          Sample testimonial content is shown for design preview only.
-          Replace with genuine BlackProp customer reviews before publishing.
-        </p>
       </div>
 
-      <style jsx global>{`
-        .testimonial-card {
-          transform: translate(-50%, -50%) scale(1);
+      {/* =====================================================
+          ANIMATIONS
+      ====================================================== */}
+
+      <style>{`
+        @keyframes bpTestimonialEnter {
+          0% {
+            opacity: 0;
+            transform: translateY(8px);
+          }
+
+          100% {
+            opacity: 1;
+            transform: translateY(0);
+          }
         }
 
-        @media (min-width: 1024px) {
-          .testimonial-card {
-            transform: var(--desktop-transform);
+        @keyframes bpCountryEnter {
+          0% {
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(.9);
+          }
+
+          100% {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+          }
+        }
+
+        @keyframes bpNetworkOrbit {
+          from {
+            transform:
+              translate(-50%, -50%)
+              rotate(0deg);
+          }
+
+          to {
+            transform:
+              translate(-50%, -50%)
+              rotate(360deg);
+          }
+        }
+
+        @keyframes bpNetworkRing {
+          from {
+            transform: rotate(0deg);
+            transform-origin: center;
+          }
+
+          to {
+            transform: rotate(-360deg);
+            transform-origin: center;
+          }
+        }
+
+        @keyframes bpNetworkPath {
+          to {
+            stroke-dashoffset: -28;
+          }
+        }
+
+        @keyframes bpCountryPulse {
+          0%, 100% {
+            opacity: .45;
+            transform: scale(.85);
+          }
+
+          50% {
+            opacity: 1;
+            transform: scale(1.2);
+            box-shadow:
+              0 0 18px
+              rgba(212,175,55,.65);
+          }
+        }
+
+        @keyframes bpArrowMove {
+          0%, 100% {
+            transform: translateX(0);
+          }
+
+          50% {
+            transform: translateX(5px);
+          }
+        }
+
+        .bp-testimonial-enter {
+          animation:
+            bpTestimonialEnter
+            .45s ease-out both;
+        }
+
+        .bp-country-enter {
+          animation:
+            bpCountryEnter
+            .45s ease-out both;
+        }
+
+        .bp-network-orbit {
+          animation:
+            bpNetworkOrbit
+            16s linear infinite;
+        }
+
+        .bp-network-ring {
+          animation:
+            bpNetworkRing
+            24s linear infinite;
+        }
+
+        .bp-network-path {
+          stroke-dashoffset: 0;
+          animation:
+            bpNetworkPath
+            4s linear infinite;
+        }
+
+        .bp-country-pulse {
+          animation:
+            bpCountryPulse
+            3s ease-in-out infinite;
+        }
+
+        .bp-country-arrow,
+        .bp-next-arrow {
+          animation:
+            bpArrowMove
+            1.6s ease-in-out infinite;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .bp-testimonial-enter,
+          .bp-country-enter,
+          .bp-network-orbit,
+          .bp-network-ring,
+          .bp-network-path,
+          .bp-country-pulse,
+          .bp-country-arrow,
+          .bp-next-arrow {
+            animation: none !important;
           }
         }
       `}</style>

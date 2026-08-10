@@ -4,16 +4,111 @@ import type { ReactNode } from "react";
    ICONS
 ========================================================= */
 
-function ArrowRight() {
+function ArrowRight({
+  className = "h-4 w-4",
+}: {
+  className?: string;
+}) {
   return (
     <svg
       viewBox="0 0 20 20"
       fill="none"
-      className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
+      className={className}
       aria-hidden="true"
     >
       <path
         d="M3.5 10h12M11.5 6l4 4-4 4"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function CheckIcon() {
+  return (
+    <svg
+      viewBox="0 0 20 20"
+      fill="none"
+      className="h-4 w-4"
+      aria-hidden="true"
+    >
+      <path
+        d="m4.5 10.2 3.2 3.2 7.8-7.8"
+        stroke="currentColor"
+        strokeWidth="1.7"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function TrendIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      className="h-5 w-5"
+      aria-hidden="true"
+    >
+      <path
+        d="M3.5 17.5 8 13l3.2 2.7L20.5 6"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+
+      <path
+        d="M15.8 6h4.7v4.7"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function BoltIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      className="h-5 w-5"
+      aria-hidden="true"
+    >
+      <path
+        d="m13.2 2.8-8 10h5.6L9.5 21l8.7-11.2h-5.8l.8-7Z"
+        stroke="currentColor"
+        strokeWidth="1.55"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function ShieldIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      className="h-5 w-5"
+      aria-hidden="true"
+    >
+      <path
+        d="M12 3 19 6v5.4c0 4.2-2.7 7.4-7 9.3-4.3-1.9-7-5.1-7-9.3V6l7-3Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinejoin="round"
+      />
+
+      <path
+        d="m8.5 12 2.2 2.2 4.8-4.8"
         stroke="currentColor"
         strokeWidth="1.5"
         strokeLinecap="round"
@@ -23,1277 +118,477 @@ function ArrowRight() {
   );
 }
 
-function UsersIcon() {
+function WalletIcon() {
   return (
     <svg
-      viewBox="0 0 20 20"
+      viewBox="0 0 24 24"
       fill="none"
-      className="h-4 w-4"
+      className="h-5 w-5"
       aria-hidden="true"
     >
-      <circle
-        cx="7"
-        cy="7"
-        r="3"
+      <rect
+        x="3"
+        y="5"
+        width="18"
+        height="14"
+        rx="3"
         stroke="currentColor"
-        strokeWidth="1.4"
+        strokeWidth="1.5"
       />
 
       <path
-        d="M2.8 16c.5-3 2.1-4.5 4.2-4.5S10.7 13 11.2 16"
+        d="M15 10h6v4h-6c-1.5 0-2.4-.8-2.4-2S13.5 10 15 10Z"
         stroke="currentColor"
-        strokeWidth="1.4"
-        strokeLinecap="round"
+        strokeWidth="1.5"
       />
 
       <circle
-        cx="14"
-        cy="8"
-        r="2.3"
-        stroke="currentColor"
-        strokeWidth="1.2"
-        opacity=".6"
-      />
-
-      <path
-        d="M12.7 12.5c2.4 0 3.8 1.1 4.3 3.5"
-        stroke="currentColor"
-        strokeWidth="1.2"
-        strokeLinecap="round"
-        opacity=".6"
+        cx="16"
+        cy="12"
+        r=".8"
+        fill="currentColor"
       />
     </svg>
   );
 }
 
-function TrophyIcon() {
+function BankIcon() {
   return (
     <svg
-      viewBox="0 0 20 20"
+      viewBox="0 0 24 24"
       fill="none"
-      className="h-4 w-4"
+      className="h-5 w-5"
       aria-hidden="true"
     >
       <path
-        d="M6 4h8v3.6c0 3.1-1.5 5-4 5s-4-1.9-4-5V4Z"
+        d="m12 3 9 4.5H3L12 3Z"
         stroke="currentColor"
-        strokeWidth="1.35"
+        strokeWidth="1.5"
+        strokeLinejoin="round"
       />
 
       <path
-        d="M6 6H3.5c0 2.7 1.2 4.1 3.4 4.1M14 6h2.5c0 2.7-1.2 4.1-3.4 4.1M10 12.6V15M7.5 17h5"
+        d="M5 10v6M9.5 10v6M14.5 10v6M19 10v6M3 20h18"
         stroke="currentColor"
-        strokeWidth="1.35"
+        strokeWidth="1.5"
         strokeLinecap="round"
       />
     </svg>
+  );
+}
+
+function CryptoIcon() {
+  return (
+    <span
+      aria-hidden="true"
+      className="flex h-5 w-5 items-center justify-center text-[19px] font-black leading-none"
+    >
+      ₿
+    </span>
   );
 }
 
 /* =========================================================
-   FEATURE 1 — PROFIT SPLIT ART
+   SMALL CHECK
 ========================================================= */
 
-function ProfitSplitArtwork() {
-  const coins = [
+function MiniCheck({
+  children,
+}: {
+  children: ReactNode;
+}) {
+  return (
+    <div className="flex items-center gap-2.5">
+      <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-[#D4AF37]/15 text-[#F0D16A]">
+        <CheckIcon />
+      </span>
+
+      <span className="text-[11px] font-bold text-white sm:text-xs">
+        {children}
+      </span>
+    </div>
+  );
+}
+
+/* =========================================================
+   ANIMATED ARROW CONNECTOR
+========================================================= */
+
+function ArrowConnector() {
+  return (
+    <div
+      className="relative flex h-14 items-center justify-center lg:h-16"
+      aria-hidden="true"
+    >
+      <div className="absolute left-1/2 top-0 h-full w-px -translate-x-1/2 bg-gradient-to-b from-white/10 via-[#D4AF37]/30 to-white/10" />
+
+      <div className="bp-arrow-drop relative z-10 grid h-8 w-8 place-items-center rounded-full border border-[#D4AF37]/25 bg-[#09090A] text-[#F0D16A] shadow-[0_0_25px_rgba(212,175,55,.10)]">
+        <ArrowRight className="h-4 w-4 rotate-90" />
+      </div>
+    </div>
+  );
+}
+
+/* =========================================================
+   GRAPHIC 1 — PERFORMANCE CORE
+========================================================= */
+
+function PerformanceCore() {
+  return (
+    <div className="relative mx-auto flex h-[240px] max-w-[430px] items-center justify-center overflow-hidden">
+      <div className="absolute left-1/2 top-1/2 h-52 w-52 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#D4AF37]/10 blur-[60px]" />
+
+      <svg
+        viewBox="0 0 430 240"
+        fill="none"
+        className="absolute inset-0 h-full w-full"
+        aria-hidden="true"
+      >
+        {/* TRACK */}
+        <circle
+          cx="215"
+          cy="120"
+          r="91"
+          stroke="#D4AF37"
+          strokeOpacity=".13"
+        />
+
+        <circle
+          cx="215"
+          cy="120"
+          r="70"
+          stroke="white"
+          strokeOpacity=".14"
+          strokeDasharray="4 9"
+          className="bp-reverse-spin"
+        />
+
+        {/* PERFORMANCE LINE */}
+        <path
+          d="M24 174C65 168 80 145 115 151C151 158 166 119 199 128C233 137 247 94 280 102C317 111 336 75 405 55"
+          stroke="#D4AF37"
+          strokeOpacity=".09"
+          strokeWidth="11"
+          strokeLinecap="round"
+        />
+
+        <path
+          d="M24 174C65 168 80 145 115 151C151 158 166 119 199 128C233 137 247 94 280 102C317 111 336 75 405 55"
+          stroke="#E9C963"
+          strokeWidth="1.6"
+          strokeLinecap="round"
+          strokeDasharray="6 8"
+          className="bp-running-path"
+        />
+
+        <circle
+          cx="25"
+          cy="174"
+          r="4"
+          fill="#D4AF37"
+        />
+
+        <circle
+          cx="405"
+          cy="55"
+          r="4"
+          fill="#F1D36C"
+        />
+      </svg>
+
+      {/* ROTATING DOT */}
+      <div className="bp-profit-spin absolute h-[180px] w-[180px] rounded-full">
+        <span className="absolute left-1/2 top-[-4px] h-2.5 w-2.5 -translate-x-1/2 rounded-full bg-[#F1D36C] shadow-[0_0_20px_rgba(212,175,55,.85)]" />
+      </div>
+
+      {/* CENTER */}
+      <div className="relative grid h-[118px] w-[118px] place-items-center rounded-full border border-[#D4AF37]/35 bg-[#070708] shadow-[0_0_45px_rgba(212,175,55,.13)]">
+        <div className="absolute inset-2 rounded-full border border-white/10" />
+
+        <div className="text-center">
+          <p className="text-[2.9rem] font-black leading-none tracking-[-0.08em] text-white">
+            90
+            <span className="text-base text-[#D4AF37]">
+              %
+            </span>
+          </p>
+
+          <p className="mt-2 text-[6px] font-black tracking-[0.18em] text-[#D4AF37]">
+            UP TO
+          </p>
+        </div>
+      </div>
+
+      <span className="bp-pulse absolute left-[13%] top-[32%] h-2 w-2 rounded-full bg-[#D4AF37]" />
+
+      <span className="absolute bottom-[19%] right-[13%] h-1.5 w-1.5 rounded-full bg-white" />
+    </div>
+  );
+}
+
+/* =========================================================
+   GRAPHIC 2 — REWARD MOTION
+========================================================= */
+
+function RewardMotion() {
+  return (
+    <div className="relative mx-auto h-[220px] max-w-[430px] overflow-hidden rounded-[24px] border border-white/10 bg-[#070708]">
+      <div
+        className="absolute inset-0 opacity-50"
+        style={{
+          backgroundImage:
+            "linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px)",
+          backgroundSize: "34px 34px",
+        }}
+      />
+
+      <div className="absolute left-5 top-5">
+        <p className="text-[7px] font-black tracking-[0.18em] text-[#D4AF37]">
+          REWARD FLOW
+        </p>
+
+        <p className="mt-2 text-sm font-black text-white">
+          Performance moves forward.
+        </p>
+      </div>
+
+      {/* FLOW */}
+      <div className="absolute inset-x-6 bottom-12 flex items-center">
+        {/* STEP 1 */}
+        <div className="relative z-10 grid h-11 w-11 shrink-0 place-items-center rounded-full border border-white/15 bg-[#0C0C0D] text-[8px] font-black text-white">
+          P
+        </div>
+
+        {/* LINE */}
+        <div className="relative h-px flex-1 bg-white/15">
+          <span className="bp-flow-one absolute top-1/2 h-2.5 w-2.5 -translate-y-1/2 rounded-full bg-[#D4AF37] shadow-[0_0_17px_rgba(212,175,55,.8)]" />
+        </div>
+
+        {/* STEP 2 */}
+        <div className="relative z-10 grid h-11 w-11 shrink-0 place-items-center rounded-full border border-[#D4AF37]/30 bg-[#D4AF37]/10 text-[8px] font-black text-[#F0D16A]">
+          R
+        </div>
+
+        {/* LINE */}
+        <div className="relative h-px flex-1 bg-gradient-to-r from-[#D4AF37]/30 to-[#D4AF37]">
+          <span className="bp-flow-two absolute top-1/2 h-2 w-2 -translate-y-1/2 rounded-full bg-[#F0D16A]" />
+        </div>
+
+        {/* END */}
+        <div className="relative z-10 grid h-12 w-12 shrink-0 place-items-center rounded-full bg-[#D4AF37] text-black shadow-[0_0_28px_rgba(212,175,55,.3)]">
+          <CheckIcon />
+        </div>
+      </div>
+
+      <div className="absolute inset-x-6 bottom-4 flex justify-between">
+        <span className="text-[6px] font-black tracking-[0.11em] text-white">
+          PERFORM
+        </span>
+
+        <span className="text-[6px] font-black tracking-[0.11em] text-white">
+          REVIEW
+        </span>
+
+        <span className="text-[6px] font-black tracking-[0.11em] text-[#D4AF37]">
+          ACCESS
+        </span>
+      </div>
+
+      {/* MOVING ARROWS */}
+      <div className="bp-arrow-stream absolute right-5 top-5 flex items-center gap-1 text-[#D4AF37]">
+        <ArrowRight className="h-3 w-3" />
+        <ArrowRight className="h-3 w-3" />
+        <ArrowRight className="h-3 w-3" />
+      </div>
+    </div>
+  );
+}
+
+/* =========================================================
+   GRAPHIC 3 — PAYOUT ROUTES
+========================================================= */
+
+function PayoutRoutes() {
+  const methods = [
     {
-      x: 260,
-      y: 145,
-      r: 61,
-      label: "BP",
-      gold: true,
+      label: "BANK",
+      icon: <BankIcon />,
     },
     {
-      x: 145,
-      y: 206,
-      r: 37,
-      label: "$",
-      gold: false,
+      label: "WALLET",
+      icon: <WalletIcon />,
     },
     {
-      x: 372,
-      y: 197,
-      r: 39,
-      label: "€",
-      gold: true,
-    },
-    {
-      x: 200,
-      y: 277,
-      r: 32,
-      label: "£",
-      gold: true,
-    },
-    {
-      x: 318,
-      y: 276,
-      r: 35,
-      label: "₿",
-      gold: false,
+      label: "CRYPTO",
+      icon: <CryptoIcon />,
     },
   ];
 
   return (
-    <div className="absolute inset-0 overflow-hidden">
-      <div className="absolute left-1/2 top-[55%] h-[290px] w-[290px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#D4AF37]/10 blur-[100px]" />
+    <div className="relative mx-auto h-[220px] max-w-[430px] overflow-hidden rounded-[24px] border border-white/10 bg-[#070708]">
+      <div className="absolute left-1/2 top-[54%] h-px w-[70%] -translate-x-1/2 bg-gradient-to-r from-transparent via-[#D4AF37]/50 to-transparent" />
 
-      <svg
-        viewBox="0 0 520 390"
-        fill="none"
-        className="absolute inset-0 h-full w-full"
-        aria-hidden="true"
-      >
-        <defs>
-          <linearGradient
-            id="profitGold"
-            x1="0"
-            y1="0"
-            x2="1"
-            y2="1"
+      <div className="absolute left-5 top-5">
+        <p className="text-[7px] font-black tracking-[0.18em] text-[#D4AF37]">
+          PAYOUT NETWORK
+        </p>
+
+        <p className="mt-2 text-sm font-black text-white">
+          Select your route.
+        </p>
+      </div>
+
+      <div className="absolute inset-x-5 bottom-10 grid grid-cols-3 gap-3">
+        {methods.map((method, index) => (
+          <div
+            key={method.label}
+            className="relative flex flex-col items-center"
           >
-            <stop stopColor="#4C3102" />
-            <stop offset=".12" stopColor="#AE7D15" />
-            <stop offset=".27" stopColor="#F0CE62" />
-            <stop offset=".37" stopColor="#FFF4B1" />
-            <stop offset=".53" stopColor="#A97512" />
-            <stop offset=".7" stopColor="#EBC75C" />
-            <stop offset=".86" stopColor="#79520A" />
-            <stop offset="1" stopColor="#3E2802" />
-          </linearGradient>
-
-          <linearGradient
-            id="profitSilver"
-            x1="0"
-            y1="0"
-            x2="1"
-            y2="1"
-          >
-            <stop stopColor="#242424" />
-            <stop offset=".13" stopColor="#AFAFAF" />
-            <stop offset=".25" stopColor="#FAFAFA" />
-            <stop offset=".4" stopColor="#676767" />
-            <stop offset=".56" stopColor="#EEEEEE" />
-            <stop offset=".74" stopColor="#464646" />
-            <stop offset=".9" stopColor="#C6C6C6" />
-            <stop offset="1" stopColor="#202020" />
-          </linearGradient>
-
-          <radialGradient id="profitFace">
-            <stop stopColor="#3A3A3A" />
-            <stop offset=".4" stopColor="#191919" />
-            <stop offset=".76" stopColor="#0C0C0D" />
-            <stop offset="1" stopColor="#040404" />
-          </radialGradient>
-
-          <filter
-            id="profitShadow"
-            x="-100%"
-            y="-100%"
-            width="300%"
-            height="320%"
-          >
-            <feDropShadow
-              dx="0"
-              dy="18"
-              stdDeviation="14"
-              floodColor="#000"
-              floodOpacity=".88"
-            />
-          </filter>
-        </defs>
-
-        {/* ORBITS */}
-        <ellipse
-          cx="260"
-          cy="205"
-          rx="185"
-          ry="92"
-          transform="rotate(-10 260 205)"
-          stroke="#D4AF37"
-          strokeOpacity=".12"
-          strokeDasharray="4 11"
-        />
-
-        <ellipse
-          cx="260"
-          cy="205"
-          rx="136"
-          ry="132"
-          stroke="white"
-          strokeOpacity=".05"
-        />
-
-        <ellipse
-          cx="260"
-          cy="205"
-          rx="96"
-          ry="146"
-          transform="rotate(56 260 205)"
-          stroke="#D4AF37"
-          strokeOpacity=".055"
-        />
-
-        {/* FLOOR */}
-        <ellipse
-          cx="260"
-          cy="329"
-          rx="175"
-          ry="26"
-          fill="#000"
-          opacity=".65"
-        />
-
-        <ellipse
-          cx="260"
-          cy="321"
-          rx="125"
-          ry="17"
-          fill="#D4AF37"
-          opacity=".055"
-        />
-
-        {/* COINS */}
-        {coins.map((coin) => (
-          <g
-            key={`${coin.x}-${coin.y}`}
-            transform={`translate(${coin.x} ${coin.y})`}
-            filter="url(#profitShadow)"
-          >
-            <circle
-              cy="7"
-              r={coin.r}
-              fill={coin.gold ? "#684507" : "#464646"}
-            />
-
-            <circle
-              r={coin.r}
-              fill={
-                coin.gold
-                  ? "url(#profitGold)"
-                  : "url(#profitSilver)"
-              }
-            />
-
-            <circle
-              r={coin.r - 8}
-              fill="url(#profitFace)"
-            />
-
-            <circle
-              r={coin.r - 15}
-              stroke={
-                coin.gold
-                  ? "#E3BB4C"
-                  : "#D4D4D4"
-              }
-              strokeOpacity=".35"
-              strokeWidth="1.5"
-            />
-
-            <text
-              y={coin.r > 50 ? 15 : 10}
-              textAnchor="middle"
-              fill={
-                coin.gold
-                  ? "#E4BD4E"
-                  : "#DADADA"
-              }
-              fontSize={coin.r > 50 ? 41 : 25}
-              fontWeight="900"
-              letterSpacing="-5"
+            <div
+              className={`relative z-10 grid h-14 w-14 place-items-center rounded-[17px] border bg-[#0D0D0E] text-[#F0D16A] ${
+                index === 1
+                  ? "border-[#D4AF37]/45 shadow-[0_0_30px_rgba(212,175,55,.12)]"
+                  : "border-white/15"
+              }`}
             >
-              {coin.label}
-            </text>
+              {method.icon}
 
-            <path
-              d={`M${-coin.r * 0.45} ${-coin.r * 0.55}
-                  C${-coin.r * 0.2} ${-coin.r * 0.74}
-                  ${coin.r * 0.18} ${-coin.r * 0.75}
-                  ${coin.r * 0.43} ${-coin.r * 0.57}`}
-              stroke="white"
-              strokeOpacity=".2"
-              strokeWidth="5"
-              strokeLinecap="round"
-            />
-          </g>
+              {index === 1 && (
+                <span className="bp-pulse absolute -right-1 -top-1 h-2 w-2 rounded-full bg-[#D4AF37]" />
+              )}
+            </div>
+
+            <span className="mt-3 text-[7px] font-black tracking-[0.12em] text-white">
+              {method.label}
+            </span>
+          </div>
         ))}
+      </div>
 
-        {/* PERFORMANCE LINE */}
-        <path
-          d="M82 274C126 262 147 239 181 244C218 250 236 207 269 215C306 223 323 181 358 186C391 191 408 153 438 132"
-          stroke="#D4AF37"
-          strokeOpacity=".09"
-          strokeWidth="13"
-          strokeLinecap="round"
-        />
+      <div className="bp-route-arrow absolute left-[18%] top-[53%] text-[#D4AF37]">
+        <ArrowRight className="h-4 w-4" />
+      </div>
 
-        <path
-          d="M82 274C126 262 147 239 181 244C218 250 236 207 269 215C306 223 323 181 358 186C391 191 408 153 438 132"
-          stroke="#E3C05A"
-          strokeWidth="2"
-          strokeLinecap="round"
-        />
-      </svg>
-
-      <div className="absolute bottom-[8%] left-1/2 -translate-x-1/2 rounded-full border border-[#D4AF37]/15 bg-black/35 px-3 py-1.5 backdrop-blur-xl">
-        <span className="text-[7px] font-black uppercase tracking-[0.18em] text-[#DDBB50]">
-          Trader-first rewards
-        </span>
+      <div className="bp-route-arrow-two absolute right-[18%] top-[53%] text-[#D4AF37]">
+        <ArrowRight className="h-4 w-4" />
       </div>
     </div>
   );
 }
 
 /* =========================================================
-   FEATURE 2 — VAULT
+   FEATURE CHAPTER
 ========================================================= */
 
-function RewardVaultArtwork() {
-  return (
-    <div className="absolute inset-0 overflow-hidden">
-      {/* SOFT AMBIENT GLOW */}
-      <div className="pointer-events-none absolute left-1/2 top-[56%] h-[230px] w-[280px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#D4AF37]/[0.09] blur-[85px]" />
-
-      <svg
-        viewBox="0 0 520 390"
-        fill="none"
-        className="absolute inset-0 h-full w-full"
-        aria-hidden="true"
-      >
-        <defs>
-          <linearGradient
-            id="rewardCardGold"
-            x1="0"
-            y1="0"
-            x2="1"
-            y2="1"
-          >
-            <stop stopColor="#FFF0A0" />
-            <stop offset=".32" stopColor="#D9B13C" />
-            <stop offset=".68" stopColor="#A57412" />
-            <stop offset="1" stopColor="#5C3B04" />
-          </linearGradient>
-
-          <linearGradient
-            id="rewardArrowGold"
-            x1="0"
-            y1="0"
-            x2="1"
-            y2="1"
-          >
-            <stop stopColor="#FFF2A7" />
-            <stop offset=".45" stopColor="#D4AF37" />
-            <stop offset="1" stopColor="#8B6210" />
-          </linearGradient>
-
-          <filter
-            id="rewardSimpleShadow"
-            x="-50%"
-            y="-50%"
-            width="200%"
-            height="220%"
-          >
-            <feDropShadow
-              dx="0"
-              dy="16"
-              stdDeviation="14"
-              floodColor="#000"
-              floodOpacity=".6"
-            />
-          </filter>
-        </defs>
-
-        {/* FLOOR */}
-        <ellipse
-          cx="260"
-          cy="318"
-          rx="145"
-          ry="18"
-          fill="#000"
-          opacity=".45"
-        />
-
-        {/* SUBTLE BACK RING */}
-        <circle
-          cx="260"
-          cy="205"
-          r="126"
-          stroke="#D4AF37"
-          strokeOpacity=".07"
-        />
-
-        <circle
-          cx="260"
-          cy="205"
-          r="102"
-          stroke="white"
-          strokeOpacity=".035"
-          strokeDasharray="4 9"
-        />
-
-        {/* =================================================
-            MAIN REWARD CARD
-        ================================================= */}
-
-        <g filter="url(#rewardSimpleShadow)">
-          <rect
-            x="132"
-            y="118"
-            width="256"
-            height="172"
-            rx="30"
-            fill="#0C0C0D"
-            stroke="white"
-            strokeOpacity=".09"
-          />
-
-          {/* GOLD TOP EDGE */}
-          <path
-            d="M163 119H357"
-            stroke="url(#rewardCardGold)"
-            strokeWidth="2"
-            strokeLinecap="round"
-          />
-
-          {/* LABEL */}
-          <text
-            x="164"
-            y="155"
-            fill="white"
-            fillOpacity=".28"
-            fontSize="8"
-            fontWeight="800"
-            letterSpacing="2"
-          >
-            REWARD PROGRESS
-          </text>
-
-          {/* MAIN VALUE */}
-          <text
-            x="164"
-            y="191"
-            fill="white"
-            fillOpacity=".92"
-            fontSize="27"
-            fontWeight="900"
-            letterSpacing="-1.5"
-          >
-            READY
-          </text>
-
-          {/* PROGRESS BACKGROUND */}
-          <rect
-            x="164"
-            y="215"
-            width="176"
-            height="7"
-            rx="3.5"
-            fill="white"
-            fillOpacity=".06"
-          />
-
-          {/* PROGRESS */}
-          <rect
-            x="164"
-            y="215"
-            width="142"
-            height="7"
-            rx="3.5"
-            fill="url(#rewardCardGold)"
-          />
-
-          {/* SMALL META */}
-          <circle
-            cx="169"
-            cy="251"
-            r="4"
-            fill="#D4AF37"
-          />
-
-          <text
-            x="181"
-            y="254"
-            fill="white"
-            fillOpacity=".35"
-            fontSize="8"
-            fontWeight="700"
-          >
-            REWARD FLOW
-          </text>
-        </g>
-
-        {/* =================================================
-            BP COIN
-        ================================================= */}
-
-        <g
-          transform="translate(350 170)"
-          filter="url(#rewardSimpleShadow)"
-        >
-          <circle
-            cy="5"
-            r="43"
-            fill="#614006"
-          />
-
-          <circle
-            r="43"
-            fill="url(#rewardCardGold)"
-          />
-
-          <circle
-            r="33"
-            fill="#101011"
-          />
-
-          <circle
-            r="27"
-            stroke="#D4AF37"
-            strokeOpacity=".32"
-          />
-
-          <text
-            y="7"
-            textAnchor="middle"
-            fill="#E2BD4F"
-            fontSize="18"
-            fontWeight="900"
-            letterSpacing="-1"
-          >
-            BP
-          </text>
-        </g>
-
-        {/* =================================================
-            FORWARD FLOW
-        ================================================= */}
-
-        <path
-          d="M105 276C157 283 194 275 226 259"
-          stroke="#D4AF37"
-          strokeOpacity=".10"
-          strokeWidth="9"
-          strokeLinecap="round"
-        />
-
-        <path
-          d="M105 276C157 283 194 275 226 259"
-          stroke="#D4AF37"
-          strokeOpacity=".55"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-        />
-
-        {/* FAST ARROW */}
-        <g transform="translate(382 247)">
-          <circle
-            cx="0"
-            cy="0"
-            r="27"
-            fill="#101011"
-            stroke="#D4AF37"
-            strokeOpacity=".18"
-          />
-
-          <path
-            d="M-9 0H9M3-7l7 7-7 7"
-            stroke="url(#rewardArrowGold)"
-            strokeWidth="3"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </g>
-
-        {/* =================================================
-            DECORATIVE DOTS
-        ================================================= */}
-
-        <circle
-          cx="112"
-          cy="185"
-          r="3"
-          fill="#D4AF37"
-          opacity=".55"
-        />
-
-        <circle
-          cx="411"
-          cy="133"
-          r="2.5"
-          fill="#D4AF37"
-          opacity=".75"
-        />
-
-        <circle
-          cx="420"
-          cy="294"
-          r="2"
-          fill="white"
-          opacity=".22"
-        />
-
-        <circle
-          cx="126"
-          cy="306"
-          r="2"
-          fill="white"
-          opacity=".16"
-        />
-      </svg>
-
-      {/* SIMPLE BADGE */}
-      <div className="absolute right-[8%] top-[10%] rounded-full border border-[#D4AF37]/15 bg-[#0B0B0C]/80 px-3 py-1.5">
-        <span className="text-[7px] font-black uppercase tracking-[0.17em] text-[#DDBB50]">
-          Reward flow
-        </span>
-      </div>
-    </div>
-  );
-}
-
-/* =========================================================
-   FEATURE 3 — FAST PAYOUT
-========================================================= */
-
-function PayoutArtwork() {
-  return (
-    <div className="absolute inset-0 overflow-hidden">
-      <div className="absolute left-1/2 top-[53%] h-64 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#D4AF37]/10 blur-[100px]" />
-
-      <svg
-        viewBox="0 0 520 390"
-        fill="none"
-        className="absolute inset-0 h-full w-full"
-        aria-hidden="true"
-      >
-        <defs>
-          <linearGradient
-            id="payoutGold"
-            x1="0"
-            y1="0"
-            x2="1"
-            y2="1"
-          >
-            <stop stopColor="#5F3E03" />
-            <stop offset=".17" stopColor="#DFB440" />
-            <stop offset=".33" stopColor="#FFF1A4" />
-            <stop offset=".51" stopColor="#AC7713" />
-            <stop offset=".73" stopColor="#EFCB63" />
-            <stop offset="1" stopColor="#513303" />
-          </linearGradient>
-
-          <linearGradient
-            id="payoutSilver"
-            x1="0"
-            y1="0"
-            x2="1"
-            y2="1"
-          >
-            <stop stopColor="#313131" />
-            <stop offset=".14" stopColor="#E7E7E7" />
-            <stop offset=".3" stopColor="#6A6A6A" />
-            <stop offset=".5" stopColor="#EFEFEF" />
-            <stop offset=".7" stopColor="#4E4E4E" />
-            <stop offset=".88" stopColor="#BDBDBD" />
-            <stop offset="1" stopColor="#272727" />
-          </linearGradient>
-
-          <filter
-            id="payoutShadow"
-            x="-100%"
-            y="-100%"
-            width="300%"
-            height="320%"
-          >
-            <feDropShadow
-              dx="0"
-              dy="20"
-              stdDeviation="16"
-              floodColor="#000"
-              floodOpacity=".86"
-            />
-          </filter>
-        </defs>
-
-        <ellipse
-          cx="260"
-          cy="325"
-          rx="165"
-          ry="24"
-          fill="#000"
-          opacity=".7"
-        />
-
-        {/* CARD */}
-        <g
-          transform="translate(92 105) rotate(-6 145 90)"
-          filter="url(#payoutShadow)"
-        >
-          <rect
-            width="289"
-            height="177"
-            rx="28"
-            fill="url(#payoutSilver)"
-          />
-
-          <rect
-            x="9"
-            y="9"
-            width="271"
-            height="159"
-            rx="23"
-            fill="#070708"
-          />
-
-          <rect
-            x="22"
-            y="22"
-            width="245"
-            height="133"
-            rx="18"
-            stroke="white"
-            strokeOpacity=".05"
-          />
-
-          <g transform="translate(30 37)">
-            <rect
-              width="49"
-              height="36"
-              rx="7"
-              fill="url(#payoutGold)"
-            />
-
-            <path
-              d="M8 12h33M8 24h33M17 4v28M31 4v28"
-              stroke="#503405"
-              strokeOpacity=".7"
-            />
-          </g>
-
-          <text
-            x="30"
-            y="117"
-            fill="white"
-            fillOpacity=".27"
-            fontSize="8"
-            fontWeight="700"
-            letterSpacing="2"
-          >
-            BLACKPROP REWARDS
-          </text>
-
-          <text
-            x="30"
-            y="140"
-            fill="#E3BE53"
-            fontSize="20"
-            fontWeight="900"
-            letterSpacing="-2"
-          >
-            BP
-          </text>
-        </g>
-
-        {/* LIGHTNING */}
-        <g
-          transform="translate(345 114)"
-          filter="url(#payoutShadow)"
-        >
-          <path
-            d="M40 0 0 83h34l-18 72 75-99H51L72 0H40Z"
-            fill="url(#payoutGold)"
-          />
-
-          <path
-            d="M44 14 16 68"
-            stroke="white"
-            strokeOpacity=".28"
-            strokeWidth="6"
-            strokeLinecap="round"
-          />
-        </g>
-
-        {/* PAYOUT STATUS */}
-        <g transform="translate(335 276)">
-          <rect
-            width="128"
-            height="45"
-            rx="13"
-            fill="#0A0A0B"
-            stroke="white"
-            strokeOpacity=".08"
-          />
-
-          <circle
-            cx="21"
-            cy="22.5"
-            r="10"
-            fill="#55D6A6"
-            fillOpacity=".1"
-          />
-
-          <path
-            d="m17 22.5 3 3 6-6"
-            stroke="#55D6A6"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-
-          <text
-            x="39"
-            y="19"
-            fill="white"
-            fillOpacity=".25"
-            fontSize="6"
-            fontWeight="700"
-          >
-            REWARD
-          </text>
-
-          <text
-            x="39"
-            y="31"
-            fill="white"
-            fillOpacity=".82"
-            fontSize="9"
-            fontWeight="900"
-          >
-            READY
-          </text>
-        </g>
-
-        <path
-          d="M71 268C135 302 209 302 276 286"
-          stroke="#D4AF37"
-          strokeOpacity=".13"
-          strokeDasharray="5 9"
-        />
-      </svg>
-
-      <div className="absolute left-[8%] bottom-[8%] rounded-full border border-emerald-400/10 bg-black/35 px-3 py-1.5 text-[7px] font-black uppercase tracking-[0.17em] text-emerald-400/70 backdrop-blur-xl">
-        Payout ready
-      </div>
-    </div>
-  );
-}
-
-/* =========================================================
-   FEATURE CARD
-========================================================= */
-
-function FeatureCard({
+function FeatureChapter({
   number,
   eyebrow,
+  icon,
   title,
   description,
-  artwork,
+  points,
+  graphic,
+  reverse = false,
 }: {
   number: string;
   eyebrow: string;
-  title: string;
+  icon: ReactNode;
+  title: ReactNode;
   description: string;
-  artwork: ReactNode;
+  points: string[];
+  graphic: ReactNode;
+  reverse?: boolean;
 }) {
   return (
-    <article className="group relative min-h-[550px] overflow-hidden rounded-[30px] border border-white/[0.075] bg-[linear-gradient(145deg,#151516,#080809)] shadow-[0_30px_100px_rgba(0,0,0,.35)] transition duration-500 hover:-translate-y-1.5 hover:border-white/[0.13]">
-      {/* TOP SHINE */}
-      <div className="pointer-events-none absolute inset-x-[14%] top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+    <div className="relative overflow-hidden rounded-[28px] border border-white/10 bg-[linear-gradient(145deg,#0D0D0E,#070708)] p-5 sm:p-7 lg:p-8">
+      {/* TOP GOLD */}
+      <div className="absolute inset-x-[18%] top-0 h-px bg-gradient-to-r from-transparent via-[#D4AF37]/60 to-transparent" />
 
-      {/* IMAGE AREA */}
-      <div className="absolute inset-x-0 bottom-0 top-[165px]">
-        {artwork}
-      </div>
+      {/* GLOW */}
+      <div className="pointer-events-none absolute -right-24 -top-24 h-56 w-56 rounded-full bg-[#D4AF37]/[0.07] blur-[80px]" />
 
-      {/* TOP GRADIENT */}
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-[265px] bg-gradient-to-b from-[#111112] via-[#111112]/95 to-transparent" />
+      <div
+        className={`relative grid gap-8 lg:grid-cols-[1fr_.9fr] lg:items-center ${
+          reverse ? "lg:[&>*:first-child]:order-2" : ""
+        }`}
+      >
+        {/* CONTENT */}
+        <div className={reverse ? "lg:pl-6" : "lg:pr-6"}>
+          <div className="flex items-center gap-3">
+            <span className="text-[8px] font-black text-[#D4AF37]">
+              {number}
+            </span>
 
-      {/* TEXT */}
-      <div className="relative z-20 p-6 sm:p-7">
-        <div className="flex items-center justify-between">
-          <span className="text-[8px] font-black uppercase tracking-[0.2em] text-[#D4AF37]/65">
-            {eyebrow}
-          </span>
+            <span className="h-px w-8 bg-[#D4AF37]/40" />
 
-          <span className="text-[9px] font-black text-white/16">
-            {number}
-          </span>
+            <span className="text-[8px] font-black tracking-[0.18em] text-[#F0D16A]">
+              {eyebrow}
+            </span>
+          </div>
+
+          <div className="mt-5 flex items-start gap-4">
+            <div className="grid h-11 w-11 shrink-0 place-items-center rounded-[14px] border border-[#D4AF37]/20 bg-[#D4AF37]/10 text-[#F0D16A]">
+              {icon}
+            </div>
+
+            <h3 className="max-w-[520px] text-[1.9rem] font-black uppercase leading-[0.98] tracking-[-0.05em] text-white sm:text-[2.3rem]">
+              {title}
+            </h3>
+          </div>
+
+          <p className="mt-5 max-w-[530px] text-sm font-medium leading-7 text-white">
+            {description}
+          </p>
+
+          <div className="mt-6 grid gap-3 sm:grid-cols-2">
+            {points.map((point) => (
+              <MiniCheck key={point}>
+                {point}
+              </MiniCheck>
+            ))}
+          </div>
         </div>
 
-        <h3 className="mt-4 max-w-[330px] text-[1.75rem] font-black leading-[1.02] tracking-[-0.055em] text-white sm:text-[1.95rem]">
-          {title}
-        </h3>
-
-        <p className="mt-3 max-w-[330px] text-xs leading-5 text-white/34">
-          {description}
-        </p>
+        {/* GRAPHIC */}
+        <div>{graphic}</div>
       </div>
-    </article>
+    </div>
   );
 }
 
 /* =========================================================
-   PAYOUT ARTWORK
+   PAYOUT METHOD
 ========================================================= */
 
-function BankArtwork() {
-  return (
-    <svg
-      viewBox="0 0 180 110"
-      fill="none"
-      className="h-24 w-40"
-      aria-hidden="true"
-    >
-      <defs>
-        <linearGradient
-          id="simpleBankGold"
-          x1="0"
-          y1="0"
-          x2="1"
-          y2="1"
-        >
-          <stop stopColor="#FFF1A0" />
-          <stop offset=".48" stopColor="#D4AF37" />
-          <stop offset="1" stopColor="#76510A" />
-        </linearGradient>
-
-        <linearGradient
-          id="simpleBankSilver"
-          x1="0"
-          y1="0"
-          x2="1"
-          y2="1"
-        >
-          <stop stopColor="#F1F1EE" />
-          <stop offset=".45" stopColor="#8A8A86" />
-          <stop offset="1" stopColor="#D4D4D0" />
-        </linearGradient>
-
-        <filter
-          id="simpleBankShadow"
-          x="-50%"
-          y="-50%"
-          width="200%"
-          height="220%"
-        >
-          <feDropShadow
-            dx="0"
-            dy="8"
-            stdDeviation="6"
-            floodColor="#000"
-            floodOpacity=".35"
-          />
-        </filter>
-      </defs>
-
-      {/* SHADOW */}
-      <ellipse
-        cx="90"
-        cy="96"
-        rx="61"
-        ry="7"
-        fill="#000"
-        opacity=".28"
-      />
-
-      <g filter="url(#simpleBankShadow)">
-        {/* ROOF */}
-        <path
-          d="M90 13 24 42h132L90 13Z"
-          fill="url(#simpleBankGold)"
-        />
-
-        {/* INNER ROOF */}
-        <path
-          d="M90 23 46 40h88L90 23Z"
-          fill="#111112"
-        />
-
-        {/* BP LOGO */}
-        <circle
-          cx="90"
-          cy="34"
-          r="8"
-          fill="#0C0C0D"
-          stroke="#D4AF37"
-          strokeOpacity=".5"
-        />
-
-        <text
-          x="90"
-          y="37"
-          textAnchor="middle"
-          fill="#D4AF37"
-          fontSize="6"
-          fontWeight="900"
-        >
-          BP
-        </text>
-
-        {/* TOP BASE */}
-        <rect
-          x="30"
-          y="43"
-          width="120"
-          height="7"
-          rx="3.5"
-          fill="url(#simpleBankGold)"
-        />
-
-        {/* COLUMNS */}
-        {[45, 70, 95, 120].map((x) => (
-          <g key={x}>
-            <rect
-              x={x}
-              y="52"
-              width="12"
-              height="31"
-              rx="2"
-              fill="url(#simpleBankSilver)"
-            />
-
-            <path
-              d={`M${x + 3} 56v23`}
-              stroke="white"
-              strokeOpacity=".28"
-              strokeWidth="2"
-              strokeLinecap="round"
-            />
-          </g>
-        ))}
-
-        {/* DARK SPACE BETWEEN COLUMNS */}
-        <rect
-          x="35"
-          y="51"
-          width="110"
-          height="33"
-          rx="3"
-          fill="#111112"
-          style={{ zIndex: -1 }}
-        />
-
-        {/* DRAW COLUMNS AGAIN ABOVE DARK BACKGROUND */}
-        {[45, 70, 95, 120].map((x) => (
-          <rect
-            key={`column-${x}`}
-            x={x}
-            y="52"
-            width="12"
-            height="31"
-            rx="2"
-            fill="url(#simpleBankSilver)"
-          />
-        ))}
-
-        {/* BOTTOM LEDGE */}
-        <rect
-          x="31"
-          y="84"
-          width="118"
-          height="7"
-          rx="3.5"
-          fill="url(#simpleBankGold)"
-        />
-
-        {/* BOTTOM BASE */}
-        <rect
-          x="23"
-          y="91"
-          width="134"
-          height="7"
-          rx="3.5"
-          fill="url(#simpleBankSilver)"
-        />
-      </g>
-    </svg>
-  );
-}
-
-function WalletArtwork() {
-  return (
-    <svg
-      viewBox="0 0 180 110"
-      fill="none"
-      className="h-24 w-40"
-      aria-hidden="true"
-    >
-      <defs>
-        <linearGradient
-          id="walletMetal"
-          x1="0"
-          y1="0"
-          x2="1"
-          y2="1"
-        >
-          <stop stopColor="#F1F1F1" />
-          <stop offset=".3" stopColor="#757575" />
-          <stop offset=".56" stopColor="#F6F6F6" />
-          <stop offset=".8" stopColor="#4D4D4D" />
-          <stop offset="1" stopColor="#C8C8C8" />
-        </linearGradient>
-      </defs>
-
-      <rect
-        x="22"
-        y="23"
-        width="135"
-        height="69"
-        rx="17"
-        fill="url(#walletMetal)"
-      />
-
-      <rect
-        x="31"
-        y="31"
-        width="117"
-        height="52"
-        rx="12"
-        fill="#101011"
-      />
-
-      <path
-        d="M107 44h51v27h-51c-10 0-16-5-16-13.5S97 44 107 44Z"
-        fill="#D4AF37"
-      />
-
-      <circle
-        cx="118"
-        cy="57.5"
-        r="5"
-        fill="#1A1202"
-      />
-    </svg>
-  );
-}
-
-function CryptoArtwork() {
-  return (
-    <svg
-      viewBox="0 0 180 110"
-      fill="none"
-      className="h-24 w-40"
-      aria-hidden="true"
-    >
-      <defs>
-        <linearGradient
-          id="cryptoGold"
-          x1="0"
-          y1="0"
-          x2="1"
-          y2="1"
-        >
-          <stop stopColor="#FFF2A7" />
-          <stop offset=".5" stopColor="#D4AF37" />
-          <stop offset="1" stopColor="#6E4B08" />
-        </linearGradient>
-
-        <linearGradient
-          id="cryptoSilver"
-          x1="0"
-          y1="0"
-          x2="1"
-          y2="1"
-        >
-          <stop stopColor="#EEE" />
-          <stop offset=".4" stopColor="#656565" />
-          <stop offset=".7" stopColor="#DADADA" />
-          <stop offset="1" stopColor="#444" />
-        </linearGradient>
-      </defs>
-
-      <circle
-        cx="86"
-        cy="56"
-        r="39"
-        fill="url(#cryptoGold)"
-      />
-
-      <circle
-        cx="86"
-        cy="56"
-        r="30"
-        fill="#101011"
-      />
-
-      <text
-        x="86"
-        y="68"
-        textAnchor="middle"
-        fill="#E4BE52"
-        fontSize="35"
-        fontWeight="900"
-      >
-        ₿
-      </text>
-
-      <circle
-        cx="130"
-        cy="37"
-        r="18"
-        fill="url(#cryptoSilver)"
-      />
-
-      <circle
-        cx="130"
-        cy="37"
-        r="13"
-        fill="#171717"
-      />
-
-      <text
-        x="130"
-        y="42"
-        textAnchor="middle"
-        fill="#D7D7D7"
-        fontSize="10"
-        fontWeight="900"
-      >
-        BP
-      </text>
-    </svg>
-  );
-}
-
-/* =========================================================
-   PAYOUT CARD
-========================================================= */
-
-function PayoutCard({
-  eyebrow,
+function PayoutMethod({
+  icon,
+  kicker,
   title,
-  description,
-  artwork,
 }: {
-  eyebrow: string;
+  icon: ReactNode;
+  kicker: string;
   title: string;
-  description: string;
-  artwork: ReactNode;
 }) {
   return (
-    <article className="group relative overflow-hidden rounded-[28px] border border-white/[0.07] bg-[linear-gradient(145deg,#121213,#09090A)] p-5 transition duration-500 hover:-translate-y-1 hover:border-[#D4AF37]/20 sm:p-6">
-      <div className="pointer-events-none absolute right-0 top-0 h-44 w-44 rounded-full bg-[#D4AF37]/[0.045] blur-[65px]" />
-
-      <div className="relative flex min-h-[205px] items-center justify-center overflow-hidden rounded-[20px] border border-white/[0.045] bg-white/[0.018]">
-        <div className="absolute inset-x-[20%] top-0 h-px bg-gradient-to-r from-transparent via-white/15 to-transparent" />
-
-        {artwork}
+    <div className="group flex items-center gap-3 rounded-[17px] border border-white/10 bg-white/[0.035] px-4 py-4 transition duration-300 hover:border-[#D4AF37]/30 hover:bg-[#D4AF37]/[0.06]">
+      <div className="grid h-10 w-10 shrink-0 place-items-center rounded-[13px] bg-[#D4AF37]/10 text-[#F0D16A]">
+        {icon}
       </div>
 
-      <div className="mt-6">
-        <p className="text-[8px] font-black uppercase tracking-[0.2em] text-[#D4AF37]/60">
-          {eyebrow}
+      <div>
+        <p className="text-[6px] font-black tracking-[0.16em] text-[#D4AF37]">
+          {kicker}
         </p>
 
-        <h4 className="mt-2 text-xl font-black tracking-[-0.04em] text-white">
+        <p className="mt-1 text-xs font-black text-white">
           {title}
-        </h4>
-
-        <p className="mt-3 max-w-[330px] text-xs leading-5 text-white/32">
-          {description}
         </p>
       </div>
-    </article>
+
+      <span className="bp-method-arrow ml-auto text-[#D4AF37]">
+        <ArrowRight />
+      </span>
+    </div>
   );
 }
 
@@ -1305,208 +600,549 @@ export function Features() {
   return (
     <section
       id="why-blackprop"
-      className="relative overflow-hidden bg-[#030303] py-24 sm:py-28 lg:py-36"
+      className="relative overflow-hidden bg-[#030303] py-20 sm:py-24 lg:py-28"
     >
-      {/* BACKGROUND */}
-      <div className="pointer-events-none absolute left-1/2 top-[8%] h-[750px] w-[1100px] -translate-x-1/2 rounded-full bg-[#D4AF37]/[0.025] blur-[180px]" />
+      {/* =====================================================
+          BACKGROUND
+      ====================================================== */}
 
-      <div
-        className="pointer-events-none absolute inset-0 opacity-[0.07]"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px)",
-          backgroundSize: "72px 72px",
-          maskImage:
-            "linear-gradient(to bottom, transparent, black 12%, black 86%, transparent)",
-        }}
-      />
+      <div className="pointer-events-none absolute left-1/2 top-[12%] h-[750px] w-[1100px] max-w-full -translate-x-1/2 rounded-full bg-[#D4AF37]/[0.03] blur-[180px]" />
 
-      <div className="relative mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
-        {/* =====================================================
-            HEADER — FULL WIDTH TOP
-        ====================================================== */}
+      <div className="pointer-events-none absolute -left-48 top-[28%] hidden h-[380px] w-[380px] rounded-full border border-[#D4AF37]/[0.05] lg:block" />
 
-        <div className="mx-auto max-w-[920px] text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-[#D4AF37]/15 bg-[#D4AF37]/[0.05] px-3 py-1.5">
-            <span className="h-1.5 w-1.5 rounded-full bg-[#D4AF37]" />
+      <div className="pointer-events-none absolute -right-48 top-[58%] hidden h-[380px] w-[380px] rounded-full border border-white/[0.04] lg:block" />
 
-            <span className="text-[8px] font-black uppercase tracking-[0.2em] text-[#DDBB50]">
-              The BlackProp advantage
-            </span>
-          </div>
+      <span className="bp-pulse pointer-events-none absolute left-[7%] top-[34%] hidden h-2 w-2 rounded-full bg-[#D4AF37] lg:block" />
 
-          <h2 className="mt-7 text-[3.5rem] font-black uppercase leading-[0.89] tracking-[-0.07em] text-white sm:text-[5rem] lg:text-[6.1rem]">
-            Built for traders
-            <span className="block bg-[linear-gradient(100deg,#fff_0%,#D5D5D5_32%,#F1D26C_70%,#967019_100%)] bg-clip-text text-transparent">
-              who want more.
-            </span>
-          </h2>
+      <span className="bp-pulse pointer-events-none absolute right-[8%] top-[53%] hidden h-1.5 w-1.5 rounded-full bg-[#D4AF37] lg:block [animation-delay:1.3s]" />
 
-          <p className="mx-auto mt-7 max-w-[650px] text-sm leading-7 text-white/38 sm:text-base sm:leading-8">
-            Access more trading capital, operate within clear risk
-            objectives and unlock a reward structure built around
-            disciplined performance.
-          </p>
+      {/* =====================================================
+          HEADER
+      ====================================================== */}
 
-          <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <a
-              href="#challenges"
-              className="group relative inline-flex min-w-[195px] items-center justify-center gap-2 overflow-hidden rounded-xl bg-[linear-gradient(135deg,#F4D978,#D4AF37_50%,#936912)] px-6 py-4 text-sm font-black text-black shadow-[0_18px_50px_rgba(212,175,55,.16)] transition hover:-translate-y-1 hover:shadow-[0_24px_65px_rgba(212,175,55,.26)]"
-            >
-              Get Funded
+      <div className="relative mx-auto max-w-[1180px] px-4 sm:px-6">
+        <div className="grid gap-8 lg:grid-cols-[1fr_.78fr] lg:items-end">
+          {/* LEFT */}
 
-              <ArrowRight />
+          <div>
+            <div className="inline-flex items-center gap-2 rounded-full border border-[#D4AF37]/20 bg-[#D4AF37]/10 px-3.5 py-2">
+              <span className="bp-pulse h-1.5 w-1.5 rounded-full bg-[#D4AF37]" />
 
-              <span className="absolute inset-y-0 -left-20 w-12 skew-x-[-20deg] bg-white/40 blur-md transition-all duration-700 group-hover:left-[125%]" />
-            </a>
-
-            <div className="flex items-center gap-2 text-xs font-medium text-white/33">
-              <span className="text-[#D4AF37]">
-                <UsersIcon />
-              </span>
-
-              Built around trader performance
-            </div>
-          </div>
-        </div>
-
-        {/* =====================================================
-            MAIN FEATURE CARDS — FULL WIDTH BELOW HEADER
-        ====================================================== */}
-
-        <div className="mt-16 grid gap-4 lg:grid-cols-3 lg:gap-5">
-          <FeatureCard
-            number="01"
-            eyebrow="Profit potential"
-            title="Keep More of Your Performance"
-            description="A trader-first reward structure designed to let successful traders retain a larger share of what they generate."
-            artwork={<ProfitSplitArtwork />}
-          />
-
-          <FeatureCard
-            number="02"
-            eyebrow="Reward processing"
-            title="Designed for Faster Rewards"
-            description="A streamlined payout experience designed around speed, visibility and secure processing."
-            artwork={<RewardVaultArtwork />}
-          />
-
-          <FeatureCard
-            number="03"
-            eyebrow="Reward flexibility"
-            title="Access Rewards Your Way"
-            description="Flexible payout options designed to reduce unnecessary friction between performance and reward access."
-            artwork={<PayoutArtwork />}
-          />
-        </div>
-
-        {/* =====================================================
-            SMALL META ROW
-        ====================================================== */}
-
-        <div className="mx-auto mt-7 flex max-w-3xl flex-wrap items-center justify-center gap-x-8 gap-y-3 text-[9px] font-semibold uppercase tracking-[0.14em] text-white/22">
-          <span>Performance focused</span>
-
-          <span className="hidden h-1 w-1 rounded-full bg-[#D4AF37]/50 sm:block" />
-
-          <span>Transparent objectives</span>
-
-          <span className="hidden h-1 w-1 rounded-full bg-[#D4AF37]/50 sm:block" />
-
-          <span>Flexible progression</span>
-        </div>
-
-        {/* =====================================================
-            SECTION DIVIDER
-        ====================================================== */}
-
-        <div className="my-24 h-px bg-gradient-to-r from-transparent via-white/[0.08] to-transparent sm:my-28 lg:my-32" />
-
-        {/* =====================================================
-            PAYOUT SECTION
-        ====================================================== */}
-
-        <div>
-          <div className="mx-auto max-w-[860px] text-center">
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/[0.07] bg-white/[0.025] px-3 py-1.5">
-              <span className="text-[#D4AF37]">
-                <TrophyIcon />
-              </span>
-
-              <span className="text-[8px] font-black uppercase tracking-[0.2em] text-white/35">
-                Reward access
+              <span className="text-[8px] font-black tracking-[0.2em] text-[#F0D16A]">
+                THE BLACKPROP ADVANTAGE
               </span>
             </div>
 
-            <h2 className="mt-6 text-4xl font-black leading-[0.97] tracking-[-0.06em] text-white sm:text-5xl lg:text-[4.7rem]">
-              From performance
-              <span className="block bg-[linear-gradient(100deg,#FFFFFF,#D2D2D2_35%,#F0D069_72%,#96701A)] bg-clip-text text-transparent">
-                to payout.
+            <h2 className="mt-6 max-w-[720px] text-[2.8rem] font-black uppercase leading-[0.92] tracking-[-0.06em] text-white sm:text-[3.8rem] lg:text-[4.6rem]">
+              BUILT FOR
+              <span className="block">
+                BETTER
+                <span className="text-[#D4AF37]">
+                  {" "}PROGRESSION.
+                </span>
               </span>
             </h2>
-
-            <p className="mx-auto mt-6 max-w-[620px] text-sm leading-7 text-white/36 sm:text-base">
-              BlackProp is designed around flexible reward access,
-              giving traders multiple ways to receive eligible
-              payouts as our payment infrastructure expands.
-            </p>
           </div>
 
-          {/* PAYOUT METHODS */}
-          <div className="mt-12 grid gap-4 md:grid-cols-3">
-            <PayoutCard
-              eyebrow="Traditional"
-              title="Bank Transfer"
-              description="Receive eligible rewards through supported banking and payout-provider rails."
-              artwork={<BankArtwork />}
-            />
+          {/* RIGHT */}
 
-            <PayoutCard
-              eyebrow="Digital"
-              title="Digital Wallets"
-              description="Access supported digital payment methods designed for convenient reward settlement."
-              artwork={<WalletArtwork />}
-            />
+          <div className="lg:pb-1">
+            <div className="border-l-2 border-[#D4AF37] pl-5">
+              <p className="max-w-[470px] text-sm font-medium leading-7 text-white sm:text-base">
+                A straightforward trading journey where
+                performance, discipline and progression stay
+                connected from start to reward.
+              </p>
+            </div>
 
-            <PayoutCard
-              eyebrow="On-chain"
-              title="Crypto"
-              description="Receive eligible rewards directly through supported crypto payout infrastructure."
-              artwork={<CryptoArtwork />}
-            />
-          </div>
-
-          {/* FINAL CTA */}
-          <div className="mt-14 flex flex-col items-center">
             <a
               href="#challenges"
-              className="group relative inline-flex min-w-[210px] items-center justify-center gap-2 overflow-hidden rounded-xl bg-[linear-gradient(135deg,#F4D978,#D4AF37_50%,#936912)] px-7 py-4 text-sm font-black text-black shadow-[0_18px_50px_rgba(212,175,55,.16)] transition hover:-translate-y-1 hover:shadow-[0_24px_65px_rgba(212,175,55,.26)]"
+              className="group mt-5 inline-flex items-center gap-2 text-[10px] font-black tracking-[0.15em] text-[#F0D16A]"
             >
-              Start Your Challenge
+              VIEW CHALLENGES
 
-              <ArrowRight />
-
-              <span className="absolute inset-y-0 -left-20 w-12 skew-x-[-20deg] bg-white/40 blur-md transition-all duration-700 group-hover:left-[125%]" />
+              <span className="bp-inline-arrow">
+                <ArrowRight />
+              </span>
             </a>
+          </div>
+        </div>
 
-            <div className="mt-5 flex items-center gap-2 text-[10px] text-white/24">
-              <span className="text-[#D4AF37]">
-                <TrophyIcon />
+        {/* =====================================================
+            THREE CHAPTERS
+        ====================================================== */}
+
+        <div className="mt-12">
+          {/* 01 */}
+
+          <FeatureChapter
+            number="01"
+            eyebrow="PROFIT POTENTIAL"
+            icon={<TrendIcon />}
+            title={
+              <>
+                KEEP MORE OF YOUR
+                <span className="block text-[#D4AF37]">
+                  PERFORMANCE.
+                </span>
+              </>
+            }
+            description="When your trading performs, the structure should reward it. BlackProp is designed around clear progression and trader-focused reward potential."
+            points={[
+              "Up to 90% profit split",
+              "Clear progression",
+              "Performance focused",
+              "Trader-first structure",
+            ]}
+            graphic={<PerformanceCore />}
+          />
+
+          <ArrowConnector />
+
+          {/* 02 */}
+
+          <FeatureChapter
+            number="02"
+            eyebrow="REWARD FLOW"
+            icon={<BoltIcon />}
+            title={
+              <>
+                KEEP MOVING
+                <span className="block text-[#D4AF37]">
+                  FORWARD.
+                </span>
+              </>
+            }
+            description="A clean progression path keeps the journey understandable — perform, meet the required objectives and move toward eligible reward access."
+            points={[
+              "Simple milestones",
+              "Defined objectives",
+              "Clear reward journey",
+              "Less unnecessary friction",
+            ]}
+            graphic={<RewardMotion />}
+            reverse
+          />
+
+          <ArrowConnector />
+
+          {/* 03 */}
+
+          <FeatureChapter
+            number="03"
+            eyebrow="FLEXIBLE ACCESS"
+            icon={<WalletIcon />}
+            title={
+              <>
+                CHOOSE HOW YOU
+                <span className="block text-[#D4AF37]">
+                  ACCESS REWARDS.
+                </span>
+              </>
+            }
+            description="When eligible, choose from supported payout routes designed to give the BlackProp reward experience more flexibility."
+            points={[
+              "Banking routes",
+              "Digital wallets",
+              "Crypto support",
+              "Flexible settlement",
+            ]}
+            graphic={<PayoutRoutes />}
+          />
+        </div>
+
+        {/* =====================================================
+            FLOW LINE
+        ====================================================== */}
+
+        <div className="mt-5 flex items-center justify-center gap-2 overflow-hidden rounded-[18px] border border-white/10 bg-[#080809] px-4 py-3">
+          {[
+            "PERFORM",
+            "PROVE",
+            "PROGRESS",
+            "ACCESS",
+          ].map((word, index) => (
+            <div
+              key={word}
+              className="flex items-center"
+            >
+              <span className="text-[7px] font-black tracking-[0.15em] text-white sm:text-[8px]">
+                {word}
               </span>
 
-              Build your account around your trading style.
+              {index !== 3 && (
+                <div className="bp-flow-arrows mx-2 flex text-[#D4AF37] sm:mx-4">
+                  <ArrowRight className="h-3 w-3" />
+                  <ArrowRight className="h-3 w-3" />
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+
+        {/* =====================================================
+            FINAL PAYOUT PANEL
+        ====================================================== */}
+
+        <div className="relative mt-16 overflow-hidden rounded-[28px] border border-[#D4AF37]/20 bg-[linear-gradient(135deg,#101011,#070708)] p-5 sm:p-7 lg:mt-20 lg:p-8">
+          <div className="absolute inset-x-[16%] top-0 h-px bg-gradient-to-r from-transparent via-[#D4AF37]/70 to-transparent" />
+
+          <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-[#D4AF37]/10 blur-[85px]" />
+
+          <div className="relative grid gap-8 lg:grid-cols-[.85fr_1.15fr] lg:items-center">
+            {/* COPY */}
+
+            <div>
+              <div className="inline-flex items-center gap-2 rounded-full border border-[#D4AF37]/20 bg-[#D4AF37]/10 px-3 py-2">
+                <span className="text-[#F0D16A]">
+                  <ShieldIcon />
+                </span>
+
+                <span className="text-[7px] font-black tracking-[0.17em] text-[#F0D16A]">
+                  REWARD ACCESS
+                </span>
+              </div>
+
+              <h3 className="mt-5 text-[2.1rem] font-black uppercase leading-[0.95] tracking-[-0.055em] text-white sm:text-[2.8rem]">
+                PERFORMANCE IN.
+                <span className="block text-[#D4AF37]">
+                  REWARDS OUT.
+                </span>
+              </h3>
+
+              <p className="mt-4 max-w-[450px] text-sm font-medium leading-7 text-white">
+                Reach eligible reward status and select from
+                supported payout methods available to your
+                BlackProp account.
+              </p>
+
+              <a
+                href="#challenges"
+                className="group relative mt-6 inline-flex min-w-[190px] items-center justify-center gap-2 overflow-hidden rounded-xl bg-[linear-gradient(135deg,#F6DE82,#D4AF37_50%,#956A11)] px-6 py-3.5 text-sm font-black uppercase text-black shadow-[0_16px_45px_rgba(212,175,55,.17)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_22px_55px_rgba(212,175,55,.27)]"
+              >
+                START CHALLENGE
+
+                <span className="bp-button-arrow">
+                  <ArrowRight />
+                </span>
+
+                <span className="absolute inset-y-0 -left-20 w-12 skew-x-[-20deg] bg-white/45 blur-md transition-all duration-700 group-hover:left-[125%]" />
+              </a>
+            </div>
+
+            {/* METHODS */}
+
+            <div>
+              <div className="grid gap-2 sm:grid-cols-3">
+                <PayoutMethod
+                  icon={<BankIcon />}
+                  kicker="TRADITIONAL"
+                  title="Bank Transfer"
+                />
+
+                <PayoutMethod
+                  icon={<WalletIcon />}
+                  kicker="DIGITAL"
+                  title="Digital Wallet"
+                />
+
+                <PayoutMethod
+                  icon={<CryptoIcon />}
+                  kicker="ON-CHAIN"
+                  title="Crypto"
+                />
+              </div>
+
+              {/* STATUS */}
+
+              <div className="relative mt-3 overflow-hidden rounded-[17px] border border-[#D4AF37]/20 bg-[#D4AF37]/[0.07] px-4 py-3">
+                <span className="bp-scan absolute inset-y-0 w-20 bg-gradient-to-r from-transparent via-[#F1D16A]/15 to-transparent" />
+
+                <div className="relative flex items-center gap-3">
+                  <span className="grid h-8 w-8 place-items-center rounded-full bg-[#D4AF37] text-black">
+                    <CheckIcon />
+                  </span>
+
+                  <div>
+                    <p className="text-[7px] font-black tracking-[0.15em] text-[#D4AF37]">
+                      FLEXIBLE SETTLEMENT
+                    </p>
+
+                    <p className="mt-0.5 text-[10px] font-bold text-white">
+                      Multiple supported payout routes. One BlackProp experience.
+                    </p>
+                  </div>
+
+                  <div className="bp-status-arrow ml-auto hidden text-[#D4AF37] sm:block">
+                    <ArrowRight />
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* DISCLAIMER */}
-        <p className="mx-auto mt-10 max-w-3xl text-center text-[9px] leading-4 text-white/15">
+        {/* =====================================================
+            END
+        ====================================================== */}
+
+        <div className="mx-auto mt-12 flex max-w-[760px] items-center gap-4">
+          <div className="h-px flex-1 bg-gradient-to-r from-transparent to-[#D4AF37]/25" />
+
+          <p className="shrink-0 text-[8px] font-black tracking-[0.17em] text-white">
+            PERFORM
+            <span className="mx-2 text-[#D4AF37]">
+              →
+            </span>
+            PROGRESS
+            <span className="mx-2 text-[#D4AF37]">
+              →
+            </span>
+            ACCESS
+          </p>
+
+          <div className="h-px flex-1 bg-gradient-to-l from-transparent to-[#D4AF37]/25" />
+        </div>
+
+        <p className="mx-auto mt-6 max-w-3xl text-center text-[9px] font-medium leading-4 text-white">
           Profit splits, payout timing, account limits and
-          withdrawal methods shown in this frontend are
-          demonstration content until BlackProp&apos;s final terms
-          and integrations are confirmed.
+          withdrawal methods shown are demonstration content
+          until BlackProp&apos;s final terms and integrations
+          are confirmed.
         </p>
       </div>
+
+      {/* =====================================================
+          ANIMATIONS
+      ====================================================== */}
+
+      <style>{`
+        @keyframes bpProfitSpin {
+          from {
+            transform: rotate(0deg);
+          }
+
+          to {
+            transform: rotate(360deg);
+          }
+        }
+
+        @keyframes bpReverseSpin {
+          from {
+            transform: rotate(360deg);
+            transform-origin: center;
+          }
+
+          to {
+            transform: rotate(0deg);
+            transform-origin: center;
+          }
+        }
+
+        @keyframes bpDashMove {
+          to {
+            stroke-dashoffset: -28;
+          }
+        }
+
+        @keyframes bpPulse {
+          0%, 100% {
+            opacity: .45;
+            transform: scale(.85);
+          }
+
+          50% {
+            opacity: 1;
+            transform: scale(1.18);
+            box-shadow: 0 0 18px rgba(212,175,55,.6);
+          }
+        }
+
+        @keyframes bpFlowOne {
+          0% {
+            left: 0;
+            opacity: 0;
+          }
+
+          12% {
+            opacity: 1;
+          }
+
+          88% {
+            opacity: 1;
+          }
+
+          100% {
+            left: calc(100% - 10px);
+            opacity: 0;
+          }
+        }
+
+        @keyframes bpFlowTwo {
+          0% {
+            left: 0;
+            opacity: 0;
+          }
+
+          20% {
+            opacity: 1;
+          }
+
+          100% {
+            left: calc(100% - 8px);
+            opacity: 0;
+          }
+        }
+
+        @keyframes bpArrowDrop {
+          0%, 100% {
+            transform: translateY(-4px);
+            box-shadow: 0 0 0 rgba(212,175,55,0);
+          }
+
+          50% {
+            transform: translateY(6px);
+            box-shadow: 0 0 24px rgba(212,175,55,.2);
+          }
+        }
+
+        @keyframes bpArrowStream {
+          0%, 100% {
+            opacity: .45;
+            transform: translateX(-4px);
+          }
+
+          50% {
+            opacity: 1;
+            transform: translateX(5px);
+          }
+        }
+
+        @keyframes bpRouteArrow {
+          0%, 100% {
+            opacity: .35;
+            transform: translateX(-4px);
+          }
+
+          50% {
+            opacity: 1;
+            transform: translateX(5px);
+          }
+        }
+
+        @keyframes bpInlineArrow {
+          0%, 100% {
+            transform: translateX(0);
+          }
+
+          50% {
+            transform: translateX(5px);
+          }
+        }
+
+        @keyframes bpScan {
+          0% {
+            left: -100px;
+            opacity: 0;
+          }
+
+          20% {
+            opacity: 1;
+          }
+
+          80% {
+            opacity: 1;
+          }
+
+          100% {
+            left: calc(100% + 20px);
+            opacity: 0;
+          }
+        }
+
+        .bp-profit-spin {
+          animation: bpProfitSpin 15s linear infinite;
+        }
+
+        .bp-reverse-spin {
+          transform-origin: center;
+          animation: bpReverseSpin 20s linear infinite;
+        }
+
+        .bp-running-path {
+          stroke-dashoffset: 0;
+          animation: bpDashMove 4s linear infinite;
+        }
+
+        .bp-pulse {
+          animation: bpPulse 3s ease-in-out infinite;
+        }
+
+        .bp-flow-one {
+          animation: bpFlowOne 3.1s ease-in-out infinite;
+        }
+
+        .bp-flow-two {
+          animation: bpFlowTwo 2.6s ease-in-out infinite 1.2s;
+        }
+
+        .bp-arrow-drop {
+          animation: bpArrowDrop 2.2s ease-in-out infinite;
+        }
+
+        .bp-arrow-stream {
+          animation: bpArrowStream 1.7s ease-in-out infinite;
+        }
+
+        .bp-route-arrow,
+        .bp-route-arrow-two {
+          animation: bpRouteArrow 1.8s ease-in-out infinite;
+        }
+
+        .bp-route-arrow-two {
+          animation-delay: .5s;
+        }
+
+        .bp-inline-arrow,
+        .bp-button-arrow,
+        .bp-method-arrow,
+        .bp-status-arrow {
+          animation: bpInlineArrow 1.6s ease-in-out infinite;
+        }
+
+        .bp-flow-arrows svg:first-child {
+          animation: bpInlineArrow 1.5s ease-in-out infinite;
+        }
+
+        .bp-flow-arrows svg:last-child {
+          animation: bpInlineArrow 1.5s ease-in-out infinite .25s;
+        }
+
+        .bp-scan {
+          animation: bpScan 4s ease-in-out infinite;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .bp-profit-spin,
+          .bp-reverse-spin,
+          .bp-running-path,
+          .bp-pulse,
+          .bp-flow-one,
+          .bp-flow-two,
+          .bp-arrow-drop,
+          .bp-arrow-stream,
+          .bp-route-arrow,
+          .bp-route-arrow-two,
+          .bp-inline-arrow,
+          .bp-button-arrow,
+          .bp-method-arrow,
+          .bp-status-arrow,
+          .bp-flow-arrows svg,
+          .bp-scan {
+            animation: none !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }

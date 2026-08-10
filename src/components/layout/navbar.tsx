@@ -255,7 +255,7 @@ export function Navbar() {
   }
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50">
+    <header className="relative z-50">
       {/* GOLD AMBIENT */}
       <div className="pointer-events-none absolute inset-x-0 top-0 h-28 bg-[radial-gradient(circle_at_50%_-100%,rgba(212,175,55,0.18),transparent_68%)]" />
 

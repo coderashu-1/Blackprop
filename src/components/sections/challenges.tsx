@@ -845,7 +845,7 @@ function OptionButton({
       className={`relative flex min-h-[54px] items-center justify-center rounded-xl border px-3 py-3 text-xs font-bold transition-all duration-300 ${
         selected
           ? "border-[#D4AF37]/40 bg-[#D4AF37]/[0.09] text-[#EDD06B] shadow-[0_8px_30px_rgba(212,175,55,.07)]"
-          : "border-white/[0.07] bg-white/[0.02] text-white/40 hover:border-white/[0.14] hover:bg-white/[0.04] hover:text-white/75"
+          : "border-white/[0.07] bg-white/[0.02] text-white hover:border-white/[0.14] hover:bg-white/[0.04] hover:text-white"
       }`}
     >
       {children}
@@ -855,7 +855,7 @@ function OptionButton({
           className={`absolute -right-1.5 -top-2 rounded-full px-2 py-0.5 text-[6px] font-black uppercase tracking-[0.08em] ${
             selected
               ? "bg-[#D4AF37] text-black"
-              : "border border-white/[0.08] bg-[#161616] text-white/40"
+              : "border border-white/[0.08] bg-[#161616] text-white"
           }`}
         >
           {badge}
@@ -889,13 +889,13 @@ function RuleRow({
           className={`grid h-8 w-8 shrink-0 place-items-center rounded-lg border ${
             accent
               ? "border-[#D4AF37]/20 bg-[#D4AF37]/[0.07] text-[#E0BD54]"
-              : "border-white/[0.06] bg-white/[0.02] text-white/27"
+              : "border-white/[0.06] bg-white/[0.02] text-white"
           }`}
         >
           {icon}
         </div>
 
-        <span className="text-[11px] font-medium text-white/42 sm:text-xs">
+        <span className="text-[11px] font-medium text-white sm:text-xs">
           {label}
         </span>
 
@@ -905,7 +905,7 @@ function RuleRow({
         className={`text-right text-[11px] font-bold sm:text-xs ${
           accent
             ? "text-[#E7C75F]"
-            : "text-white/78"
+            : "text-white"
         }`}
       >
         {value}
@@ -1028,12 +1028,12 @@ export function Challenges() {
 
           <h2 className="text-4xl font-semibold tracking-[-0.055em] text-white sm:text-5xl lg:text-[4.2rem]">
             Choose Your{" "}
-            <span className="bg-[linear-gradient(100deg,#fff,#D0D0D0_32%,#F0D16A_70%,#9C7418)] bg-clip-text text-transparent">
+            <span className="bg-[linear-gradient(100deg,#fff,#FFFFFF_32%,#F0D16A_70%,#9C7418)] bg-clip-text text-transparent">
               Account
             </span>
           </h2>
 
-          <div className="mt-4 flex items-center justify-center gap-2 text-xs text-white/38">
+          <div className="mt-4 flex items-center justify-center gap-2 text-xs text-white">
 
             <span className="text-[#D4AF37]">
               <LockIcon />
@@ -1073,7 +1073,7 @@ export function Challenges() {
 
               <div className="flex flex-wrap items-center justify-center gap-3 border-b border-white/[0.06] px-5 py-4 lg:border-b-0 lg:border-r">
 
-                <span className="text-[11px] font-bold text-white/70">
+                <span className="text-[11px] font-bold text-white">
                   40% OFF YOUR CHALLENGE
                 </span>
 
@@ -1095,7 +1095,7 @@ export function Challenges() {
 
               <div className="flex flex-wrap items-center justify-center gap-3 px-5 py-4">
 
-                <span className="text-[11px] text-white/45">
+                <span className="text-[11px] text-white">
                   New trader bonus
                 </span>
 
@@ -1104,7 +1104,7 @@ export function Challenges() {
                   onClick={() =>
                     copyCode("FIRSTBP")
                   }
-                  className="flex items-center gap-2 rounded-lg border border-white/[0.08] bg-white/[0.035] px-3 py-2 text-[9px] font-black tracking-[0.12em] text-white/65 transition hover:bg-white/[0.06]"
+                  className="flex items-center gap-2 rounded-lg border border-white/[0.08] bg-white/[0.035] px-3 py-2 text-[9px] font-black tracking-[0.12em] text-white transition hover:bg-white/[0.06]"
                 >
                   {copied === "FIRSTBP"
                     ? "COPIED"
@@ -1141,7 +1141,7 @@ export function Challenges() {
                     className={`flex items-center justify-center gap-2 rounded-xl px-3 py-3 text-xs font-bold transition-all ${
                       selected
                         ? "bg-[linear-gradient(135deg,#F1D46F,#C49425)] text-black shadow-[0_9px_30px_rgba(212,175,55,.12)]"
-                        : "text-white/35 hover:bg-white/[0.04] hover:text-white/70"
+                        : "text-white hover:bg-white/[0.04] hover:text-white"
                     }`}
                   >
                     <MarketIcon
@@ -1172,7 +1172,7 @@ export function Challenges() {
               {/* MODEL */}
               <div className="rounded-2xl border border-white/[0.06] bg-white/[0.015] p-4">
 
-                <p className="mb-3 text-[9px] font-bold uppercase tracking-[0.2em] text-white/25">
+                <p className="mb-3 text-[9px] font-bold uppercase tracking-[0.2em] text-white">
                   Model
                 </p>
 
@@ -1200,7 +1200,7 @@ export function Challenges() {
               {/* MODEL TYPE */}
               <div className="mt-3 rounded-2xl border border-white/[0.06] bg-white/[0.015] p-4">
 
-                <p className="mb-3 text-[9px] font-bold uppercase tracking-[0.2em] text-white/25">
+                <p className="mb-3 text-[9px] font-bold uppercase tracking-[0.2em] text-white">
                   Model Type
                 </p>
 
@@ -1233,7 +1233,7 @@ export function Challenges() {
               {/* PLATFORMS */}
               <div className="mt-3 rounded-2xl border border-white/[0.06] bg-white/[0.015] p-4">
 
-                <p className="mb-3 text-[9px] font-bold uppercase tracking-[0.2em] text-white/25">
+                <p className="mb-3 text-[9px] font-bold uppercase tracking-[0.2em] text-white">
                   Platforms
                 </p>
 
@@ -1254,7 +1254,7 @@ export function Challenges() {
                           className={`group relative min-h-[82px] rounded-xl border px-3 py-3 transition-all ${
                             selected
                               ? "border-[#D4AF37]/35 bg-[#D4AF37]/[0.07] text-[#E7C75F]"
-                              : "border-white/[0.07] bg-black/20 text-white/38 hover:border-white/[0.13] hover:text-white/70"
+                              : "border-white/[0.07] bg-black/20 text-white hover:border-white/[0.13] hover:text-white"
                           }`}
                         >
                           <div className="flex h-full flex-col items-center justify-center">
@@ -1290,11 +1290,11 @@ export function Challenges() {
 
                 <div className="mb-3 flex items-center justify-between">
 
-                  <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-white/25">
+                  <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-white">
                     Account Size
                   </p>
 
-                  <span className="text-[8px] text-white/18">
+                  <span className="text-[8px] text-white">
                     Simulated capital
                   </span>
 
@@ -1336,11 +1336,11 @@ export function Challenges() {
                 <div className="flex flex-wrap items-center justify-between gap-3">
 
                   <div>
-                    <p className="text-[8px] font-bold uppercase tracking-[0.18em] text-white/20">
+                    <p className="text-[8px] font-bold uppercase tracking-[0.18em] text-white">
                       Current configuration
                     </p>
 
-                    <p className="mt-1.5 text-xs font-semibold text-white/65">
+                    <p className="mt-1.5 text-xs font-semibold text-white">
                       {model} ·{" "}
                       {modelType} ·{" "}
                       {market}
@@ -1349,7 +1349,7 @@ export function Challenges() {
 
                   <div className="text-right">
 
-                    <p className="text-[8px] uppercase tracking-[0.13em] text-white/20">
+                    <p className="text-[8px] uppercase tracking-[0.13em] text-white">
                       Platform
                     </p>
 
@@ -1382,7 +1382,7 @@ export function Challenges() {
 
                 <div>
 
-                  <p className="text-[8px] font-bold uppercase tracking-[0.2em] text-[#D4AF37]/60">
+                  <p className="text-[8px] font-bold uppercase tracking-[0.2em] text-[#F0D16A]">
                     BlackProp Account
                   </p>
 
@@ -1394,7 +1394,7 @@ export function Challenges() {
                       K
                     </span>
 
-                    <span className="mb-1 text-[9px] text-white/25">
+                    <span className="mb-1 text-[9px] text-white">
                       {model}
                     </span>
 
@@ -1514,7 +1514,7 @@ export function Challenges() {
 
                     <div>
 
-                      <p className="text-[8px] font-bold uppercase tracking-[0.18em] text-white/24">
+                      <p className="text-[8px] font-bold uppercase tracking-[0.18em] text-white">
                         Challenge fee
                       </p>
 
@@ -1524,7 +1524,7 @@ export function Challenges() {
                           ${pricing.sale}
                         </span>
 
-                        <span className="mb-1 text-sm text-white/25 line-through">
+                        <span className="mb-1 text-sm text-white line-through">
                           $
                           {
                             pricing.original
@@ -1545,7 +1545,7 @@ export function Challenges() {
 
                     <div className="text-right">
 
-                      <p className="text-[8px] uppercase tracking-[0.15em] text-white/22">
+                      <p className="text-[8px] uppercase tracking-[0.15em] text-white">
                         Account
                       </p>
 
@@ -1578,7 +1578,7 @@ export function Challenges() {
                 </div>
 
                 {/* REFUND MESSAGE */}
-                <div className="flex items-center justify-center gap-2 border-t border-white/[0.06] px-4 py-3 text-[9px] text-white/32">
+                <div className="flex items-center justify-center gap-2 border-t border-white/[0.06] px-4 py-3 text-[9px] text-white">
 
                   <span className="text-[#D4AF37]">
                     <LockIcon />
@@ -1593,7 +1593,7 @@ export function Challenges() {
                 {/* PAYMENT OPTIONS */}
                 <div className="border-t border-white/[0.06] px-4 py-4">
 
-                  <p className="mb-3 text-center text-[7px] font-bold uppercase tracking-[0.2em] text-white/18">
+                  <p className="mb-3 text-center text-[7px] font-bold uppercase tracking-[0.2em] text-white">
                     Payment options
                   </p>
 
@@ -1644,7 +1644,7 @@ export function Challenges() {
                         title={
                           payment.name
                         }
-                        className="grid h-10 min-w-[62px] place-items-center rounded-lg border border-white/[0.07] bg-white/[0.025] px-3 text-white/38 transition hover:border-white/[0.13] hover:text-white/70"
+                        className="grid h-10 min-w-[62px] place-items-center rounded-lg border border-white/[0.07] bg-white/[0.025] px-3 text-white transition hover:border-white/[0.13] hover:text-white"
                       >
                         {
                           payment.mark
@@ -1684,7 +1684,7 @@ export function Challenges() {
 
                   </div>
 
-                  <span className="text-[10px] font-semibold text-white/50">
+                  <span className="text-[10px] font-semibold text-white">
                     {feature}
                   </span>
 
@@ -1697,7 +1697,7 @@ export function Challenges() {
         </div>
 
         {/* DISCLAIMER */}
-        <p className="mx-auto mt-5 max-w-3xl text-center text-[9px] leading-4 text-white/18">
+        <p className="mx-auto mt-5 max-w-3xl text-center text-[9px] leading-4 text-white">
           Pricing, platform availability,
           account rules, promotional offers
           and payment methods shown in this
