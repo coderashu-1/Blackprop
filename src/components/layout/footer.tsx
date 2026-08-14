@@ -7,7 +7,7 @@ import Link from "next/link";
 function BPMark({
   width = 58,
   height = 74,
-  color = "#D4AF37",
+  color = "#FFFFFF",
   className = "",
 }: {
   width?: number | string;
@@ -23,6 +23,8 @@ function BPMark({
       fill="none"
       color={color}
       className={className}
+      shapeRendering="geometricPrecision"
+      preserveAspectRatio="xMidYMid meet"
       aria-hidden="true"
     >
       <path
@@ -96,26 +98,17 @@ function FooterLogo() {
       aria-label="BlackProp home"
       className="group inline-flex items-center gap-3.5"
     >
-      <span className="relative grid h-12 w-12 place-items-center overflow-hidden rounded-[15px] border border-[#D4AF37]/20 bg-[#D4AF37]/[0.055] shadow-[inset_0_1px_0_rgba(255,255,255,.05),0_10px_28px_rgba(0,0,0,.22)] transition duration-300 group-hover:border-[#D4AF37]/35 group-hover:bg-[#D4AF37]/[0.08]">
-        <span className="pointer-events-none absolute inset-x-[18%] top-0 h-px bg-gradient-to-r from-transparent via-[#F0D16A]/65 to-transparent" />
-
+      <span className="grid h-12 w-12 place-items-center rounded-[15px] border border-white/[0.10] bg-white/[0.035] shadow-[inset_0_1px_0_rgba(255,255,255,.04),0_10px_28px_rgba(0,0,0,.20)] transition duration-300 group-hover:border-white/[0.18] group-hover:bg-white/[0.055]">
         <BPMark
-          width={21}
-          height={27}
-          color="#D4AF37"
-          className="drop-shadow-[0_0_10px_rgba(212,175,55,.18)]"
+          width={22}
+          height={28}
+          color="#FFFFFF"
+          className="drop-shadow-[0_1px_1px_rgba(0,0,0,.7)]"
         />
       </span>
 
-      <span>
-        <span className="block text-[21px] font-black uppercase leading-none tracking-[-0.055em] text-white">
-          BLACK
-          <span className="text-[#D4AF37]">PROP</span>
-        </span>
-
-        <span className="mt-1 block text-[6px] font-bold uppercase tracking-[0.24em] text-white/25">
-          TRADER CAPITAL
-        </span>
+      <span className="text-[23px] font-bold leading-none tracking-[-0.05em] text-white sm:text-[24px]">
+        BlackProp
       </span>
     </Link>
   );
@@ -133,16 +126,16 @@ function FooterColumn({
 }) {
   return (
     <div>
-      <p className="text-[10px] font-black uppercase tracking-[0.18em] text-white/75">
+      <p className="text-[12px] font-black uppercase tracking-[0.15em] text-white/78 sm:text-[13px]">
         {title}
       </p>
 
-      <div className="mt-5 flex flex-col gap-3.5">
+      <div className="mt-4 flex flex-col gap-3 sm:mt-5 sm:gap-3.5">
         {links.map((link) => (
           <Link
             key={link.label}
             href={link.href}
-            className="group flex w-fit items-center gap-1.5 text-[12px] font-medium text-white/35 transition-colors duration-200 hover:text-white"
+            className="group flex w-fit items-center gap-1.5 text-[14px] font-medium text-white/48 transition-colors duration-200 hover:text-white sm:text-[15px]"
           >
             {link.label}
 
@@ -183,13 +176,13 @@ export function Footer() {
             TOP CTA
         ====================================================== */}
 
-        <div className="border-b border-white/[0.06] py-14 sm:flex sm:items-center sm:justify-between sm:py-16">
+        <div className="border-b border-white/[0.06] py-10 sm:flex sm:items-center sm:justify-between sm:gap-8 sm:py-14 lg:py-16">
           <div>
-            <p className="text-[8px] font-black uppercase tracking-[0.2em] text-[#D4AF37]">
+            <p className="text-[11px] font-black uppercase tracking-[0.16em] text-[#D4AF37] sm:text-[12px]">
               Ready when you are
             </p>
 
-            <h2 className="mt-3 max-w-[590px] text-[2rem] font-black leading-[1] tracking-[-0.05em] text-white sm:text-[2.7rem]">
+            <h2 className="mt-3 max-w-[650px] text-[2.35rem] font-black leading-[1] tracking-[-0.05em] text-white sm:text-[2.8rem] lg:text-[3rem]">
               Your next trading challenge
               <span className="text-white/35">
                 {" "}
@@ -200,7 +193,7 @@ export function Footer() {
 
           <Link
             href="#challenges"
-            className="gold-button group mt-7 inline-flex h-12 items-center justify-center gap-3 rounded-xl px-6 text-[10px] font-black text-black sm:mt-0"
+            className="gold-button group mt-7 inline-flex h-14 w-full items-center justify-center gap-3 rounded-xl px-7 text-[14px] font-black text-black sm:mt-0 sm:w-auto sm:min-w-[180px] sm:text-[15px]"
           >
             Get Funded
 
@@ -214,27 +207,27 @@ export function Footer() {
             MAIN FOOTER
         ====================================================== */}
 
-        <div className="grid gap-12 py-14 sm:py-16 lg:grid-cols-[1.6fr_.8fr_.8fr_.8fr_.9fr] lg:gap-8">
+        <div className="grid grid-cols-2 gap-x-6 gap-y-10 py-11 sm:grid-cols-3 sm:py-14 lg:grid-cols-[1.6fr_.8fr_.8fr_.8fr_.9fr] lg:gap-8 lg:py-16">
           {/* BRAND */}
-          <div className="max-w-[330px]">
+          <div className="col-span-2 max-w-[420px] sm:col-span-3 lg:col-span-1 lg:max-w-[350px]">
             <FooterLogo />
 
-            <p className="mt-6 text-sm leading-7 text-white/32">
+            <p className="mt-5 text-[15px] leading-7 text-white/48 sm:mt-6 sm:text-base">
               A modern trading evaluation experience built for disciplined
               traders who want clarity, performance insights and access to
               simulated capital opportunities.
             </p>
 
             <div className="mt-7 flex flex-wrap gap-2">
-              <span className="rounded-full border border-white/[0.07] bg-white/[0.025] px-3 py-1.5 text-[7px] font-black uppercase tracking-[0.13em] text-white/35">
+              <span className="rounded-full border border-white/[0.07] bg-white/[0.025] px-3.5 py-2 text-[10px] font-black uppercase tracking-[0.11em] text-white/48 sm:text-[11px]">
                 Forex
               </span>
 
-              <span className="rounded-full border border-white/[0.07] bg-white/[0.025] px-3 py-1.5 text-[7px] font-black uppercase tracking-[0.13em] text-white/35">
+              <span className="rounded-full border border-white/[0.07] bg-white/[0.025] px-3.5 py-2 text-[10px] font-black uppercase tracking-[0.11em] text-white/48 sm:text-[11px]">
                 Futures
               </span>
 
-              <span className="rounded-full border border-white/[0.07] bg-white/[0.025] px-3 py-1.5 text-[7px] font-black uppercase tracking-[0.13em] text-white/35">
+              <span className="rounded-full border border-white/[0.07] bg-white/[0.025] px-3.5 py-2 text-[10px] font-black uppercase tracking-[0.11em] text-white/48 sm:text-[11px]">
                 Crypto
               </span>
             </div>
@@ -265,13 +258,13 @@ export function Footer() {
             PAYMENT / PLATFORM BAR
         ====================================================== */}
 
-        <div className="flex flex-col gap-5 border-t border-white/[0.06] py-7 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-5 border-t border-white/[0.06] py-6 sm:flex-row sm:items-center sm:justify-between sm:py-7">
           <div>
-            <p className="text-[7px] font-black uppercase tracking-[0.17em] text-white/22">
+            <p className="text-[11px] font-black uppercase tracking-[0.14em] text-white/42 sm:text-[12px]">
               BlackProp
             </p>
 
-            <p className="mt-1.5 text-[10px] font-medium text-white/35">
+            <p className="mt-1.5 text-[13px] font-medium text-white/50 sm:text-[14px]">
               Premium trading experience
             </p>
           </div>
@@ -284,7 +277,7 @@ export function Footer() {
             ].map((item) => (
               <span
                 key={item}
-                className="rounded-lg border border-white/[0.07] bg-white/[0.025] px-3 py-2 text-[7px] font-black uppercase tracking-[0.12em] text-white/30"
+                className="rounded-lg border border-white/[0.07] bg-white/[0.025] px-3.5 py-2.5 text-[10px] font-black uppercase tracking-[0.10em] text-white/45 sm:text-[11px]"
               >
                 {item}
               </span>
@@ -296,10 +289,10 @@ export function Footer() {
             DISCLAIMER
         ====================================================== */}
 
-        <div className="border-t border-white/[0.06] py-9">
-          <div className="max-w-[1180px] text-[9px] leading-[1.9] text-white/22">
+        <div className="border-t border-white/[0.06] py-7 sm:py-9">
+          <div className="max-w-[1180px] text-[12px] font-medium leading-6 text-white/42 sm:text-[13px] sm:leading-7">
             <p>
-              <span className="font-bold text-white/32">
+              <span className="font-bold text-white/62">
                 Disclaimer:
               </span>{" "}
               Information displayed on this website is provided for general
@@ -321,7 +314,7 @@ export function Footer() {
               restrictions before participating.
             </p>
 
-            <p className="mt-4 text-[#D4AF37]/35">
+            <p className="mt-4 text-[#D4AF37]/58">
               Replace this placeholder disclosure with BlackProp&apos;s final
               counsel-approved legal language, entity information and
               jurisdiction-specific disclosures before public launch.
@@ -333,8 +326,8 @@ export function Footer() {
             BOTTOM
         ====================================================== */}
 
-        <div className="flex flex-col gap-5 border-t border-white/[0.06] py-7 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-[9px] text-white/25">
+        <div className="flex flex-col gap-5 border-t border-white/[0.06] py-6 sm:flex-row sm:items-center sm:justify-between sm:py-7">
+          <p className="text-[12px] text-white/42 sm:text-[13px]">
             © 2026 BlackProp. All rights reserved.
           </p>
 
@@ -350,7 +343,7 @@ export function Footer() {
               <Link
                 key={link.label}
                 href={link.href}
-                className="text-[9px] text-white/25 transition hover:text-white/60"
+                className="text-[12px] text-white/42 transition hover:text-white/70 sm:text-[13px]"
               >
                 {link.label}
               </Link>
@@ -362,7 +355,7 @@ export function Footer() {
             LARGE BRAND WORDMARK
         ====================================================== */}
 
-        <div className="relative overflow-hidden border-t border-white/[0.05] pb-3 pt-6">
+        <div className="relative hidden overflow-hidden border-t border-white/[0.05] pb-3 pt-6 sm:block">
           <div className="select-none text-center text-[18vw] font-black leading-[0.75] tracking-[-0.09em] text-white/[0.025] sm:text-[14vw]">
             BLACKPROP
           </div>

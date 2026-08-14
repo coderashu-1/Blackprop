@@ -9,7 +9,7 @@ import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
 function BPMark({
   width = 42,
   height = 54,
-  color = "#D4AF37",
+  color = "#FFFFFF",
   className = "",
 }: {
   width?: number | string;
@@ -25,6 +25,8 @@ function BPMark({
       fill="none"
       color={color}
       className={className}
+      shapeRendering="geometricPrecision"
+      preserveAspectRatio="xMidYMid meet"
       aria-hidden="true"
     >
       <path
@@ -245,19 +247,19 @@ function ActivityPopup({
 
   return (
     <div
-      className={`fixed bottom-4 left-4 z-[80] w-[calc(100%-2rem)] max-w-[355px] transition-all duration-500 sm:bottom-6 sm:left-6 ${
+      className={`fixed bottom-3 left-3 right-3 z-[80] mx-auto w-auto max-w-[360px] transition-all duration-500 sm:bottom-6 sm:left-6 sm:right-auto sm:mx-0 sm:w-[calc(100%-3rem)] sm:max-w-[390px] ${
         visible
           ? "translate-y-0 opacity-100"
           : "pointer-events-none translate-y-5 opacity-0"
       }`}
       aria-live="polite"
     >
-      <div className="relative overflow-hidden rounded-[20px] border border-black/[0.08] bg-white/95 p-3.5 shadow-[0_22px_70px_rgba(0,0,0,.16)] backdrop-blur-xl">
+      <div className="relative overflow-hidden rounded-[18px] border border-black/[0.08] bg-white/95 p-4 shadow-[0_18px_55px_rgba(0,0,0,.14)] backdrop-blur-xl sm:rounded-[20px]">
         <div className="absolute inset-x-[18%] top-0 h-px bg-gradient-to-r from-transparent via-[#D4AF37]/70 to-transparent" />
 
         <div className="flex items-center gap-3">
-          <div className="relative grid h-11 w-11 shrink-0 place-items-center rounded-[14px] bg-[#0A0A0B]">
-            <BPMark width={18} height={23} color="#D4AF37" />
+          <div className="relative grid h-12 w-12 shrink-0 place-items-center rounded-[14px] bg-[#0A0A0B]">
+            <BPMark width={20} height={26} color="#FFFFFF" />
 
             <span className="absolute -bottom-1 -right-1 grid h-5 w-5 place-items-center rounded-full border-2 border-white bg-[#F5F3ED] text-[12px]">
               {item.flag}
@@ -268,17 +270,17 @@ function ActivityPopup({
             <div className="flex items-center gap-2">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
 
-              <p className="text-[7px] font-black uppercase tracking-[0.16em] text-black/35">
+              <p className="text-[10px] font-black uppercase tracking-[0.13em] text-black/45 sm:text-[11px]">
                 Live community activity
               </p>
             </div>
 
-            <p className="mt-1 text-[11px] font-bold leading-4 text-[#111]">
+            <p className="mt-1.5 text-[13px] font-bold leading-5 text-[#111] sm:text-[14px]">
               {item.message ??
                 `${item.challenge} Challenge is popular with traders in ${item.country}.`}
             </p>
 
-            <p className="mt-1 text-[8px] font-medium text-black/35">
+            <p className="mt-1.5 text-[10px] font-medium text-black/42 sm:text-[11px]">
               BlackProp • just now
             </p>
           </div>
@@ -396,13 +398,13 @@ function EmailCaptureModal() {
 
   return (
     <div
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-black/55 px-4 py-8 backdrop-blur-[7px]"
+      className="fixed inset-0 z-[100] flex items-end justify-center bg-black/55 px-0 py-0 backdrop-blur-[7px] sm:items-center sm:px-4 sm:py-8"
       role="dialog"
       aria-modal="true"
       aria-labelledby="blackprop-email-title"
     >
-      <div className="relative w-full max-w-[520px] overflow-hidden rounded-[30px] border border-white/[0.1] bg-[#0B0B0C] text-white shadow-[0_40px_120px_rgba(0,0,0,.5)]">
-        <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-[#D4AF37]/12 blur-[90px]" />
+      <div className="relative max-h-[92svh] w-full max-w-[560px] overflow-y-auto overflow-x-hidden rounded-t-[26px] border border-white/[0.1] bg-[#0B0B0C] text-white shadow-[0_35px_100px_rgba(0,0,0,.5)] sm:max-h-[90vh] sm:rounded-[30px]">
+        <div className="pointer-events-none absolute -right-24 -top-24 hidden h-72 w-72 rounded-full bg-[#D4AF37]/12 blur-[90px] sm:block" />
 
         <div className="absolute inset-x-[15%] top-0 h-px bg-gradient-to-r from-transparent via-[#D4AF37]/80 to-transparent" />
 
@@ -410,23 +412,28 @@ function EmailCaptureModal() {
           type="button"
           onClick={skipForNow}
           aria-label="Close email popup"
-          className="absolute right-4 top-4 z-20 grid h-9 w-9 place-items-center rounded-full border border-white/10 bg-white/[0.04] text-white/45 transition hover:bg-white/[0.08] hover:text-white"
+          className="absolute right-4 top-4 z-20 grid h-11 w-11 place-items-center rounded-full border border-white/10 bg-white/[0.05] text-white/55 transition hover:bg-white/[0.08] hover:text-white"
         >
           <CloseIcon />
         </button>
 
-        <div className="relative p-6 sm:p-8">
-          <div className="flex items-center gap-3">
-            <div className="grid h-12 w-12 place-items-center rounded-[16px] border border-[#D4AF37]/20 bg-[#D4AF37]/[0.07]">
-              <BPMark width={22} height={28} color="#D4AF37" />
+        <div className="relative p-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] sm:p-8">
+          <div className="flex items-center gap-3.5 pr-12">
+            <div className="grid h-12 w-12 shrink-0 place-items-center rounded-[15px] border border-white/[0.10] bg-white/[0.04]">
+              <BPMark
+                width={21}
+                height={27}
+                color="#FFFFFF"
+                className="drop-shadow-[0_1px_1px_rgba(0,0,0,.7)]"
+              />
             </div>
 
             <div>
-              <p className="text-[8px] font-black uppercase tracking-[0.2em] text-[#D4AF37]">
+              <p className="text-[11px] font-black uppercase tracking-[0.15em] text-white/78 sm:text-[12px]">
                 BLACKPROP INSIDER
               </p>
 
-              <p className="mt-1 text-[9px] font-medium text-white/35">
+              <p className="mt-1 text-[11px] font-medium leading-5 text-white/45 sm:text-[12px]">
                 Selected updates. No unnecessary noise.
               </p>
             </div>
@@ -434,7 +441,7 @@ function EmailCaptureModal() {
 
           <h2
             id="blackprop-email-title"
-            className="mt-7 max-w-[430px] text-[2.25rem] font-black uppercase leading-[0.95] tracking-[-0.055em] sm:text-[2.8rem]"
+            className="mt-6 max-w-[460px] text-[2.35rem] font-black uppercase leading-[0.96] tracking-[-0.055em] sm:mt-7 sm:text-[2.9rem]"
           >
             Stay ahead of
             <span className="block text-[#D4AF37]">
@@ -442,17 +449,17 @@ function EmailCaptureModal() {
             </span>
           </h2>
 
-          <p className="mt-4 max-w-[430px] text-sm font-medium leading-6 text-white/48">
+          <p className="mt-4 max-w-[470px] text-[15px] font-medium leading-7 text-white/60 sm:text-base">
             Get selected BlackProp updates, challenge announcements,
             promotions and important trader news directly in your inbox.
           </p>
 
-          <div className="mt-6 grid gap-2 sm:grid-cols-3">
+          <div className="mt-6 hidden gap-2 sm:grid sm:grid-cols-3">
             {["Challenge news", "Promotions", "Trader updates"].map(
               (item) => (
                 <div
                   key={item}
-                  className="rounded-xl border border-white/[0.07] bg-white/[0.035] px-3 py-2.5 text-center text-[8px] font-bold text-white/45"
+                  className="rounded-xl border border-white/[0.07] bg-white/[0.035] px-3 py-3 text-center text-[11px] font-bold text-white/55"
                 >
                   {item}
                 </div>
@@ -462,17 +469,17 @@ function EmailCaptureModal() {
 
           {status === "success" ? (
             <div className="mt-7 rounded-[18px] border border-[#D4AF37]/20 bg-[#D4AF37]/[0.07] p-5">
-              <p className="text-sm font-black text-white">
+              <p className="text-base font-black text-white">
                 You&apos;re in.
               </p>
 
-              <p className="mt-1 text-[10px] text-white/45">
+              <p className="mt-1 text-[12px] leading-5 text-white/52">
                 We&apos;ll send important BlackProp updates to your inbox.
               </p>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="mt-7">
-              <div className="rounded-[18px] border border-white/[0.09] bg-white/[0.045] p-2 sm:flex sm:items-center">
+              <div className="rounded-[18px] border border-white/[0.09] bg-white/[0.045] p-2.5 sm:flex sm:items-center sm:p-2">
                 <div className="flex min-w-0 flex-1 items-center">
                   <span className="ml-3 text-[#D4AF37]">
                     <MailIcon />
@@ -487,7 +494,7 @@ function EmailCaptureModal() {
                       if (status === "error") setStatus("idle");
                     }}
                     placeholder="Enter your email address"
-                    className="h-12 w-full min-w-0 bg-transparent px-3 text-sm font-medium text-white outline-none placeholder:text-white/25"
+                    className="h-13 w-full min-w-0 bg-transparent px-3 text-[15px] font-medium text-white outline-none placeholder:text-white/30 sm:text-base"
                     aria-label="Email address"
                   />
                 </div>
@@ -495,7 +502,7 @@ function EmailCaptureModal() {
                 <button
                   type="submit"
                   disabled={status === "loading"}
-                  className="group mt-2 flex h-12 w-full shrink-0 items-center justify-center gap-2 rounded-xl bg-[linear-gradient(135deg,#F5DC7D,#D4AF37_52%,#956A12)] px-5 text-[10px] font-black uppercase text-black transition hover:-translate-y-0.5 disabled:cursor-wait disabled:opacity-60 sm:mt-0 sm:w-auto"
+                  className="group mt-2 flex h-13 w-full shrink-0 items-center justify-center gap-2 rounded-xl bg-[linear-gradient(135deg,#F5DC7D,#D4AF37_52%,#956A12)] px-6 text-[13px] font-black uppercase text-black transition hover:-translate-y-0.5 disabled:cursor-wait disabled:opacity-60 sm:mt-0 sm:w-auto sm:text-[14px]"
                 >
                   {status === "loading" ? "Joining..." : "Keep me updated"}
                   {status !== "loading" && <ArrowIcon />}
@@ -503,22 +510,22 @@ function EmailCaptureModal() {
               </div>
 
               {status === "error" && (
-                <p className="mt-2 text-[9px] font-medium text-red-300">
+                <p className="mt-2 text-[11px] font-medium leading-5 text-red-300 sm:text-[12px]">
                   Couldn&apos;t subscribe right now. Please try again.
                 </p>
               )}
             </form>
           )}
 
-          <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
-            <p className="text-[8px] font-medium text-white/22">
+          <div className="mt-4 flex flex-col items-start gap-2.5 sm:flex-row sm:items-center sm:justify-between sm:gap-3">
+            <p className="text-[11px] font-medium text-white/35 sm:text-[12px]">
               No spam. Unsubscribe anytime.
             </p>
 
             <button
               type="button"
               onClick={skipForNow}
-              className="text-[9px] font-bold text-white/35 underline decoration-white/15 underline-offset-4 transition hover:text-white/70"
+              className="text-[12px] font-bold text-white/45 underline decoration-white/15 underline-offset-4 transition hover:text-white/70"
             >
               Skip for now
             </button>
