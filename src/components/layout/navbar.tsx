@@ -10,7 +10,7 @@ import { useEffect, useRef, useState } from "react";
 function BPMark({
   width = 58,
   height = 74,
-  color = "#D4AF37",
+  color = "#FFFFFF",
   className = "",
 }: {
   width?: number | string;
@@ -305,7 +305,7 @@ export function Navbar() {
         <div className="mx-auto flex min-h-10 max-w-[1440px] items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
           {/* MARKET SWITCHER */}
           <div className="flex items-center gap-2">
-            <span className="hidden text-[10px] font-semibold uppercase tracking-[0.22em] text-white/25 xl:block">
+            <span className="hidden text-[11px] font-semibold uppercase tracking-[0.2em] text-white/25 xl:block">
               Markets
             </span>
 
@@ -321,7 +321,7 @@ export function Navbar() {
                     onClick={() =>
                       setSelectedMarket(market)
                     }
-                    className={`relative flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-[11px] font-semibold transition-all duration-300 sm:px-3 ${
+                    className={`relative flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-[12px] font-semibold transition-all duration-300 sm:px-3 ${
                       active
                         ? "bg-[linear-gradient(135deg,#E8C866,#AF8720)] text-[#080808] shadow-[0_5px_18px_rgba(212,175,55,0.16)]"
                         : "text-white/45 hover:bg-white/[0.04] hover:text-white"
@@ -349,7 +349,7 @@ export function Navbar() {
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
               </span>
 
-              <span className="text-[11px] text-white/40">
+              <span className="text-[12px] text-white/45">
                 Systems Operational
               </span>
             </div>
@@ -358,7 +358,7 @@ export function Navbar() {
 
             <a
               href="#faq"
-              className="text-[11px] font-medium text-white/45 transition hover:text-[#E8C866]"
+              className="text-[12px] font-medium text-white/50 transition hover:text-[#E8C866]"
             >
               Help Center
             </a>
@@ -378,7 +378,7 @@ export function Navbar() {
             Launch Offer
           </span>
 
-          <span className="text-[11px] text-white/55 sm:text-xs">
+          <span className="text-[12px] text-white/60 sm:text-[13px]">
             Start your BlackProp journey with{" "}
             <strong className="font-semibold text-white">
               40% OFF
@@ -388,7 +388,7 @@ export function Navbar() {
           <button
             type="button"
             onClick={copyPromoCode}
-            className="inline-flex items-center gap-1.5 rounded-lg border border-[#D4AF37]/20 bg-[#D4AF37]/[0.07] px-2.5 py-1 text-[10px] font-bold tracking-[0.1em] text-[#E8C866] transition hover:border-[#D4AF37]/40 hover:bg-[#D4AF37]/[0.12]"
+            className="inline-flex items-center gap-1.5 rounded-lg border border-[#D4AF37]/20 bg-[#D4AF37]/[0.07] px-2.5 py-1 text-[11px] font-bold tracking-[0.09em] text-[#E8C866] transition hover:border-[#D4AF37]/40 hover:bg-[#D4AF37]/[0.12]"
           >
             {copied ? "COPIED" : "BLACK40"}
 
@@ -406,33 +406,24 @@ export function Navbar() {
           ref={navRef}
           className="relative mx-auto flex h-[76px] max-w-[1440px] items-center justify-between px-4 sm:px-6 lg:px-8"
         >
-          {/* BLACKPROP LOGO */}
+          {/* SIMPLE WHITE BLACKPROP LOGO
+              Mobile: icon on the left, wordmark centered
+              Desktop: icon + wordmark together on the left */}
           <a
             href="#"
             aria-label="BlackProp home"
-            className="group flex shrink-0 items-center gap-3"
+            className="group flex shrink-0 items-center lg:gap-3"
           >
-            <div className="relative grid h-11 w-11 place-items-center overflow-hidden rounded-[14px] border border-[#D4AF37]/20 bg-[#D4AF37]/[0.055] shadow-[inset_0_1px_0_rgba(255,255,255,.04),0_8px_24px_rgba(0,0,0,.18)] transition duration-300 group-hover:border-[#D4AF37]/35 group-hover:bg-[#D4AF37]/[0.08]">
-              <div className="pointer-events-none absolute inset-x-[18%] top-0 h-px bg-gradient-to-r from-transparent via-[#F0D16A]/65 to-transparent" />
+            <BPMark
+              width={31}
+              height={40}
+              color="#FFFFFF"
+              className="shrink-0 transition-opacity duration-300 group-hover:opacity-80 sm:h-[42px] sm:w-[33px]"
+            />
 
-              <BPMark
-                width={20}
-                height={26}
-                color="#D4AF37"
-                className="drop-shadow-[0_0_10px_rgba(212,175,55,.16)]"
-              />
-            </div>
-
-            <div className="hidden sm:block">
-              <div className="text-[17px] font-black uppercase leading-none tracking-[-0.055em] text-white">
-                BLACK
-                <span className="text-[#D4AF37]">PROP</span>
-              </div>
-
-              <div className="mt-1 text-[6px] font-bold uppercase tracking-[0.24em] text-white/25">
-                TRADER CAPITAL
-              </div>
-            </div>
+            <span className="absolute left-1/2 -translate-x-1/2 whitespace-nowrap text-[27px] font-bold leading-none tracking-[-0.045em] text-white sm:text-[29px] lg:static lg:translate-x-0 lg:text-[26px]">
+              BlackProp
+            </span>
           </a>
 
           {/* =================================================
@@ -451,7 +442,7 @@ export function Navbar() {
                       : "trading",
                   )
                 }
-                className={`flex items-center gap-1.5 rounded-xl px-3.5 py-2.5 text-sm font-medium transition ${
+                className={`flex items-center gap-1.5 rounded-xl px-3.5 py-2.5 text-[15px] font-medium transition ${
                   openDropdown === "trading"
                     ? "bg-white/[0.05] text-white"
                     : "text-white/60 hover:bg-white/[0.035] hover:text-white"
@@ -485,11 +476,11 @@ export function Navbar() {
                       className="group flex items-center justify-between rounded-xl px-3 py-3 transition hover:bg-white/[0.04]"
                     >
                       <div className="min-w-0">
-                        <div className="text-sm font-semibold text-white/85 transition group-hover:text-[#E8C866]">
+                        <div className="text-[15px] font-semibold text-white/85 transition group-hover:text-[#E8C866]">
                           {item.label}
                         </div>
 
-                        <div className="mt-1 text-[11px] leading-4 text-white/35">
+                        <div className="mt-1 text-[12px] leading-5 text-white/38">
                           {item.description}
                         </div>
                       </div>
@@ -506,7 +497,7 @@ export function Navbar() {
             {/* AFFILIATE */}
             <a
               href="#affiliate"
-              className="rounded-xl px-3.5 py-2.5 text-sm font-medium text-white/60 transition hover:bg-white/[0.035] hover:text-white"
+              className="rounded-xl px-3.5 py-2.5 text-[15px] font-medium text-white/60 transition hover:bg-white/[0.035] hover:text-white"
             >
               Affiliate
             </a>
@@ -514,7 +505,7 @@ export function Navbar() {
             {/* COMPETITION */}
             <a
               href="#competition"
-              className="relative rounded-xl px-3.5 py-2.5 text-sm font-medium text-white/60 transition hover:bg-white/[0.035] hover:text-white"
+              className="relative rounded-xl px-3.5 py-2.5 text-[15px] font-medium text-white/60 transition hover:bg-white/[0.035] hover:text-white"
             >
               Competition
 
@@ -534,7 +525,7 @@ export function Navbar() {
                       : "company",
                   )
                 }
-                className={`flex items-center gap-1.5 rounded-xl px-3.5 py-2.5 text-sm font-medium transition ${
+                className={`flex items-center gap-1.5 rounded-xl px-3.5 py-2.5 text-[15px] font-medium transition ${
                   openDropdown === "company"
                     ? "bg-white/[0.05] text-white"
                     : "text-white/60 hover:bg-white/[0.035] hover:text-white"
@@ -568,11 +559,11 @@ export function Navbar() {
                       className="group flex items-center justify-between rounded-xl px-3 py-3 transition hover:bg-white/[0.04]"
                     >
                       <div className="min-w-0">
-                        <div className="text-sm font-semibold text-white/85 transition group-hover:text-[#E8C866]">
+                        <div className="text-[15px] font-semibold text-white/85 transition group-hover:text-[#E8C866]">
                           {item.label}
                         </div>
 
-                        <div className="mt-1 text-[11px] leading-4 text-white/35">
+                        <div className="mt-1 text-[12px] leading-5 text-white/38">
                           {item.description}
                         </div>
                       </div>
@@ -589,7 +580,7 @@ export function Navbar() {
             {/* FAQ */}
             <a
               href="#faq"
-              className="rounded-xl px-3.5 py-2.5 text-sm font-medium text-white/60 transition hover:bg-white/[0.035] hover:text-white"
+              className="rounded-xl px-3.5 py-2.5 text-[15px] font-medium text-white/60 transition hover:bg-white/[0.035] hover:text-white"
             >
               FAQ
             </a>
@@ -599,18 +590,18 @@ export function Navbar() {
               RIGHT SIDE
           ================================================= */}
 
-          <div className="flex items-center gap-2">
+          <div className="ml-auto flex items-center gap-2">
             <div className="hidden items-center gap-2 sm:flex">
               <a
                 href="#login"
-                className="rounded-xl border border-white/[0.09] bg-white/[0.025] px-4 py-2.5 text-sm font-medium text-white/70 transition hover:border-white/[0.16] hover:bg-white/[0.055] hover:text-white"
+                className="rounded-xl border border-white/[0.09] bg-white/[0.025] px-4 py-2.5 text-[15px] font-medium text-white/70 transition hover:border-white/[0.16] hover:bg-white/[0.055] hover:text-white"
               >
                 Log In
               </a>
 
               <a
                 href="#challenges"
-                className="group relative overflow-hidden rounded-xl bg-[linear-gradient(135deg,#F2D675_0%,#D4AF37_45%,#A57B18_100%)] px-5 py-2.5 text-sm font-bold text-[#080808] shadow-[0_8px_28px_rgba(212,175,55,0.17)] transition hover:-translate-y-0.5 hover:shadow-[0_12px_35px_rgba(212,175,55,0.25)]"
+                className="group relative overflow-hidden rounded-xl bg-[linear-gradient(135deg,#F2D675_0%,#D4AF37_45%,#A57B18_100%)] px-5 py-2.5 text-[15px] font-bold text-[#080808] shadow-[0_8px_28px_rgba(212,175,55,0.17)] transition hover:-translate-y-0.5 hover:shadow-[0_12px_35px_rgba(212,175,55,0.25)]"
               >
                 <span className="relative z-10 flex items-center gap-2">
                   Get Funded
@@ -686,7 +677,7 @@ export function Navbar() {
                             market,
                           )
                         }
-                        className={`flex min-w-0 items-center justify-center gap-1.5 rounded-xl px-2 py-2.5 text-xs font-semibold transition ${
+                        className={`flex min-w-0 items-center justify-center gap-1.5 rounded-xl px-2 py-2.5 text-[13px] font-semibold transition ${
                           active
                             ? "bg-[linear-gradient(135deg,#E8C866,#AF8720)] text-black"
                             : "text-white/45 hover:bg-white/[0.04]"
@@ -716,7 +707,7 @@ export function Navbar() {
                         : "trading",
                     )
                   }
-                  className="flex w-full items-center justify-between rounded-xl px-3 py-3 text-left text-sm font-semibold text-white"
+                  className="flex w-full items-center justify-between rounded-xl px-3 py-3 text-left text-[15px] font-semibold text-white"
                 >
                   Trading
 
@@ -737,11 +728,11 @@ export function Navbar() {
                         onClick={closeMobile}
                         className="block rounded-xl px-4 py-2.5 transition hover:bg-white/[0.04]"
                       >
-                        <div className="text-sm text-white/70">
+                        <div className="text-[14px] text-white/72">
                           {item.label}
                         </div>
 
-                        <div className="mt-0.5 text-[10px] leading-4 text-white/30">
+                        <div className="mt-0.5 text-[11px] leading-4 text-white/34">
                           {item.description}
                         </div>
                       </a>
@@ -754,7 +745,7 @@ export function Navbar() {
               <a
                 href="#affiliate"
                 onClick={closeMobile}
-                className="block rounded-xl px-3 py-3 text-sm font-semibold text-white"
+                className="block rounded-xl px-3 py-3 text-[15px] font-semibold text-white"
               >
                 Affiliate
               </a>
@@ -763,7 +754,7 @@ export function Navbar() {
               <a
                 href="#competition"
                 onClick={closeMobile}
-                className="flex items-center justify-between rounded-xl px-3 py-3 text-sm font-semibold text-white"
+                className="flex items-center justify-between rounded-xl px-3 py-3 text-[15px] font-semibold text-white"
               >
                 Trading Competition
 
@@ -783,7 +774,7 @@ export function Navbar() {
                         : "company",
                     )
                   }
-                  className="flex w-full items-center justify-between rounded-xl px-3 py-3 text-left text-sm font-semibold text-white"
+                  className="flex w-full items-center justify-between rounded-xl px-3 py-3 text-left text-[15px] font-semibold text-white"
                 >
                   Company
 
@@ -804,11 +795,11 @@ export function Navbar() {
                         onClick={closeMobile}
                         className="block rounded-xl px-4 py-2.5 transition hover:bg-white/[0.04]"
                       >
-                        <div className="text-sm text-white/70">
+                        <div className="text-[14px] text-white/72">
                           {item.label}
                         </div>
 
-                        <div className="mt-0.5 text-[10px] leading-4 text-white/30">
+                        <div className="mt-0.5 text-[11px] leading-4 text-white/34">
                           {item.description}
                         </div>
                       </a>
@@ -821,7 +812,7 @@ export function Navbar() {
               <a
                 href="#faq"
                 onClick={closeMobile}
-                className="block rounded-xl px-3 py-3 text-sm font-semibold text-white"
+                className="block rounded-xl px-3 py-3 text-[15px] font-semibold text-white"
               >
                 FAQ
               </a>
@@ -831,7 +822,7 @@ export function Navbar() {
                 <a
                   href="#login"
                   onClick={closeMobile}
-                  className="rounded-xl border border-white/[0.09] px-4 py-3 text-center text-sm font-medium text-white/75"
+                  className="rounded-xl border border-white/[0.09] px-4 py-3 text-center text-[14px] font-medium text-white/75"
                 >
                   Log In
                 </a>
@@ -839,7 +830,7 @@ export function Navbar() {
                 <a
                   href="#challenges"
                   onClick={closeMobile}
-                  className="rounded-xl bg-[linear-gradient(135deg,#F2D675,#D4AF37,#A57B18)] px-4 py-3 text-center text-sm font-bold text-black"
+                  className="rounded-xl bg-[linear-gradient(135deg,#F2D675,#D4AF37,#A57B18)] px-4 py-3 text-center text-[14px] font-bold text-black"
                 >
                   Get Funded
                 </a>

@@ -208,7 +208,7 @@ function CountryButton({
     <button
       type="button"
       onClick={onClick}
-      className={`group relative overflow-hidden rounded-[18px] border px-3 py-3 text-left transition duration-300 sm:px-4 ${
+      className={`group relative overflow-hidden rounded-[16px] border px-3 py-3 text-left transition duration-300 sm:rounded-[18px] sm:px-4 ${
         active
           ? "border-[#D4AF37]/45 bg-[#D4AF37]/10 shadow-[0_0_35px_rgba(212,175,55,.08)]"
           : "border-white/10 bg-white/[0.035] hover:border-[#D4AF37]/25 hover:bg-[#D4AF37]/[0.05]"
@@ -220,7 +220,7 @@ function CountryButton({
 
       <div className="flex items-center gap-3">
         <div
-          className={`grid h-11 w-11 shrink-0 place-items-center rounded-[13px] border text-2xl ${
+          className={`grid h-10 w-10 shrink-0 place-items-center rounded-[12px] border text-xl sm:h-11 sm:w-11 sm:rounded-[13px] sm:text-2xl ${
             active
               ? "border-[#D4AF37]/30 bg-[#0A0A0B]"
               : "border-white/10 bg-[#0B0B0C]"
@@ -231,7 +231,7 @@ function CountryButton({
 
         <div className="min-w-0">
           <p
-            className={`text-[7px] font-black tracking-[0.17em] ${
+            className={`text-[10px] font-black tracking-[0.13em] sm:text-[11px] ${
               active
                 ? "text-[#D4AF37]"
                 : "text-white"
@@ -240,7 +240,7 @@ function CountryButton({
             {testimonial.code}
           </p>
 
-          <p className="mt-1 truncate text-[10px] font-black text-white">
+          <p className="mt-1 truncate text-[12px] font-black text-white sm:text-[13px]">
             {testimonial.country}
           </p>
         </div>
@@ -267,7 +267,7 @@ function CountryNetwork({
   const current = testimonials[active];
 
   return (
-    <div className="relative h-[360px] overflow-hidden rounded-[28px] border border-[#D4AF37]/20 bg-[#080809] sm:h-[400px]">
+    <div className="relative hidden h-[390px] overflow-hidden rounded-[28px] border border-[#D4AF37]/20 bg-[#080809] sm:block sm:h-[420px]">
       {/* AMBIENCE */}
 
       <div className="absolute left-1/2 top-1/2 h-[280px] w-[280px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#D4AF37]/10 blur-[80px]" />
@@ -385,11 +385,11 @@ function CountryNetwork({
               {current.flag}
             </div>
 
-            <p className="mt-3 text-[8px] font-black tracking-[0.18em] text-[#D4AF37]">
+            <p className="mt-3 text-[10px] font-black tracking-[0.14em] text-[#D4AF37] sm:text-[11px]">
               {current.code}
             </p>
 
-            <p className="mt-1 max-w-[100px] text-[10px] font-black leading-4 text-white">
+            <p className="mt-1 max-w-[110px] text-[12px] font-black leading-5 text-white sm:text-[13px]">
               {current.country}
             </p>
           </div>
@@ -403,7 +403,7 @@ function CountryNetwork({
           🇮🇳
         </span>
 
-        <span className="text-[6px] font-black tracking-[0.12em] text-white">
+        <span className="text-[9px] font-black tracking-[0.10em] text-white">
           INDIA
         </span>
       </div>
@@ -413,7 +413,7 @@ function CountryNetwork({
           🇬🇧
         </span>
 
-        <span className="text-[6px] font-black tracking-[0.12em] text-white">
+        <span className="text-[9px] font-black tracking-[0.10em] text-white">
           UK
         </span>
       </div>
@@ -423,7 +423,7 @@ function CountryNetwork({
           🇺🇸
         </span>
 
-        <span className="text-[6px] font-black tracking-[0.12em] text-white">
+        <span className="text-[9px] font-black tracking-[0.10em] text-white">
           USA
         </span>
       </div>
@@ -433,7 +433,7 @@ function CountryNetwork({
           🇧🇷
         </span>
 
-        <span className="text-[6px] font-black tracking-[0.12em] text-white">
+        <span className="text-[9px] font-black tracking-[0.10em] text-white">
           BRAZIL
         </span>
       </div>
@@ -443,7 +443,7 @@ function CountryNetwork({
           🇦🇪
         </span>
 
-        <span className="text-[6px] font-black tracking-[0.12em] text-[#F0D16A]">
+        <span className="text-[9px] font-black tracking-[0.10em] text-[#F0D16A]">
           UAE
         </span>
       </div>
@@ -453,7 +453,7 @@ function CountryNetwork({
       <div className="absolute left-4 top-4 flex items-center gap-2 rounded-full border border-[#D4AF37]/20 bg-[#D4AF37]/10 px-3 py-2">
         <span className="bp-country-pulse h-1.5 w-1.5 rounded-full bg-[#D4AF37]" />
 
-        <span className="text-[6px] font-black tracking-[0.16em] text-[#F0D16A]">
+        <span className="text-[9px] font-black tracking-[0.13em] text-[#F0D16A]">
           GLOBAL SIGNAL
         </span>
       </div>
@@ -474,11 +474,11 @@ function SmallStat({
 }) {
   return (
     <div>
-      <p className="text-lg font-black text-white">
+      <p className="text-xl font-black text-white sm:text-2xl">
         {value}
       </p>
 
-      <p className="mt-1 text-[7px] font-black tracking-[0.15em] text-[#D4AF37]">
+      <p className="mt-1.5 text-[10px] font-black tracking-[0.12em] text-[#D4AF37] sm:text-[11px]">
         {label}
       </p>
     </div>
@@ -528,7 +528,7 @@ export function Testimonials() {
   return (
     <section
       id="testimonials"
-      className="relative overflow-hidden bg-[#030303] py-20 sm:py-24 lg:py-28"
+      className="relative overflow-hidden bg-[#030303] py-14 sm:py-20 md:py-24 lg:py-28"
     >
       {/* =====================================================
           BACKGROUND
@@ -553,17 +553,17 @@ export function Testimonials() {
 
         <div className="grid gap-8 lg:grid-cols-[1.05fr_.95fr] lg:items-end">
           <div>
-            <div className="inline-flex items-center gap-2 rounded-full border border-[#D4AF37]/20 bg-[#D4AF37]/10 px-3.5 py-2">
+            <div className="inline-flex items-center gap-2.5 rounded-full border border-[#D4AF37]/20 bg-[#D4AF37]/10 px-3.5 py-2.5">
               <span className="text-[#F0D16A]">
                 <GlobeIcon />
               </span>
 
-              <span className="text-[8px] font-black uppercase tracking-[0.2em] text-[#F0D16A]">
+              <span className="text-[11px] font-black uppercase tracking-[0.16em] text-[#F0D16A] sm:text-[12px]">
                 GLOBAL TRADER VOICES
               </span>
             </div>
 
-            <h2 className="mt-6 max-w-[720px] text-[2.8rem] font-black uppercase leading-[0.92] tracking-[-0.06em] text-white sm:text-[3.8rem] lg:text-[4.7rem]">
+            <h2 className="mt-6 max-w-[760px] text-[3.15rem] font-black uppercase leading-[0.92] tracking-[-0.06em] text-white min-[430px]:text-[3.45rem] sm:text-[4rem] md:text-[4.35rem] lg:text-[4.9rem]">
               DIFFERENT COUNTRIES.
               <span className="block text-[#D4AF37]">
                 ONE STANDARD.
@@ -573,7 +573,7 @@ export function Testimonials() {
 
           <div className="lg:pb-1">
             <div className="max-w-[500px] border-l-2 border-[#D4AF37] pl-5 lg:ml-auto">
-              <p className="text-sm font-medium leading-7 text-white sm:text-base">
+              <p className="text-[16px] font-medium leading-7 text-white/72 sm:text-[17px] sm:leading-8">
                 A BlackProp experience designed for traders
                 across markets, styles and locations — while
                 keeping the same focus on clarity and
@@ -587,7 +587,7 @@ export function Testimonials() {
             COUNTRY SELECTORS
         ====================================================== */}
 
-        <div className="mt-10 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-5">
+        <div className="mt-8 grid grid-cols-2 gap-2.5 min-[430px]:grid-cols-3 sm:mt-10 lg:grid-cols-5">
           {testimonials.map(
             (item, index) => (
               <CountryButton
@@ -606,33 +606,33 @@ export function Testimonials() {
             MAIN EXPERIENCE
         ====================================================== */}
 
-        <div className="mt-4 grid gap-4 lg:grid-cols-[1.08fr_.92fr]">
+        <div className="mt-5 grid gap-4 lg:grid-cols-[1.08fr_.92fr]">
           {/* =================================================
               TESTIMONIAL
           ================================================= */}
 
-          <article className="relative overflow-hidden rounded-[30px] border border-[#D4AF37]/20 bg-[linear-gradient(145deg,#111112,#070708)] p-5 sm:p-7 lg:p-8">
+          <article className="relative overflow-hidden rounded-[24px] border border-[#D4AF37]/20 bg-[linear-gradient(145deg,#111112,#070708)] p-5 sm:rounded-[30px] sm:p-7 lg:p-8">
             <div className="absolute inset-x-[15%] top-0 h-px bg-gradient-to-r from-transparent via-[#D4AF37]/75 to-transparent" />
 
             <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-[#D4AF37]/10 blur-[90px]" />
 
             {/* TOP */}
 
-            <div className="relative flex items-start justify-between gap-5">
+            <div className="relative flex items-start justify-between gap-4 sm:gap-5">
               <div>
                 <Stars />
 
                 <div className="mt-5 flex items-center gap-3">
-                  <div className="grid h-12 w-12 place-items-center rounded-[14px] border border-[#D4AF37]/25 bg-[#0A0A0B] text-2xl">
+                  <div className="grid h-12 w-12 place-items-center rounded-[14px] border border-[#D4AF37]/25 bg-[#0A0A0B] text-2xl sm:h-14 sm:w-14 sm:text-[28px]">
                     {testimonial.flag}
                   </div>
 
                   <div>
-                    <p className="text-[7px] font-black tracking-[0.17em] text-[#D4AF37]">
+                    <p className="text-[10px] font-black tracking-[0.13em] text-[#D4AF37] sm:text-[11px]">
                       TRADER VOICE / {testimonial.code}
                     </p>
 
-                    <p className="mt-1 text-sm font-black text-white">
+                    <p className="mt-1 text-[15px] font-black text-white sm:text-base">
                       {testimonial.country}
                     </p>
                   </div>
@@ -648,31 +648,31 @@ export function Testimonials() {
 
             <div
               key={`${testimonial.name}-${active}`}
-              className="bp-testimonial-enter relative mt-9"
+              className="bp-testimonial-enter relative mt-7 sm:mt-9"
             >
-              <p className="text-[8px] font-black uppercase tracking-[0.19em] text-[#D4AF37]">
+              <p className="text-[11px] font-black uppercase tracking-[0.15em] text-[#D4AF37] sm:text-[12px]">
                 TRADER EXPERIENCE
               </p>
 
-              <h3 className="mt-3 max-w-[620px] text-[2rem] font-black tracking-[-0.05em] text-white sm:text-[2.5rem]">
+              <h3 className="mt-3 max-w-[650px] text-[2.15rem] font-black leading-[1.02] tracking-[-0.05em] text-white sm:text-[2.6rem] lg:text-[2.8rem]">
                 {testimonial.title}
               </h3>
 
-              <p className="mt-6 max-w-[650px] text-base font-medium leading-8 text-white sm:text-lg">
+              <p className="mt-5 max-w-[700px] text-[16px] font-medium leading-7 text-white/88 sm:mt-6 sm:text-lg sm:leading-8 lg:text-[19px]">
                 “{testimonial.quote}”
               </p>
             </div>
 
             {/* PERSON */}
 
-            <div className="relative mt-9 flex flex-col gap-5 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
+            <div className="relative mt-8 flex flex-col gap-5 border-t border-white/10 pt-5 sm:mt-9 sm:flex-row sm:items-center sm:justify-between sm:pt-6">
               <div className="flex items-center gap-3">
                 <div className="grid h-11 w-11 place-items-center rounded-full bg-[linear-gradient(135deg,#F1D16A,#A57414)] text-sm font-black text-black">
                   {testimonial.name.charAt(0)}
                 </div>
 
                 <div>
-                  <p className="text-sm font-black text-white">
+                  <p className="text-[15px] font-black text-white sm:text-base">
                     {testimonial.name}
                   </p>
 
@@ -681,7 +681,7 @@ export function Testimonials() {
                       {testimonial.flag}
                     </span>
 
-                    <span className="text-[8px] font-black uppercase tracking-[0.12em] text-white">
+                    <span className="text-[11px] font-black uppercase tracking-[0.10em] text-white/72 sm:text-[12px]">
                       {testimonial.country}
                     </span>
                   </div>
@@ -695,12 +695,12 @@ export function Testimonials() {
                   type="button"
                   onClick={previous}
                   aria-label="Previous testimonial"
-                  className="grid h-10 w-10 place-items-center rounded-xl border border-white/15 bg-white/[0.04] text-white transition hover:border-[#D4AF37]/35 hover:bg-[#D4AF37]/10 hover:text-[#F0D16A]"
+                  className="grid h-11 w-11 place-items-center rounded-xl border border-white/15 bg-white/[0.04] text-white transition hover:border-[#D4AF37]/35 hover:bg-[#D4AF37]/10 hover:text-[#F0D16A] sm:h-12 sm:w-12"
                 >
                   <ArrowLeft />
                 </button>
 
-                <div className="min-w-[72px] text-center text-[9px] font-black tracking-[0.14em] text-white">
+                <div className="min-w-[76px] text-center text-[11px] font-black tracking-[0.12em] text-white sm:text-[12px]">
                   0{active + 1}
                   <span className="mx-1 text-[#D4AF37]">
                     /
@@ -712,7 +712,7 @@ export function Testimonials() {
                   type="button"
                   onClick={next}
                   aria-label="Next testimonial"
-                  className="group grid h-10 w-10 place-items-center rounded-xl border border-[#D4AF37]/30 bg-[#D4AF37]/10 text-[#F0D16A] transition hover:bg-[#D4AF37]/15"
+                  className="group grid h-11 w-11 place-items-center rounded-xl border border-[#D4AF37]/30 bg-[#D4AF37]/10 text-[#F0D16A] transition hover:bg-[#D4AF37]/15 sm:h-12 sm:w-12"
                 >
                   <span className="bp-next-arrow">
                     <ArrowRight />
@@ -735,7 +735,7 @@ export function Testimonials() {
             COUNTRY STRIP
         ====================================================== */}
 
-        <div className="mt-4 overflow-hidden rounded-[22px] border border-white/10 bg-[#080809]">
+        <div className="mt-4 hidden overflow-hidden rounded-[22px] border border-white/10 bg-[#080809] sm:block">
           <div className="grid divide-y divide-white/10 sm:grid-cols-5 sm:divide-x sm:divide-y-0">
             {testimonials.map(
               (item, index) => (
@@ -761,7 +761,7 @@ export function Testimonials() {
 
                   <div className="text-left">
                     <p
-                      className={`text-[7px] font-black tracking-[0.15em] ${
+                      className={`text-[10px] font-black tracking-[0.12em] ${
                         active === index
                           ? "text-[#D4AF37]"
                           : "text-white"
@@ -770,7 +770,7 @@ export function Testimonials() {
                       {item.code}
                     </p>
 
-                    <p className="mt-1 text-[9px] font-black text-white">
+                    <p className="mt-1 text-[11px] font-black text-white">
                       {item.country}
                     </p>
                   </div>
@@ -784,7 +784,7 @@ export function Testimonials() {
             GLOBAL STATEMENT
         ====================================================== */}
 
-        <div className="relative mt-16 overflow-hidden rounded-[28px] border border-[#D4AF37]/20 bg-[#0A0A0B] px-5 py-7 sm:px-7 lg:px-8">
+        <div className="relative mt-12 overflow-hidden rounded-[24px] border border-[#D4AF37]/20 bg-[#0A0A0B] px-5 py-7 sm:mt-16 sm:rounded-[28px] sm:px-7 lg:px-8">
           <div className="pointer-events-none absolute right-[10%] top-1/2 h-56 w-56 -translate-y-1/2 rounded-full bg-[#D4AF37]/10 blur-[80px]" />
 
           <div className="absolute inset-x-[15%] top-0 h-px bg-gradient-to-r from-transparent via-[#D4AF37]/70 to-transparent" />
@@ -796,25 +796,25 @@ export function Testimonials() {
                   <GlobeIcon />
                 </span>
 
-                <span className="text-[8px] font-black uppercase tracking-[0.18em] text-[#D4AF37]">
+                <span className="text-[11px] font-black uppercase tracking-[0.15em] text-[#D4AF37] sm:text-[12px]">
                   ONE GLOBAL EXPERIENCE
                 </span>
               </div>
 
-              <h3 className="mt-4 text-[1.9rem] font-black uppercase leading-[1] tracking-[-0.05em] text-white sm:text-[2.4rem]">
+              <h3 className="mt-4 text-[2.15rem] font-black uppercase leading-[1] tracking-[-0.05em] text-white sm:text-[2.55rem] lg:text-[2.8rem]">
                 YOUR LOCATION CHANGES.
                 <span className="block text-[#D4AF37]">
                   THE STANDARD DOESN&apos;T.
                 </span>
               </h3>
 
-              <div className="mt-6 flex flex-wrap items-center gap-6">
+              <div className="mt-6 grid grid-cols-2 gap-5 sm:flex sm:flex-wrap sm:items-center sm:gap-6">
                 <SmallStat
                   value="5"
                   label="PREVIEW COUNTRIES"
                 />
 
-                <div className="h-10 w-px bg-white/15" />
+                <div className="hidden h-10 w-px bg-white/15 sm:block" />
 
                 <SmallStat
                   value="3"
@@ -832,7 +832,7 @@ export function Testimonials() {
 
             <a
               href="#challenges"
-              className="group relative inline-flex min-w-[200px] items-center justify-center gap-2 overflow-hidden rounded-xl bg-[linear-gradient(135deg,#F6DE82,#D4AF37_50%,#956A11)] px-6 py-3.5 text-sm font-black uppercase text-black shadow-[0_16px_45px_rgba(212,175,55,.17)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_22px_55px_rgba(212,175,55,.27)]"
+              className="group relative inline-flex min-h-[54px] w-full items-center justify-center gap-2 overflow-hidden rounded-xl bg-[linear-gradient(135deg,#F6DE82,#D4AF37_50%,#956A11)] px-6 py-4 text-[15px] font-black uppercase text-black shadow-[0_16px_45px_rgba(212,175,55,.17)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_22px_55px_rgba(212,175,55,.27)] sm:w-auto sm:min-w-[210px] sm:text-base"
             >
               GET FUNDED
 
@@ -845,22 +845,6 @@ export function Testimonials() {
           </div>
         </div>
 
-        {/* =====================================================
-            DISCLAIMER
-        ====================================================== */}
-
-        <div className="mx-auto mt-7 flex max-w-3xl items-start justify-center gap-2 text-center">
-          <span className="mt-0.5 shrink-0 text-[#D4AF37]">
-            <ShieldIcon />
-          </span>
-
-          <p className="text-[9px] font-medium leading-4 text-white">
-            Testimonials shown are sample content for design
-            preview. Replace names, countries and quotes with
-            genuine BlackProp customer reviews before
-            production launch.
-          </p>
-        </div>
       </div>
 
       {/* =====================================================

@@ -40,7 +40,7 @@ function formatMoney(value: number) {
 function BPMark({
   width = 58,
   height = 74,
-  color = "#D4AF37",
+  color = "#FFFFFF",
   className = "",
 }: {
   width?: number | string;
@@ -56,6 +56,8 @@ function BPMark({
       fill="none"
       color={color}
       className={className}
+      shapeRendering="geometricPrecision"
+      preserveAspectRatio="xMidYMid meet"
       aria-hidden="true"
     >
       <path
@@ -204,31 +206,40 @@ export function ProfitCalculator() {
   return (
     <section
       id="profit-calculator"
-      className="relative overflow-hidden bg-[#FBFAF7] py-20 text-black sm:py-24 lg:py-28"
+      className="relative overflow-hidden bg-[#FBFAF7] py-14 text-black sm:py-18 md:py-20 lg:py-24 xl:py-28"
     >
       {/* SUBTLE BACKGROUND */}
       <div className="pointer-events-none absolute left-1/2 top-[-180px] h-[620px] w-[1080px] -translate-x-1/2 rounded-full bg-[#D4AF37]/[0.045] blur-[170px]" />
 
       <div className="pointer-events-none absolute left-0 top-0 h-px w-full bg-gradient-to-r from-transparent via-[#D4AF37]/25 to-transparent" />
 
-      <div className="relative mx-auto max-w-[1240px] px-4 sm:px-6 lg:px-8">
+      <div className="relative mx-auto max-w-[1320px] px-4 sm:px-6 lg:px-8">
         {/* =====================================================
             HEADER
         ====================================================== */}
 
-        <div className="grid gap-8 lg:grid-cols-[1fr_430px] lg:items-end">
+        <div className="grid gap-7 md:gap-8 lg:grid-cols-[1fr_470px] lg:items-end">
           <div>
-            <div className="flex items-center gap-3">
-              <div className="grid h-11 w-11 place-items-center rounded-[14px] border border-[#D4AF37]/15 bg-[#D4AF37]/[0.06]">
-                <BPMark width={20} height={26} color="#B68A22" />
+            <div className="flex flex-wrap items-center gap-3.5">
+              <div className="inline-flex items-center gap-2.5 rounded-full bg-[#0A0A0B] px-3.5 py-2.5 shadow-[0_8px_24px_rgba(0,0,0,.08)]">
+                <BPMark
+                  width={18}
+                  height={23}
+                  color="#FFFFFF"
+                  className="shrink-0"
+                />
+
+                <span className="text-[14px] font-bold leading-none tracking-[-0.035em] text-white sm:text-[15px]">
+                  BlackProp
+                </span>
               </div>
 
-              <span className="text-[8px] font-black uppercase tracking-[0.22em] text-[#8D6816]">
+              <span className="text-[11px] font-black uppercase tracking-[0.18em] text-[#8D6816] sm:text-[12px]">
                 PROFIT CALCULATOR
               </span>
             </div>
 
-            <h2 className="mt-5 max-w-[760px] text-[3rem] font-black leading-[0.92] tracking-[-0.06em] text-[#080808] sm:text-[3.9rem] lg:text-[4.65rem]">
+            <h2 className="mt-6 max-w-[820px] text-[3.25rem] font-black leading-[0.92] tracking-[-0.06em] text-[#080808] sm:text-[4.15rem] md:text-[4.55rem] lg:text-[5rem] xl:text-[5.3rem]">
               How much can
               <span className="block text-[#B78A22]">
                 you make?
@@ -237,7 +248,7 @@ export function ProfitCalculator() {
           </div>
 
           <div className="lg:pb-2">
-            <p className="max-w-[430px] text-sm font-medium leading-7 text-black/55 sm:text-base lg:ml-auto">
+            <p className="max-w-[470px] text-[15px] font-medium leading-7 text-black/60 sm:text-[17px] sm:leading-8 lg:ml-auto">
               Select an account size, adjust your target return and see the
               estimated reward instantly.
             </p>
@@ -248,30 +259,30 @@ export function ProfitCalculator() {
             SINGLE CALCULATOR DIV
         ====================================================== */}
 
-        <div className="relative mt-12 overflow-hidden rounded-[34px] border border-black/[0.08] bg-white shadow-[0_30px_90px_rgba(48,38,14,.07)] sm:mt-14">
+        <div className="relative mt-10 overflow-hidden rounded-[26px] border border-black/[0.08] bg-white shadow-[0_30px_90px_rgba(48,38,14,.07)] sm:mt-12 sm:rounded-[34px] lg:mt-14">
           {/* TOP GOLD LINE */}
           <div className="absolute inset-x-[16%] top-0 h-px bg-gradient-to-r from-transparent via-[#D4AF37]/65 to-transparent" />
 
           {/* DECORATIVE LOGO WATERMARK */}
-          <div className="pointer-events-none absolute right-[-55px] top-[70px] hidden lg:block">
+          <div className="pointer-events-none absolute right-[-72px] top-[72px] hidden h-[300px] w-[300px] place-items-center rounded-full bg-[#0A0A0B]/[0.018] lg:grid">
             <BPMark
-              width={270}
-              height={340}
-              color="#D4AF37"
-              className="opacity-[0.035]"
+              width={210}
+              height={265}
+              color="#FFFFFF"
+              className="opacity-[0.05] mix-blend-difference"
             />
           </div>
 
           {/* SOFT GOLD AMBIENCE */}
           <div className="pointer-events-none absolute -right-36 -top-32 h-[430px] w-[430px] rounded-full bg-[#D4AF37]/[0.06] blur-[120px]" />
 
-          <div className="relative grid lg:grid-cols-[1.02fr_.98fr]">
+          <div className="relative grid lg:grid-cols-[1.03fr_.97fr]">
             {/* =================================================
                 CONTROLS
             ================================================= */}
 
-            <div className="border-b border-black/[0.07] p-6 sm:p-8 lg:border-b-0 lg:border-r lg:p-10">
-              <div className="flex items-center gap-2 text-[10px] font-semibold text-black/45">
+            <div className="border-b border-black/[0.07] p-5 sm:p-8 lg:border-b-0 lg:border-r lg:p-9 xl:p-10">
+              <div className="flex items-center gap-2.5 text-[12px] font-semibold text-black/55 sm:text-[13px]">
                 <span className="text-[#9C7418]">
                   <LockIcon />
                 </span>
@@ -283,7 +294,7 @@ export function ProfitCalculator() {
               <div className="mt-8">
                 <label
                   htmlFor="calculator-account-size"
-                  className="text-[9px] font-black uppercase tracking-[0.17em] text-black/40"
+                  className="text-[11px] font-black uppercase tracking-[0.15em] text-black/50 sm:text-[12px]"
                 >
                   Account Size
                 </label>
@@ -295,7 +306,7 @@ export function ProfitCalculator() {
                     onChange={(event) =>
                       setAccountSize(Number(event.target.value))
                     }
-                    className="h-[62px] w-full appearance-none rounded-xl border border-black/[0.08] bg-[#F7F6F2] px-4 pr-12 text-sm font-bold text-[#111] outline-none transition focus:border-[#B88A24]/35 focus:bg-white focus:shadow-[0_0_0_4px_rgba(212,175,55,.06)]"
+                    className="h-[66px] w-full appearance-none rounded-xl border border-black/[0.08] bg-[#F7F6F2] px-4 pr-12 text-[15px] font-bold text-[#111] outline-none transition focus:border-[#B88A24]/35 focus:bg-white focus:shadow-[0_0_0_4px_rgba(212,175,55,.06)] sm:h-[70px] sm:px-5 sm:text-base"
                   >
                     {accountSizes.map((size) => (
                       <option key={size} value={size}>
@@ -315,12 +326,12 @@ export function ProfitCalculator() {
                 <div className="flex items-center justify-between gap-4">
                   <label
                     htmlFor="calculator-profit-rate"
-                    className="text-[9px] font-black uppercase tracking-[0.17em] text-black/40"
+                    className="text-[11px] font-black uppercase tracking-[0.15em] text-black/50 sm:text-[12px]"
                   >
                     Profit Rate
                   </label>
 
-                  <span className="text-sm font-black text-[#987018]">
+                  <span className="text-[16px] font-black text-[#987018] sm:text-lg">
                     {profitRate}%
                   </span>
                 </div>
@@ -361,13 +372,13 @@ export function ProfitCalculator() {
                       left: `${sliderPosition}%`,
                     }}
                   >
-                    <div className="rounded-lg bg-[#0A0A0A] px-2.5 py-1 text-[9px] font-black text-white shadow-md">
+                    <div className="rounded-lg bg-[#0A0A0A] px-3 py-1.5 text-[11px] font-black text-white shadow-md">
                       {profitRate}%
                     </div>
                   </div>
                 </div>
 
-                <div className="mt-1 flex items-center justify-between text-[8px] font-medium text-black/25">
+                <div className="mt-2 flex items-center justify-between text-[10px] font-semibold text-black/35 sm:text-[11px]">
                   <span>1%</span>
                   <span>25%</span>
                   <span>50%</span>
@@ -377,7 +388,7 @@ export function ProfitCalculator() {
               </div>
 
               {/* QUICK INFORMATION */}
-              <div className="mt-9 grid gap-2 sm:grid-cols-3">
+              <div className="mt-9 grid gap-2.5 sm:grid-cols-3">
                 {[
                   "Flexible account sizes",
                   "Instant estimate",
@@ -385,9 +396,9 @@ export function ProfitCalculator() {
                 ].map((item) => (
                   <div
                     key={item}
-                    className="flex items-center gap-2 text-[9px] font-semibold text-black/50"
+                    className="flex min-h-[44px] items-center gap-2.5 rounded-xl bg-[#F8F6F0] px-3 py-2.5 text-[11px] font-semibold leading-5 text-black/60 sm:text-[12px]"
                   >
-                    <span className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-[#D4AF37]/10 text-[#967018]">
+                    <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-[#0A0A0B] text-white">
                       <CheckIcon />
                     </span>
 
@@ -401,31 +412,39 @@ export function ProfitCalculator() {
                 RESULT / BRAND
             ================================================= */}
 
-            <div className="relative flex min-h-[430px] flex-col justify-between p-6 sm:p-8 lg:p-10">
+            <div className="relative flex min-h-[470px] flex-col justify-between p-5 sm:p-8 lg:min-h-[500px] lg:p-9 xl:p-10">
               <div>
                 <div className="flex items-start justify-between gap-5">
                   <div>
-                    <p className="text-[8px] font-black uppercase tracking-[0.2em] text-[#957019]">
+                    <p className="text-[11px] font-black uppercase tracking-[0.17em] text-[#8A6717] sm:text-[12px]">
                       ESTIMATED REWARD
                     </p>
 
-                    <div className="mt-4 flex flex-wrap items-end gap-3">
-                      <span className="text-[3.3rem] font-black leading-none tracking-[-0.065em] text-[#080808] sm:text-[4.2rem]">
+                    <div className="mt-4 flex flex-wrap items-end gap-3.5">
+                      <span className="text-[3.6rem] font-black leading-none tracking-[-0.065em] text-[#080808] sm:text-[4.6rem] lg:text-[5rem]">
                         {formatMoney(profit)}
                       </span>
 
-                      <span className="mb-1.5 text-xs font-medium text-black/35">
+                      <span className="mb-1.5 text-[13px] font-medium text-black/45 sm:text-sm">
                         / Month
                       </span>
                     </div>
                   </div>
 
-                  <div className="grid h-14 w-14 shrink-0 place-items-center rounded-[18px] border border-[#D4AF37]/18 bg-[#D4AF37]/[0.06]">
-                    <BPMark width={25} height={32} color="#B68A22" />
+                  <div className="inline-flex shrink-0 items-center gap-2.5 rounded-[16px] bg-[#0A0A0B] px-3.5 py-3 shadow-[0_10px_28px_rgba(0,0,0,.10)]">
+                    <BPMark
+                      width={20}
+                      height={26}
+                      color="#FFFFFF"
+                    />
+
+                    <span className="hidden text-[14px] font-bold tracking-[-0.035em] text-white sm:block">
+                      BlackProp
+                    </span>
                   </div>
                 </div>
 
-                <p className="mt-6 max-w-[470px] text-sm font-medium leading-6 text-black/50">
+                <p className="mt-6 max-w-[520px] text-[15px] font-medium leading-7 text-black/58 sm:text-base">
                   Based on a{" "}
                   <span className="font-bold text-black/70">
                     {formatMoney(accountSize)}
@@ -439,22 +458,21 @@ export function ProfitCalculator() {
               </div>
 
               {/* LARGE MINIMAL BRAND AREA */}
-              <div className="relative my-8 flex min-h-[150px] items-center overflow-hidden rounded-[24px] border border-[#D4AF37]/12 bg-[#F8F6F0] px-6 py-6">
-                <div className="pointer-events-none absolute right-[-15px] top-1/2 -translate-y-1/2">
+              <div className="relative my-8 flex min-h-[175px] items-center overflow-hidden rounded-[24px] border border-black/[0.07] bg-[#F8F6F0] px-5 py-6 sm:px-7 sm:py-7">
+                <div className="pointer-events-none absolute right-[-8px] top-1/2 grid h-[150px] w-[150px] -translate-y-1/2 place-items-center rounded-full bg-[#0A0A0B] opacity-[0.045]">
                   <BPMark
-                    width={110}
-                    height={140}
-                    color="#D4AF37"
-                    className="opacity-[0.08]"
+                    width={72}
+                    height={91}
+                    color="#FFFFFF"
                   />
                 </div>
 
                 <div className="relative">
-                  <p className="text-[8px] font-black uppercase tracking-[0.18em] text-black/30">
+                  <p className="text-[11px] font-black uppercase tracking-[0.16em] text-black/40">
                     BLACKPROP
                   </p>
 
-                  <p className="mt-2 text-2xl font-black uppercase tracking-[-0.045em] text-[#090909]">
+                  <p className="mt-2.5 max-w-[430px] text-[1.65rem] font-black uppercase leading-[1.02] tracking-[-0.045em] text-[#090909] sm:text-[2rem]">
                     Performance creates opportunity.
                   </p>
 
@@ -463,14 +481,14 @@ export function ProfitCalculator() {
                       <CheckIcon />
                     </span>
 
-                    <span className="text-[9px] font-bold text-black/55">
+                    <span className="text-[11px] font-bold text-black/65 sm:text-[12px]">
                       100% Profit Split
                     </span>
                   </div>
                 </div>
               </div>
 
-              <div className="flex items-center gap-2 text-[9px] font-medium text-black/38">
+              <div className="flex items-center gap-2.5 text-[11px] font-medium text-black/48 sm:text-[12px]">
                 <span className="text-[#9C7418]">
                   <LockIcon />
                 </span>
@@ -484,20 +502,20 @@ export function ProfitCalculator() {
               INTEGRATED FOOTER CTA
           ====================================================== */}
 
-          <div className="relative flex flex-col gap-5 border-t border-black/[0.07] bg-[#F7F6F2] px-6 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-8 lg:px-10">
+          <div className="relative flex flex-col gap-5 border-t border-black/[0.07] bg-[#F7F6F2] px-5 py-6 sm:flex-row sm:items-center sm:justify-between sm:px-8 sm:py-7 lg:px-10">
             <div>
-              <p className="text-[8px] font-black uppercase tracking-[0.18em] text-[#957019]">
+              <p className="text-[11px] font-black uppercase tracking-[0.16em] text-[#8A6717]">
                 READY TO START?
               </p>
 
-              <p className="mt-1.5 text-lg font-black tracking-[-0.035em] text-[#080808]">
+              <p className="mt-2 text-[1.35rem] font-black tracking-[-0.035em] text-[#080808] sm:text-[1.55rem]">
                 Put your strategy to work.
               </p>
             </div>
 
             <a
               href="#challenges"
-              className="group relative inline-flex min-w-[185px] items-center justify-center gap-2 overflow-hidden rounded-xl bg-[linear-gradient(135deg,#F5DA79_0%,#D4AF37_50%,#956A12_100%)] px-6 py-4 text-sm font-black text-[#080806] shadow-[0_14px_35px_rgba(149,112,21,.16)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_20px_45px_rgba(149,112,21,.23)]"
+              className="group relative inline-flex min-h-[54px] w-full items-center justify-center gap-2 overflow-hidden rounded-xl bg-[linear-gradient(135deg,#F5DA79_0%,#D4AF37_50%,#956A12_100%)] px-7 py-4 text-[15px] font-black text-[#080806] shadow-[0_14px_35px_rgba(149,112,21,.16)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_20px_45px_rgba(149,112,21,.23)] sm:w-auto sm:min-w-[205px] sm:text-base"
             >
               Start Earning
               <ArrowRight />

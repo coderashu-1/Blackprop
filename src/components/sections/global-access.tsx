@@ -1,4 +1,5 @@
 import Image from "next/image";
+import type { CSSProperties } from "react";
 
 /* =========================================================
    BLACKPROP SVG LOGO
@@ -7,7 +8,7 @@ import Image from "next/image";
 function BPMark({
   width = 58,
   height = 74,
-  color = "#D4AF37",
+  color = "#FFFFFF",
   className = "",
 }: {
   width?: number | string;
@@ -23,6 +24,8 @@ function BPMark({
       fill="none"
       color={color}
       className={className}
+      shapeRendering="geometricPrecision"
+      preserveAspectRatio="xMidYMid meet"
       aria-hidden="true"
     >
       <path
@@ -122,7 +125,7 @@ function CheckIcon() {
 
 function WorldGlobe() {
   return (
-    <div className="relative z-30 w-[48%] max-w-[460px]">
+    <div className="relative z-30 w-[52%] max-w-[470px] sm:w-[49%] lg:w-[48%]">
       {/* SIMPLE GOLD AMBIENCE */}
       <div className="pointer-events-none absolute inset-[-4%] rounded-full bg-[radial-gradient(circle,rgba(212,175,55,.10)_0%,rgba(212,175,55,.035)_42%,transparent_72%)]" />
 
@@ -149,18 +152,18 @@ function WorldGlobe() {
           width={800}
           height={800}
           draggable={false}
-          sizes="(max-width: 640px) 48vw, 460px"
+          sizes="(max-width: 480px) 52vw, (max-width: 640px) 49vw, 470px"
           className="pointer-events-none relative z-10 h-full w-full select-none object-contain"
         />
       </div>
 
       {/* BP CENTER */}
-      <div className="pointer-events-none absolute left-1/2 top-1/2 z-40 grid h-11 w-11 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border border-[#D4AF37]/25 bg-[#080808] shadow-[0_0_22px_rgba(212,175,55,.12)] sm:h-14 sm:w-14">
+      <div className="pointer-events-none absolute left-1/2 top-1/2 z-40 grid h-12 w-12 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border border-white/[0.12] bg-[#080808] shadow-[0_0_24px_rgba(0,0,0,.45)] sm:h-14 sm:w-14 lg:h-16 lg:w-16">
         <BPMark
-          width={22}
-          height={28}
-          color="#D4AF37"
-          className="drop-shadow-[0_0_12px_rgba(212,175,55,.18)] sm:h-[34px] sm:w-[27px]"
+          width={24}
+          height={31}
+          color="#FFFFFF"
+          className="drop-shadow-[0_1px_1px_rgba(0,0,0,.75)] sm:h-[36px] sm:w-[29px] lg:h-[39px] lg:w-[31px]"
         />
       </div>
     </div>
@@ -181,30 +184,36 @@ function CountryCard({
       title={country.name}
       className="
         flex
-        h-12
-        w-12
+        min-h-[46px]
+        min-w-[46px]
         items-center
         justify-center
+        gap-1.5
         rounded-xl
         border
-        border-white/[0.09]
-        bg-[#101011]
+        border-white/[0.10]
+        bg-[#101011]/95
+        px-2
+        py-2
         shadow-[0_7px_16px_rgba(0,0,0,.25)]
+        backdrop-blur-md
 
-        sm:h-auto
-        sm:w-auto
-        sm:min-w-[108px]
-        sm:gap-2
+        min-[430px]:min-w-[92px]
+        min-[430px]:gap-2
+        min-[430px]:px-2.5
+
+        sm:min-h-[52px]
+        sm:min-w-[116px]
         sm:rounded-2xl
         sm:px-3
         sm:py-2.5
       "
     >
-      <span className="text-[25px] leading-none sm:text-[27px]">
+      <span className="text-[23px] leading-none min-[430px]:text-[24px] sm:text-[28px]">
         {country.flag}
       </span>
 
-      <span className="hidden whitespace-nowrap text-[8px] font-semibold text-white/55 sm:block">
+      <span className="hidden max-w-[66px] truncate whitespace-nowrap text-[9px] font-semibold text-white/65 min-[430px]:block sm:max-w-[82px] sm:text-[10px] lg:text-[11px]">
         {country.name}
       </span>
     </div>
@@ -239,12 +248,12 @@ function CountryOrbit({
           ? "border-white/[0.04]"
           : "border-[#D4AF37]/[0.085]"
       } ${size}`}
-      style={{
-        animationDuration: `${duration}s`,
-        animationDirection: reverse
-          ? "reverse"
-          : "normal",
-      }}
+      style={
+        {
+          "--bp-orbit-duration": `${duration}s`,
+          "--bp-orbit-direction": reverse ? "reverse" : "normal",
+        } as CSSProperties
+      }
     >
       {items.map((country, index) => {
         const angle =
@@ -277,12 +286,12 @@ function CountryOrbit({
             {/* COUNTER ROTATION KEEPS CARDS UPRIGHT */}
             <div
               className="bp-country-counter"
-              style={{
-                animationDuration: `${duration}s`,
-                animationDirection: reverse
-                  ? "normal"
-                  : "reverse",
-              }}
+              style={
+                {
+                  "--bp-orbit-duration": `${duration}s`,
+                  "--bp-counter-direction": reverse ? "normal" : "reverse",
+                } as CSSProperties
+              }
             >
               <CountryCard country={country} />
             </div>
@@ -308,7 +317,7 @@ function GlobalNetwork() {
     countries.slice(12, 18);
 
   return (
-    <div className="bp-global-network relative mx-auto aspect-square w-full max-w-[1060px]">
+    <div className="bp-global-network relative mx-auto aspect-square w-full max-w-[720px] sm:max-w-[880px] lg:max-w-[1060px]">
       {/* =====================================================
           SIMPLE AMBIENT GLOW
       ====================================================== */}
@@ -347,7 +356,7 @@ function GlobalNetwork() {
 
       <CountryOrbit
         items={outerCountries}
-        size="h-[92%] w-[92%]"
+        size="h-[88%] w-[88%] sm:h-[91%] sm:w-[91%] lg:h-[92%] lg:w-[92%]"
         radius={49}
         duration={68}
         offset={-9}
@@ -355,7 +364,7 @@ function GlobalNetwork() {
 
       <CountryOrbit
         items={middleCountries}
-        size="h-[73%] w-[73%]"
+        size="h-[70%] w-[70%] sm:h-[72%] sm:w-[72%] lg:h-[73%] lg:w-[73%]"
         radius={49}
         duration={56}
         reverse
@@ -365,7 +374,7 @@ function GlobalNetwork() {
 
       <CountryOrbit
         items={innerCountries}
-        size="h-[55%] w-[55%]"
+        size="h-[53%] w-[53%] sm:h-[54%] sm:w-[54%] lg:h-[55%] lg:w-[55%]"
         radius={49}
         duration={48}
         offset={5}
@@ -387,7 +396,7 @@ export function GlobalAccess() {
   return (
     <section
       id="global-access"
-      className="relative overflow-hidden bg-[#030303] py-24 sm:py-28 lg:py-32"
+      className="relative overflow-hidden bg-[#030303] py-16 sm:py-20 md:py-24 lg:py-28 xl:py-32"
     >
       {/* =====================================================
           DARK PREMIUM BACKGROUND
@@ -420,18 +429,21 @@ export function GlobalAccess() {
 
         <div className="mx-auto max-w-[840px] text-center">
           {/* BADGE */}
-          <div className="inline-flex items-center gap-2 rounded-full border border-white/[0.08] bg-white/[0.025] px-4 py-2">
-            <span className="text-[#D4AF37]">
-              <GlobeIcon />
-            </span>
+          <div className="inline-flex items-center gap-2.5 rounded-full border border-white/[0.09] bg-white/[0.035] px-4 py-2.5">
+            <BPMark
+              width={14}
+              height={18}
+              color="#FFFFFF"
+              className="shrink-0"
+            />
 
-            <span className="text-[9px] font-black uppercase tracking-[0.2em] text-white/45">
+            <span className="text-[11px] font-black uppercase tracking-[0.16em] text-white/65 sm:text-[12px]">
               BlackProp Worldwide
             </span>
           </div>
 
           {/* HEADING */}
-          <h2 className="mt-7 text-[3.2rem] font-black leading-[0.92] tracking-[-0.065em] text-white sm:text-[4.7rem] lg:text-[5.5rem]">
+          <h2 className="mt-7 text-[3.45rem] font-black leading-[0.92] tracking-[-0.065em] text-white min-[430px]:text-[3.8rem] sm:text-[4.8rem] md:text-[5.15rem] lg:text-[5.6rem] xl:text-[6rem]">
             Trade beyond
 
             <span className="block bg-[linear-gradient(100deg,#FFFFFF_0%,#D5D5D1_32%,#E2BF57_68%,#80590C_100%)] bg-clip-text text-transparent">
@@ -440,17 +452,17 @@ export function GlobalAccess() {
           </h2>
 
           {/* DESCRIPTION */}
-          <p className="mx-auto mt-6 max-w-[600px] text-sm leading-7 text-white/40 sm:text-base">
+          <p className="mx-auto mt-6 max-w-[700px] text-[16px] leading-7 text-white/52 sm:text-[17px] sm:leading-8 lg:text-lg">
             A global-facing BlackProp experience
             designed to connect ambitious traders
             across supported markets and regions.
           </p>
 
           {/* META */}
-          <div className="mx-auto mt-7 flex w-fit items-center gap-2 rounded-full border border-white/[0.07] bg-white/[0.02] px-4 py-2.5">
+          <div className="mx-auto mt-7 flex w-fit items-center gap-2.5 rounded-full border border-white/[0.08] bg-white/[0.025] px-4 py-2.5 sm:px-5">
             <span className="h-1.5 w-1.5 rounded-full bg-[#D4AF37]" />
 
-            <span className="text-[8px] font-black uppercase tracking-[0.14em] text-white/35">
+            <span className="text-[10px] font-black uppercase tracking-[0.13em] text-white/52 sm:text-[11px]">
               Global trader network
             </span>
           </div>
@@ -460,7 +472,7 @@ export function GlobalAccess() {
             NETWORK
         ====================================================== */}
 
-        <div className="mx-auto mt-3 max-w-[1120px]">
+        <div className="mx-auto mt-5 max-w-[1120px] sm:mt-4 lg:mt-3">
           <GlobalNetwork />
         </div>
 
@@ -468,26 +480,26 @@ export function GlobalAccess() {
             STATUS
         ====================================================== */}
 
-        <div className="mx-auto -mt-2 flex w-fit items-center gap-3 rounded-full border border-white/[0.08] bg-[#0B0B0C] px-4 py-2.5 sm:-mt-6">
-          <span className="grid h-7 w-7 place-items-center rounded-full border border-[#D4AF37]/15 bg-[#D4AF37]/[0.06] text-[#D4AF37]">
+        <div className="mx-auto mt-2 flex max-w-full flex-wrap items-center justify-center gap-3 rounded-full border border-white/[0.08] bg-[#0B0B0C] px-4 py-3 sm:-mt-4 sm:w-fit sm:flex-nowrap sm:px-5">
+          <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-white/[0.10] bg-white/[0.035] text-white">
             <CheckIcon />
           </span>
 
-          <div className="flex items-center gap-2">
-            <span className="text-[8px] font-black uppercase tracking-[0.14em] text-white/45">
+          <div className="flex flex-wrap items-center justify-center gap-2">
+            <span className="text-[10px] font-black uppercase tracking-[0.12em] text-white/58 sm:text-[11px]">
               Global community
             </span>
 
             <span className="h-1 w-1 rounded-full bg-[#D4AF37]" />
 
-            <span className="text-[8px] font-black uppercase tracking-[0.14em] text-white/45">
+            <span className="text-[10px] font-black uppercase tracking-[0.12em] text-white/58 sm:text-[11px]">
               One experience
             </span>
           </div>
         </div>
 
         {/* DISCLAIMER */}
-        <p className="mx-auto mt-8 max-w-3xl text-center text-[9px] leading-4 text-white/20">
+        <p className="mx-auto mt-8 max-w-[760px] px-3 text-center text-[13px] font-medium leading-6 text-white/45 sm:text-[14px] sm:leading-7">
           Country flags are illustrative. Final
           BlackProp availability should reflect actual
           supported jurisdictions and applicable
@@ -515,10 +527,14 @@ export function GlobalAccess() {
             rotate(0deg);
 
           transform-origin: 50% 50%;
+          backface-visibility: hidden;
+          -webkit-backface-visibility: hidden;
 
-          animation-name: bpCountryOrbit;
-          animation-timing-function: linear;
-          animation-iteration-count: infinite;
+          animation: bpCountryOrbit var(--bp-orbit-duration, 60s) linear infinite;
+          animation-direction: var(--bp-orbit-direction, normal);
+
+          -webkit-animation: bpCountryOrbit var(--bp-orbit-duration, 60s) linear infinite;
+          -webkit-animation-direction: var(--bp-orbit-direction, normal);
 
           will-change: transform;
         }
@@ -528,10 +544,17 @@ export function GlobalAccess() {
          * country cards facing upright.
          */
         .bp-country-counter {
-          animation-name: bpCountryCounter;
-          animation-timing-function: linear;
-          animation-iteration-count: infinite;
           transform-origin: center;
+          backface-visibility: hidden;
+          -webkit-backface-visibility: hidden;
+
+          animation: bpCountryCounter var(--bp-orbit-duration, 60s) linear infinite;
+          animation-direction: var(--bp-counter-direction, reverse);
+
+          -webkit-animation: bpCountryCounter var(--bp-orbit-duration, 60s) linear infinite;
+          -webkit-animation-direction: var(--bp-counter-direction, reverse);
+
+          will-change: transform;
         }
 
         @keyframes bpCountryOrbit {
@@ -602,7 +625,20 @@ export function GlobalAccess() {
         @media (max-width: 640px) {
           .bp-country-orbit,
           .bp-country-counter {
-            animation-duration: 74s !important;
+            animation-duration: 34s !important;
+            -webkit-animation-duration: 34s !important;
+          }
+
+          .bp-country-orbit:nth-of-type(2),
+          .bp-country-orbit:nth-of-type(2) .bp-country-counter {
+            animation-duration: 29s !important;
+            -webkit-animation-duration: 29s !important;
+          }
+
+          .bp-country-orbit:nth-of-type(3),
+          .bp-country-orbit:nth-of-type(3) .bp-country-counter {
+            animation-duration: 25s !important;
+            -webkit-animation-duration: 25s !important;
           }
         }
       `}</style>

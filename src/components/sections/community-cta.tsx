@@ -16,7 +16,7 @@ const DISCORD_URL = "#";
 function BPMark({
   width = 58,
   height = 74,
-  color = "#D4AF37",
+  color = "#FFFFFF",
   className = "",
 }: {
   width?: number | string;
@@ -32,6 +32,8 @@ function BPMark({
       fill="none"
       color={color}
       className={className}
+      shapeRendering="geometricPrecision"
+      preserveAspectRatio="xMidYMid meet"
       aria-hidden="true"
     >
       <path
@@ -251,23 +253,23 @@ function DiscordServerPreview() {
   ];
 
   return (
-    <div className="relative mt-7 overflow-hidden rounded-[24px] border border-white/[0.09] bg-[#17181C]">
+    <div className="relative mt-7 hidden overflow-hidden rounded-[24px] border border-white/[0.09] bg-[#17181C] sm:block">
       {/* DISCORD TOP BAR */}
       <div className="flex items-center justify-between gap-4 border-b border-white/[0.07] bg-[#1E1F22] px-4 py-3.5 sm:px-5">
         <div className="flex min-w-0 items-center gap-3">
           <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl border border-[#D4AF37]/20 bg-[#0B0B0C]">
-            <BPMark width={18} height={23} color="#D4AF37" />
+            <BPMark width={18} height={23} color="#FFFFFF" />
           </div>
 
           <div className="min-w-0">
-            <p className="truncate text-[11px] font-black text-white">
+            <p className="truncate text-[13px] font-black text-white sm:text-sm">
               BlackProp Official
             </p>
 
             <div className="mt-1 flex items-center gap-1.5">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
 
-              <span className="text-[7px] font-bold uppercase tracking-[0.12em] text-white/40">
+              <span className="text-[10px] font-bold uppercase tracking-[0.10em] text-white/50">
                 Official Discord Server
               </span>
             </div>
@@ -280,7 +282,7 @@ function DiscordServerPreview() {
       <div className="grid min-h-[220px] sm:grid-cols-[170px_1fr]">
         {/* CHANNELS */}
         <div className="border-b border-white/[0.06] bg-[#111214] p-3 sm:border-b-0 sm:border-r">
-          <p className="px-2 text-[7px] font-black uppercase tracking-[0.15em] text-white/25">
+          <p className="px-2 text-[10px] font-black uppercase tracking-[0.12em] text-white/38">
             Channels
           </p>
 
@@ -288,7 +290,7 @@ function DiscordServerPreview() {
             {channels.map((channel) => (
               <div
                 key={channel.name}
-                className={`flex items-center gap-2 rounded-lg px-2.5 py-2 text-[9px] font-semibold ${
+                className={`flex items-center gap-2 rounded-lg px-2.5 py-2.5 text-[11px] font-semibold ${
                   channel.accent
                     ? "bg-[#5865F2]/15 text-[#B8BEFF]"
                     : "text-white/40"
@@ -317,21 +319,21 @@ function DiscordServerPreview() {
           <div className="relative">
             <div className="flex gap-3">
               <div className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-[#D4AF37]/12">
-                <BPMark width={12} height={15} color="#D4AF37" />
+                <BPMark width={12} height={15} color="#FFFFFF" />
               </div>
 
               <div>
                 <div className="flex flex-wrap items-center gap-2">
-                  <p className="text-[9px] font-black text-white">
+                  <p className="text-[11px] font-black text-white">
                     BlackProp
                   </p>
 
-                  <span className="rounded bg-[#5865F2] px-1.5 py-0.5 text-[5px] font-black uppercase tracking-[0.08em] text-white">
+                  <span className="rounded bg-[#5865F2] px-1.5 py-0.5 text-[8px] font-black uppercase tracking-[0.07em] text-white">
                     Official
                   </span>
                 </div>
 
-                <p className="mt-1.5 max-w-[330px] text-[9px] leading-4 text-white/45">
+                <p className="mt-1.5 max-w-[360px] text-[11px] leading-5 text-white/52">
                   Welcome to the official BlackProp trader community.
                   Follow announcements, discuss markets and stay connected.
                 </p>
@@ -339,16 +341,16 @@ function DiscordServerPreview() {
             </div>
 
             <div className="mt-5 flex gap-3">
-              <div className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-[#5865F2]/20 text-[7px] font-black text-[#AEB4FF]">
+              <div className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-[#5865F2]/20 text-[9px] font-black text-[#AEB4FF]">
                 TR
               </div>
 
               <div>
-                <p className="text-[9px] font-black text-white/70">
+                <p className="text-[11px] font-black text-white/78">
                   Trader
                 </p>
 
-                <p className="mt-1 text-[9px] leading-4 text-white/35">
+                <p className="mt-1 text-[11px] leading-5 text-white/45">
                   Market discussion and community updates in one place.
                 </p>
               </div>
@@ -360,7 +362,7 @@ function DiscordServerPreview() {
               <HashIcon />
             </span>
 
-            <span className="text-[8px] font-medium text-white/25">
+            <span className="text-[10px] font-medium text-white/35">
               Message #general-chat
             </span>
           </div>
@@ -380,8 +382,8 @@ function MiniPoint({
   children: ReactNode;
 }) {
   return (
-    <div className="flex items-center gap-2 text-[9px] font-bold text-white/70">
-      <span className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-[#D4AF37]/15 text-[#F0D16A]">
+    <div className="flex items-center gap-2.5 text-[12px] font-bold text-white/78 sm:text-[13px]">
+      <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-[#D4AF37]/15 text-[#F0D16A]">
         <CheckIcon />
       </span>
 
@@ -412,31 +414,40 @@ export function CommunityCTA() {
   return (
     <section
       id="community"
-      className="relative overflow-hidden bg-[#FBFAF7] py-20 text-[#080808] sm:py-24 lg:py-28"
+      className="relative overflow-hidden bg-[#FBFAF7] py-14 text-[#080808] sm:py-20 md:py-24 lg:py-28"
     >
       {/* BACKGROUND */}
       <div className="pointer-events-none absolute left-1/2 top-[10%] h-[620px] w-[1050px] -translate-x-1/2 rounded-full bg-[#D4AF37]/[0.055] blur-[180px]" />
 
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#D4AF37]/25 to-transparent" />
 
-      <div className="relative mx-auto max-w-[1240px] px-4 sm:px-6 lg:px-8">
+      <div className="relative mx-auto max-w-[1320px] px-4 sm:px-6 lg:px-8">
         {/* =====================================================
             HEADER
         ====================================================== */}
 
         <div className="grid gap-8 lg:grid-cols-[1fr_.8fr] lg:items-end">
           <div>
-            <div className="flex items-center gap-3">
-              <div className="grid h-11 w-11 place-items-center rounded-[14px] border border-[#D4AF37]/15 bg-[#D4AF37]/[0.06]">
-                <BPMark width={20} height={26} color="#B68A22" />
+            <div className="flex flex-wrap items-center gap-3.5">
+              <div className="inline-flex items-center gap-2.5 rounded-full bg-[#0A0A0B] px-3.5 py-2.5 shadow-[0_8px_24px_rgba(0,0,0,.08)]">
+                <BPMark
+                  width={18}
+                  height={23}
+                  color="#FFFFFF"
+                  className="shrink-0"
+                />
+
+                <span className="text-[14px] font-bold leading-none tracking-[-0.035em] text-white sm:text-[15px]">
+                  BlackProp
+                </span>
               </div>
 
-              <span className="text-[8px] font-black uppercase tracking-[0.2em] text-[#8E6815]">
-                BLACKPROP COMMUNITY
+              <span className="text-[11px] font-black uppercase tracking-[0.16em] text-[#8E6815] sm:text-[12px]">
+                COMMUNITY
               </span>
             </div>
 
-            <h2 className="mt-5 max-w-[720px] text-[2.9rem] font-black uppercase leading-[0.92] tracking-[-0.06em] text-[#080808] sm:text-[3.8rem] lg:text-[4.5rem]">
+            <h2 className="mt-6 max-w-[780px] text-[3.15rem] font-black uppercase leading-[0.92] tracking-[-0.06em] text-[#080808] min-[430px]:text-[3.45rem] sm:text-[4rem] md:text-[4.35rem] lg:text-[4.8rem]">
               JOIN THE
               <span className="block text-[#B48721]">
                 CONVERSATION.
@@ -445,7 +456,7 @@ export function CommunityCTA() {
           </div>
 
           <div className="lg:pb-1">
-            <p className="max-w-[470px] text-sm font-medium leading-7 text-black/55 sm:text-base lg:ml-auto">
+            <p className="max-w-[520px] text-[16px] font-medium leading-7 text-black/62 sm:text-[17px] sm:leading-8 lg:ml-auto">
               Join the official BlackProp Discord for community
               conversations, announcements and trader updates — or subscribe
               for selected updates by email.
@@ -457,12 +468,12 @@ export function CommunityCTA() {
             COMMUNITY AREA
         ====================================================== */}
 
-        <div className="mt-12 grid gap-4 lg:grid-cols-[1.12fr_.88fr] sm:mt-14">
+        <div className="mt-10 grid gap-4 sm:mt-14 lg:grid-cols-[1.12fr_.88fr]">
           {/* =================================================
               DISCORD — PRIMARY
           ================================================= */}
 
-          <article className="relative overflow-hidden rounded-[32px] border border-[#5865F2]/35 bg-[linear-gradient(145deg,#111216,#070708)] p-5 text-white shadow-[0_32px_90px_rgba(30,25,55,.16)] sm:p-7 lg:p-8">
+          <article className="relative overflow-hidden rounded-[24px] border border-[#5865F2]/35 bg-[linear-gradient(145deg,#111216,#070708)] p-5 text-white shadow-[0_28px_78px_rgba(30,25,55,.14)] sm:rounded-[32px] sm:p-7 lg:p-8">
             <div className="absolute inset-x-[13%] top-0 h-px bg-gradient-to-r from-transparent via-[#7D87FF]/90 to-transparent" />
 
             <div className="pointer-events-none absolute -right-28 -top-28 h-80 w-80 rounded-full bg-[#5865F2]/13 blur-[95px]" />
@@ -471,39 +482,39 @@ export function CommunityCTA() {
               {/* CLEAR DISCORD LABEL */}
               <div className="flex flex-wrap items-start justify-between gap-4">
                 <div className="flex items-center gap-4">
-                  <div className="grid h-14 w-14 place-items-center rounded-[18px] bg-[#5865F2] text-white shadow-[0_12px_35px_rgba(88,101,242,.32)]">
+                  <div className="grid h-12 w-12 place-items-center rounded-[16px] bg-[#5865F2] text-white shadow-[0_12px_35px_rgba(88,101,242,.32)] sm:h-14 sm:w-14 sm:rounded-[18px]">
                     <DiscordIcon className="h-7 w-7" />
                   </div>
 
                   <div>
-                    <p className="text-[8px] font-black uppercase tracking-[0.2em] text-[#9EA6FF]">
+                    <p className="text-[11px] font-black uppercase tracking-[0.15em] text-[#AAB1FF] sm:text-[12px]">
                       OFFICIAL BLACKPROP DISCORD
                     </p>
 
                     <div className="mt-1.5 flex items-center gap-2">
                       <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_10px_rgba(52,211,153,.45)]" />
 
-                      <span className="text-[8px] font-bold uppercase tracking-[0.12em] text-white/45">
+                      <span className="text-[10px] font-bold uppercase tracking-[0.10em] text-white/55 sm:text-[11px]">
                         Community Server
                       </span>
                     </div>
                   </div>
                 </div>
 
-                <div className="rounded-full border border-[#5865F2]/35 bg-[#5865F2]/12 px-3 py-1.5 text-[7px] font-black uppercase tracking-[0.13em] text-[#ADB3FF]">
+                <div className="hidden rounded-full border border-[#5865F2]/35 bg-[#5865F2]/12 px-3 py-1.5 text-[10px] font-black uppercase tracking-[0.11em] text-[#ADB3FF] sm:block">
                   DISCORD LINK
                 </div>
               </div>
 
               <div className="mt-7">
-                <h3 className="max-w-[520px] text-[2.15rem] font-black uppercase leading-[0.96] tracking-[-0.05em] text-white sm:text-[2.8rem]">
+                <h3 className="max-w-[560px] text-[2.35rem] font-black uppercase leading-[0.97] tracking-[-0.05em] text-white sm:text-[2.85rem] lg:text-[3rem]">
                   TALK MARKETS.
                   <span className="block text-[#8D96FF]">
                     JOIN BLACKPROP.
                   </span>
                 </h3>
 
-                <p className="mt-4 max-w-[530px] text-sm font-medium leading-6 text-white/55">
+                <p className="mt-4 max-w-[570px] text-[15px] font-medium leading-7 text-white/65 sm:text-base">
                   Enter the official BlackProp Discord server to connect with
                   traders, follow announcements and stay close to the
                   community.
@@ -511,6 +522,33 @@ export function CommunityCTA() {
               </div>
 
               <DiscordServerPreview />
+
+              <div className="mt-6 grid gap-2.5 sm:hidden">
+                {[
+                  ["Announcements", "Official updates in one place"],
+                  ["Market Talk", "Trader-focused conversation"],
+                  ["Community", "Stay connected with BlackProp"],
+                ].map(([title, copy]) => (
+                  <div
+                    key={title}
+                    className="flex items-center gap-3 rounded-[14px] border border-white/[0.08] bg-white/[0.035] px-3.5 py-3"
+                  >
+                    <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-[#5865F2]/15 text-[#AEB4FF]">
+                      <HashIcon />
+                    </span>
+
+                    <div>
+                      <p className="text-[13px] font-black text-white">
+                        {title}
+                      </p>
+
+                      <p className="mt-0.5 text-[11px] leading-5 text-white/45">
+                        {copy}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
 
               <div className="mt-5 flex flex-wrap gap-x-5 gap-y-2">
                 <MiniPoint>Trader conversations</MiniPoint>
@@ -521,11 +559,11 @@ export function CommunityCTA() {
               {/* VERY CLEAR DISCORD CTA */}
               <div className="mt-6 rounded-[20px] border border-[#5865F2]/30 bg-[#5865F2]/[0.08] p-3 sm:flex sm:items-center sm:justify-between sm:gap-4">
                 <div className="px-1">
-                  <p className="text-[7px] font-black uppercase tracking-[0.17em] text-[#AAB1FF]">
+                  <p className="text-[10px] font-black uppercase tracking-[0.13em] text-[#AAB1FF] sm:text-[11px]">
                     OPEN OFFICIAL SERVER
                   </p>
 
-                  <p className="mt-1 text-[9px] font-semibold text-white/45">
+                  <p className="mt-1 text-[11px] font-semibold text-white/52 sm:text-[12px]">
                     You&apos;ll be redirected to Discord.
                   </p>
                 </div>
@@ -534,7 +572,7 @@ export function CommunityCTA() {
                   href={DISCORD_URL}
                   target="_blank"
                   rel="noreferrer"
-                  className="group mt-3 flex min-w-[205px] items-center justify-center gap-3 rounded-xl bg-[#5865F2] px-6 py-4 text-[11px] font-black uppercase text-white shadow-[0_15px_40px_rgba(88,101,242,.3)] transition duration-300 hover:-translate-y-0.5 hover:bg-[#6672F4] hover:shadow-[0_20px_50px_rgba(88,101,242,.4)] sm:mt-0"
+                  className="group mt-3 flex min-h-[54px] w-full items-center justify-center gap-3 rounded-xl bg-[#5865F2] px-6 py-4 text-[14px] font-black uppercase text-white shadow-[0_15px_40px_rgba(88,101,242,.3)] transition duration-300 hover:-translate-y-0.5 hover:bg-[#6672F4] hover:shadow-[0_20px_50px_rgba(88,101,242,.4)] sm:mt-0 sm:w-auto sm:min-w-[215px] sm:text-[15px]"
                 >
                   <DiscordIcon className="h-5 w-5" />
 
@@ -550,7 +588,7 @@ export function CommunityCTA() {
               NEWSLETTER — SECONDARY
           ================================================= */}
 
-          <article className="relative overflow-hidden rounded-[32px] border border-black/[0.08] bg-white p-5 shadow-[0_28px_80px_rgba(55,43,14,.06)] sm:p-7 lg:p-8">
+          <article className="relative overflow-hidden rounded-[24px] border border-black/[0.08] bg-white p-5 shadow-[0_24px_70px_rgba(55,43,14,.055)] sm:rounded-[32px] sm:p-7 lg:p-8">
             <div className="absolute inset-x-[17%] top-0 h-px bg-gradient-to-r from-transparent via-[#C09228]/50 to-transparent" />
 
             <div className="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full bg-[#D4AF37]/12 blur-[85px]" />
@@ -562,39 +600,39 @@ export function CommunityCTA() {
                 </div>
 
                 <div className="rounded-full border border-black/[0.07] bg-[#F8F6F0] px-3 py-1.5">
-                  <span className="text-[7px] font-black uppercase tracking-[0.14em] text-black/55">
+                  <span className="text-[10px] font-black uppercase tracking-[0.12em] text-black/60 sm:text-[11px]">
                     EMAIL UPDATES
                   </span>
                 </div>
               </div>
 
               <div className="mt-7">
-                <p className="text-[8px] font-black uppercase tracking-[0.19em] text-[#966D15]">
+                <p className="text-[11px] font-black uppercase tracking-[0.15em] text-[#966D15] sm:text-[12px]">
                   BLACKPROP INBOX
                 </p>
 
-                <h3 className="mt-3 max-w-[450px] text-[2rem] font-black uppercase leading-[0.97] tracking-[-0.05em] text-[#080808] sm:text-[2.45rem]">
+                <h3 className="mt-3 max-w-[480px] text-[2.25rem] font-black uppercase leading-[0.98] tracking-[-0.05em] text-[#080808] sm:text-[2.55rem] lg:text-[2.7rem]">
                   GET THE SIGNAL.
                   <span className="block text-[#B48721]">
                     SKIP THE NOISE.
                   </span>
                 </h3>
 
-                <p className="mt-4 max-w-[450px] text-sm font-medium leading-6 text-black/55">
+                <p className="mt-4 max-w-[500px] text-[15px] font-medium leading-7 text-black/62 sm:text-base">
                   Receive selected product announcements, promotions and
                   important BlackProp updates directly in your inbox.
                 </p>
               </div>
 
               {/* SIMPLE RELEVANT MAIL GRAPHIC */}
-              <div className="relative mt-7 flex min-h-[210px] items-center justify-center overflow-hidden rounded-[24px] border border-black/[0.07] bg-[#F8F6F0]">
+              <div className="relative mt-7 hidden min-h-[220px] items-center justify-center overflow-hidden rounded-[24px] border border-black/[0.07] bg-[#F8F6F0] sm:flex">
                 <div className="pointer-events-none absolute left-1/2 top-1/2 h-48 w-48 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#D4AF37]/12 blur-[65px]" />
 
                 <div className="pointer-events-none absolute right-7 top-7">
                   <BPMark
                     width={55}
                     height={70}
-                    color="#B68A22"
+                    color="#FFFFFF"
                     className="opacity-[0.07]"
                   />
                 </div>
@@ -604,11 +642,11 @@ export function CommunityCTA() {
                     <NewsletterIcon className="h-9 w-9" />
                   </div>
 
-                  <p className="mt-4 text-[8px] font-black uppercase tracking-[0.18em] text-[#92701C]">
+                  <p className="mt-4 text-[11px] font-black uppercase tracking-[0.15em] text-[#92701C]">
                     BLACKPROP UPDATES
                   </p>
 
-                  <p className="mt-1.5 text-[10px] font-semibold text-black/45">
+                  <p className="mt-1.5 text-[12px] font-semibold text-black/52">
                     News · Promotions · Announcements
                   </p>
                 </div>
@@ -627,11 +665,11 @@ export function CommunityCTA() {
                       </span>
 
                       <div>
-                        <p className="text-[11px] font-black text-[#080808]">
+                        <p className="text-[14px] font-black text-[#080808]">
                           You&apos;re on the list.
                         </p>
 
-                        <p className="mt-1 text-[8px] font-semibold text-black/40">
+                        <p className="mt-1 text-[11px] font-semibold text-black/48">
                           Demo signup complete.
                         </p>
                       </div>
@@ -656,13 +694,13 @@ export function CommunityCTA() {
                         }
                         placeholder="Enter your email"
                         aria-label="Email address"
-                        className="h-12 w-full min-w-0 bg-transparent px-3 text-sm font-medium text-black outline-none placeholder:text-black/35"
+                        className="h-13 w-full min-w-0 bg-transparent px-3 text-[15px] font-medium text-black outline-none placeholder:text-black/35 sm:text-base"
                       />
                     </div>
 
                     <button
                       type="submit"
-                      className="group mt-2 flex h-12 w-full shrink-0 items-center justify-center gap-2 rounded-xl bg-[#0A0A0A] px-6 text-[10px] font-black uppercase text-white transition hover:bg-[#171717] sm:mt-0 sm:w-auto"
+                      className="group mt-2 flex h-13 w-full shrink-0 items-center justify-center gap-2 rounded-xl bg-[#0A0A0A] px-6 text-[13px] font-black uppercase text-white transition hover:bg-[#171717] sm:mt-0 sm:w-auto sm:text-[14px]"
                     >
                       SUBSCRIBE
 
@@ -674,7 +712,7 @@ export function CommunityCTA() {
                 )}
               </div>
 
-              <p className="mt-4 text-[8px] font-medium leading-4 text-black/35">
+              <p className="mt-4 text-[11px] font-medium leading-5 text-black/45 sm:text-[12px]">
                 Connect this form to your newsletter provider before
                 production launch.
               </p>
@@ -683,11 +721,16 @@ export function CommunityCTA() {
         </div>
 
         {/* DISCLAIMER */}
-        <p className="mx-auto mt-6 max-w-3xl text-center text-[9px] font-medium leading-4 text-black/35">
-          Replace the Discord placeholder with the final BlackProp invite URL
-          and connect the newsletter form to your email provider before
-          publishing.
-        </p>
+        <div className="mx-auto mt-7 flex max-w-[860px] items-center gap-3 rounded-[18px] border border-black/[0.07] bg-white/70 px-4 py-4 text-left shadow-[0_10px_30px_rgba(0,0,0,.025)] sm:px-5">
+          <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-[#0A0A0B] text-white">
+            <CheckIcon />
+          </span>
+
+          <p className="text-[13px] font-medium leading-6 text-black/58 sm:text-[14px] sm:leading-7">
+            Replace the Discord placeholder with the final BlackProp invite URL
+            and connect the newsletter form to your email provider before publishing.
+          </p>
+        </div>
       </div>
     </section>
   );

@@ -7,7 +7,7 @@ function BPMark({
   y = 0,
   width = 58,
   height = 74,
-  color = "#D4AF37",
+  color = "#FFFFFF",
   className = "",
 }: {
   x?: number | string;
@@ -27,6 +27,8 @@ function BPMark({
       fill="none"
       color={color}
       className={className}
+      shapeRendering="geometricPrecision"
+      preserveAspectRatio="xMidYMid meet"
       aria-hidden="true"
     >
       <path
@@ -114,7 +116,7 @@ function ReasonIcon({
 }: {
   name: IconName;
 }) {
-  const className = "h-[18px] w-[18px]";
+  const className = "h-5 w-5 sm:h-[22px] sm:w-[22px]";
 
   switch (name) {
     case "refund":
@@ -423,23 +425,23 @@ function ReasonCard({
   reason: Reason;
 }) {
   return (
-    <article className="group relative overflow-hidden rounded-[20px] border border-white/[0.065] bg-[#121213] p-4 transition duration-300 hover:-translate-y-0.5 hover:border-[#D4AF37]/22 hover:bg-[#161617] sm:p-5">
-      <div className="pointer-events-none absolute -left-10 top-1/2 h-24 w-24 -translate-y-1/2 rounded-full bg-[#D4AF37]/0 blur-[40px] transition duration-300 group-hover:bg-[#D4AF37]/[0.055]" />
+    <article className="group relative min-h-[78px] overflow-hidden rounded-[16px] border border-white/[0.07] bg-[#111112] p-3.5 transition duration-300 sm:min-h-[96px] sm:rounded-[20px] sm:p-5 sm:hover:-translate-y-0.5 sm:hover:border-[#D4AF37]/22 sm:hover:bg-[#161617] lg:p-5 xl:p-6">
+      <div className="pointer-events-none absolute -left-10 top-1/2 hidden h-24 w-24 -translate-y-1/2 rounded-full bg-[#D4AF37]/0 blur-[40px] transition duration-300 sm:block group-hover:bg-[#D4AF37]/[0.055]" />
 
-      <div className="absolute bottom-0 left-[12%] right-[12%] h-px bg-gradient-to-r from-transparent via-[#D4AF37]/0 to-transparent transition group-hover:via-[#D4AF37]/30" />
+      <div className="absolute bottom-0 left-[12%] right-[12%] hidden h-px bg-gradient-to-r from-transparent via-[#D4AF37]/0 to-transparent transition sm:block group-hover:via-[#D4AF37]/30" />
 
-      <div className="relative flex items-center gap-3.5">
-        <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl border border-[#D4AF37]/14 bg-[#D4AF37]/[0.055] text-[#DDB84D] transition group-hover:border-[#D4AF37]/28 group-hover:bg-[#D4AF37]/10">
+      <div className="relative flex items-center gap-3 sm:gap-4">
+        <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl border border-white/[0.08] bg-white/[0.035] text-[#E4C15A] sm:h-12 sm:w-12 sm:border-[#D4AF37]/14 sm:bg-[#D4AF37]/[0.055] sm:transition sm:group-hover:border-[#D4AF37]/28 sm:group-hover:bg-[#D4AF37]/10">
           <ReasonIcon name={reason.icon} />
         </div>
 
         <div className="min-w-0">
-          <h3 className="text-[13px] font-semibold leading-5 tracking-[-0.025em] text-white/78 sm:text-sm">
+          <h3 className="text-[15px] font-semibold leading-5 tracking-[-0.02em] text-white/92 sm:text-base sm:leading-6">
             {reason.title}
           </h3>
 
           {reason.description && (
-            <p className="mt-1 text-[9px] leading-4 text-white/27">
+            <p className="mt-1.5 hidden text-[13px] leading-5 text-white/48 sm:block sm:text-[13px]">
               {reason.description}
             </p>
           )}
@@ -455,7 +457,7 @@ function ReasonCard({
 
 function BlackPropCapitalEngine() {
   return (
-    <div className="relative mx-auto w-full max-w-[500px]">
+    <div className="relative mx-auto w-full max-w-[430px] sm:max-w-[500px] lg:max-w-[520px] xl:max-w-[540px]">
       <div className="relative aspect-square w-full">
         {/* =================================================
             AMBIENT LIGHT
@@ -781,11 +783,12 @@ function BlackPropCapitalEngine() {
 
             {/* BLACKPROP SVG LOGO */}
             <BPMark
-              x={265}
-              y={247}
-              width={70}
-              height={88}
-              color="#D4AF37"
+              x={262}
+              y={242}
+              width={76}
+              height={96}
+              color="#FFFFFF"
+              className="drop-shadow-[0_2px_2px_rgba(0,0,0,.75)]"
             />
 
             <text
@@ -793,8 +796,8 @@ function BlackPropCapitalEngine() {
               y="346"
               textAnchor="middle"
               fill="white"
-              fillOpacity=".32"
-              fontSize="10"
+              fillOpacity=".46"
+              fontSize="12"
               fontWeight="800"
               letterSpacing="4"
             >
@@ -848,43 +851,43 @@ function BlackPropCapitalEngine() {
             FLOATING DATA PANELS
         ================================================= */}
 
-        <div className="absolute left-[1%] top-[21%] rounded-xl border border-white/[0.07] bg-[#0B0B0C]/90 px-3 py-2 shadow-[0_14px_35px_rgba(0,0,0,.35)] backdrop-blur-xl sm:left-[3%]">
-          <p className="text-[6px] font-bold uppercase tracking-[0.16em] text-white/26">
+        <div className="absolute left-[1%] top-[21%] rounded-xl border border-white/[0.08] bg-[#0B0B0C]/92 px-3 py-2.5 shadow-[0_14px_35px_rgba(0,0,0,.35)] backdrop-blur-xl sm:left-[3%] sm:px-3.5">
+          <p className="text-[9px] font-bold uppercase tracking-[0.12em] text-white/50 sm:text-[10px]">
             Capital
           </p>
 
-          <p className="mt-1 text-[9px] font-black text-[#DDB94E]">
+          <p className="mt-1.5 text-[12px] font-black text-[#E8C75B] sm:text-[13px]">
             $200K
           </p>
         </div>
 
-        <div className="absolute right-[1%] top-[27%] rounded-xl border border-white/[0.07] bg-[#0B0B0C]/90 px-3 py-2 shadow-[0_14px_35px_rgba(0,0,0,.35)] backdrop-blur-xl sm:right-[3%]">
-          <p className="text-[6px] font-bold uppercase tracking-[0.16em] text-white/26">
+        <div className="absolute right-[1%] top-[27%] rounded-xl border border-white/[0.08] bg-[#0B0B0C]/92 px-3 py-2.5 shadow-[0_14px_35px_rgba(0,0,0,.35)] backdrop-blur-xl sm:right-[3%] sm:px-3.5">
+          <p className="text-[9px] font-bold uppercase tracking-[0.12em] text-white/50 sm:text-[10px]">
             Profit Split
           </p>
 
-          <p className="mt-1 text-[9px] font-black text-[#DDB94E]">
+          <p className="mt-1.5 text-[12px] font-black text-[#E8C75B] sm:text-[13px]">
             Up to 90%
           </p>
         </div>
 
-        <div className="absolute bottom-[12%] left-[3%] rounded-xl border border-white/[0.07] bg-[#0B0B0C]/90 px-3 py-2 shadow-[0_14px_35px_rgba(0,0,0,.35)] backdrop-blur-xl sm:left-[9%]">
+        <div className="absolute bottom-[12%] left-[2%] rounded-xl border border-white/[0.08] bg-[#0B0B0C]/92 px-3 py-2.5 shadow-[0_14px_35px_rgba(0,0,0,.35)] backdrop-blur-xl sm:left-[8%] sm:px-3.5">
           <div className="flex items-center gap-2">
             <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
 
-            <span className="text-[7px] font-bold uppercase tracking-[0.13em] text-white/40">
+            <span className="text-[10px] font-bold uppercase tracking-[0.10em] text-white/62 sm:text-[11px]">
               Risk Defined
             </span>
           </div>
         </div>
 
-        <div className="absolute bottom-[9%] right-[1%] rounded-xl border border-white/[0.07] bg-[#0B0B0C]/90 px-3 py-2 shadow-[0_14px_35px_rgba(0,0,0,.35)] backdrop-blur-xl sm:right-[7%]">
+        <div className="absolute bottom-[9%] right-[1%] rounded-xl border border-white/[0.08] bg-[#0B0B0C]/92 px-3 py-2.5 shadow-[0_14px_35px_rgba(0,0,0,.35)] backdrop-blur-xl sm:right-[7%] sm:px-3.5">
           <div className="flex items-center gap-2">
             <span className="text-[#D4AF37]">
               <CheckIcon />
             </span>
 
-            <span className="text-[7px] font-bold uppercase tracking-[0.13em] text-white/40">
+            <span className="text-[10px] font-bold uppercase tracking-[0.10em] text-white/62 sm:text-[11px]">
               Trader Ready
             </span>
           </div>
@@ -892,10 +895,10 @@ function BlackPropCapitalEngine() {
       </div>
 
       {/* LABEL */}
-      <div className="mx-auto -mt-3 flex w-fit items-center gap-2 rounded-full border border-white/[0.065] bg-white/[0.025] px-3 py-1.5">
+      <div className="mx-auto -mt-2 flex w-fit items-center gap-2.5 rounded-full border border-white/[0.075] bg-white/[0.03] px-3.5 py-2 sm:px-4">
         <span className="h-1.5 w-1.5 rounded-full bg-[#D4AF37]" />
 
-        <span className="text-[7px] font-black uppercase tracking-[0.18em] text-white/28">
+        <span className="text-[10px] font-black uppercase tracking-[0.13em] text-white/55 sm:text-[11px]">
           BlackProp Capital Engine
         </span>
       </div>
@@ -911,7 +914,7 @@ export function WhyTradersLove() {
   return (
     <section
       id="why-traders-love"
-      className="relative overflow-hidden bg-[#030303] py-24 sm:py-28 lg:py-36"
+      className="relative overflow-hidden bg-[#030303] py-14 sm:py-20 md:py-24 lg:py-28 xl:py-32"
     >
       {/* =====================================================
           BACKGROUND
@@ -936,22 +939,27 @@ export function WhyTradersLove() {
         ====================================================== */}
 
         <div className="mx-auto max-w-[920px] text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-[#D4AF37]/15 bg-[#D4AF37]/[0.05] px-3 py-1.5">
-            <span className="h-1.5 w-1.5 rounded-full bg-[#D4AF37]" />
+          <div className="inline-flex items-center gap-2.5 rounded-full border border-white/[0.08] bg-white/[0.035] px-3.5 py-2">
+            <BPMark
+              width={13}
+              height={17}
+              color="#FFFFFF"
+              className="shrink-0"
+            />
 
-            <span className="text-[8px] font-black uppercase tracking-[0.2em] text-[#DDB94E]">
+            <span className="text-[11px] font-black uppercase tracking-[0.15em] text-white/72 sm:text-[12px]">
               The BlackProp Advantage
             </span>
           </div>
 
-          <h2 className="mt-7 text-[3.25rem] font-black uppercase leading-[0.9] tracking-[-0.07em] text-white sm:text-[4.7rem] lg:text-[5.8rem]">
+          <h2 className="mt-6 text-[3.25rem] font-black uppercase leading-[0.92] tracking-[-0.065em] text-white min-[430px]:text-[3.55rem] sm:mt-7 sm:text-[4.9rem] md:text-[5.4rem] lg:text-[6rem] xl:text-[6.35rem]">
             Why traders
             <span className="block bg-[linear-gradient(100deg,#FFFFFF_0%,#D6D6D6_33%,#F0D16C_72%,#9A7219_100%)] bg-clip-text text-transparent">
               choose BlackProp.
             </span>
           </h2>
 
-          <p className="mx-auto mt-6 max-w-[620px] text-sm leading-7 text-white/36 sm:text-base">
+          <p className="mx-auto mt-5 max-w-[720px] text-[16px] leading-7 text-white/58 sm:mt-6 sm:text-[17px] sm:leading-8 lg:text-lg">
             More capital, clear objectives and a trading experience
             designed around disciplined performance.
           </p>
@@ -961,7 +969,68 @@ export function WhyTradersLove() {
             MOBILE + TABLET CENTER ART FIRST
         ====================================================== */}
 
-        <div className="mx-auto mt-12 max-w-[540px] lg:hidden">
+        {/* =====================================================
+            MOBILE — MINIMAL CAPITAL SUMMARY
+        ====================================================== */}
+
+        <div className="mx-auto mt-8 max-w-[520px] sm:hidden">
+          <div className="relative overflow-hidden rounded-[24px] border border-white/[0.08] bg-[#0D0D0E] p-5 shadow-[0_24px_70px_rgba(0,0,0,.28)]">
+            <div className="pointer-events-none absolute right-[-32px] top-1/2 -translate-y-1/2 opacity-[0.035]">
+              <BPMark
+                width={118}
+                height={149}
+                color="#FFFFFF"
+              />
+            </div>
+
+            <div className="relative flex items-center gap-3.5">
+              <div className="grid h-14 w-14 shrink-0 place-items-center rounded-[16px] border border-white/[0.10] bg-white/[0.045]">
+                <BPMark
+                  width={23}
+                  height={29}
+                  color="#FFFFFF"
+                />
+              </div>
+
+              <div>
+                <p className="text-[11px] font-black uppercase tracking-[0.14em] text-white/48">
+                  BlackProp Capital
+                </p>
+
+                <p className="mt-1 text-xl font-black tracking-[-0.04em] text-white">
+                  Built for progression.
+                </p>
+              </div>
+            </div>
+
+            <div className="relative mt-5 grid grid-cols-3 gap-2">
+              {[
+                ["$200K", "Capital"],
+                ["90%", "Profit Split"],
+                ["No Limit", "Time"],
+              ].map(([value, label]) => (
+                <div
+                  key={label}
+                  className="rounded-[14px] border border-white/[0.065] bg-white/[0.025] px-2 py-3 text-center"
+                >
+                  <p className="text-[16px] font-black tracking-[-0.035em] text-[#E6C55A]">
+                    {value}
+                  </p>
+
+                  <p className="mt-1 text-[9px] font-bold uppercase tracking-[0.08em] text-white/42">
+                    {label}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* =====================================================
+            TABLET — PREMIUM ENGINE
+        ====================================================== */}
+
+        <div className="mx-auto mt-12 hidden max-w-[540px] sm:block lg:hidden">
           <BlackPropCapitalEngine />
         </div>
 
@@ -969,7 +1038,7 @@ export function WhyTradersLove() {
             MOBILE + TABLET REASONS
         ====================================================== */}
 
-        <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:hidden">
+        <div className="mt-6 grid grid-cols-1 gap-2.5 min-[430px]:grid-cols-2 sm:mt-10 sm:gap-4 lg:hidden">
           {[...leftReasons, ...rightReasons].map(
             (reason) => (
               <ReasonCard
@@ -984,7 +1053,7 @@ export function WhyTradersLove() {
             DESKTOP LAYOUT
         ====================================================== */}
 
-        <div className="mt-16 hidden items-center gap-6 lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(390px,.95fr)_minmax(0,1fr)] xl:gap-9">
+        <div className="mt-16 hidden items-center gap-5 lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(400px,.98fr)_minmax(0,1fr)] xl:gap-8 2xl:gap-10">
           {/* LEFT */}
           <div className="grid gap-3">
             {leftReasons.map(
@@ -1015,11 +1084,11 @@ export function WhyTradersLove() {
             <div className="relative overflow-hidden rounded-[20px] border border-[#D4AF37]/12 bg-[linear-gradient(135deg,rgba(212,175,55,.06),rgba(255,255,255,.018))] p-5">
               <div className="absolute right-0 top-0 h-28 w-28 rounded-full bg-[#D4AF37]/[0.05] blur-[45px]" />
 
-              <p className="relative text-[8px] font-black uppercase tracking-[0.18em] text-[#D4AF37]/55">
+              <p className="relative text-[11px] font-black uppercase tracking-[0.15em] text-[#D4AF37]/78">
                 Built differently
               </p>
 
-              <p className="relative mt-2 text-sm font-semibold leading-6 text-white/60">
+              <p className="relative mt-2.5 text-base font-semibold leading-6 text-white/78">
                 One ecosystem built around the trader.
               </p>
             </div>
@@ -1030,37 +1099,37 @@ export function WhyTradersLove() {
             DIVIDER
         ====================================================== */}
 
-        <div className="mx-auto my-16 h-px max-w-[880px] bg-gradient-to-r from-transparent via-white/[0.08] to-transparent sm:my-20" />
+        <div className="mx-auto my-12 h-px max-w-[880px] bg-gradient-to-r from-transparent via-white/[0.08] to-transparent sm:my-20" />
 
         {/* =====================================================
             FOOTER MESSAGE
         ====================================================== */}
 
         <div className="mx-auto max-w-[760px] text-center">
-          <p className="text-[8px] font-black uppercase tracking-[0.22em] text-[#D4AF37]/55">
+          <p className="text-[11px] font-black uppercase tracking-[0.16em] text-[#D4AF37]/78 sm:text-[12px]">
             Built for disciplined performance
           </p>
 
-          <h3 className="mt-4 text-3xl font-black uppercase leading-[1] tracking-[-0.055em] text-white sm:text-4xl lg:text-[3rem]">
+          <h3 className="mt-4 text-[2.45rem] font-black uppercase leading-[0.98] tracking-[-0.055em] text-white sm:text-[3.05rem] lg:text-[3.45rem]">
             More capital.
             <span className="text-[#D4AF37]">
               {" "}
               More opportunity.
             </span>
 
-            <span className="mt-1 block text-white/32">
+            <span className="mt-1.5 block text-white/45">
               Your execution does the rest.
             </span>
           </h3>
 
-          <p className="mx-auto mt-5 max-w-[540px] text-sm leading-6 text-white/30">
+          <p className="mx-auto mt-5 max-w-[620px] text-[16px] leading-7 text-white/55 sm:text-[17px]">
             Choose the challenge that fits your trading style and
             work toward the next stage.
           </p>
 
           <a
             href="#challenges"
-            className="group relative mt-8 inline-flex min-w-[210px] items-center justify-center gap-2 overflow-hidden rounded-xl bg-[linear-gradient(135deg,#F5DA79_0%,#D4AF37_50%,#946A12_100%)] px-7 py-4 text-sm font-black text-[#080806] shadow-[0_18px_50px_rgba(212,175,55,.17)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_64px_rgba(212,175,55,.27)]"
+            className="group relative mt-8 inline-flex min-h-[54px] w-full items-center justify-center gap-2 overflow-hidden rounded-xl bg-[linear-gradient(135deg,#F5DA79_0%,#D4AF37_50%,#946A12_100%)] px-7 py-4 text-[15px] font-black text-[#080806] shadow-[0_18px_50px_rgba(212,175,55,.17)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_64px_rgba(212,175,55,.27)] sm:w-auto sm:min-w-[220px] sm:text-base"
           >
             Get Funded
 
@@ -1074,7 +1143,7 @@ export function WhyTradersLove() {
             DISCLAIMER
         ====================================================== */}
 
-        <p className="mx-auto mt-10 max-w-3xl text-center text-[9px] leading-4 text-white/15">
+        <p className="mx-auto mt-9 max-w-[780px] px-3 text-center text-[12px] font-medium leading-6 text-white/42 sm:mt-10 sm:text-[13px] sm:leading-7">
           Account limits, profit splits, refundable-fee terms,
           reward access and trading permissions shown in this
           frontend are demonstration terms until BlackProp&apos;s

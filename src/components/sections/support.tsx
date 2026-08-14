@@ -7,7 +7,7 @@
 function BPMark({
   width = 58,
   height = 74,
-  color = "#D4AF37",
+  color = "#FFFFFF",
   className = "",
 }: {
   width?: number | string;
@@ -23,6 +23,8 @@ function BPMark({
       fill="none"
       color={color}
       className={className}
+      shapeRendering="geometricPrecision"
+      preserveAspectRatio="xMidYMid meet"
       aria-hidden="true"
     >
       <path
@@ -188,12 +190,12 @@ function SupportCard({
 }: SupportCardProps) {
   return (
     <div
-      className={`support-float absolute z-20 w-[170px] sm:w-[195px] ${className}`}
+      className={`support-float relative z-20 mt-3 w-full sm:absolute sm:mt-0 sm:w-[205px] lg:w-[215px] ${className}`}
       style={{ animationDelay: delay }}
     >
-      <div className="group rounded-[22px] border border-black/[0.07] bg-white/85 p-4 shadow-[0_20px_55px_rgba(52,43,19,.10)] backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-[#C69A2B]/25 hover:shadow-[0_25px_65px_rgba(90,65,14,.14)]">
+      <div className="group rounded-[20px] border border-black/[0.07] bg-white/92 p-4 shadow-[0_16px_44px_rgba(52,43,19,.08)] backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-[#C69A2B]/25 hover:shadow-[0_25px_65px_rgba(90,65,14,.14)] sm:rounded-[22px] sm:p-5">
         <div className="flex items-start justify-between">
-          <div className="grid h-9 w-9 place-items-center rounded-xl border border-[#D4AF37]/15 bg-[#D4AF37]/[0.07] text-[#9B7319]">
+          <div className="grid h-10 w-10 place-items-center rounded-xl border border-[#D4AF37]/15 bg-[#D4AF37]/[0.07] text-[#9B7319] sm:h-11 sm:w-11">
             {icon}
           </div>
 
@@ -202,11 +204,11 @@ function SupportCard({
           </div>
         </div>
 
-        <p className="mt-5 text-[12px] font-black tracking-[-0.03em] text-[#111]">
+        <p className="mt-4 text-[15px] font-black leading-5 tracking-[-0.03em] text-[#111] sm:mt-5 sm:text-base">
           {title}
         </p>
 
-        <p className="mt-1.5 text-[8px] leading-4 text-black/38">
+        <p className="mt-2 text-[12px] leading-5 text-black/52 sm:text-[13px]">
           {description}
         </p>
       </div>
@@ -216,33 +218,33 @@ function SupportCard({
 
 function SupportIllustration() {
   return (
-    <div className="relative mx-auto h-[470px] w-full max-w-[650px] sm:h-[540px] lg:h-[590px]">
+    <div className="relative mx-auto h-auto w-full max-w-[680px] pt-2 sm:h-[560px] sm:pt-0 lg:h-[610px]">
       {/* BACKGROUND GLOW */}
       <div className="pointer-events-none absolute left-1/2 top-1/2 h-[72%] w-[72%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#D4AF37]/[0.08] blur-[100px]" />
 
       {/* ORBIT LINES */}
-      <div className="pointer-events-none absolute left-1/2 top-[52%] h-[70%] w-[82%] -translate-x-1/2 -translate-y-1/2 rounded-[50%] border border-[#B88A24]/[0.08]" />
+      <div className="pointer-events-none absolute left-1/2 top-[52%] hidden h-[70%] w-[82%] -translate-x-1/2 -translate-y-1/2 rounded-[50%] border border-[#B88A24]/[0.08] sm:block" />
 
-      <div className="pointer-events-none absolute left-1/2 top-[52%] h-[55%] w-[66%] -translate-x-1/2 -translate-y-1/2 rotate-[-12deg] rounded-[50%] border border-dashed border-black/[0.06]" />
+      <div className="pointer-events-none absolute left-1/2 top-[52%] hidden h-[55%] w-[66%] -translate-x-1/2 -translate-y-1/2 rotate-[-12deg] rounded-[50%] border border-dashed border-black/[0.06] sm:block" />
 
       {/* CENTER CORE */}
-      <div className="absolute left-1/2 top-[48%] z-10 -translate-x-1/2 -translate-y-1/2">
-        <div className="relative grid h-32 w-32 place-items-center rounded-[32px] border border-black/[0.07] bg-[linear-gradient(145deg,#1A1A18,#080808)] shadow-[0_30px_80px_rgba(35,28,8,.22)] sm:h-40 sm:w-40 sm:rounded-[38px]">
+      <div className="relative z-10 mx-auto mb-5 w-fit sm:absolute sm:left-1/2 sm:top-[48%] sm:mb-0 sm:-translate-x-1/2 sm:-translate-y-1/2">
+        <div className="support-core relative grid h-36 w-36 place-items-center rounded-[32px] border border-black/[0.07] bg-[linear-gradient(145deg,#1A1A18,#080808)] shadow-[0_24px_65px_rgba(35,28,8,.20)] sm:h-40 sm:w-40 sm:rounded-[38px] lg:h-44 lg:w-44">
           <div className="absolute inset-[8px] rounded-[26px] border border-white/[0.06]" />
 
           <div className="absolute left-1/2 top-0 h-px w-[55%] -translate-x-1/2 bg-gradient-to-r from-transparent via-[#E1BE58] to-transparent" />
 
           <div>
-            <div className="mx-auto grid h-14 w-14 place-items-center rounded-2xl border border-[#D4AF37]/25 bg-[#D4AF37]/[0.07] shadow-[0_0_35px_rgba(212,175,55,.12)]">
+            <div className="mx-auto grid h-16 w-16 place-items-center rounded-2xl border border-white/[0.12] bg-white/[0.045] shadow-[0_12px_35px_rgba(0,0,0,.24)]">
               <BPMark
-                width={28}
-                height={35}
-                color="#D4AF37"
-                className="drop-shadow-[0_0_12px_rgba(212,175,55,.18)]"
+                width={31}
+                height={39}
+                color="#FFFFFF"
+                className="drop-shadow-[0_1px_1px_rgba(0,0,0,.75)]"
               />
             </div>
 
-            <p className="mt-3 text-center text-[7px] font-black uppercase tracking-[0.18em] text-white/35">
+            <p className="mt-3 text-center text-[10px] font-black uppercase tracking-[0.15em] text-white/55 sm:text-[11px]">
               Support
             </p>
           </div>
@@ -254,7 +256,7 @@ function SupportIllustration() {
         title="General FAQ"
         description="Quick answers to common BlackProp questions."
         icon={<BookIcon />}
-        className="left-[2%] top-[7%] sm:left-[4%] sm:top-[10%]"
+        className="sm:left-[4%] sm:top-[8%] lg:left-[5%] lg:top-[10%]"
         delay="0s"
       />
 
@@ -262,7 +264,7 @@ function SupportIllustration() {
         title="Platform Help"
         description="Guidance for your trading workspace and setup."
         icon={<PlatformIcon />}
-        className="right-[1%] top-[20%] sm:right-[3%] sm:top-[18%]"
+        className="sm:right-[3%] sm:top-[18%] lg:right-[4%] lg:top-[17%]"
         delay="-1.5s"
       />
 
@@ -270,7 +272,7 @@ function SupportIllustration() {
         title="Trading & Rewards"
         description="Understand objectives, progress and reward access."
         icon={<RewardIcon />}
-        className="bottom-[4%] left-[12%] sm:bottom-[6%] sm:left-[18%]"
+        className="sm:bottom-[5%] sm:left-[14%] lg:bottom-[7%] lg:left-[17%]"
         delay="-3s"
       />
 
@@ -291,11 +293,11 @@ function SupportIllustration() {
           </div>
 
           <div>
-            <p className="text-[7px] font-black uppercase tracking-[0.13em] text-black/30">
+            <p className="text-[10px] font-black uppercase tracking-[0.11em] text-black/42">
               Need help?
             </p>
 
-            <p className="mt-0.5 text-[9px] font-bold text-black/65">
+            <p className="mt-1 text-[12px] font-bold text-black/70">
               Reach our support team
             </p>
           </div>
@@ -314,7 +316,7 @@ export function Support() {
   return (
     <section
       id="support"
-      className="relative overflow-hidden bg-[#FBFAF7] py-24 sm:py-28 lg:py-32"
+      className="relative overflow-hidden bg-[#FBFAF7] py-16 sm:py-20 md:py-24 lg:py-28 xl:py-32"
     >
       {/* BACKGROUND */}
       <div className="pointer-events-none absolute -right-40 top-[15%] h-[650px] w-[650px] rounded-full bg-[#D4AF37]/[0.055] blur-[160px]" />
@@ -332,35 +334,40 @@ export function Support() {
         }}
       />
 
-      <div className="relative mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
-        <div className="grid items-center gap-12 lg:grid-cols-[0.86fr_1.14fr] lg:gap-8">
+      <div className="relative mx-auto max-w-[1360px] px-4 sm:px-6 lg:px-8">
+        <div className="grid items-start gap-10 md:gap-12 lg:grid-cols-[0.86fr_1.14fr] lg:items-center lg:gap-8">
           {/* LEFT */}
           <div className="relative z-20 mx-auto max-w-[560px] text-center lg:mx-0 lg:text-left">
-            <div className="inline-flex items-center gap-2 rounded-full border border-black/[0.06] bg-[#F0EFEA] px-4 py-2 shadow-[inset_0_1px_0_white]">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#D4AF37] shadow-[0_0_10px_rgba(212,175,55,.35)]" />
+            <div className="inline-flex items-center gap-2.5 rounded-full bg-[#0A0A0B] px-4 py-2.5 shadow-[0_8px_24px_rgba(0,0,0,.08)]">
+              <BPMark
+                width={14}
+                height={18}
+                color="#FFFFFF"
+                className="shrink-0"
+              />
 
-              <span className="text-[8px] font-black uppercase tracking-[0.2em] text-black/45">
+              <span className="text-[11px] font-black uppercase tracking-[0.16em] text-white/72 sm:text-[12px]">
                 BlackProp Support
               </span>
             </div>
 
-            <h2 className="mt-7 text-[3.25rem] font-black leading-[0.93] tracking-[-0.065em] text-[#080808] sm:text-[4.5rem] lg:text-[5rem]">
+            <h2 className="mt-7 text-[3.4rem] font-black leading-[0.93] tracking-[-0.065em] text-[#080808] min-[430px]:text-[3.75rem] sm:text-[4.55rem] md:text-[4.8rem] lg:text-[5.15rem] xl:text-[5.45rem]">
               Help when
               <span className="block bg-[linear-gradient(100deg,#111_0%,#444_35%,#C89E35_72%,#77520A_100%)] bg-clip-text text-transparent">
                 you need it.
               </span>
             </h2>
 
-            <p className="mx-auto mt-6 max-w-[510px] text-sm leading-7 text-black/42 sm:text-base lg:mx-0">
+            <p className="mx-auto mt-6 max-w-[560px] text-[16px] leading-7 text-black/58 sm:text-[17px] sm:leading-8 lg:mx-0">
               Find quick answers in our help center or reach out when
               you need more guidance.
             </p>
 
             {/* BUTTONS */}
-            <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center lg:justify-start">
+            <div className="mt-8 grid w-full grid-cols-1 gap-3 sm:flex sm:w-auto sm:flex-row sm:items-center sm:justify-center lg:justify-start">
               <a
                 href="#faq"
-                className="gold-button group inline-flex h-12 min-w-[150px] items-center justify-center gap-3 rounded-xl px-6 text-[11px] font-black text-black"
+                className="gold-button group inline-flex h-14 w-full items-center justify-center gap-3 rounded-xl px-6 text-[14px] font-black text-black sm:w-auto sm:min-w-[170px] sm:text-[15px]"
               >
                 Explore FAQ
 
@@ -371,7 +378,7 @@ export function Support() {
 
               <a
                 href="#contact"
-                className="group inline-flex h-12 min-w-[150px] items-center justify-center gap-3 rounded-xl border border-black/[0.08] bg-white/65 px-6 text-[11px] font-black text-black/65 shadow-[inset_0_1px_0_white] transition hover:border-black/[0.14] hover:bg-white hover:text-black"
+                className="group inline-flex h-14 w-full items-center justify-center gap-3 rounded-xl border border-black/[0.08] bg-white/75 px-6 text-[14px] font-black text-black/70 shadow-[inset_0_1px_0_white] transition hover:border-black/[0.14] hover:bg-white hover:text-black sm:w-auto sm:min-w-[170px] sm:text-[15px]"
               >
                 Contact Us
 
@@ -394,7 +401,7 @@ export function Support() {
                 >
                   <span className="h-1 w-1 rounded-full bg-[#B4861E]" />
 
-                  <span className="text-[8px] font-bold text-black/32">
+                  <span className="text-[11px] font-bold text-black/45 sm:text-[12px]">
                     {item}
                   </span>
                 </div>
@@ -411,6 +418,30 @@ export function Support() {
         .support-float {
           animation: blackpropSupportFloat 6s ease-in-out infinite;
           will-change: transform;
+        }
+
+
+        .support-core {
+          animation: blackpropSupportCore 5.5s ease-in-out infinite;
+          will-change: transform;
+        }
+
+        @keyframes blackpropSupportCore {
+          0%,
+          100% {
+            transform: translateY(0) scale(1);
+          }
+
+          50% {
+            transform: translateY(-4px) scale(1.015);
+          }
+        }
+
+        @media (max-width: 639px) {
+          .support-float {
+            animation: none !important;
+            transform: none !important;
+          }
         }
 
         .support-pillar {
@@ -450,7 +481,8 @@ export function Support() {
 
         @media (prefers-reduced-motion: reduce) {
           .support-float,
-          .support-pillar {
+          .support-pillar,
+          .support-core {
             animation: none;
           }
         }

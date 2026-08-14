@@ -14,8 +14,9 @@ function BPMark({
   y = 0,
   width = 58,
   height = 74,
-  color = "#D4AF37",
+  color = "#FFFFFF",
   opacity = 1,
+  className = "",
 }: {
   x?: number | string;
   y?: number | string;
@@ -23,6 +24,7 @@ function BPMark({
   height?: number | string;
   color?: string;
   opacity?: number | string;
+  className?: string;
 }) {
   return (
     <svg
@@ -34,6 +36,9 @@ function BPMark({
       fill="none"
       color={color}
       opacity={opacity}
+      className={className}
+      shapeRendering="geometricPrecision"
+      preserveAspectRatio="xMidYMid meet"
       aria-hidden="true"
     >
       {/* Outer B */}
@@ -107,7 +112,7 @@ function RewardsArtwork() {
       <svg
         viewBox="0 0 760 650"
         fill="none"
-        className="absolute inset-x-0 bottom-[-8px] h-[91%] w-full"
+        className="absolute inset-x-0 bottom-[-8px] h-[94%] w-full"
         aria-hidden="true"
       >
         <defs>
@@ -544,11 +549,12 @@ function RewardsArtwork() {
 
           {/* BLACKPROP LOGO MARK */}
           <BPMark
-            x={-31}
-            y={-39}
-            width={62}
-            height={78}
-            color="#F0D16A"
+            x={-34}
+            y={-43}
+            width={68}
+            height={86}
+            color="#FFFFFF"
+            className="drop-shadow-[0_1px_1px_rgba(0,0,0,.7)]"
           />
 
           
@@ -628,7 +634,7 @@ function RewardsArtwork() {
             y={-16}
             width={16}
             height={20}
-            color="#2B1C02"
+            color="#FFFFFF"
           />
         </g>
 
@@ -656,7 +662,7 @@ function RewardsArtwork() {
             y={-14}
             width={14}
             height={18}
-            color="#252525"
+            color="#FFFFFF"
           />
         </g>
 
@@ -684,7 +690,9 @@ function RewardsArtwork() {
           <ellipse
             rx="27"
             ry="34"
-            fill="#111"
+            fill="#090909"
+            stroke="white"
+            strokeOpacity=".10"
           />
 
           <BPMark
@@ -692,7 +700,7 @@ function RewardsArtwork() {
             y={-13}
             width={20}
             height={25}
-            color="#D9AF38"
+            color="#FFFFFF"
           />
         </g>
 
@@ -716,7 +724,9 @@ function RewardsArtwork() {
           <ellipse
             rx="24"
             ry="31"
-            fill="#111"
+            fill="#090909"
+            stroke="white"
+            strokeOpacity=".10"
           />
 
           <BPMark
@@ -724,7 +734,7 @@ function RewardsArtwork() {
             y={-12}
             width={18}
             height={23}
-            color="#D8D8D8"
+            color="#FFFFFF"
           />
         </g>
 
@@ -855,7 +865,7 @@ function RewardsArtwork() {
             y={-9}
             width={14}
             height={18}
-            color="#D8D8D8"
+            color="#FFFFFF"
           />
         </g>
 
@@ -918,7 +928,7 @@ function TrophyArtwork() {
 
       <svg
         viewBox="0 0 520 330"
-        className="absolute bottom-[-20px] right-[-35px] h-[103%] w-[72%]"
+        className="absolute bottom-[-22px] right-[-40px] h-[108%] w-[76%]"
         fill="none"
         aria-hidden="true"
       >
@@ -1017,11 +1027,12 @@ function TrophyArtwork() {
           />
 
           <BPMark
-            x={230}
-            y={113}
-            width={36}
-            height={46}
-            color="#D4AF37"
+            x={228}
+            y={110}
+            width={40}
+            height={51}
+            color="#FFFFFF"
+            className="drop-shadow-[0_1px_1px_rgba(0,0,0,.65)]"
           />
 
           <path
@@ -1111,7 +1122,7 @@ function GlobeArtwork() {
     <div className="pointer-events-none absolute inset-0 overflow-hidden">
       <div className="absolute -bottom-24 -right-16 h-[360px] w-[360px] rounded-full bg-[#D4AF37]/10 blur-[100px]" />
 
-      <div className="absolute -bottom-[115px] -right-[55px] h-[390px] w-[390px] rounded-full border border-white/[0.08] bg-[radial-gradient(circle_at_35%_27%,#313131_0%,#151515_30%,#080808_65%,#020202_100%)] shadow-[inset_-55px_-35px_90px_rgba(0,0,0,.9),0_30px_70px_rgba(0,0,0,.7)]">
+      <div className="absolute -bottom-[115px] -right-[55px] h-[420px] w-[420px] rounded-full border border-white/[0.08] bg-[radial-gradient(circle_at_35%_27%,#313131_0%,#151515_30%,#080808_65%,#020202_100%)] shadow-[inset_-55px_-35px_90px_rgba(0,0,0,.9),0_30px_70px_rgba(0,0,0,.7)]">
 
         <div className="absolute left-1/2 top-[7%] h-[86%] w-[34%] -translate-x-1/2 rounded-[50%] border border-white/[0.045]" />
 
@@ -1150,21 +1161,21 @@ function GlobeArtwork() {
 
 export function ProofStats() {
   return (
-    <section className="relative overflow-hidden bg-[#030303] py-20 sm:py-24 lg:py-28">
+    <section className="relative overflow-hidden bg-[#030303] py-16 sm:py-20 lg:py-24 xl:py-28">
 
       {/* AMBIENCE */}
       <div className="pointer-events-none absolute left-1/2 top-0 h-[550px] w-[950px] -translate-x-1/2 rounded-full bg-[#D4AF37]/[0.025] blur-[150px]" />
 
-      <div className="relative mx-auto max-w-[1240px] px-4 sm:px-6 lg:px-8">
+      <div className="relative mx-auto max-w-[1320px] px-4 sm:px-6 lg:px-8">
 
         {/* =====================================================
             STAT CARDS
         ====================================================== */}
 
-        <div className="grid gap-4 lg:grid-cols-[1.08fr_.92fr]">
+        <div className="grid gap-4 lg:grid-cols-[1.08fr_.92fr] xl:gap-5">
 
           {/* LARGE REWARDS CARD */}
-          <article className="group relative min-h-[625px] overflow-hidden rounded-[32px] border border-white/[0.075] bg-[linear-gradient(145deg,#171718,#09090A)] shadow-[0_35px_100px_rgba(0,0,0,.35)]">
+          <article className="group relative min-h-[650px] sm:min-h-[700px] lg:min-h-[720px] overflow-hidden rounded-[32px] border border-white/[0.075] bg-[linear-gradient(145deg,#171718,#09090A)] shadow-[0_35px_100px_rgba(0,0,0,.35)]">
 
             <RewardsArtwork />
 
@@ -1180,15 +1191,15 @@ export function ProofStats() {
             {/* TEXT */}
             <div className="relative z-20 p-7 sm:p-9 lg:p-10">
 
-              <p className="text-[9px] font-bold uppercase tracking-[0.22em] text-[#D4AF37]/70">
+              <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#D4AF37]/75 sm:text-[12px]">
                 Rewards paid
               </p>
 
-              <h3 className="mt-4 text-5xl font-black tracking-[-0.06em] text-white sm:text-6xl lg:text-[4.7rem]">
+              <h3 className="mt-4 text-[3.6rem] font-black leading-none tracking-[-0.06em] text-white sm:text-[4.8rem] lg:text-[5.2rem]">
                 {stats.rewards}
               </h3>
 
-              <p className="mt-3 max-w-[320px] text-sm leading-6 text-white/38">
+              <p className="mt-4 max-w-[380px] text-[15px] leading-7 text-white/48 sm:text-base">
                 Capital rewarded to traders for
                 disciplined performance.
               </p>
@@ -1208,7 +1219,7 @@ export function ProofStats() {
 
                 </span>
 
-                <span className="text-[9px] font-medium text-white/42">
+                <span className="text-[11px] font-medium text-white/52 sm:text-[12px]">
                   BlackProp rewards
                 </span>
 
@@ -1222,7 +1233,7 @@ export function ProofStats() {
           <div className="grid gap-4">
 
             {/* AVERAGE REWARD */}
-            <article className="group relative min-h-[305px] overflow-hidden rounded-[32px] border border-white/[0.075] bg-[linear-gradient(145deg,#171718,#09090A)]">
+            <article className="group relative min-h-[330px] sm:min-h-[350px] lg:min-h-[350px] overflow-hidden rounded-[32px] border border-white/[0.075] bg-[linear-gradient(145deg,#171718,#09090A)]">
 
               <TrophyArtwork />
 
@@ -1230,17 +1241,17 @@ export function ProofStats() {
 
               <div className="absolute inset-x-[15%] top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
 
-              <div className="relative z-20 max-w-[58%] p-7 sm:p-8">
+              <div className="relative z-20 max-w-[66%] p-6 sm:max-w-[60%] sm:p-8 lg:max-w-[58%]">
 
-                <p className="text-[9px] font-bold uppercase tracking-[0.22em] text-white/28">
+                <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-white/40 sm:text-[12px]">
                   Average reward
                 </p>
 
-                <h3 className="mt-4 text-4xl font-black tracking-[-0.055em] text-white sm:text-5xl">
+                <h3 className="mt-4 text-[2.8rem] font-black leading-none tracking-[-0.055em] text-white sm:text-[3.4rem]">
                   {stats.averageReward}
                 </h3>
 
-                <p className="mt-3 text-xs leading-5 text-white/35 sm:text-sm">
+                <p className="mt-4 text-[14px] leading-6 text-white/45 sm:text-[15px]">
                   Average reward across successful
                   payout cycles.
                 </p>
@@ -1250,7 +1261,7 @@ export function ProofStats() {
             </article>
 
             {/* TRADERS */}
-            <article className="group relative min-h-[305px] overflow-hidden rounded-[32px] border border-white/[0.075] bg-[linear-gradient(145deg,#171718,#09090A)]">
+            <article className="group relative min-h-[330px] sm:min-h-[350px] lg:min-h-[350px] overflow-hidden rounded-[32px] border border-white/[0.075] bg-[linear-gradient(145deg,#171718,#09090A)]">
 
               <GlobeArtwork />
 
@@ -1258,17 +1269,17 @@ export function ProofStats() {
 
               <div className="absolute inset-x-[15%] top-0 h-px bg-gradient-to-r from-transparent via-[#D4AF37]/28 to-transparent" />
 
-              <div className="relative z-20 max-w-[56%] p-7 sm:p-8">
+              <div className="relative z-20 max-w-[66%] p-6 sm:max-w-[60%] sm:p-8 lg:max-w-[58%]">
 
-                <p className="text-[9px] font-bold uppercase tracking-[0.22em] text-[#D4AF37]/60">
+                <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#D4AF37]/70 sm:text-[12px]">
                   Global traders
                 </p>
 
-                <h3 className="mt-4 text-4xl font-black tracking-[-0.055em] text-white sm:text-5xl">
+                <h3 className="mt-4 text-[2.8rem] font-black leading-none tracking-[-0.055em] text-white sm:text-[3.4rem]">
                   {stats.traders}
                 </h3>
 
-                <p className="mt-3 text-xs leading-5 text-white/35 sm:text-sm">
+                <p className="mt-4 text-[14px] leading-6 text-white/45 sm:text-[15px]">
                   Traders connected across global
                   financial markets.
                 </p>
@@ -1285,7 +1296,7 @@ export function ProofStats() {
             BOTTOM STATS
         ====================================================== */}
 
-        <div className="mt-4 grid overflow-hidden rounded-[24px] border border-white/[0.06] bg-[#0A0A0B] sm:grid-cols-3">
+        <div className="mt-4 grid overflow-hidden rounded-[26px] border border-white/[0.06] bg-[#0A0A0B] sm:grid-cols-3">
 
           {[
             {
@@ -1306,7 +1317,7 @@ export function ProofStats() {
           ].map((item, index) => (
             <div
               key={item.title}
-              className={`relative px-6 py-6 sm:px-8 ${
+              className={`relative px-5 py-6 sm:px-7 sm:py-7 lg:px-8 ${
                 index !== 2
                   ? "border-b border-white/[0.055] sm:border-b-0 sm:border-r"
                   : ""
@@ -1317,16 +1328,16 @@ export function ProofStats() {
 
               <div className="flex items-center gap-5">
 
-                <span className="text-2xl font-black tracking-[-0.055em] text-[#E3C35D]">
+                <span className="text-[1.9rem] font-black leading-none tracking-[-0.055em] text-[#E3C35D] sm:text-[2.15rem]">
                   {item.value}
                 </span>
 
                 <div>
-                  <p className="text-xs font-semibold text-white/70">
+                  <p className="text-[14px] font-semibold text-white/80 sm:text-[15px]">
                     {item.title}
                   </p>
 
-                  <p className="mt-1 text-[9px] text-white/25">
+                  <p className="mt-1.5 text-[11px] leading-4 text-white/38 sm:text-[12px]">
                     {item.text}
                   </p>
                 </div>

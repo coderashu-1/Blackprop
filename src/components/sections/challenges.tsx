@@ -2,6 +2,46 @@
 
 import { useMemo, useState, type ReactNode } from "react";
 
+
+/* =========================================================
+   BLACKPROP SVG LOGO
+========================================================= */
+
+function BPMark({
+  width = 58,
+  height = 74,
+  color = "#FFFFFF",
+  className = "",
+}: {
+  width?: number | string;
+  height?: number | string;
+  color?: string;
+  className?: string;
+}) {
+  return (
+    <svg
+      width={width}
+      height={height}
+      viewBox="0 0 290 366"
+      fill="none"
+      color={color}
+      className={className}
+      aria-hidden="true"
+    >
+      <path
+        fill="currentColor"
+        d="M28 0H196C244 0 278 48 278 105C278 130 271 150 256 172C277 190 289 213 289 241V267C289 319 249 365 195 365H90V237H161C201 237 230 202 230 168V139C230 104 207 78 177 78H0V25C0 11 12 0 28 0Z"
+      />
+
+      <path
+        fill="currentColor"
+        d="M0 129H157C171 129 181 141 181 156C181 171 171 183 157 183H41V365C18 365 0 352 0 335V129Z"
+      />
+    </svg>
+  );
+}
+
+
 /* =========================================================
    TYPES
 ========================================================= */
@@ -656,7 +696,7 @@ function PlatformMark({
 
 function VisaMark() {
   return (
-    <span className="text-[13px] font-black italic tracking-[-0.06em]">
+    <span className="text-[14px] font-black italic tracking-[-0.06em]">
       VISA
     </span>
   );
@@ -689,7 +729,7 @@ function MastercardMark() {
 
 function PaypalMark() {
   return (
-    <span className="text-[12px] font-black italic">
+    <span className="text-[13px] font-black italic">
       PayPal
     </span>
   );
@@ -705,7 +745,7 @@ function BitcoinMark() {
 
 function AmexMark() {
   return (
-    <span className="text-[10px] font-black">
+    <span className="text-[11px] font-black">
       AMEX
     </span>
   );
@@ -713,7 +753,7 @@ function AmexMark() {
 
 function SkrillMark() {
   return (
-    <span className="text-[11px] font-black">
+    <span className="text-[12px] font-black">
       Skrill
     </span>
   );
@@ -738,7 +778,7 @@ function OptionButton({
     <button
       type="button"
       onClick={onClick}
-      className={`relative flex min-h-[54px] items-center justify-center rounded-xl border px-3 py-3 text-xs font-bold transition-all duration-300 ${
+      className={`relative flex min-h-[62px] items-center justify-center rounded-xl border px-3.5 py-3.5 text-[15px] font-bold transition-all duration-300 sm:min-h-[66px] sm:text-base ${
         selected
           ? "border-[#D4AF37]/40 bg-[#D4AF37]/[0.09] text-[#EDD06B] shadow-[0_8px_30px_rgba(212,175,55,.07)]"
           : "border-white/[0.07] bg-white/[0.02] text-white hover:border-white/[0.14] hover:bg-white/[0.04] hover:text-white"
@@ -748,7 +788,7 @@ function OptionButton({
 
       {badge && (
         <span
-          className={`absolute -right-1.5 -top-2 rounded-full px-2 py-0.5 text-[6px] font-black uppercase tracking-[0.08em] ${
+          className={`absolute -right-1.5 -top-2 rounded-full px-2 py-0.5 text-[9px] font-black uppercase tracking-[0.08em] ${
             selected
               ? "bg-[#D4AF37] text-black"
               : "border border-white/[0.08] bg-[#161616] text-white"
@@ -777,12 +817,12 @@ function RuleRow({
   accent?: boolean;
 }) {
   return (
-    <div className="flex min-h-[59px] items-center justify-between gap-4 border-b border-white/[0.055] px-4 last:border-0 sm:px-5">
+    <div className="flex min-h-[66px] items-center justify-between gap-4 border-b border-white/[0.055] px-4 last:border-0 sm:min-h-[70px] sm:px-5">
 
       <div className="flex items-center gap-3">
 
         <div
-          className={`grid h-8 w-8 shrink-0 place-items-center rounded-lg border ${
+          className={`grid h-9 w-9 shrink-0 place-items-center rounded-xl border sm:h-10 sm:w-10 ${
             accent
               ? "border-[#D4AF37]/20 bg-[#D4AF37]/[0.07] text-[#E0BD54]"
               : "border-white/[0.06] bg-white/[0.02] text-white"
@@ -791,14 +831,14 @@ function RuleRow({
           {icon}
         </div>
 
-        <span className="text-[11px] font-medium text-white sm:text-xs">
+        <span className="text-[13px] font-medium text-white sm:text-sm">
           {label}
         </span>
 
       </div>
 
       <span
-        className={`text-right text-[11px] font-bold sm:text-xs ${
+        className={`text-right text-[13px] font-bold sm:text-sm ${
           accent
             ? "text-[#E7C75F]"
             : "text-white"
@@ -893,7 +933,7 @@ export function Challenges() {
   return (
     <section
       id="challenges"
-      className="relative overflow-hidden bg-[#030303] py-24 sm:py-28 lg:py-36"
+      className="relative overflow-hidden bg-[#030303] py-16 sm:py-20 lg:py-24 xl:py-28"
     >
       {/* BACKGROUND */}
       <div className="pointer-events-none absolute left-1/2 top-[20%] h-[900px] w-[1100px] -translate-x-1/2 rounded-full bg-[#D4AF37]/[0.025] blur-[180px]" />
@@ -917,14 +957,14 @@ export function Challenges() {
 
         <div className="mb-12 text-center">
 
-          <h2 className="text-4xl font-semibold tracking-[-0.055em] text-white sm:text-5xl lg:text-[4.2rem]">
+          <h2 className="text-[2.65rem] font-semibold leading-[0.95] tracking-[-0.055em] text-white sm:text-[3.5rem] lg:text-[4.35rem] xl:text-[4.8rem]">
             Choose Your{" "}
             <span className="bg-[linear-gradient(100deg,#fff,#FFFFFF_32%,#F0D16A_70%,#9C7418)] bg-clip-text text-transparent">
               Account
             </span>
           </h2>
 
-          <div className="mt-4 flex items-center justify-center gap-2 text-xs text-white">
+          <div className="mt-5 flex items-center justify-center gap-2 text-[14px] font-medium text-white/80 sm:text-[15px]">
 
             <span className="text-[#D4AF37]">
               <LockIcon />
@@ -941,7 +981,7 @@ export function Challenges() {
             OUTER FRAME
         ====================================================== */}
 
-        <div className="overflow-hidden rounded-[34px] border border-white/[0.08] bg-[#080809] shadow-[0_50px_140px_rgba(0,0,0,.55)]">
+        <div className="overflow-hidden rounded-[30px] sm:rounded-[34px] border border-white/[0.08] bg-[#080809] shadow-[0_50px_140px_rgba(0,0,0,.55)]">
 
           {/* TOP GOLD LIGHT */}
           <div className="h-px bg-gradient-to-r from-transparent via-[#E4C459]/45 to-transparent" />
@@ -957,14 +997,14 @@ export function Challenges() {
             <div className="relative grid lg:grid-cols-[auto_1fr_1fr]">
 
               <div className="flex items-center justify-center border-b border-white/[0.06] px-5 py-4 lg:border-b-0 lg:border-r">
-                <span className="rounded-full border border-[#D4AF37]/20 bg-[#D4AF37]/[0.08] px-3 py-1 text-[8px] font-black uppercase tracking-[0.18em] text-[#E8C866]">
+                <span className="rounded-full border border-[#D4AF37]/20 bg-[#D4AF37]/[0.08] px-3.5 py-1.5 text-[11px] font-black uppercase tracking-[0.15em] text-[#E8C866]">
                   Limited Time
                 </span>
               </div>
 
               <div className="flex flex-wrap items-center justify-center gap-3 border-b border-white/[0.06] px-5 py-4 lg:border-b-0 lg:border-r">
 
-                <span className="text-[11px] font-bold text-white">
+                <span className="text-[14px] font-bold text-white sm:text-[15px]">
                   40% OFF YOUR CHALLENGE
                 </span>
 
@@ -973,7 +1013,7 @@ export function Challenges() {
                   onClick={() =>
                     copyCode("BLACK40")
                   }
-                  className="flex items-center gap-2 rounded-lg border border-[#D4AF37]/20 bg-[#D4AF37]/[0.07] px-3 py-2 text-[9px] font-black tracking-[0.12em] text-[#E4C25B] transition hover:bg-[#D4AF37]/[0.12]"
+                  className="flex items-center gap-2 rounded-lg border border-[#D4AF37]/20 bg-[#D4AF37]/[0.07] px-3.5 py-2.5 text-[12px] font-black tracking-[0.09em] text-[#E4C25B] transition hover:bg-[#D4AF37]/[0.12]"
                 >
                   {copied === "BLACK40"
                     ? "COPIED"
@@ -986,7 +1026,7 @@ export function Challenges() {
 
               <div className="flex flex-wrap items-center justify-center gap-3 px-5 py-4">
 
-                <span className="text-[11px] text-white">
+                <span className="text-[14px] text-white/85">
                   New trader bonus
                 </span>
 
@@ -995,7 +1035,7 @@ export function Challenges() {
                   onClick={() =>
                     copyCode("FIRSTBP")
                   }
-                  className="flex items-center gap-2 rounded-lg border border-white/[0.08] bg-white/[0.035] px-3 py-2 text-[9px] font-black tracking-[0.12em] text-white transition hover:bg-white/[0.06]"
+                  className="flex items-center gap-2 rounded-lg border border-white/[0.08] bg-white/[0.035] px-3.5 py-2.5 text-[12px] font-black tracking-[0.09em] text-white transition hover:bg-white/[0.06]"
                 >
                   {copied === "FIRSTBP"
                     ? "COPIED"
@@ -1014,7 +1054,7 @@ export function Challenges() {
               MARKET TABS
           ================================================= */}
 
-          <div className="border-b border-white/[0.06] p-4 sm:p-5">
+          <div className="border-b border-white/[0.06] p-4 sm:p-5 lg:p-6">
 
             <div className="grid grid-cols-3 gap-1.5 rounded-2xl border border-white/[0.06] bg-black/35 p-1.5">
 
@@ -1029,7 +1069,7 @@ export function Challenges() {
                     onClick={() =>
                       setMarket(item)
                     }
-                    className={`flex items-center justify-center gap-2 rounded-xl px-3 py-3 text-xs font-bold transition-all ${
+                    className={`flex items-center justify-center gap-2.5 rounded-xl px-3 py-3.5 text-[15px] font-bold sm:text-base transition-all ${
                       selected
                         ? "bg-[linear-gradient(135deg,#F1D46F,#C49425)] text-black shadow-[0_9px_30px_rgba(212,175,55,.12)]"
                         : "text-white hover:bg-white/[0.04] hover:text-white"
@@ -1052,22 +1092,22 @@ export function Challenges() {
               TWO COLUMN PLAYGROUND
           ================================================= */}
 
-          <div className="grid xl:grid-cols-[1.06fr_.94fr]">
+          <div className="grid lg:grid-cols-[1.04fr_.96fr]">
 
             {/* =================================================
                 LEFT SIDE
             ================================================= */}
 
-            <div className="border-b border-white/[0.06] p-4 sm:p-6 xl:border-b-0 xl:border-r">
+            <div className="flex flex-col border-b border-white/[0.06] p-4 sm:p-6 lg:border-b-0 lg:border-r lg:p-7">
 
               {/* MODEL
               <div className="rounded-2xl border border-white/[0.06] bg-white/[0.015] p-4">
 
-                <p className="mb-3 text-[9px] font-bold uppercase tracking-[0.2em] text-white">
+                <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.18em] text-white">
                   Model
                 </p>
 
-                <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+                <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4">
 
                   {models.map((item) => (
                     <OptionButton
@@ -1089,9 +1129,9 @@ export function Challenges() {
               </div> */}
 
               {/* PLATFORMS */}
-              <div className="mt-3 rounded-2xl border border-white/[0.06] bg-white/[0.015] p-4">
+              <div className="rounded-2xl border border-white/[0.06] bg-white/[0.015] p-4 sm:p-5">
 
-                <p className="mb-3 text-[9px] font-bold uppercase tracking-[0.2em] text-white">
+                <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.18em] text-white">
                   Platforms
                 </p>
 
@@ -1109,7 +1149,7 @@ export function Challenges() {
                           onClick={() =>
                             setPlatform(item)
                           }
-                          className={`group relative min-h-[82px] rounded-xl border px-3 py-3 transition-all ${
+                          className={`group relative min-h-[92px] sm:min-h-[98px] rounded-xl border px-3 py-3 transition-all ${
                             selected
                               ? "border-[#D4AF37]/35 bg-[#D4AF37]/[0.07] text-[#E7C75F]"
                               : "border-white/[0.07] bg-black/20 text-white hover:border-white/[0.13] hover:text-white"
@@ -1121,7 +1161,7 @@ export function Challenges() {
                               platform={item}
                             />
 
-                            <span className="mt-1 text-[9px] font-bold">
+                            <span className="mt-2.5 text-[12px] font-bold sm:text-[13px]">
                               {item}
                             </span>
 
@@ -1129,7 +1169,7 @@ export function Challenges() {
 
                           {item ===
                             "cTrader" && (
-                            <span className="absolute -right-1.5 -top-2 rounded-full bg-[#D4AF37] px-2 py-0.5 text-[6px] font-black uppercase text-black">
+                            <span className="absolute -right-1.5 -top-2 rounded-full bg-[#D4AF37] px-2 py-0.5 text-[8px] font-black uppercase text-black">
                               Popular
                             </span>
                           )}
@@ -1144,21 +1184,21 @@ export function Challenges() {
               </div>
 
               {/* ACCOUNT SIZE */}
-              <div className="mt-3 rounded-2xl border border-white/[0.06] bg-white/[0.015] p-4">
+              <div className="mt-4 rounded-2xl border border-white/[0.06] bg-white/[0.015] p-4 sm:p-5">
 
                 <div className="mb-3 flex items-center justify-between">
 
-                  <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-white">
+                  <p className="text-[12px] font-bold uppercase tracking-[0.16em] text-white/90">
                     Account Size
                   </p>
 
-                  <span className="text-[8px] text-white">
+                  <span className="text-[11px] font-medium text-white/55 sm:text-[12px]">
                     Simulated capital
                   </span>
 
                 </div>
 
-                <div className="grid grid-cols-3 gap-2 sm:grid-cols-4 lg:grid-cols-6">
+                <div className="grid grid-cols-2 gap-2.5 min-[420px]:grid-cols-3 sm:grid-cols-4 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6">
 
                   {accountSizes.map(
                     (item) => (
@@ -1189,16 +1229,16 @@ export function Challenges() {
               </div>
 
               {/* CONFIG SUMMARY */}
-              <div className="mt-3 rounded-2xl border border-[#D4AF37]/[0.10] bg-[#D4AF37]/[0.035] p-4">
+              <div className="mt-4 rounded-2xl border border-[#D4AF37]/[0.12] bg-[#D4AF37]/[0.04] p-4 sm:p-5">
 
                 <div className="flex flex-wrap items-center justify-between gap-3">
 
                   <div>
-                    <p className="text-[8px] font-bold uppercase tracking-[0.18em] text-white">
+                    <p className="text-[11px] font-bold uppercase tracking-[0.15em] text-white">
                       Current configuration
                     </p>
 
-                    <p className="mt-1.5 text-xs font-semibold text-white">
+                    <p className="mt-2 text-[15px] font-semibold text-white">
                       {model} ·{" "}
                       {market}
                     </p>
@@ -1206,11 +1246,11 @@ export function Challenges() {
 
                   <div className="text-right">
 
-                    <p className="text-[8px] uppercase tracking-[0.13em] text-white">
+                    <p className="text-[11px] uppercase tracking-[0.11em] text-white">
                       Platform
                     </p>
 
-                    <p className="mt-1 text-[10px] font-bold text-[#D4AF37]">
+                    <p className="mt-1.5 text-[13px] font-bold text-[#D4AF37]">
                       {platform}
                     </p>
 
@@ -1218,6 +1258,56 @@ export function Challenges() {
 
                 </div>
 
+              </div>
+
+              {/* INCLUDED WITH YOUR CHALLENGE
+                  Fills the lower-left space on desktop and gives
+                  the user useful information instead of dead space. */}
+              <div className="mt-4 flex-1 rounded-2xl border border-white/[0.06] bg-[linear-gradient(145deg,rgba(255,255,255,.025),rgba(212,175,55,.025))] p-4 sm:p-5">
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-[#E7C75F]">
+                      Included with your challenge
+                    </p>
+
+                    <p className="mt-2 max-w-[440px] text-[13px] leading-6 text-white/55 sm:text-sm">
+                      Everything you need to trade with a clear setup from day one.
+                    </p>
+                  </div>
+
+                  <div className="grid h-11 w-11 shrink-0 place-items-center rounded-xl border border-[#D4AF37]/15 bg-[#D4AF37]/[0.055]">
+                    <BPMark width={18} height={23} color="#D4AF37" />
+                  </div>
+                </div>
+
+                <div className="mt-5 grid gap-2.5 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
+                  {features.map((feature) => (
+                    <div
+                      key={feature}
+                      className="flex min-h-[52px] items-center gap-3 rounded-xl border border-white/[0.055] bg-black/20 px-3.5 py-3"
+                    >
+                      <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-[#D4AF37]/[0.08] text-[#D4AF37]">
+                        <CheckIcon />
+                      </span>
+
+                      <span className="text-[12px] font-semibold leading-5 text-white/80 sm:text-[13px]">
+                        {feature}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-white/[0.055] pt-4">
+                  <span className="text-[10px] font-medium text-white/40">
+                    Selected: <strong className="text-white/75">{market}</strong>
+                  </span>
+
+                  <span className="h-1 w-1 rounded-full bg-[#D4AF37]/70" />
+
+                  <span className="text-[10px] font-medium text-white/40">
+                    Platform: <strong className="text-white/75">{platform}</strong>
+                  </span>
+                </div>
               </div>
 
             </div>
@@ -1230,7 +1320,7 @@ export function Challenges() {
                 RIGHT SIDE
             ================================================= */}
 
-            <div className="relative p-4 sm:p-6">
+            <div className="relative p-4 sm:p-6 lg:p-7">
 
               <div className="pointer-events-none absolute right-0 top-0 h-80 w-80 rounded-full bg-[#D4AF37]/[0.025] blur-[90px]" />
 
@@ -1239,19 +1329,19 @@ export function Challenges() {
 
                 <div>
 
-                  <p className="text-[8px] font-bold uppercase tracking-[0.2em] text-[#F0D16A]">
+                  <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-[#F0D16A]">
                     BlackProp Account
                   </p>
 
                   <div className="mt-2 flex items-end gap-2">
 
-                    <span className="text-3xl font-black tracking-[-0.055em] text-white">
+                    <span className="text-[2.2rem] font-black sm:text-[2.45rem] tracking-[-0.055em] text-white">
                       $
                       {(account.value / 1000).toFixed(0)}
                       K
                     </span>
 
-                    <span className="mb-1 text-[9px] text-white">
+                    <span className="mb-1 text-[12px] font-medium text-white/70">
                       {model}
                     </span>
 
@@ -1261,9 +1351,12 @@ export function Challenges() {
 
                 <div className="grid h-12 w-12 place-items-center rounded-2xl border border-[#D4AF37]/20 bg-[#D4AF37]/[0.07]">
 
-                  <span className="bg-[linear-gradient(135deg,#FFF1A0,#D4AF37,#77500A)] bg-clip-text text-sm font-black tracking-[-0.1em] text-transparent">
-                    BP
-                  </span>
+                  <BPMark
+                    width={20}
+                    height={26}
+                    color="#D4AF37"
+                    className="drop-shadow-[0_0_10px_rgba(212,175,55,.15)]"
+                  />
 
                 </div>
 
@@ -1371,13 +1464,13 @@ export function Challenges() {
 
                     <div>
 
-                      <p className="text-[8px] font-bold uppercase tracking-[0.18em] text-white">
+                      <p className="text-[11px] font-bold uppercase tracking-[0.15em] text-white">
                         Challenge fee
                       </p>
 
                       <div className="mt-2 flex items-end gap-3">
 
-                        <span className="text-4xl font-black tracking-[-0.055em] text-white">
+                        <span className="text-[2.75rem] font-black sm:text-5xl tracking-[-0.055em] text-white">
                           ${pricing.sale}
                         </span>
 
@@ -1390,7 +1483,7 @@ export function Challenges() {
 
                       </div>
 
-                      <p className="mt-2 text-[9px] text-emerald-400/70">
+                      <p className="mt-2.5 text-[12px] font-medium text-emerald-400/85">
                         Save $
                         {
                           pricing.saving
@@ -1402,11 +1495,11 @@ export function Challenges() {
 
                     <div className="text-right">
 
-                      <p className="text-[8px] uppercase tracking-[0.15em] text-white">
+                      <p className="text-[11px] uppercase tracking-[0.12em] text-white/70">
                         Account
                       </p>
 
-                      <p className="mt-1 text-lg font-black text-[#E4C25B]">
+                      <p className="mt-1.5 text-xl font-black text-[#E4C25B]">
                         {
                           account.label
                         }
@@ -1423,7 +1516,7 @@ export function Challenges() {
                         `BlackProp checkout selected:\n${market} · ${model} · ${platform} · ${account.label}\nPrice: $${pricing.sale}`
                       );
                     }}
-                    className="group relative mt-5 flex w-full items-center justify-center gap-2 overflow-hidden rounded-xl bg-[linear-gradient(135deg,#F4DB7C,#D4AF37_50%,#946A11)] px-5 py-4 text-sm font-black text-black shadow-[0_15px_45px_rgba(212,175,55,.15)] transition hover:-translate-y-0.5 hover:shadow-[0_20px_60px_rgba(212,175,55,.25)]"
+                    className="group relative mt-5 flex w-full items-center justify-center gap-2 overflow-hidden rounded-xl bg-[linear-gradient(135deg,#F4DB7C,#D4AF37_50%,#946A11)] px-5 py-4 text-[15px] font-black sm:text-base text-black shadow-[0_15px_45px_rgba(212,175,55,.15)] transition hover:-translate-y-0.5 hover:shadow-[0_20px_60px_rgba(212,175,55,.25)]"
                   >
                     Get Funded
 
@@ -1435,7 +1528,7 @@ export function Challenges() {
                 </div>
 
                 {/* REFUND MESSAGE */}
-                <div className="flex items-center justify-center gap-2 border-t border-white/[0.06] px-4 py-3 text-[9px] text-white">
+                <div className="flex items-center justify-center gap-2 border-t border-white/[0.06] px-4 py-3.5 text-[12px] font-medium leading-5 text-white/75">
 
                   <span className="text-[#D4AF37]">
                     <LockIcon />
@@ -1450,7 +1543,7 @@ export function Challenges() {
                 {/* PAYMENT OPTIONS */}
                 <div className="border-t border-white/[0.06] px-4 py-4">
 
-                  <p className="mb-3 text-center text-[7px] font-bold uppercase tracking-[0.2em] text-white">
+                  <p className="mb-3 text-center text-[10px] font-bold uppercase tracking-[0.16em] text-white/70">
                     Payment options
                   </p>
 
@@ -1523,7 +1616,7 @@ export function Challenges() {
               FOOTER CONDITIONS
           ================================================= */}
 
-          <div className="grid border-t border-white/[0.06] sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid border-t border-white/[0.06] sm:grid-cols-2 xl:grid-cols-4">
 
             {features.map(
               (feature, index) => (
@@ -1541,7 +1634,7 @@ export function Challenges() {
 
                   </div>
 
-                  <span className="text-[10px] font-semibold text-white">
+                  <span className="text-[13px] font-semibold text-white/85 sm:text-sm">
                     {feature}
                   </span>
 
@@ -1554,7 +1647,7 @@ export function Challenges() {
         </div>
 
         {/* DISCLAIMER */}
-        <p className="mx-auto mt-5 max-w-3xl text-center text-[9px] leading-4 text-white">
+        <p className="mx-auto mt-6 max-w-3xl px-2 text-center text-[11px] leading-5 text-white/55 sm:text-[12px] sm:leading-6">
           Pricing, platform availability,
           account rules, promotional offers
           and payment methods shown in this
