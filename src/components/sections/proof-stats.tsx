@@ -1,8 +1,55 @@
 const stats = {
-  rewards: "$12M+",
+  rewards: "$1.2M+",
   averageReward: "$2,450",
   traders: "180K+",
 };
+
+/* =========================================================
+   BLACKPROP BP MARK
+   Vector recreation of the supplied logo symbol
+   ========================================================= */
+
+function BPMark({
+  x = 0,
+  y = 0,
+  width = 58,
+  height = 74,
+  color = "#D4AF37",
+  opacity = 1,
+}: {
+  x?: number | string;
+  y?: number | string;
+  width?: number | string;
+  height?: number | string;
+  color?: string;
+  opacity?: number | string;
+}) {
+  return (
+    <svg
+      x={x}
+      y={y}
+      width={width}
+      height={height}
+      viewBox="0 0 290 366"
+      fill="none"
+      color={color}
+      opacity={opacity}
+      aria-hidden="true"
+    >
+      {/* Outer B */}
+      <path
+        fill="currentColor"
+        d="M28 0H196C244 0 278 48 278 105C278 130 271 150 256 172C277 190 289 213 289 241V267C289 319 249 365 195 365H90V237H161C201 237 230 202 230 168V139C230 104 207 78 177 78H0V25C0 11 12 0 28 0Z"
+      />
+
+      {/* Inner P / left stem */}
+      <path
+        fill="currentColor"
+        d="M0 129H157C171 129 181 141 181 156C181 171 171 183 157 183H41V365C18 365 0 352 0 335V129Z"
+      />
+    </svg>
+  );
+}
 
 /* =========================================================
    PREMIUM REWARDS ARTWORK
@@ -495,32 +542,16 @@ function RewardsArtwork() {
             strokeOpacity=".055"
           />
 
-          {/* MONOGRAM */}
-          <text
-            x="-4"
-            y="22"
-            textAnchor="middle"
-            fill="url(#coreGoldBright)"
-            fontSize="72"
-            fontWeight="900"
-            letterSpacing="-11"
-          >
-            BP
-          </text>
+          {/* BLACKPROP LOGO MARK */}
+          <BPMark
+            x={-31}
+            y={-39}
+            width={62}
+            height={78}
+            color="#F0D16A"
+          />
 
-          {/* MINI WORDMARK */}
-          <text
-            x="0"
-            y="48"
-            textAnchor="middle"
-            fill="#F0D16C"
-            fillOpacity=".48"
-            fontSize="8"
-            fontWeight="700"
-            letterSpacing="4"
-          >
-            CAPITAL
-          </text>
+          
 
           {/* SPECULAR HIGHLIGHT */}
           <path
@@ -592,16 +623,13 @@ function RewardsArtwork() {
             fill="#B18120"
           />
 
-          <text
-            x="-2"
-            y="-5"
-            textAnchor="middle"
-            fill="#2B1C02"
-            fontSize="10"
-            fontWeight="900"
-          >
-            BP
-          </text>
+          <BPMark
+            x={-8}
+            y={-16}
+            width={16}
+            height={20}
+            color="#2B1C02"
+          />
         </g>
 
         <g
@@ -623,16 +651,13 @@ function RewardsArtwork() {
             fill="#8B8B8B"
           />
 
-          <text
-            x="-1"
-            y="-4"
-            textAnchor="middle"
-            fill="#252525"
-            fontSize="9"
-            fontWeight="900"
-          >
-            BP
-          </text>
+          <BPMark
+            x={-7}
+            y={-14}
+            width={14}
+            height={18}
+            color="#252525"
+          />
         </g>
 
         {/* =====================================================
@@ -662,15 +687,13 @@ function RewardsArtwork() {
             fill="#111"
           />
 
-          <text
-            y="7"
-            textAnchor="middle"
-            fill="#D9AF38"
-            fontSize="16"
-            fontWeight="900"
-          >
-            BP
-          </text>
+          <BPMark
+            x={-10}
+            y={-13}
+            width={20}
+            height={25}
+            color="#D9AF38"
+          />
         </g>
 
         <g
@@ -696,15 +719,13 @@ function RewardsArtwork() {
             fill="#111"
           />
 
-          <text
-            y="6"
-            textAnchor="middle"
-            fill="#D8D8D8"
-            fontSize="14"
-            fontWeight="900"
-          >
-            BP
-          </text>
+          <BPMark
+            x={-9}
+            y={-12}
+            width={18}
+            height={23}
+            color="#D8D8D8"
+          />
         </g>
 
         {/* =====================================================
@@ -829,16 +850,13 @@ function RewardsArtwork() {
             fill="#191919"
           />
 
-          <text
-            x="0"
-            y="5"
-            textAnchor="middle"
-            fill="#D8D8D8"
-            fontSize="11"
-            fontWeight="900"
-          >
-            BP
-          </text>
+          <BPMark
+            x={-7}
+            y={-9}
+            width={14}
+            height={18}
+            color="#D8D8D8"
+          />
         </g>
 
         {/* =====================================================
@@ -998,17 +1016,13 @@ function TrophyArtwork() {
             strokeOpacity=".55"
           />
 
-          <text
-            x="248"
-            y="151"
-            textAnchor="middle"
-            fill="url(#cupGold)"
-            fontSize="38"
-            fontWeight="900"
-            letterSpacing="-5"
-          >
-            BP
-          </text>
+          <BPMark
+            x={230}
+            y={113}
+            width={36}
+            height={46}
+            color="#D4AF37"
+          />
 
           <path
             d="M228 218h40l10 54h-60l10-54Z"
@@ -1131,64 +1145,6 @@ function GlobeArtwork() {
 }
 
 /* =========================================================
-   MEDIA BRAND WORDMARKS
-   ========================================================= */
-
-function BenzingaLogo() {
-  return (
-    <div className="flex items-center gap-1.5">
-      <span className="text-xl font-black tracking-[-0.055em]">
-        BENZINGA
-      </span>
-
-      <span className="grid h-4 w-4 place-items-center rounded-full border border-current text-[8px] font-black">
-        B
-      </span>
-    </div>
-  );
-}
-
-function YahooLogo() {
-  return (
-    <div className="flex items-baseline gap-1">
-      <span className="text-xl font-black tracking-[-0.06em]">
-        yahoo!
-      </span>
-
-      <span className="text-[8px] font-semibold uppercase tracking-[0.16em] opacity-55">
-        finance
-      </span>
-    </div>
-  );
-}
-
-function NasdaqLogo() {
-  return (
-    <div className="flex items-center gap-2">
-      <span className="relative h-5 w-5 rotate-45">
-
-        <span className="absolute left-0 top-0 h-3 w-2 border border-current" />
-
-        <span className="absolute bottom-0 right-0 h-3 w-2 border border-current" />
-
-      </span>
-
-      <span className="text-xl font-bold tracking-[-0.05em]">
-        Nasdaq
-      </span>
-    </div>
-  );
-}
-
-function MarketWatchLogo() {
-  return (
-    <span className="text-xl font-black tracking-[-0.07em]">
-      MarketWatch
-    </span>
-  );
-}
-
-/* =========================================================
    SECTION
    ========================================================= */
 
@@ -1200,44 +1156,6 @@ export function ProofStats() {
       <div className="pointer-events-none absolute left-1/2 top-0 h-[550px] w-[950px] -translate-x-1/2 rounded-full bg-[#D4AF37]/[0.025] blur-[150px]" />
 
       <div className="relative mx-auto max-w-[1240px] px-4 sm:px-6 lg:px-8">
-
-        {/* =====================================================
-            PRESS / COMPANY LOGOS
-        ====================================================== */}
-
-        <div className="mb-10">
-
-          <p className="mb-6 text-center text-[8px] font-bold uppercase tracking-[0.28em] text-white/18">
-            Featured across leading financial media
-          </p>
-
-          <div className="relative overflow-hidden border-y border-white/[0.055]">
-
-            <div className="pointer-events-none absolute left-1/2 top-0 h-px w-[65%] -translate-x-1/2 bg-gradient-to-r from-transparent via-white/[0.11] to-transparent" />
-
-            <div className="grid min-h-[104px] grid-cols-2 items-center sm:grid-cols-4">
-
-              <div className="flex h-full items-center justify-center py-7 text-white/28 transition duration-300 hover:text-white/60">
-                <BenzingaLogo />
-              </div>
-
-              <div className="flex h-full items-center justify-center border-l border-white/[0.055] py-7 text-white/28 transition duration-300 hover:text-white/60">
-                <YahooLogo />
-              </div>
-
-              <div className="flex h-full items-center justify-center border-t border-white/[0.055] py-7 text-white/28 transition duration-300 hover:text-white/60 sm:border-l sm:border-t-0">
-                <NasdaqLogo />
-              </div>
-
-              <div className="flex h-full items-center justify-center border-l border-t border-white/[0.055] py-7 text-white/28 transition duration-300 hover:text-white/60 sm:border-t-0">
-                <MarketWatchLogo />
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
 
         {/* =====================================================
             STAT CARDS

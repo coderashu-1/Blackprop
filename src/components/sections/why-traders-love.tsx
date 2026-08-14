@@ -1,3 +1,47 @@
+/* =========================================================
+   BLACKPROP SVG LOGO
+========================================================= */
+
+function BPMark({
+  x = 0,
+  y = 0,
+  width = 58,
+  height = 74,
+  color = "#D4AF37",
+  className = "",
+}: {
+  x?: number | string;
+  y?: number | string;
+  width?: number | string;
+  height?: number | string;
+  color?: string;
+  className?: string;
+}) {
+  return (
+    <svg
+      x={x}
+      y={y}
+      width={width}
+      height={height}
+      viewBox="0 0 290 366"
+      fill="none"
+      color={color}
+      className={className}
+      aria-hidden="true"
+    >
+      <path
+        fill="currentColor"
+        d="M28 0H196C244 0 278 48 278 105C278 130 271 150 256 172C277 190 289 213 289 241V267C289 319 249 365 195 365H90V237H161C201 237 230 202 230 168V139C230 104 207 78 177 78H0V25C0 11 12 0 28 0Z"
+      />
+
+      <path
+        fill="currentColor"
+        d="M0 129H157C171 129 181 141 181 156C181 171 171 183 157 183H41V365C18 365 0 352 0 335V129Z"
+      />
+    </svg>
+  );
+}
+
 type IconName =
   | "refund"
   | "wallet"
@@ -735,18 +779,14 @@ function BlackPropCapitalEngine() {
               strokeLinecap="round"
             />
 
-            {/* BP */}
-            <text
-              x="294"
-              y="315"
-              textAnchor="middle"
-              fill="url(#engineGold)"
-              fontSize="72"
-              fontWeight="900"
-              letterSpacing="-10"
-            >
-              BP
-            </text>
+            {/* BLACKPROP SVG LOGO */}
+            <BPMark
+              x={265}
+              y={247}
+              width={70}
+              height={88}
+              color="#D4AF37"
+            />
 
             <text
               x="300"

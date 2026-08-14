@@ -1,7 +1,45 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Logo } from "@/components/ui/logo";
+
+
+/* =========================================================
+   BLACKPROP SVG LOGO
+========================================================= */
+
+function BPMark({
+  width = 58,
+  height = 74,
+  color = "#D4AF37",
+  className = "",
+}: {
+  width?: number | string;
+  height?: number | string;
+  color?: string;
+  className?: string;
+}) {
+  return (
+    <svg
+      width={width}
+      height={height}
+      viewBox="0 0 290 366"
+      fill="none"
+      color={color}
+      className={className}
+      aria-hidden="true"
+    >
+      <path
+        fill="currentColor"
+        d="M28 0H196C244 0 278 48 278 105C278 130 271 150 256 172C277 190 289 213 289 241V267C289 319 249 365 195 365H90V237H161C201 237 230 202 230 168V139C230 104 207 78 177 78H0V25C0 11 12 0 28 0Z"
+      />
+
+      <path
+        fill="currentColor"
+        d="M0 129H157C171 129 181 141 181 156C181 171 171 183 157 183H41V365C18 365 0 352 0 335V129Z"
+      />
+    </svg>
+  );
+}
 
 type DropdownKey = "trading" | "company" | null;
 type Market = "Forex" | "Futures" | "Crypto";
@@ -368,10 +406,34 @@ export function Navbar() {
           ref={navRef}
           className="relative mx-auto flex h-[76px] max-w-[1440px] items-center justify-between px-4 sm:px-6 lg:px-8"
         >
-          {/* LOGO */}
-          <div className="flex shrink-0 items-center">
-            <Logo />
-          </div>
+          {/* BLACKPROP LOGO */}
+          <a
+            href="#"
+            aria-label="BlackProp home"
+            className="group flex shrink-0 items-center gap-3"
+          >
+            <div className="relative grid h-11 w-11 place-items-center overflow-hidden rounded-[14px] border border-[#D4AF37]/20 bg-[#D4AF37]/[0.055] shadow-[inset_0_1px_0_rgba(255,255,255,.04),0_8px_24px_rgba(0,0,0,.18)] transition duration-300 group-hover:border-[#D4AF37]/35 group-hover:bg-[#D4AF37]/[0.08]">
+              <div className="pointer-events-none absolute inset-x-[18%] top-0 h-px bg-gradient-to-r from-transparent via-[#F0D16A]/65 to-transparent" />
+
+              <BPMark
+                width={20}
+                height={26}
+                color="#D4AF37"
+                className="drop-shadow-[0_0_10px_rgba(212,175,55,.16)]"
+              />
+            </div>
+
+            <div className="hidden sm:block">
+              <div className="text-[17px] font-black uppercase leading-none tracking-[-0.055em] text-white">
+                BLACK
+                <span className="text-[#D4AF37]">PROP</span>
+              </div>
+
+              <div className="mt-1 text-[6px] font-bold uppercase tracking-[0.24em] text-white/25">
+                TRADER CAPITAL
+              </div>
+            </div>
+          </a>
 
           {/* =================================================
               DESKTOP LINKS

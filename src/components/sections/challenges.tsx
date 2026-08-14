@@ -11,21 +11,13 @@ type Market = "Forex" | "Futures" | "Crypto";
 type Model =
   | "1 Step"
   | "2 Step"
-  | "3 Step"
-  | "Instant"
-  | "Black Blitz";
-
-type ModelType =
-  | "Core"
-  | "Elite"
-  | "Premium";
+  | "Instant";
 
 type Platform =
   | "TradeLocker"
   | "Volumetrica"
   | "MatchTrader"
-  | "cTrader"
-  | "MetaTrader 5";
+  | "cTrader";
 
 /* =========================================================
    DATA
@@ -48,33 +40,8 @@ const models: {
     name: "2 Step",
   },
   {
-    name: "3 Step",
-  },
-  {
     name: "Instant",
     badge: "Popular",
-  },
-  {
-    name: "Black Blitz",
-    badge: "Special",
-  },
-];
-
-const modelTypes: {
-  name: ModelType;
-  badge?: string;
-}[] = [
-  {
-    name: "Core",
-    badge: "Popular",
-  },
-  {
-    name: "Elite",
-    badge: "New",
-  },
-  {
-    name: "Premium",
-    badge: "New",
   },
 ];
 
@@ -83,7 +50,6 @@ const platforms: Platform[] = [
   "Volumetrica",
   "MatchTrader",
   "cTrader",
-  "MetaTrader 5",
 ];
 
 const accountSizes = [
@@ -187,19 +153,6 @@ const modelRules: Record<
     multiplier: 0.92,
   },
 
-  "3 Step": {
-    phase1: "6%",
-    phase2: "5%",
-    phase3: "5%",
-    dailyLoss: "5%",
-    maxLoss: "10%",
-    consistency: "None",
-    leverage: "Up to 1:100",
-    rewards: "Bi-weekly",
-    profitSplit: "Up to 90%",
-    multiplier: 0.84,
-  },
-
   Instant: {
     phase1: "None",
     dailyLoss: "3%",
@@ -210,26 +163,6 @@ const modelRules: Record<
     profitSplit: "80% → 90%",
     multiplier: 1.65,
   },
-
-  "Black Blitz": {
-    phase1: "6%",
-    dailyLoss: "4%",
-    maxLoss: "8%",
-    consistency: "None",
-    leverage: "Up to 1:50",
-    rewards: "On demand",
-    profitSplit: "Up to 90%",
-    multiplier: 1.18,
-  },
-};
-
-const typeMultipliers: Record<
-  ModelType,
-  number
-> = {
-  Core: 1,
-  Elite: 1.12,
-  Premium: 1.28,
 };
 
 const marketMultipliers: Record<
@@ -697,40 +630,6 @@ function CTraderMark() {
   );
 }
 
-function MT5Mark() {
-  return (
-    <svg
-      viewBox="0 0 42 32"
-      className="h-7 w-9"
-      fill="none"
-    >
-      <circle
-        cx="15"
-        cy="14"
-        r="7"
-        stroke="currentColor"
-        strokeWidth="2"
-      />
-
-      <circle
-        cx="26"
-        cy="14"
-        r="7"
-        stroke="currentColor"
-        strokeWidth="2"
-        opacity=".7"
-      />
-
-      <path
-        d="M13 24h17"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
-}
-
 function PlatformMark({
   platform,
 }: {
@@ -748,9 +647,6 @@ function PlatformMark({
 
     case "cTrader":
       return <CTraderMark />;
-
-    default:
-      return <MT5Mark />;
   }
 }
 
@@ -926,11 +822,8 @@ export function Challenges() {
   const [model, setModel] =
     useState<Model>("Instant");
 
-  const [modelType, setModelType] =
-    useState<ModelType>("Core");
-
   const [platform, setPlatform] =
-    useState<Platform>("MetaTrader 5");
+    useState<Platform>("cTrader");
 
   const [accountSize, setAccountSize] =
     useState(100000);
@@ -953,7 +846,6 @@ export function Challenges() {
     const original = Math.round(
       account.price *
         rules.multiplier *
-        typeMultipliers[modelType] *
         marketMultipliers[market]
     );
 
@@ -970,7 +862,6 @@ export function Challenges() {
   }, [
     account.price,
     market,
-    modelType,
     rules.multiplier,
   ]);
 
@@ -1169,14 +1060,14 @@ export function Challenges() {
 
             <div className="border-b border-white/[0.06] p-4 sm:p-6 xl:border-b-0 xl:border-r">
 
-              {/* MODEL */}
+              {/* MODEL
               <div className="rounded-2xl border border-white/[0.06] bg-white/[0.015] p-4">
 
                 <p className="mb-3 text-[9px] font-bold uppercase tracking-[0.2em] text-white">
                   Model
                 </p>
 
-                <div className="grid grid-cols-2 gap-2 sm:grid-cols-5">
+                <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
 
                   {models.map((item) => (
                     <OptionButton
@@ -1195,40 +1086,7 @@ export function Challenges() {
 
                 </div>
 
-              </div>
-
-              {/* MODEL TYPE */}
-              <div className="mt-3 rounded-2xl border border-white/[0.06] bg-white/[0.015] p-4">
-
-                <p className="mb-3 text-[9px] font-bold uppercase tracking-[0.2em] text-white">
-                  Model Type
-                </p>
-
-                <div className="grid grid-cols-3 gap-2">
-
-                  {modelTypes.map(
-                    (item) => (
-                      <OptionButton
-                        key={item.name}
-                        selected={
-                          modelType ===
-                          item.name
-                        }
-                        onClick={() =>
-                          setModelType(
-                            item.name
-                          )
-                        }
-                        badge={item.badge}
-                      >
-                        {item.name.toUpperCase()}
-                      </OptionButton>
-                    )
-                  )}
-
-                </div>
-
-              </div>
+              </div> */}
 
               {/* PLATFORMS */}
               <div className="mt-3 rounded-2xl border border-white/[0.06] bg-white/[0.015] p-4">
@@ -1270,7 +1128,7 @@ export function Challenges() {
                           </div>
 
                           {item ===
-                            "MetaTrader 5" && (
+                            "cTrader" && (
                             <span className="absolute -right-1.5 -top-2 rounded-full bg-[#D4AF37] px-2 py-0.5 text-[6px] font-black uppercase text-black">
                               Popular
                             </span>
@@ -1342,7 +1200,6 @@ export function Challenges() {
 
                     <p className="mt-1.5 text-xs font-semibold text-white">
                       {model} ·{" "}
-                      {modelType} ·{" "}
                       {market}
                     </p>
                   </div>
@@ -1563,7 +1420,7 @@ export function Challenges() {
                     type="button"
                     onClick={() => {
                       alert(
-                        `BlackProp checkout selected:\n${market} · ${model} · ${modelType} · ${platform} · ${account.label}\nPrice: $${pricing.sale}`
+                        `BlackProp checkout selected:\n${market} · ${model} · ${platform} · ${account.label}\nPrice: $${pricing.sale}`
                       );
                     }}
                     className="group relative mt-5 flex w-full items-center justify-center gap-2 overflow-hidden rounded-xl bg-[linear-gradient(135deg,#F4DB7C,#D4AF37_50%,#946A11)] px-5 py-4 text-sm font-black text-black shadow-[0_15px_45px_rgba(212,175,55,.15)] transition hover:-translate-y-0.5 hover:shadow-[0_20px_60px_rgba(212,175,55,.25)]"

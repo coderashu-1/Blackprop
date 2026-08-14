@@ -1,8 +1,6 @@
 import { Footer } from "@/components/layout/footer";
 import { Navbar } from "@/components/layout/navbar";
 import { Challenges } from "@/components/sections/challenges";
-import { CTA } from "@/components/sections/cta";
-import { Features } from "@/components/sections/features";
 import { Hero } from "@/components/sections/hero";
 import { ProofStats } from "@/components/sections/proof-stats";
 import { TraderStories } from "@/components/sections/trader-stories";
@@ -24,11 +22,8 @@ export default function Home() {
       <ProofStats />
       <Challenges />
       <HowItWorks />
-      <Features />
-      <TraderStories />
       <ProfitCalculator />
       <WhyTradersLove />
-      <Technology />
       <DashboardShowcase />
       <GlobalAccess />
       <Support />

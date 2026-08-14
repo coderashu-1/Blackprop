@@ -1,5 +1,44 @@
 "use client";
 
+/* =========================================================
+   BLACKPROP SVG LOGO
+========================================================= */
+
+function BPMark({
+  width = 58,
+  height = 74,
+  color = "#D4AF37",
+  className = "",
+}: {
+  width?: number | string;
+  height?: number | string;
+  color?: string;
+  className?: string;
+}) {
+  return (
+    <svg
+      width={width}
+      height={height}
+      viewBox="0 0 290 366"
+      fill="none"
+      color={color}
+      className={className}
+      aria-hidden="true"
+    >
+      <path
+        fill="currentColor"
+        d="M28 0H196C244 0 278 48 278 105C278 130 271 150 256 172C277 190 289 213 289 241V267C289 319 249 365 195 365H90V237H161C201 237 230 202 230 168V139C230 104 207 78 177 78H0V25C0 11 12 0 28 0Z"
+      />
+
+      <path
+        fill="currentColor"
+        d="M0 129H157C171 129 181 141 181 156C181 171 171 183 157 183H41V365C18 365 0 352 0 335V129Z"
+      />
+    </svg>
+  );
+}
+
+
 type SupportCardProps = {
   title: string;
   description: string;
@@ -195,9 +234,12 @@ function SupportIllustration() {
 
           <div>
             <div className="mx-auto grid h-14 w-14 place-items-center rounded-2xl border border-[#D4AF37]/25 bg-[#D4AF37]/[0.07] shadow-[0_0_35px_rgba(212,175,55,.12)]">
-              <span className="bg-[linear-gradient(135deg,#FFF1A0,#D4AF37,#79520A)] bg-clip-text text-lg font-black tracking-[-0.1em] text-transparent">
-                BP
-              </span>
+              <BPMark
+                width={28}
+                height={35}
+                color="#D4AF37"
+                className="drop-shadow-[0_0_12px_rgba(212,175,55,.18)]"
+              />
             </div>
 
             <p className="mt-3 text-center text-[7px] font-black uppercase tracking-[0.18em] text-white/35">
