@@ -1,5 +1,44 @@
 import Link from "next/link";
 
+/* =========================================================
+   BLACKPROP SVG LOGO
+========================================================= */
+
+function BPMark({
+  width = 58,
+  height = 74,
+  color = "#D4AF37",
+  className = "",
+}: {
+  width?: number | string;
+  height?: number | string;
+  color?: string;
+  className?: string;
+}) {
+  return (
+    <svg
+      width={width}
+      height={height}
+      viewBox="0 0 290 366"
+      fill="none"
+      color={color}
+      className={className}
+      aria-hidden="true"
+    >
+      <path
+        fill="currentColor"
+        d="M28 0H196C244 0 278 48 278 105C278 130 271 150 256 172C277 190 289 213 289 241V267C289 319 249 365 195 365H90V237H161C201 237 230 202 230 168V139C230 104 207 78 177 78H0V25C0 11 12 0 28 0Z"
+      />
+
+      <path
+        fill="currentColor"
+        d="M0 129H157C171 129 181 141 181 156C181 171 171 183 157 183H41V365C18 365 0 352 0 335V129Z"
+      />
+    </svg>
+  );
+}
+
+
 const tradingLinks = [
   { label: "Home", href: "/" },
   { label: "How It Works", href: "#how-it-works" },
@@ -55,18 +94,27 @@ function FooterLogo() {
     <Link
       href="/"
       aria-label="BlackProp home"
-      className="inline-flex items-center gap-3"
+      className="group inline-flex items-center gap-3.5"
     >
-      <span className="grid h-11 w-11 place-items-center rounded-2xl border border-white/[0.09] bg-white/[0.035] shadow-[inset_0_1px_0_rgba(255,255,255,.06)]">
-        <span className="relative block h-5 w-5 rotate-45 border-2 border-[#D4AF37]">
-          <span className="absolute -right-1 -top-1 h-2 w-2 border border-[#C7C9CC] bg-[#050505]" />
-        </span>
+      <span className="relative grid h-12 w-12 place-items-center overflow-hidden rounded-[15px] border border-[#D4AF37]/20 bg-[#D4AF37]/[0.055] shadow-[inset_0_1px_0_rgba(255,255,255,.05),0_10px_28px_rgba(0,0,0,.22)] transition duration-300 group-hover:border-[#D4AF37]/35 group-hover:bg-[#D4AF37]/[0.08]">
+        <span className="pointer-events-none absolute inset-x-[18%] top-0 h-px bg-gradient-to-r from-transparent via-[#F0D16A]/65 to-transparent" />
+
+        <BPMark
+          width={21}
+          height={27}
+          color="#D4AF37"
+          className="drop-shadow-[0_0_10px_rgba(212,175,55,.18)]"
+        />
       </span>
 
-      <span className="text-[21px] font-semibold tracking-[-0.05em] text-white">
-        Black
-        <span className="text-[#D4AF37]">
-          Prop
+      <span>
+        <span className="block text-[21px] font-black uppercase leading-none tracking-[-0.055em] text-white">
+          BLACK
+          <span className="text-[#D4AF37]">PROP</span>
+        </span>
+
+        <span className="mt-1 block text-[6px] font-bold uppercase tracking-[0.24em] text-white/25">
+          TRADER CAPITAL
         </span>
       </span>
     </Link>
