@@ -31,6 +31,7 @@ function formatMoney(value: number) {
 
 /* =========================================================
    BLACKPROP SVG LOGO
+   BLACK / WHITE ONLY
 ========================================================= */
 
 function BPMark({
@@ -41,7 +42,7 @@ function BPMark({
 }: {
   width?: number | string;
   height?: number | string;
-  color?: string;
+  color?: "#000000" | "#FFFFFF";
   className?: string;
 }) {
   return (
@@ -68,6 +69,10 @@ function BPMark({
     </svg>
   );
 }
+
+/* =========================================================
+   ICONS
+========================================================= */
 
 function LockIcon() {
   return (
@@ -134,6 +139,25 @@ function ArrowRight() {
   );
 }
 
+function DragIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      className="h-3.5 w-3.5"
+      aria-hidden="true"
+    >
+      <path
+        d="M4 12h16M7 9l-3 3 3 3M17 9l3 3-3 3"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 /* =========================================================
    SIMPLE LEFT GRAPHIC
 ========================================================= */
@@ -142,16 +166,16 @@ function SimpleRewardGraphic() {
   return (
     <div className="relative mx-auto mt-10 h-[260px] w-full max-w-[480px] sm:h-[300px] lg:mx-0 lg:mt-12 lg:h-[330px]">
       {/* soft glow */}
-      <div className="absolute left-1/2 top-1/2 h-[220px] w-[300px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#D4AF37]/10 blur-[70px]" />
+      <div className="bp-glow absolute left-1/2 top-1/2 h-[220px] w-[300px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#D4AF37]/10 blur-[70px]" />
 
       {/* back card */}
-      <div className="absolute left-[10%] top-[28%] h-[145px] w-[235px] rotate-[-7deg] rounded-[26px] border border-black/[0.07] bg-[#EEEDE8] shadow-[0_24px_50px_rgba(0,0,0,.07)] sm:h-[165px] sm:w-[270px]">
+      <div className="bp-back-card absolute left-[10%] top-[28%] h-[145px] w-[235px] rotate-[-7deg] rounded-[26px] border border-black/[0.07] bg-[#EEEDE8] shadow-[0_24px_50px_rgba(0,0,0,.07)] sm:h-[165px] sm:w-[270px]">
         <div className="absolute left-6 top-6 h-2 w-16 rounded-full bg-black/10" />
         <div className="absolute left-6 top-11 h-2 w-24 rounded-full bg-black/[0.06]" />
       </div>
 
       {/* gold card */}
-      <div className="absolute left-[28%] top-[20%] h-[155px] w-[245px] rotate-[5deg] rounded-[28px] bg-[linear-gradient(145deg,#F0D274,#D4AF37_58%,#A87B1A)] shadow-[0_24px_55px_rgba(153,112,20,.15)] sm:h-[178px] sm:w-[285px]">
+      <div className="bp-gold-card absolute left-[28%] top-[20%] h-[155px] w-[245px] rotate-[5deg] rounded-[28px] bg-[linear-gradient(145deg,#F0D274,#D4AF37_58%,#A87B1A)] shadow-[0_24px_55px_rgba(153,112,20,.15)] sm:h-[178px] sm:w-[285px]">
         <div className="absolute inset-[1px] rounded-[27px] border border-white/35" />
 
         <span className="absolute left-6 top-6 text-[9px] font-black uppercase tracking-[0.16em] text-black/45 sm:text-[10px]">
@@ -164,8 +188,8 @@ function SimpleRewardGraphic() {
       </div>
 
       {/* main logo block */}
-      <div className="absolute right-[5%] top-[12%] grid h-[165px] w-[165px] place-items-center rounded-[38px] border border-white/10 bg-[#0B0B0B] shadow-[0_28px_65px_rgba(0,0,0,.28)] sm:h-[190px] sm:w-[190px] sm:rounded-[44px]">
-        <div className="absolute inset-[13px] rounded-[29px] border border-[#D4AF37]/18 sm:rounded-[34px]" />
+      <div className="bp-logo-card absolute right-[5%] top-[12%] grid h-[165px] w-[165px] place-items-center rounded-[38px] border border-white/10 bg-[#0B0B0B] shadow-[0_28px_65px_rgba(0,0,0,.28)] sm:h-[190px] sm:w-[190px] sm:rounded-[44px]">
+        <div className="absolute inset-[13px] rounded-[29px] border border-white/10 sm:rounded-[34px]" />
 
         <BPMark
           width={62}
@@ -185,6 +209,8 @@ function SimpleRewardGraphic() {
 export function ProfitCalculator() {
   const [accountSize, setAccountSize] = useState(200000);
   const [profitRate, setProfitRate] = useState(8);
+  const [hasDragged, setHasDragged] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
 
   const profit = useMemo(() => {
     return accountSize * (profitRate / 100);
@@ -192,18 +218,163 @@ export function ProfitCalculator() {
 
   const sliderPosition = ((profitRate - 1) / 24) * 100;
 
+  function updateProfitRate(value: number) {
+    setProfitRate(value);
+    setHasDragged(true);
+  }
+
   return (
     <section
       id="profit-calculator"
       className="relative overflow-hidden bg-[#FBFAF6] py-14 text-black sm:py-16 lg:py-20 xl:py-24"
     >
+      {/* =====================================================
+          LOCAL ANIMATIONS
+      ====================================================== */}
+
+      <style>{`
+        @keyframes bpFadeUp {
+          from {
+            opacity: 0;
+            transform: translateY(18px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes bpLogoFloat {
+          0%, 100% {
+            transform: translateY(0) rotate(0deg);
+          }
+          50% {
+            transform: translateY(-7px) rotate(1deg);
+          }
+        }
+
+        @keyframes bpCardFloat {
+          0%, 100% {
+            transform: rotate(5deg) translateY(0);
+          }
+          50% {
+            transform: rotate(5deg) translateY(-4px);
+          }
+        }
+
+        @keyframes bpBackFloat {
+          0%, 100% {
+            transform: rotate(-7deg) translateY(0);
+          }
+          50% {
+            transform: rotate(-7deg) translateY(3px);
+          }
+        }
+
+        @keyframes bpGlowPulse {
+          0%, 100% {
+            opacity: .7;
+            transform: translate(-50%, -50%) scale(.96);
+          }
+          50% {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1.05);
+          }
+        }
+
+        @keyframes bpDragHint {
+          0%, 100% {
+            transform: translateX(-5px);
+          }
+          50% {
+            transform: translateX(5px);
+          }
+        }
+
+        @keyframes bpThumbPulse {
+          0%, 100% {
+            box-shadow:
+              0 3px 10px rgba(0,0,0,.16),
+              0 0 0 0 rgba(212,175,55,.20);
+          }
+          50% {
+            box-shadow:
+              0 3px 10px rgba(0,0,0,.16),
+              0 0 0 8px rgba(212,175,55,.10);
+          }
+        }
+
+        @keyframes bpResultPop {
+          0% {
+            opacity: .75;
+            transform: translateY(4px);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .bp-section-copy {
+          animation: bpFadeUp .7s cubic-bezier(.2,.75,.25,1) both;
+        }
+
+        .bp-calculator-card {
+          animation: bpFadeUp .75s .12s cubic-bezier(.2,.75,.25,1) both;
+        }
+
+        .bp-logo-card {
+          animation: bpLogoFloat 4.6s ease-in-out infinite;
+        }
+
+        .bp-gold-card {
+          animation: bpCardFloat 5.3s ease-in-out infinite;
+        }
+
+        .bp-back-card {
+          animation: bpBackFloat 5.8s ease-in-out infinite;
+        }
+
+        .bp-glow {
+          animation: bpGlowPulse 4.8s ease-in-out infinite;
+        }
+
+        .bp-drag-hint {
+          animation: bpDragHint 1.35s ease-in-out infinite;
+        }
+
+        .bp-thumb-idle {
+          animation: bpThumbPulse 1.8s ease-in-out infinite;
+        }
+
+        .bp-result-pop {
+          animation: bpResultPop .22s ease-out both;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .bp-section-copy,
+          .bp-calculator-card,
+          .bp-logo-card,
+          .bp-gold-card,
+          .bp-back-card,
+          .bp-glow,
+          .bp-drag-hint,
+          .bp-thumb-idle,
+          .bp-result-pop {
+            animation: none !important;
+            opacity: 1 !important;
+            transform: none !important;
+          }
+        }
+      `}</style>
+
       <div className="mx-auto max-w-[1320px] px-4 sm:px-6 lg:px-8">
         <div className="grid items-center gap-10 lg:grid-cols-[1fr_.92fr] lg:gap-14 xl:gap-20">
           {/* =====================================================
               LEFT
           ====================================================== */}
 
-          <div>
+          <div className="bp-section-copy">
             <p className="text-[11px] font-black uppercase tracking-[0.18em] text-[#9B7318] sm:text-[12px] lg:text-[13px]">
               Profit Calculator
             </p>
@@ -214,8 +385,8 @@ export function ProfitCalculator() {
             </h2>
 
             <p className="mt-5 max-w-[520px] text-[13px] font-medium leading-6 text-black/50 sm:text-[15px] sm:leading-7 lg:text-base">
-              Pick an account size and profit rate to see your estimated
-              monthly reward.
+              Pick an account size, then drag the profit slider to calculate
+              your estimated monthly reward.
             </p>
 
             <SimpleRewardGraphic />
@@ -225,7 +396,7 @@ export function ProfitCalculator() {
               RIGHT
           ====================================================== */}
 
-          <div className="rounded-[28px] border border-black/[0.07] bg-white p-5 shadow-[0_30px_90px_rgba(54,43,16,.08)] sm:p-7 lg:p-8 xl:p-9">
+          <div className="bp-calculator-card rounded-[28px] border border-black/[0.07] bg-white p-5 shadow-[0_30px_90px_rgba(54,43,16,.08)] sm:p-7 lg:p-8 xl:p-9">
             <div className="flex items-center gap-2.5 text-[11px] font-bold text-black/55 sm:text-[12px] lg:text-[13px]">
               <span className="text-[#9A7118]">
                 <LockIcon />
@@ -279,10 +450,24 @@ export function ProfitCalculator() {
                 </span>
               </div>
 
-              <div className="relative mt-4 h-9">
+              {/* DRAG TO CALCULATE HINT */}
+              <div
+                className={`mt-3 flex min-h-[28px] items-center transition-all duration-300 ${
+                  hasDragged
+                    ? "pointer-events-none -translate-y-1 opacity-0"
+                    : "opacity-100"
+                }`}
+              >
+                <div className="bp-drag-hint inline-flex items-center gap-2 rounded-full bg-[#F5F1E5] px-3 py-1.5 text-[9px] font-bold uppercase tracking-[0.12em] text-[#8D6716] sm:text-[10px] lg:text-[11px]">
+                  <DragIcon />
+                  Drag to calculate
+                </div>
+              </div>
+
+              <div className="relative mt-2 h-10">
                 <div className="absolute inset-x-0 top-1/2 h-[6px] -translate-y-1/2 rounded-full bg-black/[0.06]">
                   <div
-                    className="h-full rounded-full bg-[#D4AF37]"
+                    className="h-full rounded-full bg-[#D4AF37] transition-[width] duration-150"
                     style={{
                       width: `${Math.max(
                         0,
@@ -299,14 +484,23 @@ export function ProfitCalculator() {
                   max="25"
                   step="1"
                   value={profitRate}
+                  onPointerDown={() => setIsDragging(true)}
+                  onPointerUp={() => {
+                    setIsDragging(false);
+                    setHasDragged(true);
+                  }}
+                  onPointerCancel={() => setIsDragging(false)}
                   onChange={(event) =>
-                    setProfitRate(Number(event.target.value))
+                    updateProfitRate(Number(event.target.value))
                   }
-                  className="absolute inset-0 z-20 h-full w-full cursor-pointer opacity-0"
+                  className="absolute inset-0 z-20 h-full w-full cursor-ew-resize opacity-0"
+                  aria-label="Drag to calculate profit rate"
                 />
 
                 <div
-                  className="pointer-events-none absolute top-1/2 z-10 h-6 w-6 -translate-x-1/2 -translate-y-1/2 rounded-full border-[4px] border-white bg-black shadow-[0_3px_10px_rgba(0,0,0,.16)]"
+                  className={`pointer-events-none absolute top-1/2 z-10 h-6 w-6 -translate-x-1/2 -translate-y-1/2 rounded-full border-[4px] border-white bg-black transition-[left,transform] duration-150 ${
+                    !hasDragged ? "bp-thumb-idle" : ""
+                  } ${isDragging ? "scale-110" : ""}`}
                   style={{
                     left: `${Math.max(
                       0,
@@ -314,6 +508,30 @@ export function ProfitCalculator() {
                     )}%`,
                   }}
                 />
+
+                {/* tiny value bubble while dragging */}
+                <div
+                  className={`pointer-events-none absolute top-[-25px] z-10 -translate-x-1/2 transition-all duration-150 ${
+                    isDragging
+                      ? "translate-y-0 opacity-100"
+                      : "translate-y-1 opacity-0"
+                  }`}
+                  style={{
+                    left: `${Math.max(
+                      0,
+                      Math.min(100, sliderPosition)
+                    )}%`,
+                  }}
+                >
+                  <div className="rounded-lg bg-black px-2.5 py-1 text-[10px] font-black text-white shadow-sm">
+                    {profitRate}%
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-1 flex items-center justify-between text-[9px] font-semibold text-black/25 sm:text-[10px]">
+                <span>1%</span>
+                <span>25%</span>
               </div>
             </div>
 
@@ -323,7 +541,11 @@ export function ProfitCalculator() {
                 Estimated monthly reward
               </p>
 
-              <div className="mt-3 flex items-end gap-2.5">
+              <div
+                key={`${accountSize}-${profitRate}`}
+                className="bp-result-pop mt-3 flex items-end gap-2.5"
+                aria-live="polite"
+              >
                 <span className="text-[2.45rem] font-black leading-none tracking-[-0.055em] sm:text-[3rem] lg:text-[3.35rem]">
                   {formatMoney(profit)}
                 </span>
@@ -347,7 +569,7 @@ export function ProfitCalculator() {
             {/* CTA */}
             <a
               href="#challenges"
-              className="group mt-5 flex min-h-[54px] w-full items-center justify-center gap-2 rounded-2xl bg-[#D4AF37] px-5 text-[14px] font-black text-black transition hover:bg-[#E3C45C] sm:min-h-[58px] sm:text-[15px] lg:text-base"
+              className="group mt-5 flex min-h-[54px] w-full items-center justify-center gap-2 rounded-2xl bg-[#D4AF37] px-5 text-[14px] font-black text-black transition duration-300 hover:-translate-y-0.5 hover:bg-[#E3C45C] hover:shadow-[0_12px_28px_rgba(181,135,30,.15)] sm:min-h-[58px] sm:text-[15px] lg:text-base"
             >
               Start Earning
               <ArrowRight />

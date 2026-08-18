@@ -952,12 +952,12 @@ export function WhyTradersLove() {
             </span>
           </div>
 
-          <h2 className="mt-6 text-[3.25rem] font-black uppercase leading-[0.92] tracking-[-0.065em] text-white min-[430px]:text-[3.55rem] sm:mt-7 sm:text-[4.9rem] md:text-[5.4rem] lg:text-[6rem] xl:text-[6.35rem]">
-            Why traders
-            <span className="block bg-[linear-gradient(100deg,#FFFFFF_0%,#D6D6D6_33%,#F0D16C_72%,#9A7219_100%)] bg-clip-text text-transparent">
-              choose BlackProp.
-            </span>
-          </h2>
+         <h2 className="mt-6 text-[2.6rem] font-black uppercase leading-[0.95] tracking-[-0.06em] text-white min-[430px]:text-[3rem] sm:mt-7 sm:text-[3.8rem] md:text-[4.3rem] lg:text-[4.8rem] xl:text-[5.2rem]">
+          Why traders
+          <span className="block bg-[linear-gradient(100deg,#FFFFFF_0%,#D6D6D6_33%,#F0D16C_72%,#9A7219_100%)] bg-clip-text text-transparent">
+            choose BlackProp.
+          </span>
+        </h2>
 
           <p className="mx-auto mt-5 max-w-[720px] text-[16px] leading-7 text-white/58 sm:mt-6 sm:text-[17px] sm:leading-8 lg:text-lg">
             More capital, clear objectives and a trading experience

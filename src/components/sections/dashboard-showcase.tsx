@@ -174,11 +174,7 @@ export function DashboardShowcase() {
           </div>
 
           <h2 className="mt-7 text-[3.15rem] font-black uppercase leading-[0.92] tracking-[-0.06em] text-white min-[420px]:text-[3.45rem] sm:text-[4.2rem] md:text-[4.65rem] lg:text-[5rem] xl:text-[5.35rem]">
-            Custom Dashboard
-
-            <span className="block bg-[linear-gradient(100deg,#FFFFFF_0%,#D6D6D6_38%,#F0D16A_76%,#98701A_100%)] bg-clip-text text-transparent">
-              View
-            </span>
+            Custom Dashboard View
           </h2>
 
           <p className="mx-auto mt-6 max-w-[700px] text-[16px] leading-7 text-white/58 sm:text-[17px] sm:leading-8 lg:text-lg">
