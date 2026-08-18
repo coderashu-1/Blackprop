@@ -784,7 +784,7 @@ export function Testimonials() {
             GLOBAL STATEMENT
         ====================================================== */}
 
-        <div className="relative mt-12 overflow-hidden rounded-[24px] border border-[#D4AF37]/20 bg-[#0A0A0B] px-5 py-7 sm:mt-16 sm:rounded-[28px] sm:px-7 lg:px-8">
+        {/* <div className="relative mt-12 overflow-hidden rounded-[24px] border border-[#D4AF37]/20 bg-[#0A0A0B] px-5 py-7 sm:mt-16 sm:rounded-[28px] sm:px-7 lg:px-8">
           <div className="pointer-events-none absolute right-[10%] top-1/2 h-56 w-56 -translate-y-1/2 rounded-full bg-[#D4AF37]/10 blur-[80px]" />
 
           <div className="absolute inset-x-[15%] top-0 h-px bg-gradient-to-r from-transparent via-[#D4AF37]/70 to-transparent" />
@@ -843,7 +843,7 @@ export function Testimonials() {
               <span className="absolute inset-y-0 -left-20 w-12 skew-x-[-20deg] bg-white/45 blur-md transition-all duration-700 group-hover:left-[125%]" />
             </a>
           </div>
-        </div>
+        </div> */}
 
       </div>
 

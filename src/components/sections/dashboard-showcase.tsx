@@ -299,7 +299,7 @@ export function DashboardShowcase() {
             TABS
         ====================================================== */}
 
-        <div className="mx-auto mt-6 grid w-full max-w-[820px] grid-cols-1 gap-2.5 min-[430px]:grid-cols-3 sm:mt-7 sm:gap-3">
+        {/* <div className="mx-auto mt-6 grid w-full max-w-[820px] grid-cols-1 gap-2.5 min-[430px]:grid-cols-3 sm:mt-7 sm:gap-3">
           {dashboards.map(
             (dashboard, index) => {
               const selected =
@@ -327,25 +327,25 @@ export function DashboardShowcase() {
               );
             },
           )}
-        </div>
+        </div> */}
 
         {/* =====================================================
             AUTO PROGRESS
         ====================================================== */}
 
-        <div className="mx-auto mt-6 h-[3px] w-28 overflow-hidden rounded-full bg-white/[0.08] sm:w-32">
+        {/* <div className="mx-auto mt-6 h-[3px] w-28 overflow-hidden rounded-full bg-white/[0.08] sm:w-32">
           <div
             key={active}
             className="dashboard-progress h-full origin-left bg-[#D4AF37]"
           />
-        </div>
+        </div> */}
 
         {/* DISCLAIMER */}
-        <p className="mx-auto mt-7 max-w-[680px] px-3 text-center text-[13px] font-medium leading-6 text-white/52 sm:text-[14px] sm:leading-7">
+        {/* <p className="mx-auto mt-7 max-w-[680px] px-3 text-center text-[13px] font-medium leading-6 text-white/52 sm:text-[14px] sm:leading-7">
           Dashboard visuals and displayed values are
           product-preview examples and may use sample
           data.
-        </p>
+        </p> */}
       </div>
 
       <style jsx>{`
