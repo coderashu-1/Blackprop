@@ -23,12 +23,10 @@ export default function Home() {
       <Challenges />
       <Testimonials />
       <ProfitCalculator />
-
       <DashboardShowcase />
       <GlobalAccess />
       <Support />
       <CommunityCTA />
-
       <HowItWorks />
       <WhyTradersLove />
       <Footer />
