@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 /* =========================================================
    DATA
@@ -16,9 +16,6 @@ const accountSizes = [
   100000,
   150000,
   200000,
-  250000,
-  300000,
-  400000,
 ];
 
 function formatMoney(value: number) {
@@ -91,6 +88,7 @@ function LockIcon() {
         stroke="currentColor"
         strokeWidth="1.4"
       />
+
       <path
         d="M6.5 8V6.2A3.5 3.5 0 0 1 10 2.7a3.5 3.5 0 0 1 3.5 3.5V8"
         stroke="currentColor"
@@ -158,6 +156,53 @@ function DragIcon() {
   );
 }
 
+function AccountIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      className="h-[17px] w-[17px]"
+      aria-hidden="true"
+    >
+      <rect
+        x="3.5"
+        y="6"
+        width="17"
+        height="12"
+        rx="3"
+        stroke="currentColor"
+        strokeWidth="1.6"
+      />
+
+      <path
+        d="M7 10h10M7 14h5"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+function CheckIcon() {
+  return (
+    <svg
+      viewBox="0 0 20 20"
+      fill="none"
+      className="h-3.5 w-3.5"
+      aria-hidden="true"
+    >
+      <path
+        d="m5 10 3 3 7-7"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 /* =========================================================
    SIMPLE LEFT GRAPHIC
 ========================================================= */
@@ -212,6 +257,35 @@ export function ProfitCalculator() {
   const [hasDragged, setHasDragged] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
 
+  const [accountDropdownOpen, setAccountDropdownOpen] = useState(false);
+
+  const accountDropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleOutsideClick(event: MouseEvent) {
+      if (
+        accountDropdownRef.current &&
+        !accountDropdownRef.current.contains(event.target as Node)
+      ) {
+        setAccountDropdownOpen(false);
+      }
+    }
+
+    function handleEscape(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        setAccountDropdownOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleOutsideClick);
+    document.addEventListener("keydown", handleEscape);
+
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, []);
+
   const profit = useMemo(() => {
     return accountSize * (profitRate / 100);
   }, [accountSize, profitRate]);
@@ -238,6 +312,7 @@ export function ProfitCalculator() {
             opacity: 0;
             transform: translateY(18px);
           }
+
           to {
             opacity: 1;
             transform: translateY(0);
@@ -248,6 +323,7 @@ export function ProfitCalculator() {
           0%, 100% {
             transform: translateY(0) rotate(0deg);
           }
+
           50% {
             transform: translateY(-7px) rotate(1deg);
           }
@@ -257,6 +333,7 @@ export function ProfitCalculator() {
           0%, 100% {
             transform: rotate(5deg) translateY(0);
           }
+
           50% {
             transform: rotate(5deg) translateY(-4px);
           }
@@ -266,6 +343,7 @@ export function ProfitCalculator() {
           0%, 100% {
             transform: rotate(-7deg) translateY(0);
           }
+
           50% {
             transform: rotate(-7deg) translateY(3px);
           }
@@ -276,6 +354,7 @@ export function ProfitCalculator() {
             opacity: .7;
             transform: translate(-50%, -50%) scale(.96);
           }
+
           50% {
             opacity: 1;
             transform: translate(-50%, -50%) scale(1.05);
@@ -286,6 +365,7 @@ export function ProfitCalculator() {
           0%, 100% {
             transform: translateX(-5px);
           }
+
           50% {
             transform: translateX(5px);
           }
@@ -297,6 +377,7 @@ export function ProfitCalculator() {
               0 3px 10px rgba(0,0,0,.16),
               0 0 0 0 rgba(212,175,55,.20);
           }
+
           50% {
             box-shadow:
               0 3px 10px rgba(0,0,0,.16),
@@ -309,6 +390,7 @@ export function ProfitCalculator() {
             opacity: .75;
             transform: translateY(4px);
           }
+
           100% {
             opacity: 1;
             transform: translateY(0);
@@ -401,41 +483,202 @@ export function ProfitCalculator() {
               <span className="text-[#9A7118]">
                 <LockIcon />
               </span>
+
               Reward estimate
             </div>
 
-            {/* ACCOUNT SIZE */}
+            {/* =====================================================
+                ACCOUNT SIZE
+            ====================================================== */}
+
             <div className="mt-7">
               <label
-                htmlFor="profit-account-size"
+                id="profit-account-size-label"
                 className="text-[11px] font-semibold text-black/45 sm:text-[12px] lg:text-[13px]"
               >
                 Account size
               </label>
 
-              <div className="relative mt-2.5">
-                <select
+              <div
+                ref={accountDropdownRef}
+                className="relative z-40 mt-2.5"
+              >
+                {/* BUTTON */}
+                <button
+                  type="button"
                   id="profit-account-size"
-                  value={accountSize}
-                  onChange={(event) =>
-                    setAccountSize(Number(event.target.value))
+                  aria-haspopup="listbox"
+                  aria-expanded={accountDropdownOpen}
+                  aria-labelledby="profit-account-size-label profit-account-size"
+                  onClick={() =>
+                    setAccountDropdownOpen((current) => !current)
                   }
-                  className="h-[58px] w-full appearance-none rounded-2xl border border-black/[0.06] bg-[#F6F5F1] px-4 pr-12 text-[16px] font-bold text-black outline-none transition focus:border-[#D4AF37]/40 focus:bg-white sm:h-[64px] sm:px-5 sm:text-[18px] lg:h-[68px] lg:text-[20px]"
+                  className={`
+                    group relative flex h-[58px] w-full items-center justify-between
+                    overflow-hidden rounded-2xl border px-4 text-left
+                    outline-none transition-all duration-300
+                    sm:h-[64px] sm:px-5
+                    lg:h-[68px]
+                    ${
+                      accountDropdownOpen
+                        ? "border-[#D4AF37]/55 bg-white shadow-[0_14px_35px_rgba(54,43,16,.10)] ring-4 ring-[#D4AF37]/[0.07]"
+                        : "border-black/[0.06] bg-[#F6F5F1] hover:border-black/[0.11] hover:bg-[#F9F8F4]"
+                    }
+                  `}
                 >
-                  {accountSizes.map((size) => (
-                    <option key={size} value={size}>
-                      ${size.toLocaleString("en-US")}
-                    </option>
-                  ))}
-                </select>
+                  {/* gold glow */}
+                  <div
+                    className={`
+                      pointer-events-none absolute -right-10 top-1/2
+                      h-24 w-24 -translate-y-1/2 rounded-full
+                      bg-[#D4AF37]/10 blur-2xl transition-opacity duration-300
+                      ${
+                        accountDropdownOpen
+                          ? "opacity-100"
+                          : "opacity-0"
+                      }
+                    `}
+                  />
 
-                <div className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-black/40">
-                  <ChevronDown />
+                  <div className="relative flex min-w-0 items-center gap-3">
+                    <div
+                      className={`
+                        grid h-9 w-9 shrink-0 place-items-center
+                        rounded-xl transition-all duration-300
+                        sm:h-10 sm:w-10
+                        ${
+                          accountDropdownOpen
+                            ? "bg-[#D4AF37] text-black shadow-[0_6px_16px_rgba(212,175,55,.22)]"
+                            : "bg-black/[0.045] text-black/45 group-hover:bg-black/[0.07]"
+                        }
+                      `}
+                    >
+                      <AccountIcon />
+                    </div>
+
+                    <div className="min-w-0">
+                      <span className="block text-[9px] font-bold uppercase tracking-[0.12em] text-black/30 sm:text-[10px]">
+                        Selected account
+                      </span>
+
+                      <span className="mt-0.5 block truncate text-[16px] font-black tracking-[-0.02em] text-black sm:text-[18px] lg:text-[20px]">
+                        {accountSize.toLocaleString("en-US")}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div
+                    className={`
+                      relative grid h-9 w-9 shrink-0 place-items-center
+                      rounded-xl text-black/40
+                      transition-all duration-300
+                      group-hover:bg-black/[0.04]
+                      group-hover:text-black/70
+                      ${
+                        accountDropdownOpen
+                          ? "rotate-180 bg-black/[0.04] text-black"
+                          : ""
+                      }
+                    `}
+                  >
+                    <ChevronDown />
+                  </div>
+                </button>
+
+                {/* DROPDOWN */}
+                <div
+                  className={`
+                    absolute left-0 right-0 top-full z-50 mt-2
+                    origin-top overflow-hidden rounded-[20px]
+                    border border-black/[0.07] bg-white p-2
+                    shadow-[0_24px_70px_rgba(30,25,10,.16)]
+                    transition-all duration-200
+                    ${
+                      accountDropdownOpen
+                        ? "pointer-events-auto translate-y-0 scale-100 opacity-100"
+                        : "pointer-events-none -translate-y-2 scale-[0.98] opacity-0"
+                    }
+                  `}
+                >
+                  <div className="mb-1 flex items-center justify-between gap-3 px-3 pb-2 pt-2">
+                    <span className="text-[9px] font-black uppercase tracking-[0.14em] text-black/30 sm:text-[10px]">
+                      Choose account size
+                    </span>
+
+                    <span className="shrink-0 rounded-full bg-[#F5F1E5] px-2 py-1 text-[8px] font-black uppercase tracking-[0.1em] text-[#8D6716]">
+                      Up to 200K
+                    </span>
+                  </div>
+
+                  <div
+                    role="listbox"
+                    aria-labelledby="profit-account-size-label"
+                    className="max-h-[300px] overflow-y-auto overscroll-contain pr-1"
+                  >
+                    {accountSizes.map((size) => {
+                      const selected = accountSize === size;
+
+                      return (
+                        <button
+                          key={size}
+                          type="button"
+                          role="option"
+                          aria-selected={selected}
+                          onClick={() => {
+                            setAccountSize(size);
+                            setAccountDropdownOpen(false);
+                          }}
+                          className={`
+                            group/option relative mb-1 flex min-h-[48px]
+                            w-full items-center justify-between overflow-hidden
+                            rounded-[13px] px-3.5 text-left
+                            transition-all duration-200 last:mb-0
+                            ${
+                              selected
+                                ? "bg-[#0B0B0B] text-white"
+                                : "text-black hover:bg-[#F6F5F1]"
+                            }
+                          `}
+                        >
+                          <div className="relative z-10 flex items-center gap-3">
+                            <span
+                              className={`
+                                h-1.5 w-1.5 rounded-full
+                                transition-all duration-200
+                                ${
+                                  selected
+                                    ? "scale-100 bg-[#D4AF37]"
+                                    : "scale-75 bg-black/15 group-hover/option:scale-100 group-hover/option:bg-[#D4AF37]"
+                                }
+                              `}
+                            />
+
+                            <span className="text-[14px] font-bold sm:text-[15px]">
+                              {size.toLocaleString("en-US")}
+                            </span>
+                          </div>
+
+                          {selected && (
+                            <div className="relative z-10 grid h-6 w-6 place-items-center rounded-full bg-[#D4AF37] text-black">
+                              <CheckIcon />
+                            </div>
+                          )}
+
+                          {selected && (
+                            <div className="pointer-events-none absolute right-0 top-1/2 h-20 w-20 -translate-y-1/2 translate-x-1/2 rounded-full bg-[#D4AF37]/10 blur-xl" />
+                          )}
+                        </button>
+                      );
+                    })}
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* PROFIT RATE */}
+            {/* =====================================================
+                PROFIT RATE
+            ====================================================== */}
+
             <div className="mt-7">
               <div className="flex items-end justify-between">
                 <label
@@ -465,18 +708,20 @@ export function ProfitCalculator() {
               </div>
 
               <div className="relative mt-2 h-10">
+                {/* TRACK */}
                 <div className="absolute inset-x-0 top-1/2 h-[6px] -translate-y-1/2 rounded-full bg-black/[0.06]">
                   <div
                     className="h-full rounded-full bg-[#D4AF37] transition-[width] duration-150"
                     style={{
                       width: `${Math.max(
                         0,
-                        Math.min(100, sliderPosition)
+                        Math.min(100, sliderPosition),
                       )}%`,
                     }}
                   />
                 </div>
 
+                {/* INVISIBLE RANGE INPUT */}
                 <input
                   id="profit-rate"
                   type="range"
@@ -497,6 +742,7 @@ export function ProfitCalculator() {
                   aria-label="Drag to calculate profit rate"
                 />
 
+                {/* THUMB */}
                 <div
                   className={`pointer-events-none absolute top-1/2 z-10 h-6 w-6 -translate-x-1/2 -translate-y-1/2 rounded-full border-[4px] border-white bg-black transition-[left,transform] duration-150 ${
                     !hasDragged ? "bp-thumb-idle" : ""
@@ -504,12 +750,12 @@ export function ProfitCalculator() {
                   style={{
                     left: `${Math.max(
                       0,
-                      Math.min(100, sliderPosition)
+                      Math.min(100, sliderPosition),
                     )}%`,
                   }}
                 />
 
-                {/* tiny value bubble while dragging */}
+                {/* VALUE BUBBLE */}
                 <div
                   className={`pointer-events-none absolute top-[-25px] z-10 -translate-x-1/2 transition-all duration-150 ${
                     isDragging
@@ -519,7 +765,7 @@ export function ProfitCalculator() {
                   style={{
                     left: `${Math.max(
                       0,
-                      Math.min(100, sliderPosition)
+                      Math.min(100, sliderPosition),
                     )}%`,
                   }}
                 >
@@ -535,7 +781,10 @@ export function ProfitCalculator() {
               </div>
             </div>
 
-            {/* RESULT */}
+            {/* =====================================================
+                RESULT
+            ====================================================== */}
+
             <div className="mt-8 rounded-[22px] bg-[#0B0B0B] p-5 text-white sm:p-6">
               <p className="text-[9px] font-black uppercase tracking-[0.16em] text-white/35 sm:text-[10px] lg:text-[11px]">
                 Estimated monthly reward
@@ -566,7 +815,10 @@ export function ProfitCalculator() {
               </div>
             </div>
 
-            {/* CTA */}
+            {/* =====================================================
+                CTA
+            ====================================================== */}
+
             <a
               href="#challenges"
               className="group mt-5 flex min-h-[54px] w-full items-center justify-center gap-2 rounded-2xl bg-[#D4AF37] px-5 text-[14px] font-black text-black transition duration-300 hover:-translate-y-0.5 hover:bg-[#E3C45C] hover:shadow-[0_12px_28px_rgba(181,135,30,.15)] sm:min-h-[58px] sm:text-[15px] lg:text-base"

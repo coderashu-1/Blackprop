@@ -309,7 +309,7 @@ function RewardsArtwork() {
 
         <div className="absolute left-[5%] top-[39%] hidden min-w-[125px] rounded-2xl border border-white/[0.07] bg-[#09090A]/85 p-3.5 shadow-[0_18px_40px_rgba(0,0,0,.38)] backdrop-blur-xl sm:block lg:left-[7%]">
           <div className="flex items-center justify-between gap-4">
-            <span className="text-[7px] font-bold uppercase tracking-[0.16em] text-white/25">
+            <span className="text-[9px] font-bold uppercase tracking-[0.16em] text-white/25">
               Total paid
             </span>
 
@@ -322,7 +322,7 @@ function RewardsArtwork() {
 
           <div className="mt-2.5 h-px w-full bg-white/[0.05]" />
 
-          <p className="mt-2 text-[8px] font-medium text-[#D8B84F]/70">
+          <p className="mt-2 text-[10px] font-medium text-[#D8B84F]/70">
             Rewards distributed
           </p>
         </div>
@@ -332,7 +332,7 @@ function RewardsArtwork() {
             ===================================================== */}
 
         <div className="absolute right-[5%] top-[33%] hidden min-w-[120px] rounded-2xl border border-[#D4AF37]/[0.12] bg-[#09090A]/85 p-3.5 shadow-[0_18px_40px_rgba(0,0,0,.38)] backdrop-blur-xl sm:block lg:right-[7%]">
-          <p className="text-[7px] font-bold uppercase tracking-[0.16em] text-white/25">
+          <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-white/25">
             Profit split
           </p>
 
@@ -341,7 +341,7 @@ function RewardsArtwork() {
               90%
             </p>
 
-            <span className="mb-[2px] text-[7px] font-medium text-white/25">
+            <span className="mb-[2px] text-[12px] font-medium text-white/25">
               trader
             </span>
           </div>
@@ -371,39 +371,7 @@ function RewardsArtwork() {
           <span className="h-1 w-1 rounded-full bg-white/30" />
         </div>
 
-        {/* =====================================================
-            BOTTOM STATUS BAR
-            ===================================================== */}
-
-        <div className="absolute bottom-[-2px] left-1/2 flex w-[84%] max-w-[430px] -translate-x-1/2 items-center justify-between rounded-2xl border border-white/[0.06] bg-[#09090A]/75 px-4 py-3 shadow-[0_18px_50px_rgba(0,0,0,.35)] backdrop-blur-xl sm:px-5">
-          <div className="flex items-center gap-3">
-            <div className="flex h-7 w-7 items-center justify-center rounded-lg border border-[#D4AF37]/15 bg-[#D4AF37]/[0.055]">
-              <BPMark
-                width={11}
-                height={14}
-                color="#DCC05B"
-              />
-            </div>
-
-            <div>
-              <p className="text-[8px] font-semibold text-white/55">
-                BlackProp Rewards
-              </p>
-
-              <p className="mt-0.5 text-[7px] text-white/20">
-                Performance rewarded
-              </p>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-1.5">
-            <span className="h-1.5 w-1.5 rounded-full bg-[#D4AF37]" />
-
-            <span className="text-[7px] font-bold uppercase tracking-[0.13em] text-white/30">
-              Active
-            </span>
-          </div>
-        </div>
+     
       </div>
 
       {/* =====================================================
