@@ -66,10 +66,11 @@ const legalLinks = [
 ];
 
 const socialLinks = [
-  { label: "Instagram", href: "#" },
-  { label: "Discord", href: "#" },
-  { label: "X / Twitter", href: "#" },
-  { label: "YouTube", href: "#" },
+  { label: "Discord", href: "https://discord.gg/AXU9YEd4T" },
+  { label: "Telegram", href: "https://t.me/+r5HfFcX32Tw4M2Y1" },
+  { label: "Instagram", href: "https://www.instagram.com/blackpropcom/" },
+  { label: "YouTube", href: "https://www.youtube.com/channel/UCvdMQKZnAI2-EmuG9a_MycA" },
+  { label: "X / Twitter", href: "https://x.com/Blackpropcom" },
 ];
 
 function ArrowIcon() {
@@ -135,6 +136,8 @@ function FooterColumn({
           <Link
             key={link.label}
             href={link.href}
+            target={link.href.startsWith("http") ? "_blank" : undefined}
+            rel={link.href.startsWith("http") ? "noreferrer" : undefined}
             className="group flex w-fit items-center gap-1.5 text-[14px] font-medium text-white/48 transition-colors duration-200 hover:text-white sm:text-[15px]"
           >
             {link.label}

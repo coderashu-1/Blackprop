@@ -21,14 +21,16 @@ export default function Home() {
       <Hero />
       <ProofStats />
       <Challenges />
-      <HowItWorks />
+      <Testimonials />
       <ProfitCalculator />
-      <WhyTradersLove />
+
       <DashboardShowcase />
       <GlobalAccess />
       <Support />
-      <Testimonials />
       <CommunityCTA />
+
+      <HowItWorks />
+      <WhyTradersLove />
       <Footer />
     </main>
   );

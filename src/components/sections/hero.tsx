@@ -30,10 +30,10 @@ export function Hero() {
 
           {/* HEADING */}
           <h1 className="mx-auto mt-6 max-w-[930px] text-[2.9rem] font-black uppercase leading-[0.93] tracking-[-0.055em] text-white sm:text-[4rem] lg:text-[5rem] xl:text-[5.35rem]">
-            TRADE WITH PURPOSE.
+            PROVE YOUR EDGE
 
             <span className="mt-2 block bg-[linear-gradient(100deg,#FFF7D6_0%,#F0D674_35%,#D4AF37_68%,#A87D1D_100%)] bg-clip-text text-transparent">
-              SCALE WITH CAPITAL.
+              We WILL BACK IT.
             </span>
           </h1>
 

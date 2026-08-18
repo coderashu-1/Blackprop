@@ -7,7 +7,7 @@ import { FormEvent, useState, type ReactNode } from "react";
    Replace this with the final BlackProp Discord invite URL.
 ========================================================= */
 
-const DISCORD_URL = "#";
+const DISCORD_URL = "https://discord.com/invite/AXU9YEd4T";
 
 /* =========================================================
    BLACKPROP SVG LOGO

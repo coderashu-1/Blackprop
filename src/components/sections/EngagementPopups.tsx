@@ -59,14 +59,14 @@ type ActivityItem = {
 };
 
 const fallbackActivity: ActivityItem[] = [
+  { country: "United Kingdom", flag: "🇬🇧", challenge: "$200K" },
+  { country: "United States", flag: "🇺🇸", challenge: "$200K" },
   { country: "India", flag: "🇮🇳", challenge: "$50K" },
-  { country: "United Kingdom", flag: "🇬🇧", challenge: "$100K" },
-  { country: "United States", flag: "🇺🇸", challenge: "$25K" },
-  { country: "United Arab Emirates", flag: "🇦🇪", challenge: "$100K" },
-  { country: "Canada", flag: "🇨🇦", challenge: "$50K" },
-  { country: "Australia", flag: "🇦🇺", challenge: "$25K" },
-  { country: "Germany", flag: "🇩🇪", challenge: "$50K" },
-  { country: "Singapore", flag: "🇸🇬", challenge: "$100K" },
+  { country: "South Africa", flag: "🇿🇦", challenge: "$50K" },
+  { country: "Nigeria", flag: "🇳🇬", challenge: "$50K" },
+  { country: "Philippines", flag: "🇵🇭", challenge: "$50K" },
+  { country: "Canada", flag: "🇨🇦", challenge: "$100K" },
+  { country: "Germany", flag: "🇩🇪", challenge: "$100K" },
 ];
 
 const SUBSCRIBED_KEY = "bp_email_subscribed";

@@ -74,14 +74,14 @@ const models: {
   badge?: string;
 }[] = [
   {
+    name: "Instant",
+  },
+  {
     name: "1 Step",
   },
   {
     name: "2 Step",
-  },
-  {
-    name: "Instant",
-    badge: "Popular",
+    badge: "Default",
   },
 ];
 
@@ -160,25 +160,76 @@ const modelRules: Record<
   {
     phase1: string;
     phase2?: string;
-    phase3?: string;
     dailyLoss: string;
     maxLoss: string;
-    consistency: string;
+    inactivity: string;
     leverage: string;
-    rewards: string;
+    maxTime: string;
+    flatForWeekend?: string;
     profitSplit: string;
     multiplier: number;
+    addOns: {
+      title: string;
+      cost: string;
+      description: string;
+    }[];
   }
 > = {
+  Instant: {
+    phase1: "N/A",
+    dailyLoss: "3%",
+    maxLoss: "6%",
+    inactivity: "30 Days",
+    leverage: "1:50",
+    maxTime: "No max time",
+    flatForWeekend: "Yes",
+    profitSplit: "80% → 90%",
+    multiplier: 1.65,
+    addOns: [
+      {
+        title: "Hold Over Weekend",
+        cost: "10% Cost",
+        description:
+          "Disables the Flat for Weekend requirement so positions can remain open over the weekend.",
+      },
+      {
+        title: "Profit Share Increased to 90%",
+        cost: "20% Cost",
+        description:
+          "Increases the funded account profit share from the standard 80% to 90%.",
+      },
+      {
+        title: "Payout Protector",
+        cost: "25% Cost",
+        description:
+          "Protects an eligible profit share in a funded account in the event of a hard breach.",
+      },
+    ],
+  },
+
   "1 Step": {
     phase1: "10%",
-    dailyLoss: "4%",
-    maxLoss: "8%",
-    consistency: "None",
-    leverage: "Up to 1:100",
-    rewards: "Bi-weekly",
+    dailyLoss: "3%",
+    maxLoss: "6%",
+    inactivity: "30 Days",
+    leverage: "1:50",
+    maxTime: "No max time",
     profitSplit: "Up to 90%",
     multiplier: 1,
+    addOns: [
+      {
+        title: "Payout Protector",
+        cost: "25% Cost",
+        description:
+          "Protects an eligible profit share in a funded account in the event of a hard breach.",
+      },
+      {
+        title: "Remove Lock Upon Payout",
+        cost: "25% Cost",
+        description:
+          "Disables the post-payout maximum drawdown lock at the account starting balance.",
+      },
+    ],
   },
 
   "2 Step": {
@@ -186,22 +237,25 @@ const modelRules: Record<
     phase2: "5%",
     dailyLoss: "5%",
     maxLoss: "10%",
-    consistency: "None",
-    leverage: "Up to 1:100",
-    rewards: "Bi-weekly",
+    inactivity: "30 Days",
+    leverage: "1:50",
+    maxTime: "No max time",
     profitSplit: "Up to 90%",
     multiplier: 0.92,
-  },
-
-  Instant: {
-    phase1: "None",
-    dailyLoss: "3%",
-    maxLoss: "6%",
-    consistency: "15%",
-    leverage: "Up to 1:100",
-    rewards: "Bi-weekly",
-    profitSplit: "80% → 90%",
-    multiplier: 1.65,
+    addOns: [
+      {
+        title: "Payout Protector",
+        cost: "25% Cost",
+        description:
+          "Protects an eligible profit share in a funded account in the event of a hard breach.",
+      },
+      {
+        title: "Remove Lock Upon Payout",
+        cost: "25% Cost",
+        description:
+          "Disables the post-payout maximum drawdown lock at the account starting balance.",
+      },
+    ],
   },
 };
 
@@ -860,7 +914,7 @@ export function Challenges() {
     useState<Market>("Forex");
 
   const [model, setModel] =
-    useState<Model>("Instant");
+    useState<Model>("2 Step");
 
   const [platform, setPlatform] =
     useState<Platform>("cTrader");
@@ -1100,21 +1154,35 @@ export function Challenges() {
 
             <div className="flex flex-col border-b border-white/[0.06] p-4 sm:p-6 lg:border-b-0 lg:border-r lg:p-7">
 
-              {/* MODEL
-              <div className="rounded-2xl border border-white/[0.06] bg-white/[0.015] p-4">
+              {/* CHALLENGE TYPE */}
+              <div className="rounded-2xl border border-[#D4AF37]/[0.12] bg-[linear-gradient(145deg,rgba(212,175,55,.045),rgba(255,255,255,.012))] p-4 sm:p-5">
 
-                <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.18em] text-white">
-                  Model
-                </p>
+                <div className="mb-4 flex flex-wrap items-end justify-between gap-2">
 
-                <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4">
+                  <div>
+                    <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#E7C75F]">
+                      Challenge Type
+                    </p>
+
+                    <p className="mt-1.5 text-[12px] leading-5 text-white/45">
+                      Instant · 1 Step · 2 Step
+                    </p>
+                  </div>
+
+                  {market === "Forex" && (
+                    <span className="rounded-full border border-white/[0.07] bg-black/25 px-2.5 py-1 text-[9px] font-bold uppercase tracking-[0.12em] text-white/45">
+                      Forex
+                    </span>
+                  )}
+
+                </div>
+
+                <div className="grid grid-cols-3 gap-2.5">
 
                   {models.map((item) => (
                     <OptionButton
                       key={item.name}
-                      selected={
-                        model === item.name
-                      }
+                      selected={model === item.name}
                       onClick={() =>
                         setModel(item.name)
                       }
@@ -1126,10 +1194,10 @@ export function Challenges() {
 
                 </div>
 
-              </div> */}
+              </div>
 
               {/* PLATFORMS */}
-              <div className="rounded-2xl border border-white/[0.06] bg-white/[0.015] p-4 sm:p-5">
+              <div className="mt-4 rounded-2xl border border-white/[0.06] bg-white/[0.015] p-4 sm:p-5">
 
                 <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.18em] text-white">
                   Platforms
@@ -1260,54 +1328,97 @@ export function Challenges() {
 
               </div>
 
-              {/* INCLUDED WITH YOUR CHALLENGE
-                  Fills the lower-left space on desktop and gives
-                  the user useful information instead of dead space. */}
+              {/* ADD-ONS AVAILABLE AT PURCHASE */}
               <div className="mt-4 flex-1 rounded-2xl border border-white/[0.06] bg-[linear-gradient(145deg,rgba(255,255,255,.025),rgba(212,175,55,.025))] p-4 sm:p-5">
+
                 <div className="flex items-start justify-between gap-4">
+
                   <div>
                     <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-[#E7C75F]">
-                      Included with your challenge
+                      Add-ons available at purchase
                     </p>
 
-                    <p className="mt-2 max-w-[440px] text-[13px] leading-6 text-white/55 sm:text-sm">
-                      Everything you need to trade with a clear setup from day one.
+                    <p className="mt-2 max-w-[460px] text-[13px] leading-6 text-white/55 sm:text-sm">
+                      Available options update with the selected challenge type.
                     </p>
                   </div>
 
                   <div className="grid h-11 w-11 shrink-0 place-items-center rounded-xl border border-[#D4AF37]/15 bg-[#D4AF37]/[0.055]">
-                    <BPMark width={18} height={23} color="#D4AF37" />
+                    <BPMark
+                      width={18}
+                      height={23}
+                      color="#D4AF37"
+                    />
                   </div>
+
                 </div>
 
-                <div className="mt-5 grid gap-2.5 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
-                  {features.map((feature) => (
-                    <div
-                      key={feature}
-                      className="flex min-h-[52px] items-center gap-3 rounded-xl border border-white/[0.055] bg-black/20 px-3.5 py-3"
-                    >
-                      <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-[#D4AF37]/[0.08] text-[#D4AF37]">
-                        <CheckIcon />
-                      </span>
+                <div className="mt-5 grid gap-2.5">
 
-                      <span className="text-[12px] font-semibold leading-5 text-white/80 sm:text-[13px]">
-                        {feature}
-                      </span>
+                  {rules.addOns.map((addOn) => (
+                    <div
+                      key={addOn.title}
+                      className="rounded-xl border border-white/[0.055] bg-black/20 px-3.5 py-3.5"
+                    >
+                      <div className="flex items-start gap-3">
+
+                        <span className="mt-0.5 grid h-8 w-8 shrink-0 place-items-center rounded-full bg-[#D4AF37]/[0.08] text-[#D4AF37]">
+                          <CheckIcon />
+                        </span>
+
+                        <div className="min-w-0">
+
+                          <div className="flex flex-wrap items-center gap-2">
+                            <span className="text-[12px] font-bold leading-5 text-white/85 sm:text-[13px]">
+                              {addOn.title}
+                            </span>
+
+                            <span className="rounded-full border border-[#D4AF37]/15 bg-[#D4AF37]/[0.06] px-2 py-0.5 text-[8px] font-black uppercase tracking-[0.08em] text-[#E7C75F]">
+                              {addOn.cost}
+                            </span>
+                          </div>
+
+                          <p className="mt-1.5 text-[10px] leading-[18px] text-white/38 sm:text-[11px] sm:leading-5">
+                            {addOn.description}
+                          </p>
+
+                        </div>
+
+                      </div>
                     </div>
                   ))}
+
                 </div>
 
                 <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-white/[0.055] pt-4">
+
                   <span className="text-[10px] font-medium text-white/40">
-                    Selected: <strong className="text-white/75">{market}</strong>
+                    Selected:{" "}
+                    <strong className="text-white/75">
+                      {model}
+                    </strong>
                   </span>
 
                   <span className="h-1 w-1 rounded-full bg-[#D4AF37]/70" />
 
                   <span className="text-[10px] font-medium text-white/40">
-                    Platform: <strong className="text-white/75">{platform}</strong>
+                    Market:{" "}
+                    <strong className="text-white/75">
+                      {market}
+                    </strong>
                   </span>
+
+                  <span className="h-1 w-1 rounded-full bg-[#D4AF37]/70" />
+
+                  <span className="text-[10px] font-medium text-white/40">
+                    Platform:{" "}
+                    <strong className="text-white/75">
+                      {platform}
+                    </strong>
+                  </span>
+
                 </div>
+
               </div>
 
             </div>
@@ -1366,90 +1477,66 @@ export function Challenges() {
               <div className="overflow-hidden rounded-2xl border border-white/[0.065] bg-black/20">
 
                 <RuleRow
-                  icon={
-                    <TargetIcon />
+                  icon={<TargetIcon />}
+                  label={
+                    model === "Instant"
+                      ? "Profit Target"
+                      : "Profit Target Phase 1"
                   }
-                  label="Profit Target Phase 1"
                   value={rules.phase1}
                   accent
                 />
 
                 {rules.phase2 && (
                   <RuleRow
-                    icon={
-                      <TargetIcon />
-                    }
+                    icon={<TargetIcon />}
                     label="Profit Target Phase 2"
-                    value={
-                      rules.phase2
-                    }
-                  />
-                )}
-
-                {rules.phase3 && (
-                  <RuleRow
-                    icon={
-                      <TargetIcon />
-                    }
-                    label="Profit Target Phase 3"
-                    value={
-                      rules.phase3
-                    }
+                    value={rules.phase2}
                   />
                 )}
 
                 <RuleRow
                   icon={<LossIcon />}
-                  label="Maximum Daily Loss"
-                  value={
-                    rules.dailyLoss
-                  }
+                  label="Daily Loss Limit"
+                  value={rules.dailyLoss}
                 />
 
                 <RuleRow
-                  icon={
-                    <ShieldIcon />
-                  }
-                  label="Maximum Loss"
+                  icon={<ShieldIcon />}
+                  label="Max Drawdown"
                   value={rules.maxLoss}
                 />
 
                 <RuleRow
-                  icon={
-                    <TrophyIcon />
-                  }
-                  label="Consistency"
-                  value={
-                    rules.consistency
-                  }
+                  icon={<CalendarIcon />}
+                  label="Inactivity Period"
+                  value={rules.inactivity}
                 />
 
                 <RuleRow
-                  icon={
-                    <LeverageIcon />
-                  }
+                  icon={<LeverageIcon />}
                   label="Leverage"
-                  value={
-                    rules.leverage
-                  }
+                  value={rules.leverage}
                 />
 
+                {rules.flatForWeekend && (
+                  <RuleRow
+                    icon={<CalendarIcon />}
+                    label="Flat for Weekend"
+                    value={rules.flatForWeekend}
+                  />
+                )}
+
                 <RuleRow
-                  icon={
-                    <CalendarIcon />
-                  }
-                  label="Rewards"
-                  value={
-                    rules.rewards
-                  }
+                  icon={<CalendarIcon />}
+                  label="Max Time"
+                  value={rules.maxTime}
                 />
 
                 <RuleRow
                   icon={<SplitIcon />}
                   label="Profit Split"
-                  value={
-                    rules.profitSplit
-                  }
+                  value={rules.profitSplit}
                   accent
                 />
 

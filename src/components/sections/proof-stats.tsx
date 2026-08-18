@@ -1,12 +1,12 @@
 const stats = {
   rewards: "$1.2M+",
   averageReward: "$2,450",
-  traders: "180K+",
+  traders: "8K+",
 };
 
 /* =========================================================
    BLACKPROP BP MARK
-   Vector recreation of the supplied logo symbol
+   Same SVG mark from your original code
    ========================================================= */
 
 function BPMark({
@@ -57,868 +57,372 @@ function BPMark({
 }
 
 /* =========================================================
-   PREMIUM REWARDS ARTWORK
+   LEFT CARD — REWARDS ARTWORK
+   Full but simple / premium
    ========================================================= */
 
 function RewardsArtwork() {
-  const orbitNodes = [
-    [185, 327, 6],
-    [232, 208, 4],
-    [319, 155, 5],
-    [471, 153, 4],
-    [557, 219, 6],
-    [592, 338, 4],
-    [536, 420, 5],
-    [215, 421, 4],
-  ];
-
-  const microParticles = [
-    [110, 244, 2],
-    [142, 359, 3],
-    [188, 168, 2],
-    [221, 118, 2],
-    [270, 234, 2],
-    [295, 96, 3],
-    [347, 123, 2],
-    [404, 96, 2],
-    [456, 126, 3],
-    [511, 103, 2],
-    [556, 155, 2],
-    [622, 205, 3],
-    [646, 286, 2],
-    [613, 389, 2],
-    [565, 455, 3],
-    [488, 475, 2],
-    [291, 472, 2],
-    [180, 453, 3],
-  ];
-
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden">
+      {/* =====================================================
+          AMBIENT LIGHT
+          ===================================================== */}
+
+      <div className="absolute bottom-[-140px] left-1/2 h-[560px] w-[620px] -translate-x-1/2 rounded-full bg-[#D4AF37]/[0.10] blur-[135px]" />
+
+      <div className="absolute bottom-[8%] left-[8%] h-[280px] w-[280px] rounded-full bg-[#D4AF37]/[0.035] blur-[90px]" />
+
+      <div className="absolute right-[-7%] top-[27%] h-[310px] w-[310px] rounded-full bg-white/[0.025] blur-[110px]" />
 
       {/* =====================================================
-          CINEMATIC AMBIENCE
-      ====================================================== */}
+          SUBTLE GRID
+          ===================================================== */}
 
-      <div className="absolute bottom-[-10%] left-1/2 h-[470px] w-[560px] -translate-x-1/2 rounded-full bg-[#D4AF37]/[0.09] blur-[130px]" />
+      <div
+        className="absolute inset-x-[8%] bottom-[5%] top-[32%] opacity-50"
+        style={{
+          backgroundImage: `
+            linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px)
+          `,
+          backgroundSize: "44px 44px",
+          maskImage:
+            "linear-gradient(to bottom, transparent 0%, black 25%, black 75%, transparent 100%)",
+          WebkitMaskImage:
+            "linear-gradient(to bottom, transparent 0%, black 25%, black 75%, transparent 100%)",
+        }}
+      />
 
-      <div className="absolute left-[25%] top-[18%] h-56 w-56 rounded-full bg-white/[0.025] blur-[90px]" />
+      {/* =====================================================
+          BIG BACKGROUND WATERMARK
+          ===================================================== */}
 
-      <div className="absolute right-[9%] top-[28%] h-48 w-48 rounded-full bg-[#D4AF37]/[0.045] blur-[75px]" />
-
-      {/* VERTICAL LIGHT BEAM */}
-      <div className="absolute left-1/2 top-[17%] h-[58%] w-[140px] -translate-x-1/2 bg-[linear-gradient(180deg,transparent,rgba(244,215,123,0.035),rgba(212,175,55,0.08),transparent)] blur-2xl" />
-
-      <svg
-        viewBox="0 0 760 650"
-        fill="none"
-        className="absolute inset-x-0 bottom-[-8px] h-[94%] w-full"
-        aria-hidden="true"
-      >
-        <defs>
-
-          {/* =================================================
-              METAL MATERIALS
-          ================================================= */}
-
-          <linearGradient
-            id="coreGold"
-            x1="145"
-            y1="90"
-            x2="615"
-            y2="590"
-            gradientUnits="userSpaceOnUse"
-          >
-            <stop stopColor="#4B3103" />
-            <stop offset=".08" stopColor="#956A11" />
-            <stop offset=".18" stopColor="#E5BC48" />
-            <stop offset=".27" stopColor="#FFF1A1" />
-            <stop offset=".35" stopColor="#C49125" />
-            <stop offset=".48" stopColor="#724D08" />
-            <stop offset=".58" stopColor="#F2D16A" />
-            <stop offset=".69" stopColor="#A77817" />
-            <stop offset=".82" stopColor="#F6DA78" />
-            <stop offset=".92" stopColor="#79530A" />
-            <stop offset="1" stopColor="#372302" />
-          </linearGradient>
-
-          <linearGradient
-            id="coreGoldBright"
-            x1="0"
-            y1="0"
-            x2="1"
-            y2="1"
-          >
-            <stop stopColor="#FFF7C7" />
-            <stop offset=".18" stopColor="#F5D873" />
-            <stop offset=".48" stopColor="#B47E17" />
-            <stop offset=".72" stopColor="#F5D470" />
-            <stop offset="1" stopColor="#664306" />
-          </linearGradient>
-
-          <linearGradient
-            id="coreSilver"
-            x1="0"
-            y1="0"
-            x2="1"
-            y2="1"
-          >
-            <stop stopColor="#222" />
-            <stop offset=".11" stopColor="#B7B7B7" />
-            <stop offset=".22" stopColor="#FAFAFA" />
-            <stop offset=".34" stopColor="#595959" />
-            <stop offset=".48" stopColor="#D7D7D7" />
-            <stop offset=".62" stopColor="#383838" />
-            <stop offset=".78" stopColor="#EEEEEE" />
-            <stop offset="1" stopColor="#181818" />
-          </linearGradient>
-
-          <radialGradient
-            id="obsidianFace"
-            cx="0"
-            cy="0"
-            r="1"
-            gradientUnits="userSpaceOnUse"
-            gradientTransform="translate(332 214) rotate(45) scale(190)"
-          >
-            <stop stopColor="#404040" />
-            <stop offset=".2" stopColor="#242424" />
-            <stop offset=".52" stopColor="#111112" />
-            <stop offset=".8" stopColor="#080809" />
-            <stop offset="1" stopColor="#020202" />
-          </radialGradient>
-
-          <linearGradient
-            id="pedestalMetal"
-            x1="380"
-            y1="475"
-            x2="380"
-            y2="635"
-            gradientUnits="userSpaceOnUse"
-          >
-            <stop stopColor="#4A4A4A" />
-            <stop offset=".08" stopColor="#292929" />
-            <stop offset=".32" stopColor="#191919" />
-            <stop offset=".72" stopColor="#0C0C0D" />
-            <stop offset="1" stopColor="#030303" />
-          </linearGradient>
-
-          <radialGradient
-            id="pedestalTop"
-            cx="0"
-            cy="0"
-            r="1"
-            gradientUnits="userSpaceOnUse"
-            gradientTransform="translate(336 501) rotate(15) scale(255 75)"
-          >
-            <stop stopColor="#484848" />
-            <stop offset=".28" stopColor="#292929" />
-            <stop offset=".68" stopColor="#161616" />
-            <stop offset="1" stopColor="#070707" />
-          </radialGradient>
-
-          {/* =================================================
-              LIGHTS
-          ================================================= */}
-
-          <radialGradient id="coreAura">
-            <stop stopColor="#F0CF63" stopOpacity=".28" />
-            <stop offset=".35" stopColor="#D4AF37" stopOpacity=".12" />
-            <stop offset="1" stopColor="#D4AF37" stopOpacity="0" />
-          </radialGradient>
-
-          <linearGradient
-            id="tradeTrajectory"
-            x1="135"
-            y1="385"
-            x2="635"
-            y2="188"
-            gradientUnits="userSpaceOnUse"
-          >
-            <stop stopColor="#76520A" stopOpacity="0" />
-            <stop offset=".2" stopColor="#A87C20" stopOpacity=".3" />
-            <stop offset=".52" stopColor="#F1D16E" />
-            <stop offset=".82" stopColor="#C99B2B" stopOpacity=".45" />
-            <stop offset="1" stopColor="#F7DB7B" stopOpacity="0" />
-          </linearGradient>
-
-          {/* =================================================
-              FILTERS
-          ================================================= */}
-
-          <filter
-            id="capitalShadow"
-            x="-100%"
-            y="-100%"
-            width="300%"
-            height="320%"
-          >
-            <feDropShadow
-              dx="0"
-              dy="25"
-              stdDeviation="22"
-              floodColor="#000"
-              floodOpacity=".95"
-            />
-          </filter>
-
-          <filter
-            id="capitalSoftShadow"
-            x="-100%"
-            y="-100%"
-            width="300%"
-            height="300%"
-          >
-            <feDropShadow
-              dx="0"
-              dy="12"
-              stdDeviation="11"
-              floodColor="#000"
-              floodOpacity=".85"
-            />
-          </filter>
-
-          <filter
-            id="nodeGlow"
-            x="-300%"
-            y="-300%"
-            width="700%"
-            height="700%"
-          >
-            <feGaussianBlur
-              stdDeviation="5"
-              result="blur"
-            />
-
-            <feMerge>
-              <feMergeNode in="blur" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
-
-          <filter
-            id="majorGlow"
-            x="-100%"
-            y="-100%"
-            width="300%"
-            height="300%"
-          >
-            <feGaussianBlur
-              stdDeviation="15"
-              result="blur"
-            />
-
-            <feMerge>
-              <feMergeNode in="blur" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
-
-        </defs>
-
-        {/* =====================================================
-            BACKGROUND ARCHITECTURE
-        ====================================================== */}
-
-        <ellipse
-          cx="380"
-          cy="326"
-          rx="264"
-          ry="264"
-          fill="url(#coreAura)"
-          opacity=".43"
+      <div className="absolute bottom-[30px] right-[-42px] opacity-[0.025]">
+        <BPMark
+          width={330}
+          height={420}
+          color="#FFFFFF"
         />
+      </div>
 
-        {/* LARGE ORBIT */}
-        <ellipse
-          cx="380"
-          cy="318"
-          rx="249"
-          ry="119"
-          transform="rotate(-13 380 318)"
-          stroke="#D4AF37"
-          strokeOpacity=".13"
-          strokeWidth="1.5"
-        />
+      {/* =====================================================
+          MAIN VISUAL AREA
+          ===================================================== */}
 
-        <ellipse
-          cx="380"
-          cy="318"
-          rx="212"
-          ry="92"
-          transform="rotate(24 380 318)"
-          stroke="white"
-          strokeOpacity=".065"
-          strokeWidth="1"
-        />
+      <div className="absolute inset-x-0 bottom-[50px] h-[430px] sm:bottom-[58px] sm:h-[455px]">
+        {/* Large architectural outer circle */}
 
-        <ellipse
-          cx="380"
-          cy="315"
-          rx="173"
-          ry="169"
-          stroke="#D4AF37"
-          strokeOpacity=".055"
-        />
+        <div className="absolute left-1/2 top-1/2 h-[350px] w-[350px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#D4AF37]/[0.10] sm:h-[390px] sm:w-[390px]" />
 
-        {/* ORBIT DASHES */}
-        <ellipse
-          cx="380"
-          cy="318"
-          rx="278"
-          ry="143"
-          transform="rotate(-12 380 318)"
-          stroke="#D4AF37"
-          strokeOpacity=".09"
-          strokeWidth="1"
-          strokeDasharray="3 12"
-        />
+        <div className="absolute left-1/2 top-1/2 h-[294px] w-[294px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/[0.045] sm:h-[326px] sm:w-[326px]" />
 
-        {/* =====================================================
-            TRADING TRAJECTORY
-        ====================================================== */}
+        {/* Broken ring effect */}
 
-        <path
-          d="M104 412C151 403 176 368 214 376C255 385 274 338 316 348C358 359 379 303 417 311C457 319 475 268 516 277C558 286 572 231 611 237C630 240 646 220 665 198"
-          stroke="url(#tradeTrajectory)"
-          strokeWidth="2"
-          strokeLinecap="round"
-        />
-
-        <path
-          d="M104 412C151 403 176 368 214 376C255 385 274 338 316 348C358 359 379 303 417 311C457 319 475 268 516 277C558 286 572 231 611 237C630 240 646 220 665 198"
-          stroke="#F5D675"
-          strokeOpacity=".08"
-          strokeWidth="11"
-          strokeLinecap="round"
-          filter="url(#majorGlow)"
-        />
-
-        {/* =====================================================
-            ORBIT NODES
-        ====================================================== */}
-
-        {orbitNodes.map(([cx, cy, r], index) => (
-          <g
-            key={`${cx}-${cy}`}
-            filter={
-              index % 2 === 0
-                ? "url(#nodeGlow)"
-                : undefined
-            }
-          >
-            <circle
-              cx={cx}
-              cy={cy}
-              r={r + 4}
-              fill="#D4AF37"
-              opacity=".07"
-            />
-
-            <circle
-              cx={cx}
-              cy={cy}
-              r={r}
-              fill={
-                index % 3 === 0
-                  ? "#F5D775"
-                  : "#9F7820"
-              }
-            />
-
-            <circle
-              cx={cx - 1}
-              cy={cy - 1}
-              r={Math.max(1, r * 0.3)}
-              fill="#FFF3AE"
-              opacity=".85"
-            />
-          </g>
-        ))}
-
-        {/* =====================================================
-            MICRO PARTICLES
-        ====================================================== */}
-
-        {microParticles.map(
-          ([cx, cy, r], index) => (
-            <circle
-              key={`${cx}-${cy}`}
-              cx={cx}
-              cy={cy}
-              r={r}
-              fill={
-                index % 3 === 0
-                  ? "#F5D875"
-                  : "#9E7A28"
-              }
-              opacity={
-                index % 2 === 0 ? ".7" : ".35"
-              }
-            />
-          )
-        )}
-
-        {/* =====================================================
-            BLACKPROP CAPITAL CORE
-        ====================================================== */}
-
-        <g
-          transform="translate(380 304)"
-          filter="url(#capitalShadow)"
+        <svg
+          viewBox="0 0 420 420"
+          className="absolute left-1/2 top-1/2 h-[390px] w-[390px] -translate-x-1/2 -translate-y-1/2 sm:h-[430px] sm:w-[430px]"
+          fill="none"
+          aria-hidden="true"
         >
-          {/* REAR DEPTH */}
-          <path
-            d="M0-137 119-69 119 69 0 137-119 69-119-69 0-137Z"
-            transform="translate(0 15)"
-            fill="#624508"
-          />
+          <defs>
+            <linearGradient
+              id="rewardRingGold"
+              x1="70"
+              y1="90"
+              x2="350"
+              y2="330"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop stopColor="#D4AF37" stopOpacity="0" />
+              <stop
+                offset=".3"
+                stopColor="#E9CB68"
+                stopOpacity=".7"
+              />
+              <stop
+                offset=".7"
+                stopColor="#A77D20"
+                stopOpacity=".4"
+              />
+              <stop
+                offset="1"
+                stopColor="#D4AF37"
+                stopOpacity="0"
+              />
+            </linearGradient>
 
-          <path
-            d="M0-137 119-69 119 69 0 137-119 69-119-69 0-137Z"
-            transform="translate(0 8)"
-            fill="url(#coreGold)"
-          />
+            <radialGradient id="rewardCoreGlow">
+              <stop stopColor="#D4AF37" stopOpacity=".18" />
+              <stop
+                offset=".45"
+                stopColor="#D4AF37"
+                stopOpacity=".06"
+              />
+              <stop
+                offset="1"
+                stopColor="#D4AF37"
+                stopOpacity="0"
+              />
+            </radialGradient>
+          </defs>
 
-          {/* PRIMARY FRAME */}
-          <path
-            d="M0-132 114-66 114 66 0 132-114 66-114-66 0-132Z"
-            fill="url(#coreGoldBright)"
-          />
-
-          {/* BLACK INNER HEX */}
-          <path
-            d="M0-116 100-58 100 58 0 116-100 58-100-58 0-116Z"
-            fill="url(#obsidianFace)"
-            stroke="#F2D16A"
-            strokeOpacity=".35"
-            strokeWidth="2"
-          />
-
-          {/* INNER DETAIL FRAME */}
-          <path
-            d="M0-101 87-50 87 50 0 101-87 50-87-50 0-101Z"
-            fill="none"
-            stroke="white"
-            strokeOpacity=".07"
-          />
-
-          {/* TECH LINES */}
-          <path
-            d="M-87-50 0 0 87-50"
-            stroke="white"
-            strokeOpacity=".045"
-          />
-
-          <path
-            d="M-87 50 0 0 87 50"
-            stroke="white"
-            strokeOpacity=".045"
-          />
-
-          <path
-            d="M0-101V101"
-            stroke="#D4AF37"
-            strokeOpacity=".065"
-          />
-
-          {/* CENTRAL HALO */}
           <circle
-            cx="0"
-            cy="0"
-            r="66"
+            cx="210"
+            cy="210"
+            r="172"
+            stroke="url(#rewardRingGold)"
+            strokeWidth="1.4"
+            strokeDasharray="105 40 18 45"
+            transform="rotate(-24 210 210)"
+          />
+
+          <circle
+            cx="210"
+            cy="210"
+            r="143"
+            stroke="white"
+            strokeOpacity=".045"
+            strokeDasharray="2 10"
+          />
+
+          <circle
+            cx="210"
+            cy="210"
+            r="118"
+            fill="url(#rewardCoreGlow)"
+          />
+
+          {/* Small architectural marks */}
+
+          <path
+            d="M210 22V48"
+            stroke="#D4AF37"
+            strokeOpacity=".32"
+          />
+
+          <path
+            d="M210 372V398"
+            stroke="#D4AF37"
+            strokeOpacity=".18"
+          />
+
+          <path
+            d="M22 210H48"
+            stroke="white"
+            strokeOpacity=".12"
+          />
+
+          <path
+            d="M372 210H398"
+            stroke="white"
+            strokeOpacity=".12"
+          />
+
+          <circle
+            cx="210"
+            cy="38"
+            r="3"
+            fill="#E5C763"
+          />
+
+          <circle
+            cx="382"
+            cy="210"
+            r="2"
             fill="#D4AF37"
-            opacity=".035"
+            fillOpacity=".7"
           />
 
           <circle
-            cx="0"
-            cy="0"
-            r="61"
-            stroke="#D4AF37"
-            strokeOpacity=".2"
+            cx="38"
+            cy="210"
+            r="2"
+            fill="#FFFFFF"
+            fillOpacity=".25"
           />
-
-          <circle
-            cx="0"
-            cy="0"
-            r="51"
-            stroke="white"
-            strokeOpacity=".055"
-          />
-
-          {/* BLACKPROP LOGO MARK */}
-          <BPMark
-            x={-34}
-            y={-43}
-            width={68}
-            height={86}
-            color="#FFFFFF"
-            className="drop-shadow-[0_1px_1px_rgba(0,0,0,.7)]"
-          />
-
-          
-
-          {/* SPECULAR HIGHLIGHT */}
-          <path
-            d="M-69-77C-35-106 13-112 49-92"
-            stroke="white"
-            strokeOpacity=".2"
-            strokeWidth="8"
-            strokeLinecap="round"
-          />
-
-          <path
-            d="M-93-47C-85-59-78-67-67-76"
-            stroke="#FFF4B7"
-            strokeOpacity=".15"
-            strokeWidth="3"
-            strokeLinecap="round"
-          />
-
-          {/* GOLD CORNER DETAILS */}
-          <circle
-            cx="0"
-            cy="-105"
-            r="3"
-            fill="#F5D979"
-          />
-
-          <circle
-            cx="91"
-            cy="-52"
-            r="3"
-            fill="#B8871E"
-          />
-
-          <circle
-            cx="-91"
-            cy="52"
-            r="3"
-            fill="#B8871E"
-          />
-
-          <circle
-            cx="0"
-            cy="105"
-            r="3"
-            fill="#F5D979"
-          />
-        </g>
+        </svg>
 
         {/* =====================================================
-            FLOATING CAPITAL BARS
-        ====================================================== */}
+            CENTER BRAND CORE
+            ===================================================== */}
 
-        <g
-          transform="translate(172 353) rotate(-16)"
-          filter="url(#capitalSoftShadow)"
-        >
-          <path
-            d="M-47-15 32-28 47-8-31 7Z"
-            fill="url(#coreGoldBright)"
-          />
+        <div className="absolute left-1/2 top-1/2 h-[190px] w-[190px] -translate-x-1/2 -translate-y-1/2 sm:h-[210px] sm:w-[210px]">
+          {/* Glow */}
 
-          <path
-            d="M-31 7 47-8 47 3-30 18Z"
-            fill="#76520B"
-          />
+          <div className="absolute inset-[14%] rounded-[42px] bg-[#D4AF37]/20 blur-[42px]" />
 
-          <path
-            d="M32-28 47-8 47 3 33-17Z"
-            fill="#B18120"
-          />
+          {/* Outer frame */}
 
-          <BPMark
-            x={-8}
-            y={-16}
-            width={16}
-            height={20}
-            color="#FFFFFF"
-          />
-        </g>
+          <div className="absolute inset-0 rotate-[3deg] rounded-[46px] border border-[#E3C45F]/25 bg-[linear-gradient(145deg,rgba(212,175,55,.10),rgba(255,255,255,.018),rgba(212,175,55,.035))] shadow-[0_35px_70px_rgba(0,0,0,.65)]" />
 
-        <g
-          transform="translate(576 359) rotate(20)"
-          filter="url(#capitalSoftShadow)"
-        >
-          <path
-            d="M-43-14 28-25 43-7-29 6Z"
-            fill="url(#coreSilver)"
-          />
+          {/* Second frame */}
 
-          <path
-            d="M-29 6 43-7 43 4-28 17Z"
-            fill="#555"
-          />
+          <div className="absolute inset-[7px] rounded-[40px] border border-white/[0.07] bg-[#09090A]" />
 
-          <path
-            d="M28-25 43-7 43 4 29-15Z"
-            fill="#8B8B8B"
-          />
+          {/* Thin highlight */}
 
-          <BPMark
-            x={-7}
-            y={-14}
-            width={14}
-            height={18}
-            color="#FFFFFF"
-          />
-        </g>
+          <div className="absolute inset-[8px] rounded-[39px] bg-[linear-gradient(145deg,rgba(255,255,255,.045),transparent_40%,rgba(212,175,55,.025))]" />
+
+          {/* Inner logo plate */}
+
+          <div className="absolute inset-[28px] flex items-center justify-center rounded-[30px] border border-[#D4AF37]/[0.18] bg-[radial-gradient(circle_at_35%_25%,#232324_0%,#111112_35%,#070708_75%)] shadow-[inset_0_1px_0_rgba(255,255,255,.06)]">
+            <div className="absolute left-1/2 top-0 h-px w-[55%] -translate-x-1/2 bg-gradient-to-r from-transparent via-[#E4C45F]/50 to-transparent" />
+
+            <BPMark
+              width={60}
+              height={76}
+              color="#FFFFFF"
+              className="drop-shadow-[0_5px_14px_rgba(0,0,0,.7)]"
+            />
+          </div>
+
+          {/* Corner details */}
+
+          <span className="absolute left-[17px] top-[17px] h-1 w-1 rounded-full bg-[#D4AF37]/70" />
+
+          <span className="absolute right-[17px] top-[17px] h-1 w-1 rounded-full bg-[#D4AF37]/35" />
+
+          <span className="absolute bottom-[17px] left-[17px] h-1 w-1 rounded-full bg-white/15" />
+
+          <span className="absolute bottom-[17px] right-[17px] h-1 w-1 rounded-full bg-[#D4AF37]/55" />
+        </div>
 
         {/* =====================================================
-            SMALL FLOATING TOKENS
-        ====================================================== */}
+            TOP STATUS PILL
+            ===================================================== */}
 
-        <g
-          transform="translate(218 247) rotate(-21)"
-          filter="url(#capitalSoftShadow)"
-        >
-          <ellipse
-            cy="5"
-            rx="34"
-            ry="42"
-            fill="#634408"
-          />
+        <div className="absolute left-1/2 top-[10px] flex -translate-x-1/2 items-center gap-2.5 rounded-full border border-white/[0.07] bg-[#0A0A0B]/80 px-4 py-2 shadow-[0_15px_35px_rgba(0,0,0,.32)] backdrop-blur-xl">
+          <span className="relative flex h-1.5 w-1.5">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#E1BF53] opacity-40" />
 
-          <ellipse
-            rx="34"
-            ry="42"
-            fill="url(#coreGold)"
-          />
+            <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#E1BF53]" />
+          </span>
 
-          <ellipse
-            rx="27"
-            ry="34"
-            fill="#090909"
-            stroke="white"
-            strokeOpacity=".10"
-          />
-
-          <BPMark
-            x={-10}
-            y={-13}
-            width={20}
-            height={25}
-            color="#FFFFFF"
-          />
-        </g>
-
-        <g
-          transform="translate(547 223) rotate(17)"
-          filter="url(#capitalSoftShadow)"
-        >
-          <ellipse
-            cy="5"
-            rx="31"
-            ry="39"
-            fill="#414141"
-          />
-
-          <ellipse
-            rx="31"
-            ry="39"
-            fill="url(#coreSilver)"
-          />
-
-          <ellipse
-            rx="24"
-            ry="31"
-            fill="#090909"
-            stroke="white"
-            strokeOpacity=".10"
-          />
-
-          <BPMark
-            x={-9}
-            y={-12}
-            width={18}
-            height={23}
-            color="#FFFFFF"
-          />
-        </g>
+          <span className="whitespace-nowrap text-[8px] font-bold uppercase tracking-[0.18em] text-white/45 sm:text-[9px]">
+            Verified rewards
+          </span>
+        </div>
 
         {/* =====================================================
-            PEDESTAL
-        ====================================================== */}
+            LEFT DATA CARD
+            ===================================================== */}
 
-        <ellipse
-          cx="380"
-          cy="610"
-          rx="235"
-          ry="35"
-          fill="#000"
-          opacity=".9"
-        />
+        <div className="absolute left-[5%] top-[39%] hidden min-w-[125px] rounded-2xl border border-white/[0.07] bg-[#09090A]/85 p-3.5 shadow-[0_18px_40px_rgba(0,0,0,.38)] backdrop-blur-xl sm:block lg:left-[7%]">
+          <div className="flex items-center justify-between gap-4">
+            <span className="text-[7px] font-bold uppercase tracking-[0.16em] text-white/25">
+              Total paid
+            </span>
 
-        <path
-          d="M183 521V578C183 609 271 633 380 633C489 633 577 609 577 578V521"
-          fill="url(#pedestalMetal)"
-        />
+            <span className="h-1.5 w-1.5 rounded-full bg-[#D4AF37]" />
+          </div>
 
-        <ellipse
-          cx="380"
-          cy="521"
-          rx="197"
-          ry="45"
-          fill="url(#pedestalTop)"
-          stroke="white"
-          strokeOpacity=".075"
-        />
+          <p className="mt-2 text-[19px] font-black tracking-[-0.05em] text-white">
+            $1.2M+
+          </p>
 
-        {/* GOLD PEDESTAL RING */}
-        <ellipse
-          cx="380"
-          cy="517"
-          rx="165"
-          ry="34"
-          stroke="url(#coreGold)"
-          strokeOpacity=".42"
-          strokeWidth="2"
-        />
+          <div className="mt-2.5 h-px w-full bg-white/[0.05]" />
 
-        <ellipse
-          cx="380"
-          cy="517"
-          rx="142"
-          ry="27"
-          stroke="white"
-          strokeOpacity=".04"
-        />
-
-        {/* LIGHT UNDER CORE */}
-        <ellipse
-          cx="380"
-          cy="501"
-          rx="105"
-          ry="21"
-          fill="#D4AF37"
-          opacity=".11"
-          filter="url(#majorGlow)"
-        />
+          <p className="mt-2 text-[8px] font-medium text-[#D8B84F]/70">
+            Rewards distributed
+          </p>
+        </div>
 
         {/* =====================================================
-            STACKED BARS ON PLATFORM
-        ====================================================== */}
+            RIGHT DATA CARD
+            ===================================================== */}
 
-        <g
-          transform="translate(285 517)"
-          filter="url(#capitalSoftShadow)"
-        >
-          <path
-            d="M-56-7 34-20 54-6-37 8Z"
-            fill="url(#coreGold)"
-          />
+        <div className="absolute right-[5%] top-[33%] hidden min-w-[120px] rounded-2xl border border-[#D4AF37]/[0.12] bg-[#09090A]/85 p-3.5 shadow-[0_18px_40px_rgba(0,0,0,.38)] backdrop-blur-xl sm:block lg:right-[7%]">
+          <p className="text-[7px] font-bold uppercase tracking-[0.16em] text-white/25">
+            Profit split
+          </p>
 
-          <path
-            d="M-37 8 54-6 54 4-36 18Z"
-            fill="#72500A"
-          />
+          <div className="mt-2 flex items-end gap-1">
+            <p className="text-[21px] font-black leading-none tracking-[-0.05em] text-[#E3C35D]">
+              90%
+            </p>
 
-          <path
-            d="M-52 8 38-5 56 9-35 22Z"
-            fill="url(#coreGold)"
-          />
+            <span className="mb-[2px] text-[7px] font-medium text-white/25">
+              trader
+            </span>
+          </div>
 
-          <text
-            x="1"
-            y="-3"
-            textAnchor="middle"
-            fill="#3A2602"
-            fontSize="9"
-            fontWeight="900"
-          >
-            BLACKPROP
-          </text>
-        </g>
-
-        <g
-          transform="translate(486 520)"
-          filter="url(#capitalSoftShadow)"
-        >
-          <ellipse
-            cx="0"
-            cy="12"
-            rx="55"
-            ry="15"
-            fill="#3C3C3C"
-          />
-
-          <ellipse
-            cx="0"
-            cy="6"
-            rx="55"
-            ry="15"
-            fill="url(#coreSilver)"
-          />
-
-          <ellipse
-            cx="0"
-            cy="1"
-            rx="54"
-            ry="14"
-            fill="#191919"
-          />
-
-          <BPMark
-            x={-7}
-            y={-9}
-            width={14}
-            height={18}
-            color="#FFFFFF"
-          />
-        </g>
+          <div className="mt-3 h-[3px] overflow-hidden rounded-full bg-white/[0.05]">
+            <div className="h-full w-[90%] rounded-full bg-gradient-to-r from-[#806111] to-[#E5C75F]" />
+          </div>
+        </div>
 
         {/* =====================================================
-            FRONT REFLECTIONS
-        ====================================================== */}
+            SMALL LEFT DOT / CONNECTION
+            ===================================================== */}
 
-        <path
-          d="M213 568C298 592 468 594 548 566"
-          stroke="white"
-          strokeOpacity=".035"
-          strokeWidth="2"
-        />
+        <div className="absolute left-[18%] top-[24%] hidden items-center gap-2 lg:flex">
+          <span className="h-1 w-1 rounded-full bg-[#D4AF37]/70 shadow-[0_0_10px_rgba(212,175,55,.6)]" />
 
-        <path
-          d="M248 579C317 595 442 596 509 579"
-          stroke="#D4AF37"
-          strokeOpacity=".045"
-        />
-      </svg>
+          <span className="h-px w-12 bg-gradient-to-r from-[#D4AF37]/30 to-transparent" />
+        </div>
+
+        {/* =====================================================
+            SMALL RIGHT DOT / CONNECTION
+            ===================================================== */}
+
+        <div className="absolute right-[17%] top-[68%] hidden items-center gap-2 lg:flex">
+          <span className="h-px w-12 bg-gradient-to-l from-white/15 to-transparent" />
+
+          <span className="h-1 w-1 rounded-full bg-white/30" />
+        </div>
+
+        {/* =====================================================
+            BOTTOM STATUS BAR
+            ===================================================== */}
+
+        <div className="absolute bottom-[-2px] left-1/2 flex w-[84%] max-w-[430px] -translate-x-1/2 items-center justify-between rounded-2xl border border-white/[0.06] bg-[#09090A]/75 px-4 py-3 shadow-[0_18px_50px_rgba(0,0,0,.35)] backdrop-blur-xl sm:px-5">
+          <div className="flex items-center gap-3">
+            <div className="flex h-7 w-7 items-center justify-center rounded-lg border border-[#D4AF37]/15 bg-[#D4AF37]/[0.055]">
+              <BPMark
+                width={11}
+                height={14}
+                color="#DCC05B"
+              />
+            </div>
+
+            <div>
+              <p className="text-[8px] font-semibold text-white/55">
+                BlackProp Rewards
+              </p>
+
+              <p className="mt-0.5 text-[7px] text-white/20">
+                Performance rewarded
+              </p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-1.5">
+            <span className="h-1.5 w-1.5 rounded-full bg-[#D4AF37]" />
+
+            <span className="text-[7px] font-bold uppercase tracking-[0.13em] text-white/30">
+              Active
+            </span>
+          </div>
+        </div>
+      </div>
 
       {/* =====================================================
-          HTML OVERLAY DETAILS
-      ====================================================== */}
+          FLOOR / DEPTH
+          ===================================================== */}
 
-      <div className="absolute bottom-[20%] left-[8%] hidden items-center gap-2 rounded-full border border-white/[0.07] bg-black/25 px-3 py-1.5 backdrop-blur-lg sm:flex">
+      <div className="absolute bottom-[34px] left-1/2 h-[32px] w-[360px] -translate-x-1/2 rounded-full bg-black/80 blur-2xl" />
 
-        <span className="h-1.5 w-1.5 rounded-full bg-[#E6C45B] shadow-[0_0_8px_rgba(212,175,55,.5)]" />
+      <div className="absolute bottom-[48px] left-1/2 h-px w-[48%] -translate-x-1/2 bg-gradient-to-r from-transparent via-[#D4AF37]/25 to-transparent" />
 
-        <span className="text-[7px] font-bold uppercase tracking-[0.18em] text-white/30">
-          Capital unlocked
-        </span>
+      {/* Bottom fade */}
 
-      </div>
-
-      <div className="absolute bottom-[30%] right-[7%] hidden rounded-xl border border-white/[0.07] bg-[#09090A]/70 px-3 py-2 backdrop-blur-xl md:block">
-
-        <p className="text-[7px] font-semibold uppercase tracking-[0.17em] text-white/20">
-          Trader share
-        </p>
-
-        <p className="mt-1 text-sm font-black tracking-[-0.04em] text-[#E8C65E]">
-          90%
-        </p>
-
-      </div>
-
+      <div className="absolute inset-x-0 bottom-0 h-[130px] bg-gradient-to-t from-[#080809] via-[#080809]/45 to-transparent" />
     </div>
   );
 }
 
 /* =========================================================
-   TROPHY
+   TROPHY ARTWORK
    ========================================================= */
 
 function TrophyArtwork() {
@@ -941,13 +445,34 @@ function TrophyArtwork() {
             y2="300"
           >
             <stop stopColor="#202020" />
-            <stop offset=".08" stopColor="#F1F1F1" />
-            <stop offset=".19" stopColor="#5B5B5B" />
-            <stop offset=".35" stopColor="#F8F8F8" />
-            <stop offset=".53" stopColor="#353535" />
-            <stop offset=".68" stopColor="#CFCFCF" />
-            <stop offset=".82" stopColor="#282828" />
-            <stop offset="1" stopColor="#111" />
+            <stop
+              offset=".08"
+              stopColor="#F1F1F1"
+            />
+            <stop
+              offset=".19"
+              stopColor="#5B5B5B"
+            />
+            <stop
+              offset=".35"
+              stopColor="#F8F8F8"
+            />
+            <stop
+              offset=".53"
+              stopColor="#353535"
+            />
+            <stop
+              offset=".68"
+              stopColor="#CFCFCF"
+            />
+            <stop
+              offset=".82"
+              stopColor="#282828"
+            />
+            <stop
+              offset="1"
+              stopColor="#111"
+            />
           </linearGradient>
 
           <linearGradient
@@ -958,10 +483,22 @@ function TrophyArtwork() {
             y2="1"
           >
             <stop stopColor="#704D09" />
-            <stop offset=".25" stopColor="#FFF1A0" />
-            <stop offset=".48" stopColor="#C89927" />
-            <stop offset=".75" stopColor="#F4D36D" />
-            <stop offset="1" stopColor="#6A4807" />
+            <stop
+              offset=".25"
+              stopColor="#FFF1A0"
+            />
+            <stop
+              offset=".48"
+              stopColor="#C89927"
+            />
+            <stop
+              offset=".75"
+              stopColor="#F4D36D"
+            />
+            <stop
+              offset="1"
+              stopColor="#6A4807"
+            />
           </linearGradient>
 
           <filter
@@ -982,6 +519,8 @@ function TrophyArtwork() {
         </defs>
 
         <g filter="url(#trophyShadow)">
+          {/* Handles */}
+
           <path
             d="M161 82c-62-17-98 5-92 53 5 41 34 66 88 67"
             stroke="url(#metalCup)"
@@ -996,6 +535,8 @@ function TrophyArtwork() {
             strokeLinecap="round"
           />
 
+          {/* Cup */}
+
           <path
             d="M145 57h206c-9 107-39 164-103 169-64-5-94-62-103-169Z"
             fill="url(#metalCup)"
@@ -1008,6 +549,8 @@ function TrophyArtwork() {
             strokeLinecap="round"
           />
 
+          {/* Highlight */}
+
           <path
             d="M184 74c-9 64 8 107 49 133"
             stroke="white"
@@ -1015,6 +558,8 @@ function TrophyArtwork() {
             strokeWidth="11"
             strokeLinecap="round"
           />
+
+          {/* Logo center */}
 
           <circle
             cx="248"
@@ -1032,13 +577,16 @@ function TrophyArtwork() {
             width={40}
             height={51}
             color="#FFFFFF"
-            className="drop-shadow-[0_1px_1px_rgba(0,0,0,.65)]"
           />
+
+          {/* Stem */}
 
           <path
             d="M228 218h40l10 54h-60l10-54Z"
             fill="url(#metalCup)"
           />
+
+          {/* Gold separator */}
 
           <rect
             x="201"
@@ -1048,6 +596,8 @@ function TrophyArtwork() {
             rx="8"
             fill="url(#cupGold)"
           />
+
+          {/* Base */}
 
           <rect
             x="174"
@@ -1064,7 +614,7 @@ function TrophyArtwork() {
 }
 
 /* =========================================================
-   GLOBE
+   GLOBE ARTWORK
    ========================================================= */
 
 function GlobeArtwork() {
@@ -1123,14 +673,19 @@ function GlobeArtwork() {
       <div className="absolute -bottom-24 -right-16 h-[360px] w-[360px] rounded-full bg-[#D4AF37]/10 blur-[100px]" />
 
       <div className="absolute -bottom-[115px] -right-[55px] h-[420px] w-[420px] rounded-full border border-white/[0.08] bg-[radial-gradient(circle_at_35%_27%,#313131_0%,#151515_30%,#080808_65%,#020202_100%)] shadow-[inset_-55px_-35px_90px_rgba(0,0,0,.9),0_30px_70px_rgba(0,0,0,.7)]">
+        {/* Longitude */}
 
         <div className="absolute left-1/2 top-[7%] h-[86%] w-[34%] -translate-x-1/2 rounded-[50%] border border-white/[0.045]" />
 
         <div className="absolute left-1/2 top-[7%] h-[86%] w-[65%] -translate-x-1/2 rounded-[50%] border border-white/[0.03]" />
 
+        {/* Latitude */}
+
         <div className="absolute left-[7%] top-1/2 h-[32%] w-[86%] -translate-y-1/2 rounded-[50%] border border-white/[0.035]" />
 
         <div className="absolute left-[10%] top-[29%] h-[18%] w-[80%] rounded-[50%] border border-white/[0.035]" />
+
+        {/* Map points */}
 
         {points.map(([left, top], index) => (
           <span
@@ -1149,6 +704,8 @@ function GlobeArtwork() {
           />
         ))}
 
+        {/* Highlight */}
+
         <div className="absolute left-[19%] top-[14%] h-[40%] w-[20%] rotate-[28deg] rounded-full bg-white/[0.05] blur-xl" />
       </div>
     </div>
@@ -1156,85 +713,95 @@ function GlobeArtwork() {
 }
 
 /* =========================================================
-   SECTION
+   MAIN SECTION
    ========================================================= */
 
 export function ProofStats() {
   return (
     <section className="relative overflow-hidden bg-[#030303] py-16 sm:py-20 lg:py-24 xl:py-28">
+      {/* SECTION AMBIENCE */}
 
-      {/* AMBIENCE */}
       <div className="pointer-events-none absolute left-1/2 top-0 h-[550px] w-[950px] -translate-x-1/2 rounded-full bg-[#D4AF37]/[0.025] blur-[150px]" />
 
       <div className="relative mx-auto max-w-[1320px] px-4 sm:px-6 lg:px-8">
-
         {/* =====================================================
-            STAT CARDS
-        ====================================================== */}
+            MAIN STAT CARDS
+            ===================================================== */}
 
         <div className="grid gap-4 lg:grid-cols-[1.08fr_.92fr] xl:gap-5">
+          {/* ===================================================
+              LARGE LEFT REWARDS CARD
+              =================================================== */}
 
-          {/* LARGE REWARDS CARD */}
-          <article className="group relative min-h-[650px] sm:min-h-[700px] lg:min-h-[720px] overflow-hidden rounded-[32px] border border-white/[0.075] bg-[linear-gradient(145deg,#171718,#09090A)] shadow-[0_35px_100px_rgba(0,0,0,.35)]">
-
+          <article className="group relative min-h-[650px] overflow-hidden rounded-[32px] border border-white/[0.075] bg-[linear-gradient(145deg,#161617_0%,#0C0C0D_48%,#080809_100%)] shadow-[0_35px_100px_rgba(0,0,0,.40)] sm:min-h-[690px] lg:min-h-[720px]">
             <RewardsArtwork />
 
-            {/* CINEMATIC VIGNETTE */}
-            <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(4,4,4,.04)_0%,transparent_40%,rgba(3,3,3,.15)_75%,rgba(3,3,3,.38)_100%)]" />
+            {/* Overall vignette */}
 
-            {/* TOP TEXT GRADIENT */}
-            <div className="pointer-events-none absolute inset-x-0 top-0 h-[260px] bg-gradient-to-b from-[#111112] via-[#111112]/80 to-transparent" />
+            <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(3,3,3,.02)_0%,transparent_43%,rgba(3,3,3,.08)_75%,rgba(3,3,3,.32)_100%)]" />
 
-            {/* TOP SHINE */}
-            <div className="absolute inset-x-[13%] top-0 h-px bg-gradient-to-r from-transparent via-[#F0D16E]/40 to-transparent" />
+            {/* Keep top readable */}
+
+            <div className="pointer-events-none absolute inset-x-0 top-0 h-[290px] bg-gradient-to-b from-[#111112] via-[#111112]/90 to-transparent" />
+
+            {/* Top gold edge */}
+
+            <div className="absolute inset-x-[12%] top-0 h-px bg-gradient-to-r from-transparent via-[#E8CA67]/45 to-transparent" />
+
+            {/* Subtle inner border */}
+
+            <div className="pointer-events-none absolute inset-[1px] rounded-[31px] border border-white/[0.018]" />
 
             {/* TEXT */}
+
             <div className="relative z-20 p-7 sm:p-9 lg:p-10">
+              <div className="flex items-center gap-2.5">
+                <span className="h-px w-5 bg-[#D4AF37]/65" />
 
-              <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#D4AF37]/75 sm:text-[12px]">
-                Rewards paid
-              </p>
+                <p className="text-[11px] font-bold uppercase tracking-[0.19em] text-[#D4AF37]/80 sm:text-[12px]">
+                  Rewards paid
+                </p>
+              </div>
 
-              <h3 className="mt-4 text-[3.6rem] font-black leading-none tracking-[-0.06em] text-white sm:text-[4.8rem] lg:text-[5.2rem]">
+              <h3 className="mt-4 text-[3.6rem] font-black leading-none tracking-[-0.065em] text-white sm:text-[4.8rem] lg:text-[5.2rem]">
                 {stats.rewards}
               </h3>
 
-              <p className="mt-4 max-w-[380px] text-[15px] leading-7 text-white/48 sm:text-base">
-                Capital rewarded to traders for
-                disciplined performance.
+              <p className="mt-4 max-w-[380px] text-[15px] leading-7 text-white/[0.46] sm:text-base">
+                Capital rewarded to traders for disciplined
+                performance.
               </p>
 
-            </div>
+              {/* Tiny trust indicators */}
 
-            {/* BADGE */}
-            <div className="absolute bottom-7 left-7 z-20 sm:bottom-9 sm:left-9">
+              <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2">
+                <div className="flex items-center gap-2">
+                  <span className="h-1 w-1 rounded-full bg-[#D4AF37]" />
 
-              <div className="inline-flex items-center gap-2 rounded-full border border-white/[0.08] bg-black/40 px-3 py-1.5 backdrop-blur-xl">
+                  <span className="text-[9px] font-medium uppercase tracking-[0.13em] text-white/[0.25]">
+                    Verified
+                  </span>
+                </div>
 
-                <span className="relative flex h-1.5 w-1.5">
+                <div className="flex items-center gap-2">
+                  <span className="h-1 w-1 rounded-full bg-white/25" />
 
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#D4AF37] opacity-35" />
-
-                  <span className="relative h-1.5 w-1.5 rounded-full bg-[#D4AF37]" />
-
-                </span>
-
-                <span className="text-[11px] font-medium text-white/52 sm:text-[12px]">
-                  BlackProp rewards
-                </span>
-
+                  <span className="text-[9px] font-medium uppercase tracking-[0.13em] text-white/[0.25]">
+                    Performance based
+                  </span>
+                </div>
               </div>
-
             </div>
-
           </article>
 
-          {/* RIGHT CARDS */}
+          {/* ===================================================
+              RIGHT COLUMN
+              =================================================== */}
+
           <div className="grid gap-4">
-
             {/* AVERAGE REWARD */}
-            <article className="group relative min-h-[330px] sm:min-h-[350px] lg:min-h-[350px] overflow-hidden rounded-[32px] border border-white/[0.075] bg-[linear-gradient(145deg,#171718,#09090A)]">
 
+            <article className="group relative min-h-[330px] overflow-hidden rounded-[32px] border border-white/[0.075] bg-[linear-gradient(145deg,#171718,#09090A)] sm:min-h-[350px] lg:min-h-[350px]">
               <TrophyArtwork />
 
               <div className="absolute inset-0 bg-gradient-to-r from-[#111112] via-[#111112]/75 to-transparent" />
@@ -1242,7 +809,6 @@ export function ProofStats() {
               <div className="absolute inset-x-[15%] top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
 
               <div className="relative z-20 max-w-[66%] p-6 sm:max-w-[60%] sm:p-8 lg:max-w-[58%]">
-
                 <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-white/40 sm:text-[12px]">
                   Average reward
                 </p>
@@ -1251,18 +817,15 @@ export function ProofStats() {
                   {stats.averageReward}
                 </h3>
 
-                <p className="mt-4 text-[14px] leading-6 text-white/45 sm:text-[15px]">
-                  Average reward across successful
-                  payout cycles.
+                <p className="mt-4 text-[14px] leading-6 text-white/[0.45] sm:text-[15px]">
+                  Average reward across successful payout cycles.
                 </p>
-
               </div>
-
             </article>
 
-            {/* TRADERS */}
-            <article className="group relative min-h-[330px] sm:min-h-[350px] lg:min-h-[350px] overflow-hidden rounded-[32px] border border-white/[0.075] bg-[linear-gradient(145deg,#171718,#09090A)]">
+            {/* GLOBAL TRADERS */}
 
+            <article className="group relative min-h-[330px] overflow-hidden rounded-[32px] border border-white/[0.075] bg-[linear-gradient(145deg,#171718,#09090A)] sm:min-h-[350px] lg:min-h-[350px]">
               <GlobeArtwork />
 
               <div className="absolute inset-0 bg-gradient-to-r from-[#111112] via-[#111112]/72 to-transparent" />
@@ -1270,7 +833,6 @@ export function ProofStats() {
               <div className="absolute inset-x-[15%] top-0 h-px bg-gradient-to-r from-transparent via-[#D4AF37]/28 to-transparent" />
 
               <div className="relative z-20 max-w-[66%] p-6 sm:max-w-[60%] sm:p-8 lg:max-w-[58%]">
-
                 <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#D4AF37]/70 sm:text-[12px]">
                   Global traders
                 </p>
@@ -1279,25 +841,19 @@ export function ProofStats() {
                   {stats.traders}
                 </h3>
 
-                <p className="mt-4 text-[14px] leading-6 text-white/45 sm:text-[15px]">
-                  Traders connected across global
-                  financial markets.
+                <p className="mt-4 text-[14px] leading-6 text-white/[0.45] sm:text-[15px]">
+                  Traders connected across global financial markets.
                 </p>
-
               </div>
-
             </article>
-
           </div>
-
         </div>
 
         {/* =====================================================
             BOTTOM STATS
-        ====================================================== */}
+            ===================================================== */}
 
         <div className="mt-4 grid overflow-hidden rounded-[26px] border border-white/[0.06] bg-[#0A0A0B] sm:grid-cols-3">
-
           {[
             {
               value: "90%",
@@ -1323,11 +879,9 @@ export function ProofStats() {
                   : ""
               }`}
             >
-
               <div className="absolute left-0 top-0 h-px w-20 bg-gradient-to-r from-[#D4AF37]/45 to-transparent" />
 
               <div className="flex items-center gap-5">
-
                 <span className="text-[1.9rem] font-black leading-none tracking-[-0.055em] text-[#E3C35D] sm:text-[2.15rem]">
                   {item.value}
                 </span>
@@ -1337,18 +891,14 @@ export function ProofStats() {
                     {item.title}
                   </p>
 
-                  <p className="mt-1.5 text-[11px] leading-4 text-white/38 sm:text-[12px]">
+                  <p className="mt-1.5 text-[11px] leading-4 text-white/[0.38] sm:text-[12px]">
                     {item.text}
                   </p>
                 </div>
-
               </div>
-
             </div>
           ))}
-
         </div>
-
       </div>
     </section>
   );
