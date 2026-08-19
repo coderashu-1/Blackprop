@@ -40,38 +40,72 @@ function BPMark({
   );
 }
 
+/* =========================================================
+   LINKS
+========================================================= */
 
 const tradingLinks = [
   { label: "Home", href: "/" },
-  { label: "How It Works", href: "#how-it-works" },
-  { label: "Challenges", href: "#challenges" },
-  { label: "Trader Stories", href: "#testimonials" },
-  { label: "Dashboard", href: "#dashboard" },
-  { label: "FAQ", href: "#faq" },
+  { label: "How It Works", href: "/#how-it-works" },
+  { label: "Challenges", href: "/#challenges" },
+  { label: "Trader Stories", href: "/#testimonials" },
+  { label: "Dashboard", href: "/#dashboard" },
+  { label: "FAQ", href: "/#faq" },
 ];
 
 const companyLinks = [
-  { label: "About BlackProp", href: "#about" },
-  { label: "Affiliate", href: "#affiliate" },
-  { label: "Community", href: "#community" },
-  { label: "Contact", href: "#contact" },
-  { label: "Support", href: "#support" },
+  { label: "About BlackProp", href: "/#about" },
+  { label: "Affiliate", href: "/#affiliate" },
+  { label: "Community", href: "/#community" },
+  { label: "Contact", href: "/#contact" },
+  { label: "Support", href: "/#support" },
 ];
 
 const legalLinks = [
-  { label: "Terms & Conditions", href: "#terms" },
-  { label: "Privacy Policy", href: "#privacy" },
-  { label: "Refund Policy", href: "#refund-policy" },
-  { label: "Risk Disclosure", href: "#risk-disclosure" },
+  {
+    label: "Terms & Conditions",
+    href: "/terms",
+  },
+  {
+    label: "Privacy Policy",
+    href: "/privacy",
+  },
+  {
+    label: "Refund Policy",
+    href: "/refund-policy",
+  },
+  {
+    label: "Risk Disclosure",
+    href: "/risk-disclosure",
+  },
 ];
 
 const socialLinks = [
-  { label: "Discord", href: "https://discord.gg/AXU9YEd4T" },
-  { label: "Telegram", href: "https://t.me/+r5HfFcX32Tw4M2Y1" },
-  { label: "Instagram", href: "https://www.instagram.com/blackpropcom/" },
-  { label: "YouTube", href: "https://www.youtube.com/channel/UCvdMQKZnAI2-EmuG9a_MycA" },
-  { label: "X / Twitter", href: "https://x.com/Blackpropcom" },
+  {
+    label: "Discord",
+    href: "https://discord.gg/AXU9YEd4T",
+  },
+  {
+    label: "Telegram",
+    href: "https://t.me/+r5HfFcX32Tw4M2Y1",
+  },
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/blackpropcom/",
+  },
+  {
+    label: "YouTube",
+    href: "https://www.youtube.com/channel/UCvdMQKZnAI2-EmuG9a_MycA",
+  },
+  {
+    label: "X / Twitter",
+    href: "https://x.com/Blackpropcom",
+  },
 ];
+
+/* =========================================================
+   ARROW
+========================================================= */
 
 function ArrowIcon() {
   return (
@@ -91,6 +125,10 @@ function ArrowIcon() {
     </svg>
   );
 }
+
+/* =========================================================
+   LOGO
+========================================================= */
 
 function FooterLogo() {
   return (
@@ -115,6 +153,10 @@ function FooterLogo() {
   );
 }
 
+/* =========================================================
+   FOOTER COLUMN
+========================================================= */
+
 function FooterColumn({
   title,
   links,
@@ -132,25 +174,33 @@ function FooterColumn({
       </p>
 
       <div className="mt-4 flex flex-col gap-3 sm:mt-5 sm:gap-3.5">
-        {links.map((link) => (
-          <Link
-            key={link.label}
-            href={link.href}
-            target={link.href.startsWith("http") ? "_blank" : undefined}
-            rel={link.href.startsWith("http") ? "noreferrer" : undefined}
-            className="group flex w-fit items-center gap-1.5 text-[14px] font-medium text-white/48 transition-colors duration-200 hover:text-white sm:text-[15px]"
-          >
-            {link.label}
+        {links.map((link) => {
+          const external = link.href.startsWith("http");
 
-            <span className="translate-x-[-3px] text-[#D4AF37] opacity-0 transition duration-200 group-hover:translate-x-0 group-hover:opacity-100">
-              <ArrowIcon />
-            </span>
-          </Link>
-        ))}
+          return (
+            <Link
+              key={link.label}
+              href={link.href}
+              target={external ? "_blank" : undefined}
+              rel={external ? "noopener noreferrer" : undefined}
+              className="group flex w-fit items-center gap-1.5 text-[14px] font-medium text-white/48 transition-colors duration-200 hover:text-white sm:text-[15px]"
+            >
+              {link.label}
+
+              <span className="translate-x-[-3px] text-[#D4AF37] opacity-0 transition duration-200 group-hover:translate-x-0 group-hover:opacity-100">
+                <ArrowIcon />
+              </span>
+            </Link>
+          );
+        })}
       </div>
     </div>
   );
 }
+
+/* =========================================================
+   FOOTER
+========================================================= */
 
 export function Footer() {
   return (
@@ -169,8 +219,7 @@ export function Footer() {
           backgroundImage:
             "linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px)",
           backgroundSize: "80px 80px",
-          maskImage:
-            "linear-gradient(to bottom, black, transparent 78%)",
+          maskImage: "linear-gradient(to bottom, black, transparent 78%)",
         }}
       />
 
@@ -187,15 +236,12 @@ export function Footer() {
 
             <h2 className="mt-3 max-w-[650px] text-[2.35rem] font-black leading-[1] tracking-[-0.05em] text-white sm:text-[2.8rem] lg:text-[3rem]">
               Your next trading challenge
-              <span className="text-white/35">
-                {" "}
-                starts here.
-              </span>
+              <span className="text-white/35"> starts here.</span>
             </h2>
           </div>
 
           <Link
-            href="#challenges"
+            href="/#challenges"
             className="gold-button group mt-7 inline-flex h-14 w-full items-center justify-center gap-3 rounded-xl px-7 text-[14px] font-black text-black sm:mt-0 sm:w-auto sm:min-w-[180px] sm:text-[15px]"
           >
             Get Funded
@@ -212,6 +258,7 @@ export function Footer() {
 
         <div className="grid grid-cols-2 gap-x-6 gap-y-10 py-11 sm:grid-cols-3 sm:py-14 lg:grid-cols-[1.6fr_.8fr_.8fr_.8fr_.9fr] lg:gap-8 lg:py-16">
           {/* BRAND */}
+
           <div className="col-span-2 max-w-[420px] sm:col-span-3 lg:col-span-1 lg:max-w-[350px]">
             <FooterLogo />
 
@@ -258,7 +305,7 @@ export function Footer() {
         </div>
 
         {/* =====================================================
-            PAYMENT / PLATFORM BAR
+            PLATFORM BAR
         ====================================================== */}
 
         <div className="flex flex-col gap-5 border-t border-white/[0.06] py-6 sm:flex-row sm:items-center sm:justify-between sm:py-7">
@@ -273,11 +320,7 @@ export function Footer() {
           </div>
 
           <div className="flex flex-wrap gap-2">
-            {[
-              "Secure",
-              "Global",
-              "Trader Focused",
-            ].map((item) => (
+            {["Secure", "Global", "Trader Focused"].map((item) => (
               <span
                 key={item}
                 className="rounded-lg border border-white/[0.07] bg-white/[0.025] px-3.5 py-2.5 text-[10px] font-black uppercase tracking-[0.10em] text-white/45 sm:text-[11px]"
@@ -335,22 +378,33 @@ export function Footer() {
           </p>
 
           <div className="flex flex-wrap gap-x-5 gap-y-2">
-            {[
-              { label: "Privacy", href: "#privacy" },
-              { label: "Terms", href: "#terms" },
-              {
-                label: "Risk Disclosure",
-                href: "#risk-disclosure",
-              },
-            ].map((link) => (
-              <Link
-                key={link.label}
-                href={link.href}
-                className="text-[12px] text-white/42 transition hover:text-white/70 sm:text-[13px]"
-              >
-                {link.label}
-              </Link>
-            ))}
+            <Link
+              href="/privacy"
+              className="text-[12px] text-white/42 transition-colors duration-200 hover:text-[#D4AF37] sm:text-[13px]"
+            >
+              Privacy
+            </Link>
+
+            <Link
+              href="/terms"
+              className="text-[12px] text-white/42 transition-colors duration-200 hover:text-[#D4AF37] sm:text-[13px]"
+            >
+              Terms
+            </Link>
+
+            <Link
+              href="/refund-policy"
+              className="text-[12px] text-white/42 transition-colors duration-200 hover:text-[#D4AF37] sm:text-[13px]"
+            >
+              Refund Policy
+            </Link>
+
+            <Link
+              href="/risk-disclosure"
+              className="text-[12px] text-white/42 transition-colors duration-200 hover:text-[#D4AF37] sm:text-[13px]"
+            >
+              Risk Disclosure
+            </Link>
           </div>
         </div>
 

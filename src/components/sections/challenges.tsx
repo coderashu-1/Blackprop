@@ -73,17 +73,17 @@ const models: {
   name: Model;
   badge?: string;
 }[] = [
-  {
-    name: "Instant",
-  },
-  {
-    name: "1 Step",
-  },
-  {
-    name: "2 Step",
-    badge: "Default",
-  },
-];
+    {
+      name: "Instant",
+    },
+    {
+      name: "1 Step",
+    },
+    {
+      name: "2 Step",
+      badge: "Default",
+    },
+  ];
 
 const platforms: Platform[] = [
   "TradeLocker",
@@ -134,21 +134,7 @@ const accountSizes = [
     label: "200K",
     price: 719,
   },
-  {
-    value: 250000,
-    label: "250K",
-    price: 849,
-  },
-  {
-    value: 300000,
-    label: "300K",
-    price: 979,
-  },
-  {
-    value: 400000,
-    label: "400K",
-    price: 1249,
-  },
+
 ];
 
 /* =========================================================
@@ -832,21 +818,19 @@ function OptionButton({
     <button
       type="button"
       onClick={onClick}
-      className={`relative flex min-h-[62px] items-center justify-center rounded-xl border px-3.5 py-3.5 text-[15px] font-bold transition-all duration-300 sm:min-h-[66px] sm:text-base ${
-        selected
+      className={`relative flex min-h-[62px] items-center justify-center rounded-xl border px-3.5 py-3.5 text-[15px] font-bold transition-all duration-300 sm:min-h-[66px] sm:text-base ${selected
           ? "border-[#D4AF37]/40 bg-[#D4AF37]/[0.09] text-[#EDD06B] shadow-[0_8px_30px_rgba(212,175,55,.07)]"
           : "border-white/[0.07] bg-white/[0.02] text-white hover:border-white/[0.14] hover:bg-white/[0.04] hover:text-white"
-      }`}
+        }`}
     >
       {children}
 
       {badge && (
         <span
-          className={`absolute -right-1.5 -top-2 rounded-full px-2 py-0.5 text-[9px] font-black uppercase tracking-[0.08em] ${
-            selected
+          className={`absolute -right-1.5 -top-2 rounded-full px-2 py-0.5 text-[9px] font-black uppercase tracking-[0.08em] ${selected
               ? "bg-[#D4AF37] text-black"
               : "border border-white/[0.08] bg-[#161616] text-white"
-          }`}
+            }`}
         >
           {badge}
         </span>
@@ -876,11 +860,10 @@ function RuleRow({
       <div className="flex items-center gap-3">
 
         <div
-          className={`grid h-9 w-9 shrink-0 place-items-center rounded-xl border sm:h-10 sm:w-10 ${
-            accent
+          className={`grid h-9 w-9 shrink-0 place-items-center rounded-xl border sm:h-10 sm:w-10 ${accent
               ? "border-[#D4AF37]/20 bg-[#D4AF37]/[0.07] text-[#E0BD54]"
               : "border-white/[0.06] bg-white/[0.02] text-white"
-          }`}
+            }`}
         >
           {icon}
         </div>
@@ -892,11 +875,10 @@ function RuleRow({
       </div>
 
       <span
-        className={`text-right text-[13px] font-bold sm:text-sm ${
-          accent
+        className={`text-right text-[13px] font-bold sm:text-sm ${accent
             ? "text-[#E7C75F]"
             : "text-white"
-        }`}
+          }`}
       >
         {value}
       </span>
@@ -939,8 +921,8 @@ export function Challenges() {
   const pricing = useMemo(() => {
     const original = Math.round(
       account.price *
-        rules.multiplier *
-        marketMultipliers[market]
+      rules.multiplier *
+      marketMultipliers[market]
     );
 
     const sale = Math.max(
@@ -1123,11 +1105,10 @@ export function Challenges() {
                     onClick={() =>
                       setMarket(item)
                     }
-                    className={`flex items-center justify-center gap-2.5 rounded-xl px-3 py-3.5 text-[15px] font-bold sm:text-base transition-all ${
-                      selected
+                    className={`flex items-center justify-center gap-2.5 rounded-xl px-3 py-3.5 text-[15px] font-bold sm:text-base transition-all ${selected
                         ? "bg-[linear-gradient(135deg,#F1D46F,#C49425)] text-black shadow-[0_9px_30px_rgba(212,175,55,.12)]"
                         : "text-white hover:bg-white/[0.04] hover:text-white"
-                    }`}
+                      }`}
                   >
                     <MarketIcon
                       market={item}
@@ -1195,62 +1176,6 @@ export function Challenges() {
                 </div>
 
               </div>
-
-              {/* PLATFORMS */}
-              <div className="mt-4 rounded-2xl border border-white/[0.06] bg-white/[0.015] p-4 sm:p-5">
-
-                <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.18em] text-white">
-                  Platforms
-                </p>
-
-                <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
-
-                  {platforms.map(
-                    (item) => {
-                      const selected =
-                        platform === item;
-
-                      return (
-                        <button
-                          key={item}
-                          type="button"
-                          onClick={() =>
-                            setPlatform(item)
-                          }
-                          className={`group relative min-h-[92px] sm:min-h-[98px] rounded-xl border px-3 py-3 transition-all ${
-                            selected
-                              ? "border-[#D4AF37]/35 bg-[#D4AF37]/[0.07] text-[#E7C75F]"
-                              : "border-white/[0.07] bg-black/20 text-white hover:border-white/[0.13] hover:text-white"
-                          }`}
-                        >
-                          <div className="flex h-full flex-col items-center justify-center">
-
-                            <PlatformMark
-                              platform={item}
-                            />
-
-                            <span className="mt-2.5 text-[12px] font-bold sm:text-[13px]">
-                              {item}
-                            </span>
-
-                          </div>
-
-                          {item ===
-                            "cTrader" && (
-                            <span className="absolute -right-1.5 -top-2 rounded-full bg-[#D4AF37] px-2 py-0.5 text-[8px] font-black uppercase text-black">
-                              Popular
-                            </span>
-                          )}
-
-                        </button>
-                      );
-                    }
-                  )}
-
-                </div>
-
-              </div>
-
               {/* ACCOUNT SIZE */}
               <div className="mt-4 rounded-2xl border border-white/[0.06] bg-white/[0.015] p-4 sm:p-5">
 
@@ -1295,6 +1220,62 @@ export function Challenges() {
                 </div>
 
               </div>
+
+              {/* PLATFORMS */}
+              <div className="mt-4 rounded-2xl border border-white/[0.06] bg-white/[0.015] p-4 sm:p-5">
+
+                <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.18em] text-white">
+                  Platforms
+                </p>
+
+                <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+
+                  {platforms.map(
+                    (item) => {
+                      const selected =
+                        platform === item;
+
+                      return (
+                        <button
+                          key={item}
+                          type="button"
+                          onClick={() =>
+                            setPlatform(item)
+                          }
+                          className={`group relative min-h-[92px] sm:min-h-[98px] rounded-xl border px-3 py-3 transition-all ${selected
+                              ? "border-[#D4AF37]/35 bg-[#D4AF37]/[0.07] text-[#E7C75F]"
+                              : "border-white/[0.07] bg-black/20 text-white hover:border-white/[0.13] hover:text-white"
+                            }`}
+                        >
+                          <div className="flex h-full flex-col items-center justify-center">
+
+                            <PlatformMark
+                              platform={item}
+                            />
+
+                            <span className="mt-2.5 text-[12px] font-bold sm:text-[13px]">
+                              {item}
+                            </span>
+
+                          </div>
+
+                          {item ===
+                            "cTrader" && (
+                              <span className="absolute -right-1.5 -top-2 rounded-full bg-[#D4AF37] px-2 py-0.5 text-[8px] font-black uppercase text-black">
+                                Popular
+                              </span>
+                            )}
+
+                        </button>
+                      );
+                    }
+                  )}
+
+                </div>
+
+              </div>
+
+
 
               {/* CONFIG SUMMARY */}
               <div className="mt-4 rounded-2xl border border-[#D4AF37]/[0.12] bg-[#D4AF37]/[0.04] p-4 sm:p-5">
@@ -1709,11 +1690,10 @@ export function Challenges() {
               (feature, index) => (
                 <div
                   key={feature}
-                  className={`flex items-center gap-3 px-5 py-5 ${
-                    index !== 3
+                  className={`flex items-center gap-3 px-5 py-5 ${index !== 3
                       ? "border-b border-white/[0.055] sm:border-r lg:border-b-0"
                       : ""
-                  }`}
+                    }`}
                 >
                   <div className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-[#D4AF37]/[0.07] text-[#D4AF37]">
 

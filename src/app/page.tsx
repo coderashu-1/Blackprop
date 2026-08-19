@@ -11,8 +11,10 @@ import { Technology } from "@/components/sections/technology";
 import { DashboardShowcase } from "@/components/sections/dashboard-showcase";
 import { GlobalAccess } from "@/components/sections/global-access";
 import { Support } from "@/components/sections/support";
-import { Testimonials } from "@/components/sections/testimonials";
+import { Testimony } from "@/components/sections/testimony";
 import { CommunityCTA } from "@/components/sections/community-cta";
+import { Rewards } from "@/components/sections/rewards";
+
 
 export default function Home() {
   return (
@@ -21,8 +23,9 @@ export default function Home() {
       <Hero />
       <ProofStats />
       <Challenges />
-      <Testimonials />
       <ProfitCalculator />
+      <Rewards />
+      <Testimony />
       <DashboardShowcase />
       <GlobalAccess />
       <Support />
