@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "BlackProp — Trade Bigger. Risk Smarter.",
+  title: "BlackProp — Prop Trading Firm",
   description: "A premium prop-trading frontend concept for BlackProp.",
 };
 
