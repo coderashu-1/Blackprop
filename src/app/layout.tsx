@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { EngagementPopups } from "@/components/sections/EngagementPopups";
+import { AIChatbot } from "@/components/AIChatbot";
 import "./globals.css";
 
 const geist = Geist({
@@ -32,6 +33,10 @@ export default function RootLayout({
 
         {/* GLOBAL POPUPS */}
         <EngagementPopups />
+
+        {/* AI FAQ CHATBOT */}
+        <AIChatbot />
+
       </body>
     </html>
   );
