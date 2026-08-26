@@ -247,21 +247,21 @@ function ActivityPopup({
 
   return (
     <div
-      className={`fixed bottom-3 left-3 right-3 z-[80] mx-auto w-auto max-w-[360px] transition-all duration-500 sm:bottom-6 sm:left-6 sm:right-auto sm:mx-0 sm:w-[calc(100%-3rem)] sm:max-w-[390px] ${
+      className={`fixed bottom-3 left-3 z-[80] w-[300px] transition-all duration-500 sm:bottom-6 sm:left-6 sm:w-[320px] ${
         visible
           ? "translate-y-0 opacity-100"
           : "pointer-events-none translate-y-5 opacity-0"
       }`}
       aria-live="polite"
     >
-      <div className="relative overflow-hidden rounded-[18px] border border-black/[0.08] bg-white/95 p-4 shadow-[0_18px_55px_rgba(0,0,0,.14)] backdrop-blur-xl sm:rounded-[20px]">
+      <div className="relative overflow-hidden rounded-[16px] border border-black/[0.08] bg-white/95 p-3 shadow-[0_14px_40px_rgba(0,0,0,.14)] backdrop-blur-xl sm:rounded-[18px]">
         <div className="absolute inset-x-[18%] top-0 h-px bg-gradient-to-r from-transparent via-[#D4AF37]/70 to-transparent" />
 
         <div className="flex items-center gap-3">
-          <div className="relative grid h-12 w-12 shrink-0 place-items-center rounded-[14px] bg-[#0A0A0B]">
-            <BPMark width={20} height={26} color="#FFFFFF" />
+          <div className="relative grid h-9 w-9 shrink-0 place-items-center rounded-[11px] bg-[#0A0A0B]">
+            <BPMark width={16} height={21} color="#FFFFFF" />
 
-            <span className="absolute -bottom-1 -right-1 grid h-5 w-5 place-items-center rounded-full border-2 border-white bg-[#F5F3ED] text-[12px]">
+            <span className="absolute -bottom-1 -right-1 grid h-4 w-4 place-items-center rounded-full border-2 border-white bg-[#F5F3ED] text-[9px]">
               {item.flag}
             </span>
           </div>
@@ -270,17 +270,17 @@ function ActivityPopup({
             <div className="flex items-center gap-2">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
 
-              <p className="text-[10px] font-black uppercase tracking-[0.13em] text-black/45 sm:text-[11px]">
+              <p className="text-[9px] font-black uppercase tracking-[0.12em] text-black/45">
                 Live community activity
               </p>
             </div>
 
-            <p className="mt-1.5 text-[13px] font-bold leading-5 text-[#111] sm:text-[14px]">
+            <p className="mt-1.5 text-[12px] font-bold leading-4 text-[#111]">
               {item.message ??
                 `${item.challenge} Challenge is popular with traders in ${item.country}.`}
             </p>
 
-            <p className="mt-1.5 text-[10px] font-medium text-black/42 sm:text-[11px]">
+            <p className="mt-1 text-[9px] font-medium text-black/42">
               BlackProp • just now
             </p>
           </div>

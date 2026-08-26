@@ -339,31 +339,42 @@ export function Footer() {
           <div className="max-w-[1180px] text-[12px] font-medium leading-6 text-white/42 sm:text-[13px] sm:leading-7">
             <p>
               <span className="font-bold text-white/62">
-                Disclaimer:
+                Legal Disclosure:
               </span>{" "}
-              Information displayed on this website is provided for general
-              informational and educational purposes only and should not be
-              considered financial, investment, legal or tax advice.
+              All information provided on this site is intended solely for
+              educational purposes related to trading on financial markets and
+              does not serve in any way as a specific investment recommendation,
+              business recommendation, investment opportunity analysis or
+              similar general recommendation regarding the trading of investment
+              instruments. BlackProp only provides services of simulated trading
+              and educational tools. The information on this site is not directed
+              at residents in any country or jurisdiction where such distribution
+              or use would be contrary to local laws or regulations. BlackProp
+              does not act as a broker and does not accept any deposits. The
+              offered technical solution for the BlackProp platforms and data
+              feed is powered by liquidity providers.
             </p>
 
             <p className="mt-4">
-              Any simulated or evaluation-based trading services offered by
-              BlackProp should be clearly distinguished from live brokerage or
-              investment services. Simulated results and hypothetical
-              performance have inherent limitations and do not guarantee future
-              results.
+              BlackProp is an affiliate of Prop Account, LLC. All funding
+              assessments are provided by Prop Account, LLC and all assessment
+              fees are paid to Prop Account, LLC. If you qualify for a Funded
+              Account, you will be required to enter into a Trader Agreement
+              with Prop Account LLC. Neither Prop Account, LLC nor Prop Account
+              LLC provides any trading education or other services.
             </p>
 
             <p className="mt-4">
-              Trading involves risk. Users are responsible for understanding
-              applicable program rules, eligibility requirements and local
-              restrictions before participating.
+              BlackProp provides access to simulated trading programs designed
+              solely for the evaluation of trading proficiency and
+              risk-management skills. Trading in Futures, derivatives, and
+              digital assets markets involves substantial risk of loss. Past
+              performance is not indicative of future results.
             </p>
 
-            <p className="mt-4 text-[#D4AF37]/58">
-              Replace this placeholder disclosure with BlackProp&apos;s final
-              counsel-approved legal language, entity information and
-              jurisdiction-specific disclosures before public launch.
+            <p className="mt-4">
+              All subscription fees paid are strictly for Evaluation purposes
+              and for access to our evaluation services.
             </p>
           </div>
         </div>

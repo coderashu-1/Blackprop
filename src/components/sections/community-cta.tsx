@@ -231,7 +231,7 @@ export function CommunityCTA() {
             </h2>
           </div>
 
-          <p className="max-w-[480px] text-[14px] font-medium leading-6 text-black/58 sm:text-[15px] lg:ml-auto">
+          <p className="max-w-[480px] text-[14px] font-medium leading-6 text-white/60 sm:text-[15px] lg:ml-auto">
             Join the official Discord for trader conversations and
             announcements, or get important BlackProp updates by email.
           </p>
@@ -291,28 +291,28 @@ export function CommunityCTA() {
           </article>
 
           {/* EMAIL */}
-          <article className="relative overflow-hidden rounded-[24px] border border-black/[0.08] bg-white p-5 shadow-[0_20px_55px_rgba(55,43,14,.05)] sm:p-6">
+          <article className="relative overflow-hidden rounded-[24px] border border-white/[0.10] bg-[#0B0B0C] p-5 text-white shadow-[0_20px_55px_rgba(0,0,0,.25)] sm:p-6">
             <div className="pointer-events-none absolute -right-20 -top-20 h-52 w-52 rounded-full bg-[#D4AF37]/10 blur-[75px]" />
 
             <div className="relative flex h-full flex-col">
               <div className="flex items-center gap-3">
-                <div className="grid h-11 w-11 shrink-0 place-items-center rounded-[14px] border border-[#B88B22]/15 bg-[#F8F5ED] text-[#987018]">
+                <div className="grid h-11 w-11 shrink-0 place-items-center rounded-[14px] border border-[#B88B22]/15 bg-white/[0.06] text-[#D4AF37]">
                   <NewsletterIcon className="h-5 w-5" />
                 </div>
 
                 <div>
-                  <p className="text-[10px] font-black uppercase tracking-[0.14em] text-[#966D15]">
+                  <p className="text-[10px] font-black uppercase tracking-[0.14em] text-[#D4AF37]">
                     Email updates
                   </p>
 
-                  <p className="mt-1 text-[11px] font-semibold text-black/42">
+                  <p className="mt-1 text-[11px] font-semibold text-white/45">
                     Important news only
                   </p>
                 </div>
               </div>
 
               <div className="mt-6">
-                <h3 className="text-[2rem] font-black uppercase leading-[0.98] tracking-[-0.045em] text-[#080808] sm:text-[2.35rem]">
+                <h3 className="text-[2rem] font-black uppercase leading-[0.98] tracking-[-0.045em] text-white sm:text-[2.35rem]">
                   Get the signal.
 
                   <span className="block text-[#B48721]">
@@ -320,7 +320,7 @@ export function CommunityCTA() {
                   </span>
                 </h3>
 
-                <p className="mt-3 max-w-[520px] text-[14px] font-medium leading-6 text-black/58">
+                <p className="mt-3 max-w-[520px] text-[14px] font-medium leading-6 text-white/60">
                   Receive selected product announcements, promotions and key
                   BlackProp updates in your inbox.
                 </p>
@@ -330,7 +330,7 @@ export function CommunityCTA() {
                 {submitted ? (
                   <div
                     role="status"
-                    className="flex min-h-[50px] items-center gap-3 rounded-xl border border-[#B88B22]/15 bg-[#F8F6F0] px-4"
+                    className="flex min-h-[50px] items-center gap-3 rounded-xl border border-[#B88B22]/15 bg-white/[0.06] px-4"
                   >
                     <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-[#D4AF37] text-black">
                       <CheckIcon />
@@ -343,7 +343,7 @@ export function CommunityCTA() {
                 ) : (
                   <form
                     onSubmit={handleSubmit}
-                    className="rounded-xl border border-black/[0.08] bg-[#F8F6F0] p-2 sm:flex sm:items-center"
+                    className="rounded-xl border border-white/[0.10] bg-white/[0.06] p-2 sm:flex sm:items-center"
                   >
                     <input
                       type="email"
@@ -354,7 +354,7 @@ export function CommunityCTA() {
                       }
                       placeholder="Enter your email"
                       aria-label="Email address"
-                      className="h-11 w-full min-w-0 bg-transparent px-3 text-[14px] font-medium text-black outline-none placeholder:text-black/35"
+                      className="h-11 w-full min-w-0 bg-transparent px-3 text-[14px] font-medium text-white outline-none placeholder:text-white/35"
                     />
 
                     <button

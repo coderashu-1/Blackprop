@@ -348,10 +348,6 @@ export function Navbar() {
 
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
               </span>
-
-              <span className="text-[12px] text-white/45">
-                Systems Operational
-              </span>
             </div>
 
             <span className="hidden h-4 w-px bg-white/[0.08] md:block" />
@@ -410,7 +406,7 @@ export function Navbar() {
               Mobile: icon on the left, wordmark centered
               Desktop: icon + wordmark together on the left */}
           <a
-            href="#"
+            href="/"
             aria-label="BlackProp home"
             className="group flex shrink-0 items-center lg:gap-3"
           >
