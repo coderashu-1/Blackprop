@@ -57,6 +57,7 @@ const payouts = [
   },
 ];
 
+
 function ClockIcon() {
   return (
     <svg
@@ -84,6 +85,7 @@ function ClockIcon() {
   );
 }
 
+
 function PayoutCard({
   amount,
   time,
@@ -91,121 +93,227 @@ function PayoutCard({
   country,
   flag,
 }: (typeof payouts)[number]) {
+
   return (
     <article
       className="
         group
+        relative
         flex
         h-[190px]
-        w-[210px]
+        w-[220px]
         shrink-0
         flex-col
-        rounded-[20px]
+        overflow-hidden
+        rounded-[22px]
         border
-        border-[#D4AF37]/15
-        bg-white/[0.035]
+        border-white/[0.12]
+        bg-gradient-to-br
+        from-white/[0.09]
+        via-white/[0.04]
+        to-transparent
         p-2
-        backdrop-blur-md
+        backdrop-blur-xl
+        shadow-[0_20px_60px_rgba(0,0,0,.55)]
         transition-all
         duration-300
         hover:-translate-y-1
-        hover:border-[#D4AF37]/30
-        hover:bg-[#D4AF37]/[0.055]
-        sm:w-[220px]
+        hover:border-[#D4AF37]/50
+        hover:shadow-[0_25px_70px_rgba(212,175,55,.18)]
       "
     >
+
+      {/* GOLD GLOW */}
       <div
         className="
+          pointer-events-none
+          absolute
+          -right-10
+          -top-10
+          h-32
+          w-32
+          rounded-full
+          bg-[#D4AF37]/15
+          blur-3xl
+        "
+      />
+
+
+      <div
+        className="
+          relative
           flex
           flex-1
           flex-col
           justify-between
-          rounded-2xl
+          rounded-[18px]
           border
-          border-white/[0.055]
-          bg-black/30
+          border-white/[0.08]
+          bg-[#0D0D0E]
           p-4
         "
       >
+
         <span
           className="
             w-fit
-            rounded-md
+            rounded-lg
             border
-            border-[#D4AF37]/20
-            bg-[#D4AF37]/10
-            px-2
+            border-[#D4AF37]/40
+            bg-[#D4AF37]/15
+            px-2.5
             py-1
             text-[10px]
             font-black
-            uppercase
-            tracking-[0.08em]
-            text-[#E8C962]
+            tracking-[0.15em]
+            text-[#F5DC7D]
           "
         >
           PAID
         </span>
 
+
         <div>
-          <p className="whitespace-nowrap text-[21px] font-bold tracking-tight text-white">
+
+          <p
+            className="
+              whitespace-nowrap
+              text-[22px]
+              font-black
+              tracking-tight
+              text-white
+            "
+          >
             {amount}
           </p>
 
-          <div className="mt-1 flex items-center gap-1.5 text-xs font-medium text-white/45">
-            <span className="text-[#D4AF37]/70">
+
+          <div
+            className="
+              mt-2
+              flex
+              items-center
+              gap-1.5
+              text-xs
+              font-medium
+              text-white/55
+            "
+          >
+
+            <span className="text-[#D4AF37]">
               <ClockIcon />
             </span>
 
-            <span>Paid in {time}</span>
+            <span>
+              Paid in {time}
+            </span>
+
           </div>
+
         </div>
+
+
       </div>
 
-      <div className="flex items-center gap-2 px-2 py-3">
+
+
+      <div className="flex items-center gap-3 px-2 py-3">
+
         <span
           className="
             flex
-            h-6
-            w-6
+            h-8
+            w-8
             items-center
             justify-center
-            overflow-hidden
             rounded-full
             border
-            border-[#D4AF37]/15
-            bg-[#D4AF37]/[0.06]
-            text-[15px]
+            border-[#D4AF37]/30
+            bg-[#D4AF37]/10
+            text-lg
           "
-          role="img"
-          aria-label={country}
         >
           {flag}
         </span>
 
-        <span className="text-sm font-medium text-white/90">
-          {name}
-        </span>
+
+        <div>
+
+          <p
+            className="
+              text-sm
+              font-bold
+              text-white
+            "
+          >
+            {name}
+          </p>
+
+
+          <p
+            className="
+              text-[11px]
+              text-white/45
+            "
+          >
+            {country}
+          </p>
+
+        </div>
+
+
       </div>
+
+
     </article>
   );
 }
 
+
+
 export function Rewards() {
+
   return (
+
     <section
       className="
         relative
         overflow-hidden
-        bg-[#030303]
+        bg-gradient-to-b
+        from-[#090909]
+        via-[#030303]
+        to-black
         pt-12
-        pb-6
+        pb-8
         sm:pt-14
-        sm:pb-8
+        sm:pb-10
         lg:pt-16
-        lg:pb-10
+        lg:pb-12
       "
     >
-      {/* SUBTLE TOP LINE */}
+
+
+      {/* GOLD AMBIENT LIGHT */}
+
+      <div
+        className="
+          pointer-events-none
+          absolute
+          left-1/2
+          top-0
+          h-[300px]
+          w-[900px]
+          -translate-x-1/2
+          rounded-full
+          bg-[#D4AF37]/10
+          blur-[130px]
+        "
+      />
+
+
+
+      {/* TOP BORDER */}
+
       <div
         className="
           pointer-events-none
@@ -218,30 +326,51 @@ export function Rewards() {
           -translate-x-1/2
           bg-gradient-to-r
           from-transparent
-          via-[#D4AF37]/20
+          via-[#D4AF37]/50
           to-transparent
         "
       />
 
-      {/* RUNNING STRIP */}
+
+
+      {/* MARQUEE */}
+
       <div className="rewards-marquee relative overflow-hidden">
+
         <div className="rewards-marquee-track flex w-max">
-          {[0, 1].map((group) => (
+
+          {[0,1].map((group)=>(
+
             <div
               key={group}
-              aria-hidden={group === 1}
-              className="flex shrink-0 gap-4 pr-4"
+              aria-hidden={group===1}
+              className="
+                flex
+                shrink-0
+                gap-4
+                pr-4
+              "
             >
-              {payouts.map((payout) => (
+
+              {payouts.map((payout)=>(
+
                 <PayoutCard
                   key={`${group}-${payout.name}-${payout.amount}`}
                   {...payout}
                 />
+
               ))}
+
             </div>
+
           ))}
+
         </div>
+
       </div>
+
+
     </section>
+
   );
 }
