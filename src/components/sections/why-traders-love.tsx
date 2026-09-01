@@ -65,7 +65,7 @@ const leftReasons: Reason[] = [
  
   {
     icon: "wallet",
-    title: "80% + Add on of upto 100% Profit Split",
+    title: "80% + Add on upto 100% Profit Split",
   },
   {
     icon: "time",
@@ -864,7 +864,7 @@ function BlackPropCapitalEngine() {
           </p>
 
           <p className="mt-1.5 text-[12px] font-black text-[#E8C75B] sm:text-[13px]">
-            80% + Add on of upto 100%
+            80% + Add on upto 100%
           </p>
         </div>
 

@@ -57,7 +57,8 @@ type Platform =
   | "TradeLocker"
   | "Volumetrica"
   | "MatchTrader"
-  | "cTrader";
+  | "cTrader"
+  | "DXFUTURE";
 
 type AddOn = {
   title: string;
@@ -71,10 +72,17 @@ type RuleSet = {
   dailyLoss: string;
   maxLoss: string;
   inactivity: string;
-  leverage: string;
+  leverage?: string;
   maxTime: string;
   flatForWeekend?: string;
   profitSplit: string;
+  // Futures-specific extra fields (optional so Forex/Crypto rule sets
+  // don't need to define them).
+  consistencyRequirement?: string;
+  exposureLimits?: string;
+  nonWithdrawableBuffer?: string;
+  lockUponPayout?: string;
+  purchaseType?: string;
   addOns: AddOn[];
 };
 
@@ -88,21 +96,30 @@ const markets: Market[] = [
   "Crypto",
 ];
 
-const models: {
-  name: Model;
-  badge?: string;
-}[] = [
-    {
-      name: "Instant",
-    },
-    {
-      name: "1 Step",
-    },
-    {
-      name: "2 Step",
-      badge: "Default",
-    },
-  ];
+/* ---------------------------------------------------------
+   MODELS AVAILABLE PER MARKET
+   - Forex: Instant, 1 Step, 2 Step
+   - Futures: One Step only (rendered using the "1 Step" model key)
+   - Crypto: 1 Step, 2 Step only (no Instant tier)
+--------------------------------------------------------- */
+
+const modelsByMarket: Record<
+  Market,
+  { name: Model; badge?: string }[]
+> = {
+  Forex: [
+    { name: "Instant" },
+    { name: "1 Step" },
+    { name: "2 Step", badge: "Default" },
+  ],
+  Futures: [
+    { name: "1 Step", badge: "Only Option" },
+  ],
+  Crypto: [
+    { name: "1 Step" },
+    { name: "2 Step", badge: "Default" },
+  ],
+};
 
 const platforms: Platform[] = [
   "TradeLocker",
@@ -112,10 +129,21 @@ const platforms: Platform[] = [
 ];
 
 /* ---------------------------------------------------------
-   ACCOUNT SIZES + CFD/FOREX PRICING
-   Source: "Plans & Workflows" sheet. The first "Example" row
-   ($10,000 → $85 / $110) is a template row and is intentionally
-   excluded — only the real per-size prices below it are used.
+   PLATFORMS AVAILABLE PER MARKET
+   - Forex / Crypto: the standard 4-platform lineup
+   - Futures: DXFUTURE only, per the live purchase flow
+--------------------------------------------------------- */
+
+const platformsByMarket: Record<Market, Platform[]> = {
+  Forex: platforms,
+  Crypto: platforms,
+  Futures: ["DXFUTURE"],
+};
+
+/* ---------------------------------------------------------
+   ACCOUNT SIZES PER MARKET
+   Forex / Crypto share the standard tier list. Futures uses its
+   own tiers ($25K – $150K), matching the live purchase flow.
 --------------------------------------------------------- */
 
 const accountSizes = [
@@ -126,8 +154,30 @@ const accountSizes = [
   { value: 100000, label: "100K", popular: true },
 ];
 
-// Real CFD/Forex prices per account size, taken directly from the
-// "Plans & Workflows" sheet (Example row excluded).
+const futuresAccountSizes = [
+  { value: 25000, label: "25K" },
+  { value: 50000, label: "50K" },
+  { value: 75000, label: "75K" },
+  { value: 100000, label: "100K", popular: true },
+  { value: 150000, label: "150K" },
+];
+
+const accountSizesByMarket: Record<
+  Market,
+  { value: number; label: string; popular?: boolean }[]
+> = {
+  Forex: accountSizes,
+  Crypto: accountSizes,
+  Futures: futuresAccountSizes,
+};
+
+/* ---------------------------------------------------------
+   CFD/FOREX PRICING
+   Source: "Plans & Workflows" sheet. The first "Example" row
+   ($10,000 → $85 / $110) is a template row and is intentionally
+   excluded — only the real per-size prices below it are used.
+--------------------------------------------------------- */
+
 const cfdPricing: Record<"1 Step" | "2 Step", Record<number, number>> = {
   "1 Step": {
     5000: 35,
@@ -155,7 +205,70 @@ const cfdPricing: Record<"1 Step" | "2 Step", Record<number, number>> = {
 // is provided.
 const INSTANT_PRICE_RATIO = 1.65 / 0.92;
 
-function getModelBasePrice(model: Model, accountValue: number): number {
+/* ---------------------------------------------------------
+   CRYPTO PRICING
+   Confirmed live values: 1 Step $5K = $45, 2 Step $5K = $35
+   (seen at checkout). Other tiers are extrapolated from those
+   confirmed prices using the same 1 Step (~1.29x) and 2 Step
+   (~1.4x) markup over the equivalent CFD/Forex price — replace
+   with real values once the full crypto price sheet is available.
+--------------------------------------------------------- */
+
+const cryptoPricing: Record<"1 Step" | "2 Step", Record<number, number>> = {
+  "1 Step": {
+    5000: 45,
+    10000: 96,
+    25000: 244,
+    50000: 482,
+    100000: 964,
+    200000: 1413,
+    400000: 4629,
+  },
+  "2 Step": {
+    5000: 35,
+    10000: 70,
+    25000: 175,
+    50000: 315,
+    100000: 630,
+    200000: 1539,
+    400000: 3080,
+  },
+};
+
+/* ---------------------------------------------------------
+   FUTURES PRICING
+   Only the $25,000 One Step price ($150, confirmed at checkout)
+   is real. The remaining tiers are estimated using the same
+   scaling pattern seen across the other markets' size tiers —
+   swap in real values once the full futures price sheet lands.
+--------------------------------------------------------- */
+
+const futuresPricing: Record<number, number> = {
+  25000: 150,
+  50000: 275,
+  75000: 375,
+  100000: 450,
+  150000: 650,
+};
+
+function getModelBasePrice(
+  market: Market,
+  model: Model,
+  accountValue: number
+): number {
+  if (market === "Futures") {
+    return futuresPricing[accountValue] ?? 0;
+  }
+
+  if (market === "Crypto") {
+    if (model === "1 Step" || model === "2 Step") {
+      return cryptoPricing[model][accountValue] ?? 0;
+    }
+    // Crypto has no Instant tier in the UI — fall back defensively.
+    return cfdPricing["2 Step"][accountValue] ?? 0;
+  }
+
+  // Forex
   if (model === "1 Step" || model === "2 Step") {
     return cfdPricing[model][accountValue];
   }
@@ -164,22 +277,13 @@ function getModelBasePrice(model: Model, accountValue: number): number {
   return Math.round(twoStepPrice * INSTANT_PRICE_RATIO);
 }
 
-// Futures / Crypto don't have their own price sheet yet, so their price
-// is the CFD/Forex base price with a market markup applied.
-const marketMultipliers: Record<Market, number> = {
-  Forex: 1,
-  Futures: 1.08,
-  Crypto: 1.12,
-};
-
 /* ---------------------------------------------------------
    TRADING RULES — PER MARKET
    Forex rules come from "Instant FOREX Final", "One step FOREX
    Final" and "2 step Forex Final". Crypto rules come from "Crypto
-   One Step Overview" and "Crypto Two Step Overview". There's no
-   Crypto Instant sheet, so Crypto Instant falls back to the Forex
-   Instant rules. Futures has no sheet at all, so it falls back to
-   Forex rules entirely.
+   One Step Overview" and "Crypto Two Step Overview" (no Instant
+   tier exists for Crypto). Futures rules come from the live "One
+   Step Futures Assessment" purchase page/overview.
 --------------------------------------------------------- */
 
 const forexRules: Record<Model, RuleSet> = {
@@ -191,7 +295,7 @@ const forexRules: Record<Model, RuleSet> = {
     leverage: "1:50",
     maxTime: "No max time",
     flatForWeekend: "Yes",
-    profitSplit: "80% + Add on of upto 100%",
+    profitSplit: "80% + Add on upto 100%",
     addOns: [
       {
         title: "Hold Over Weekend",
@@ -265,7 +369,8 @@ const forexRules: Record<Model, RuleSet> = {
 };
 
 const cryptoRules: Record<Model, RuleSet> = {
-  // No Crypto Instant sheet was provided — falls back to Forex Instant.
+  // Crypto has no Instant sheet/tier — kept only so the Record<Model, RuleSet>
+  // type is satisfied. Instant is never selectable when market === "Crypto".
   Instant: forexRules.Instant,
 
   "1 Step": {
@@ -275,7 +380,7 @@ const cryptoRules: Record<Model, RuleSet> = {
     inactivity: "30 Days",
     leverage: "5:1 BTC/ETH, 2:1 Others",
     maxTime: "No max time",
-    profitSplit: "Up to 90%",
+    profitSplit: "90%",
     addOns: [
       {
         title: "Payout Protector",
@@ -294,7 +399,7 @@ const cryptoRules: Record<Model, RuleSet> = {
     inactivity: "30 Days",
     leverage: "5:1 BTC/ETH, 2:1 Others",
     maxTime: "No max time",
-    profitSplit: "Up to 90%",
+    profitSplit: "90%",
     addOns: [
       {
         title: "Payout Protector",
@@ -306,10 +411,47 @@ const cryptoRules: Record<Model, RuleSet> = {
   },
 };
 
-// Futures has no sheet of its own — falls back to Forex rules.
+// Futures only has a "One Step" assessment. Instant / 2 Step keys are
+// filled with the One Step rule set purely to satisfy the
+// Record<Model, RuleSet> type — they're never selectable in the UI
+// when market === "Futures".
+const futuresOneStepRules: RuleSet = {
+  phase1: "6%",
+  dailyLoss: "None",
+  maxLoss: "6% (Intraday Equity HWM)",
+  inactivity: "30 Days",
+  maxTime: "No max time",
+  profitSplit: "80% (90% with add-on)",
+  consistencyRequirement: "33.33% Assessment / 33.33% Funded",
+  exposureLimits: "1 Contract / 10 Micros",
+  nonWithdrawableBuffer: "6% (Funded only)",
+  lockUponPayout: "No",
+  purchaseType: "Monthly Subscription",
+  addOns: [
+    {
+      title: "Profit Share Boost to 90%",
+      cost: "15% Cost",
+      description:
+        "Increases the funded account profit share from the standard 80% to 90%.",
+    },
+    {
+      title: "Payout Protector",
+      cost: "25% Cost",
+      description:
+        "Protects an eligible profit share in a funded account in the event of a hard breach.",
+    },
+  ],
+};
+
+const futuresRules: Record<Model, RuleSet> = {
+  Instant: futuresOneStepRules,
+  "1 Step": futuresOneStepRules,
+  "2 Step": futuresOneStepRules,
+};
+
 const modelRulesByMarket: Record<Market, Record<Model, RuleSet>> = {
   Forex: forexRules,
-  Futures: forexRules,
+  Futures: futuresRules,
   Crypto: cryptoRules,
 };
 
@@ -769,6 +911,27 @@ function CTraderMark() {
   );
 }
 
+function DXFutureMark() {
+  return (
+    <svg
+      viewBox="0 0 42 32"
+      className="h-7 w-9"
+      fill="none"
+    >
+      <path
+        d="M6 6h9l11 20H16L6 6Z"
+        fill="currentColor"
+      />
+
+      <path
+        d="M23 6h9l4 10-4 10h-9l4-10-4-10Z"
+        fill="currentColor"
+        opacity=".55"
+      />
+    </svg>
+  );
+}
+
 function PlatformMark({
   platform,
 }: {
@@ -786,6 +949,9 @@ function PlatformMark({
 
     case "cTrader":
       return <CTraderMark />;
+
+    case "DXFUTURE":
+      return <DXFutureMark />;
   }
 }
 
@@ -966,21 +1132,48 @@ export function Challenges() {
   const [copied, setCopied] =
     useState<string | null>(null);
 
+  const availableModels = modelsByMarket[market];
+  const availableSizes = accountSizesByMarket[market];
+  const availablePlatforms = platformsByMarket[market];
+
+  // When switching markets, snap model / account size / platform back to
+  // a valid option for that market (e.g. Futures only has "1 Step" and
+  // its own size tiers + a single platform).
+  function handleMarketChange(next: Market) {
+    setMarket(next);
+
+    const nextModels = modelsByMarket[next];
+    if (!nextModels.some((item) => item.name === model)) {
+      setModel(nextModels[0].name);
+    }
+
+    const nextSizes = accountSizesByMarket[next];
+    if (!nextSizes.some((item) => item.value === accountSize)) {
+      setAccountSize(nextSizes[0].value);
+    }
+
+    const nextPlatforms = platformsByMarket[next];
+    if (!nextPlatforms.includes(platform)) {
+      setPlatform(nextPlatforms[0]);
+    }
+  }
+
   const account = useMemo(
     () =>
-      accountSizes.find(
+      availableSizes.find(
         (item) =>
           item.value === accountSize
-      ) ?? accountSizes[4],
-    [accountSize]
+      ) ?? availableSizes[0],
+    [accountSize, availableSizes]
   );
 
   const rules = modelRulesByMarket[market][model];
 
   const pricing = useMemo(() => {
-    const original = Math.round(
-      getModelBasePrice(model, account.value) *
-      marketMultipliers[market]
+    const original = getModelBasePrice(
+      market,
+      model,
+      account.value
     );
 
     const sale = Math.max(
@@ -1161,7 +1354,7 @@ export function Challenges() {
                     key={item}
                     type="button"
                     onClick={() =>
-                      setMarket(item)
+                      handleMarketChange(item)
                     }
                     className={`flex items-center justify-center gap-2.5 rounded-xl px-3 py-3.5 text-[15px] font-bold sm:text-base transition-all ${selected
                         ? "bg-[linear-gradient(135deg,#F1D46F,#C49425)] text-black shadow-[0_9px_30px_rgba(212,175,55,.12)]"
@@ -1204,7 +1397,9 @@ export function Challenges() {
                     </p>
 
                     <p className="mt-1.5 text-[12px] leading-5 text-white/45">
-                      Instant · 1 Step · 2 Step
+                      {availableModels
+                        .map((item) => item.name)
+                        .join(" · ")}
                     </p>
                   </div>
 
@@ -1214,9 +1409,16 @@ export function Challenges() {
 
                 </div>
 
-                <div className="grid grid-cols-3 gap-2.5">
+                <div
+                  className={`grid gap-2.5 ${availableModels.length === 1
+                      ? "mx-auto max-w-[220px] grid-cols-1"
+                      : availableModels.length === 2
+                        ? "grid-cols-2"
+                        : "grid-cols-3"
+                    }`}
+                >
 
-                  {models.map((item) => (
+                  {availableModels.map((item) => (
                     <OptionButton
                       key={item.name}
                       selected={model === item.name}
@@ -1249,7 +1451,7 @@ export function Challenges() {
 
                 <div className="grid grid-cols-2 gap-2.5 min-[420px]:grid-cols-3 sm:grid-cols-4 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6">
 
-                  {accountSizes.map(
+                  {availableSizes.map(
                     (item) => (
                       <OptionButton
                         key={item.value}
@@ -1284,9 +1486,14 @@ export function Challenges() {
                   Platforms
                 </p>
 
-                <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+                <div
+                  className={`grid gap-2 ${availablePlatforms.length === 1
+                      ? "mx-auto max-w-[160px] grid-cols-1"
+                      : "grid-cols-2 sm:grid-cols-3"
+                    }`}
+                >
 
-                  {platforms.map(
+                  {availablePlatforms.map(
                     (item) => {
                       const selected =
                         platform === item;
@@ -1512,9 +1719,9 @@ export function Challenges() {
                 <RuleRow
                   icon={<TargetIcon />}
                   label={
-                    model === "Instant"
-                      ? "Profit Target"
-                      : "Profit Target Phase 1"
+                    rules.phase2
+                      ? "Profit Target Phase 1"
+                      : "Profit Target"
                   }
                   value={rules.phase1}
                   accent
@@ -1540,17 +1747,43 @@ export function Challenges() {
                   value={rules.maxLoss}
                 />
 
+                {rules.consistencyRequirement && (
+                  <RuleRow
+                    icon={<TrophyIcon />}
+                    label="Consistency Requirement"
+                    value={rules.consistencyRequirement}
+                  />
+                )}
+
+                {rules.exposureLimits && (
+                  <RuleRow
+                    icon={<LeverageIcon />}
+                    label="Exposure Limits"
+                    value={rules.exposureLimits}
+                  />
+                )}
+
+                {rules.nonWithdrawableBuffer && (
+                  <RuleRow
+                    icon={<ShieldIcon />}
+                    label="Non-Withdrawable Buffer"
+                    value={rules.nonWithdrawableBuffer}
+                  />
+                )}
+
                 <RuleRow
                   icon={<CalendarIcon />}
                   label="Inactivity Period"
                   value={rules.inactivity}
                 />
 
-                <RuleRow
-                  icon={<LeverageIcon />}
-                  label="Leverage"
-                  value={rules.leverage}
-                />
+                {rules.leverage && (
+                  <RuleRow
+                    icon={<LeverageIcon />}
+                    label="Leverage"
+                    value={rules.leverage}
+                  />
+                )}
 
                 {rules.flatForWeekend && (
                   <RuleRow
@@ -1565,6 +1798,14 @@ export function Challenges() {
                   label="Max Time"
                   value={rules.maxTime}
                 />
+
+                {rules.lockUponPayout && (
+                  <RuleRow
+                    icon={<LockIcon />}
+                    label="Lock Upon Payout"
+                    value={rules.lockUponPayout}
+                  />
+                )}
 
                 <RuleRow
                   icon={<SplitIcon />}
@@ -1585,7 +1826,7 @@ export function Challenges() {
                     <div>
 
                       <p className="text-[11px] font-bold uppercase tracking-[0.15em] text-white">
-                        Challenge fee
+                        {rules.purchaseType ?? "Challenge fee"}
                       </p>
 
                       <div className="mt-2 flex items-end gap-3">
@@ -1610,6 +1851,12 @@ export function Challenges() {
                         }{" "}
                         with BLACK40
                       </p>
+
+                      {rules.purchaseType && (
+                        <p className="mt-1.5 text-[11px] font-medium text-white/45">
+                          Renews monthly at ${pricing.original}
+                        </p>
+                      )}
 
                     </div>
 
