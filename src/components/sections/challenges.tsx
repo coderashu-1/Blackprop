@@ -58,7 +58,9 @@ type Platform =
   | "Volumetrica"
   | "MatchTrader"
   | "cTrader"
-  | "DXFUTURE";
+  | "DXFUTURE"
+  | "DXTRADE"
+  | "GooeyPro";
 
 type AddOn = {
   title: string;
@@ -136,7 +138,7 @@ const platforms: Platform[] = [
 
 const platformsByMarket: Record<Market, Platform[]> = {
   Forex: platforms,
-  Crypto: platforms,
+  Crypto: ["DXTRADE", "GooeyPro"],
   Futures: ["DXFUTURE"],
 };
 
@@ -932,6 +934,53 @@ function DXFutureMark() {
   );
 }
 
+function DXTradeMark() {
+  return (
+    <svg
+      viewBox="0 0 42 32"
+      className="h-7 w-9"
+      fill="none"
+    >
+      <path
+        d="M7 6h9c6 0 10 4.5 10 10s-4 10-10 10H7V6Zm5 4.5v11h4c3.2 0 5.5-2.4 5.5-5.5s-2.3-5.5-5.5-5.5h-4Z"
+        fill="currentColor"
+      />
+
+      <path
+        d="M27 6h9v4.5h-9V6Zm0 8.2h8v4.5h-8v-4.5Zm0 8.3h9V27h-9v-4.5Z"
+        fill="currentColor"
+        opacity=".55"
+      />
+    </svg>
+  );
+}
+
+function GooeyProMark() {
+  return (
+    <svg
+      viewBox="0 0 42 32"
+      className="h-7 w-9"
+      fill="none"
+    >
+      <circle
+        cx="14"
+        cy="16"
+        r="9"
+        stroke="currentColor"
+        strokeWidth="2.6"
+      />
+
+      <circle
+        cx="28"
+        cy="16"
+        r="5.5"
+        fill="currentColor"
+        opacity=".55"
+      />
+    </svg>
+  );
+}
+
 function PlatformMark({
   platform,
 }: {
@@ -952,6 +1001,12 @@ function PlatformMark({
 
     case "DXFUTURE":
       return <DXFutureMark />;
+
+    case "DXTRADE":
+      return <DXTradeMark />;
+
+    case "GooeyPro":
+      return <GooeyProMark />;
   }
 }
 
