@@ -191,7 +191,7 @@ const forexRules: Record<Model, RuleSet> = {
     leverage: "1:50",
     maxTime: "No max time",
     flatForWeekend: "Yes",
-    profitSplit: "80% → 90%",
+    profitSplit: "80% + Add on of upto 100%",
     addOns: [
       {
         title: "Hold Over Weekend",

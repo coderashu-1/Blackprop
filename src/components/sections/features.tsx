@@ -689,7 +689,7 @@ export function Features() {
             }
             description="When your trading performs, the structure should reward it. BlackProp is designed around clear progression and trader-focused reward potential."
             points={[
-              "Up to 90% profit split",
+              "80% + Add on of upto 100% profit split",
               "Clear progression",
               "Performance focused",
               "Trader-first structure",
