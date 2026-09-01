@@ -21,7 +21,7 @@ export default function Home() {
     <main className="min-h-screen overflow-hidden bg-[var(--background)]">
       <Navbar />
       <Hero />
-      <ProofStats />
+      {/* <ProofStats /> */}
       <Challenges />
       <ProfitCalculator />
       <Rewards />

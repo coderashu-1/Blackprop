@@ -47,19 +47,19 @@ function BPMark({
 
 const dashboards = [
   {
-    title: "Trader Dashboard",
-    image: "/images/dashboard1.png",
-    eyebrow: "Trading Workspace",
+    title: "Dashboard",
+    image: "/images/dashboard.png",
+    eyebrow: "Dashboard Preview",
   },
   {
-    title: "Performance Analytics",
-    image: "/images/dashboard2.png",
-    eyebrow: "Performance Intelligence",
+    title: "Accounts",
+    image: "/images/accounts.png",
+    eyebrow: "Account Management",
   },
   {
-    title: "Reward Center",
-    image: "/images/dashboard3.png",
-    eyebrow: "Rewards & Progress",
+    title: "Affiliate",
+    image: "/images/affiliate.png",
+    eyebrow: "Partner Program",
   },
 ];
 

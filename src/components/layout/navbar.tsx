@@ -1,5 +1,5 @@
-"use client";
 
+"use client";
 import { useEffect, useRef, useState } from "react";
 
 
@@ -218,9 +218,6 @@ export function Navbar() {
   const [openDropdown, setOpenDropdown] =
     useState<DropdownKey>(null);
 
-  const [selectedMarket, setSelectedMarket] =
-    useState<Market>("Forex");
-
   const [copied, setCopied] = useState(false);
 
   const navRef = useRef<HTMLElement>(null);
@@ -303,40 +300,22 @@ export function Navbar() {
 
       <div className="relative border-b border-white/[0.06] bg-[#050505]/95 backdrop-blur-xl">
         <div className="mx-auto flex min-h-10 max-w-[1440px] items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
-          {/* MARKET SWITCHER */}
-          <div className="flex items-center gap-2">
+          {/* MARKET DISPLAY (NO TOGGLE) */}
+          <div className="flex items-center gap-3">
             <span className="hidden text-[11px] font-semibold uppercase tracking-[0.2em] text-white/25 xl:block">
               Markets
             </span>
 
-            <div className="flex items-center rounded-xl border border-white/[0.07] bg-white/[0.025] p-1">
-              {markets.map((market) => {
-                const active =
-                  selectedMarket === market;
-
-                return (
-                  <button
-                    key={market}
-                    type="button"
-                    onClick={() =>
-                      setSelectedMarket(market)
-                    }
-                    className={`relative flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-[12px] font-semibold transition-all duration-300 sm:px-3 ${
-                      active
-                        ? "bg-[linear-gradient(135deg,#E8C866,#AF8720)] text-[#080808] shadow-[0_5px_18px_rgba(212,175,55,0.16)]"
-                        : "text-white/45 hover:bg-white/[0.04] hover:text-white"
-                    }`}
-                  >
-                    <MarketIcon market={market} />
-
-                    <span>{market}</span>
-
-                    {active && (
-                      <span className="absolute inset-x-2 -bottom-[5px] h-px bg-[#F4D77B]/60" />
-                    )}
-                  </button>
-                );
-              })}
+            <div className="flex items-center gap-2 rounded-xl border border-white/[0.07] bg-white/[0.025] px-3 py-1.5">
+              {markets.map((market) => (
+                <span
+                  key={market}
+                  className="flex items-center gap-1.5 text-[12px] font-semibold text-white/55"
+                >
+                  <MarketIcon market={market} />
+                  {market}
+                </span>
+              ))}
             </div>
           </div>
 
@@ -653,42 +632,22 @@ export function Navbar() {
 
           {mobileOpen && (
             <div className="absolute inset-x-4 top-[calc(100%+10px)] max-h-[calc(100vh-180px)] overflow-y-auto rounded-3xl border border-white/[0.09] bg-[#080809] p-4 shadow-[0_35px_100px_rgba(0,0,0,0.75)] sm:inset-x-6 lg:hidden">
-              {/* MOBILE MARKET */}
+              {/* MOBILE MARKET DISPLAY */}
               <div className="mb-4">
                 <p className="mb-2 px-2 text-[9px] font-bold uppercase tracking-[0.2em] text-white/25">
-                  Market
+                  Markets
                 </p>
 
-                <div className="grid grid-cols-3 gap-1.5 rounded-2xl border border-white/[0.07] bg-white/[0.025] p-1.5">
-                  {markets.map((market) => {
-                    const active =
-                      selectedMarket === market;
-
-                    return (
-                      <button
-                        key={market}
-                        type="button"
-                        onClick={() =>
-                          setSelectedMarket(
-                            market,
-                          )
-                        }
-                        className={`flex min-w-0 items-center justify-center gap-1.5 rounded-xl px-2 py-2.5 text-[13px] font-semibold transition ${
-                          active
-                            ? "bg-[linear-gradient(135deg,#E8C866,#AF8720)] text-black"
-                            : "text-white/45 hover:bg-white/[0.04]"
-                        }`}
-                      >
-                        <MarketIcon
-                          market={market}
-                        />
-
-                        <span className="truncate">
-                          {market}
-                        </span>
-                      </button>
-                    );
-                  })}
+                <div className="flex items-center justify-around rounded-2xl border border-white/[0.07] bg-white/[0.025] p-3">
+                  {markets.map((market) => (
+                    <div
+                      key={market}
+                      className="flex items-center gap-1.5 text-[12px] font-semibold text-white/55"
+                    >
+                      <MarketIcon market={market} />
+                      {market}
+                    </div>
+                  ))}
                 </div>
               </div>
 

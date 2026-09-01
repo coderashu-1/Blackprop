@@ -1,266 +1,178 @@
-const payouts = [
+const highlights = [
   {
-    amount: "$34,408.19",
-    time: "8 hours",
-    name: "Sardor",
-    country: "Uzbekistan",
-    flag: "🇺🇿",
+    title: "Clear Evaluation",
+    value: "Simple Goals",
+    description: "Transparent objectives designed for focused trading.",
+    icon: "⚡",
   },
   {
-    amount: "$20,932.09",
-    time: "12 hours",
-    name: "Mathis",
-    country: "France",
-    flag: "🇫🇷",
+    title: "Global Traders",
+    value: "Worldwide",
+    description: "A professional environment built for traders globally.",
+    icon: "🌎",
   },
   {
-    amount: "$20,706.45",
-    time: "18 hours",
-    name: "SaiLun",
-    country: "Hong Kong",
-    flag: "🇭🇰",
+    title: "Smart Dashboard",
+    value: "Track Progress",
+    description: "Monitor your trading journey with a clean interface.",
+    icon: "▣",
   },
   {
-    amount: "$20,009.64",
-    time: "9 hours",
-    name: "Kizito",
-    country: "Nigeria",
-    flag: "🇳🇬",
+    title: "Multiple Markets",
+    value: "Forex • Crypto",
+    description: "Trade across different markets from one platform.",
+    icon: "◉",
   },
   {
-    amount: "$18,000.00",
-    time: "6 hours",
-    name: "Sukhman",
-    country: "Canada",
-    flag: "🇨🇦",
+    title: "Transparent Rules",
+    value: "Know Everything",
+    description: "Clear requirements with no unnecessary complexity.",
+    icon: "◈",
   },
   {
-    amount: "$17,599.78",
-    time: "5 hours",
-    name: "Takuya",
-    country: "Japan",
-    flag: "🇯🇵",
+    title: "Trader Growth",
+    value: "Scale Better",
+    description: "A structure focused on consistency and improvement.",
+    icon: "↗",
   },
   {
-    amount: "$16,420.34",
-    time: "14 hours",
-    name: "Giovanni",
-    country: "Italy",
-    flag: "🇮🇹",
+    title: "Secure Platform",
+    value: "Built For Trust",
+    description: "Professional infrastructure for serious traders.",
+    icon: "✓",
   },
   {
-    amount: "$15,180.21",
-    time: "45 min",
-    name: "Mujtaba",
-    country: "Germany",
-    flag: "🇩🇪",
+    title: "Performance",
+    value: "Execution First",
+    description: "Stay focused on strategy and discipline.",
+    icon: "◆",
   },
 ];
 
 
-function ClockIcon() {
-  return (
-    <svg
-      viewBox="0 0 20 20"
-      fill="none"
-      className="h-3.5 w-3.5"
-      aria-hidden="true"
-    >
-      <circle
-        cx="10"
-        cy="10"
-        r="7.5"
-        stroke="currentColor"
-        strokeWidth="1.25"
-      />
-
-      <path
-        d="M10 6V10L12.75 12"
-        stroke="currentColor"
-        strokeWidth="1.25"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
-
-function PayoutCard({
-  amount,
-  time,
-  name,
-  country,
-  flag,
-}: (typeof payouts)[number]) {
+function HighlightCard({
+  title,
+  value,
+  description,
+  icon,
+}: (typeof highlights)[number]) {
 
   return (
     <article
       className="
-        group
-        relative
-        flex
-        h-[190px]
-        w-[220px]
-        shrink-0
-        flex-col
-        overflow-hidden
-        rounded-[22px]
-        border
-        border-white/[0.12]
-        bg-gradient-to-br
-        from-white/[0.09]
-        via-white/[0.04]
-        to-transparent
-        p-2
-        backdrop-blur-xl
-        shadow-[0_20px_60px_rgba(0,0,0,.55)]
-        transition-all
-        duration-300
-        hover:-translate-y-1
-        hover:border-[#D4AF37]/50
-        hover:shadow-[0_25px_70px_rgba(212,175,55,.18)]
+      group
+      relative
+      flex
+      h-[190px]
+      w-[230px]
+      shrink-0
+      flex-col
+      justify-between
+      overflow-hidden
+      rounded-[22px]
+      border
+      border-white/[0.10]
+      bg-gradient-to-br
+      from-white/[0.08]
+      via-white/[0.03]
+      to-transparent
+      p-4
+      backdrop-blur-xl
+      transition-all
+      duration-500
+      hover:-translate-y-1
+      hover:border-[#D4AF37]/40
+      hover:shadow-[0_20px_70px_rgba(212,175,55,.15)]
       "
     >
 
       {/* GOLD GLOW */}
       <div
         className="
-          pointer-events-none
-          absolute
-          -right-10
-          -top-10
-          h-32
-          w-32
-          rounded-full
-          bg-[#D4AF37]/15
-          blur-3xl
+        absolute
+        -right-10
+        -top-10
+        h-28
+        w-28
+        rounded-full
+        bg-[#D4AF37]/10
+        blur-3xl
+        "
+      />
+
+
+      {/* TOP LINE */}
+      <div
+        className="
+        absolute
+        left-4
+        right-4
+        top-0
+        h-px
+        bg-gradient-to-r
+        from-transparent
+        via-[#D4AF37]/40
+        to-transparent
         "
       />
 
 
       <div
         className="
-          relative
-          flex
-          flex-1
-          flex-col
-          justify-between
-          rounded-[18px]
-          border
-          border-white/[0.08]
-          bg-[#0D0D0E]
-          p-4
+        flex
+        h-9
+        w-9
+        items-center
+        justify-center
+        rounded-xl
+        border
+        border-[#D4AF37]/25
+        bg-[#D4AF37]/10
+        text-[#D4AF37]
         "
       >
-
-        <span
-          className="
-            w-fit
-            rounded-lg
-            border
-            border-[#D4AF37]/40
-            bg-[#D4AF37]/15
-            px-2.5
-            py-1
-            text-[10px]
-            font-black
-            tracking-[0.15em]
-            text-[#F5DC7D]
-          "
-        >
-          PAID
-        </span>
-
-
-        <div>
-
-          <p
-            className="
-              whitespace-nowrap
-              text-[22px]
-              font-black
-              tracking-tight
-              text-white
-            "
-          >
-            {amount}
-          </p>
-
-
-          <div
-            className="
-              mt-2
-              flex
-              items-center
-              gap-1.5
-              text-xs
-              font-medium
-              text-white/55
-            "
-          >
-
-            <span className="text-[#D4AF37]">
-              <ClockIcon />
-            </span>
-
-            <span>
-              Paid in {time}
-            </span>
-
-          </div>
-
-        </div>
-
-
+        {icon}
       </div>
 
 
+      <div>
 
-      <div className="flex items-center gap-3 px-2 py-3">
-
-        <span
+        <p
           className="
-            flex
-            h-8
-            w-8
-            items-center
-            justify-center
-            rounded-full
-            border
-            border-[#D4AF37]/30
-            bg-[#D4AF37]/10
-            text-lg
+          mt-4
+          text-[10px]
+          font-bold
+          uppercase
+          tracking-[0.18em]
+          text-[#D4AF37]
           "
         >
-          {flag}
-        </span>
+          {title}
+        </p>
 
 
-        <div>
+        <h3
+          className="
+          mt-1
+          text-lg
+          font-black
+          text-white
+          "
+        >
+          {value}
+        </h3>
 
-          <p
-            className="
-              text-sm
-              font-bold
-              text-white
-            "
-          >
-            {name}
-          </p>
 
-
-          <p
-            className="
-              text-[11px]
-              text-white/45
-            "
-          >
-            {country}
-          </p>
-
-        </div>
-
+        <p
+          className="
+          mt-2
+          text-xs
+          leading-5
+          text-white/45
+          "
+        >
+          {description}
+        </p>
 
       </div>
 
@@ -273,104 +185,102 @@ function PayoutCard({
 
 export function Rewards() {
 
-  return (
+return (
 
-    <section
-      className="
-        relative
-        overflow-hidden
-        bg-gradient-to-b
-        from-[#090909]
-        via-[#030303]
-        to-black
-        pt-12
-        pb-8
-        sm:pt-14
-        sm:pb-10
-        lg:pt-16
-        lg:pb-12
-      "
-    >
+<section
+className="
+relative
+overflow-hidden
+bg-[#030303]
+py-8
+"
+>
 
 
-      {/* GOLD AMBIENT LIGHT */}
-
-      <div
-        className="
-          pointer-events-none
-          absolute
-          left-1/2
-          top-0
-          h-[300px]
-          w-[900px]
-          -translate-x-1/2
-          rounded-full
-          bg-[#D4AF37]/10
-          blur-[130px]
-        "
-      />
+<div
+className="
+pointer-events-none
+absolute
+left-1/2
+top-0
+h-[250px]
+w-[800px]
+-translate-x-1/2
+rounded-full
+bg-[#D4AF37]/10
+blur-[120px]
+"
+/>
 
 
-
-      {/* TOP BORDER */}
-
-      <div
-        className="
-          pointer-events-none
-          absolute
-          left-1/2
-          top-0
-          h-px
-          w-[90%]
-          max-w-[1250px]
-          -translate-x-1/2
-          bg-gradient-to-r
-          from-transparent
-          via-[#D4AF37]/50
-          to-transparent
-        "
-      />
+<div className="relative overflow-hidden">
 
 
-
-      {/* MARQUEE */}
-
-      <div className="rewards-marquee relative overflow-hidden">
-
-        <div className="rewards-marquee-track flex w-max">
-
-          {[0,1].map((group)=>(
-
-            <div
-              key={group}
-              aria-hidden={group===1}
-              className="
-                flex
-                shrink-0
-                gap-4
-                pr-4
-              "
-            >
-
-              {payouts.map((payout)=>(
-
-                <PayoutCard
-                  key={`${group}-${payout.name}-${payout.amount}`}
-                  {...payout}
-                />
-
-              ))}
-
-            </div>
-
-          ))}
-
-        </div>
-
-      </div>
+<div
+className="
+pointer-events-none
+absolute
+inset-y-0
+left-0
+z-20
+w-24
+bg-gradient-to-r
+from-[#030303]
+to-transparent
+"
+/>
 
 
-    </section>
+<div
+className="
+pointer-events-none
+absolute
+inset-y-0
+right-0
+z-20
+w-24
+bg-gradient-to-l
+from-[#030303]
+to-transparent
+"
+/>
 
-  );
+
+
+<div className="rewards-marquee-track flex w-max">
+
+{[0,1].map((group)=>(
+
+<div
+key={group}
+className="
+flex
+gap-4
+pr-4
+"
+>
+
+{highlights.map((item)=>(
+
+<HighlightCard
+key={`${group}-${item.title}`}
+{...item}
+/>
+
+))}
+
+</div>
+
+))}
+
+</div>
+
+
+</div>
+
+
+</section>
+
+);
+
 }

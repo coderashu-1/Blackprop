@@ -59,6 +59,25 @@ type Platform =
   | "MatchTrader"
   | "cTrader";
 
+type AddOn = {
+  title: string;
+  cost: string;
+  description: string;
+};
+
+type RuleSet = {
+  phase1: string;
+  phase2?: string;
+  dailyLoss: string;
+  maxLoss: string;
+  inactivity: string;
+  leverage: string;
+  maxTime: string;
+  flatForWeekend?: string;
+  profitSplit: string;
+  addOns: AddOn[];
+};
+
 /* =========================================================
    DATA
 ========================================================= */
@@ -92,75 +111,78 @@ const platforms: Platform[] = [
   "cTrader",
 ];
 
-const accountSizes = [
-  {
-    value: 5000,
-    label: "5K",
-    price: 69,
-  },
-  {
-    value: 10000,
-    label: "10K",
-    price: 99,
-  },
-  {
-    value: 15000,
-    label: "15K",
-    price: 119,
-  },
-  {
-    value: 25000,
-    label: "25K",
-    price: 159,
-  },
-  {
-    value: 50000,
-    label: "50K",
-    price: 269,
-  },
-  {
-    value: 100000,
-    label: "100K",
-    price: 449,
-    popular: true,
-  },
-  {
-    value: 150000,
-    label: "150K",
-    price: 589,
-  },
-  {
-    value: 200000,
-    label: "200K",
-    price: 719,
-  },
+/* ---------------------------------------------------------
+   ACCOUNT SIZES + CFD/FOREX PRICING
+   Source: "Plans & Workflows" sheet. The first "Example" row
+   ($10,000 → $85 / $110) is a template row and is intentionally
+   excluded — only the real per-size prices below it are used.
+--------------------------------------------------------- */
 
+const accountSizes = [
+  { value: 5000, label: "5K" },
+  { value: 10000, label: "10K" },
+  { value: 25000, label: "25K" },
+  { value: 50000, label: "50K" },
+  { value: 100000, label: "100K", popular: true },
 ];
 
-/* =========================================================
-   MODEL RULES
-========================================================= */
+// Real CFD/Forex prices per account size, taken directly from the
+// "Plans & Workflows" sheet (Example row excluded).
+const cfdPricing: Record<"1 Step" | "2 Step", Record<number, number>> = {
+  "1 Step": {
+    5000: 35,
+    10000: 75,
+    25000: 190,
+    50000: 375,
+    100000: 750,
+    200000: 1099,
+    400000: 3600,
+  },
+  "2 Step": {
+    5000: 25,
+    10000: 50,
+    25000: 125,
+    50000: 225,
+    100000: 450,
+    200000: 1099,
+    400000: 2200,
+  },
+};
 
-const modelRules: Record<
-  Model,
-  {
-    phase1: string;
-    phase2?: string;
-    dailyLoss: string;
-    maxLoss: string;
-    inactivity: string;
-    leverage: string;
-    maxTime: string;
-    flatForWeekend?: string;
-    profitSplit: string;
-    multiplier: number;
-    addOns: {
-      title: string;
-      cost: string;
-      description: string;
-    }[];
+// Instant funding isn't in the pricing sheet, so its price is derived
+// from the 2 Step price at the same size using the prior Instant/2-Step
+// price ratio (1.65 / 0.92) as a placeholder until real Instant pricing
+// is provided.
+const INSTANT_PRICE_RATIO = 1.65 / 0.92;
+
+function getModelBasePrice(model: Model, accountValue: number): number {
+  if (model === "1 Step" || model === "2 Step") {
+    return cfdPricing[model][accountValue];
   }
-> = {
+
+  const twoStepPrice = cfdPricing["2 Step"][accountValue];
+  return Math.round(twoStepPrice * INSTANT_PRICE_RATIO);
+}
+
+// Futures / Crypto don't have their own price sheet yet, so their price
+// is the CFD/Forex base price with a market markup applied.
+const marketMultipliers: Record<Market, number> = {
+  Forex: 1,
+  Futures: 1.08,
+  Crypto: 1.12,
+};
+
+/* ---------------------------------------------------------
+   TRADING RULES — PER MARKET
+   Forex rules come from "Instant FOREX Final", "One step FOREX
+   Final" and "2 step Forex Final". Crypto rules come from "Crypto
+   One Step Overview" and "Crypto Two Step Overview". There's no
+   Crypto Instant sheet, so Crypto Instant falls back to the Forex
+   Instant rules. Futures has no sheet at all, so it falls back to
+   Forex rules entirely.
+--------------------------------------------------------- */
+
+const forexRules: Record<Model, RuleSet> = {
   Instant: {
     phase1: "N/A",
     dailyLoss: "3%",
@@ -170,7 +192,6 @@ const modelRules: Record<
     maxTime: "No max time",
     flatForWeekend: "Yes",
     profitSplit: "80% → 90%",
-    multiplier: 1.65,
     addOns: [
       {
         title: "Hold Over Weekend",
@@ -201,7 +222,6 @@ const modelRules: Record<
     leverage: "1:50",
     maxTime: "No max time",
     profitSplit: "Up to 90%",
-    multiplier: 1,
     addOns: [
       {
         title: "Payout Protector",
@@ -227,7 +247,6 @@ const modelRules: Record<
     leverage: "1:50",
     maxTime: "No max time",
     profitSplit: "Up to 90%",
-    multiplier: 0.92,
     addOns: [
       {
         title: "Payout Protector",
@@ -245,13 +264,53 @@ const modelRules: Record<
   },
 };
 
-const marketMultipliers: Record<
-  Market,
-  number
-> = {
-  Forex: 1,
-  Futures: 1.08,
-  Crypto: 1.12,
+const cryptoRules: Record<Model, RuleSet> = {
+  // No Crypto Instant sheet was provided — falls back to Forex Instant.
+  Instant: forexRules.Instant,
+
+  "1 Step": {
+    phase1: "9%",
+    dailyLoss: "±3%",
+    maxLoss: "6%",
+    inactivity: "30 Days",
+    leverage: "5:1 BTC/ETH, 2:1 Others",
+    maxTime: "No max time",
+    profitSplit: "Up to 90%",
+    addOns: [
+      {
+        title: "Payout Protector",
+        cost: "25% Cost",
+        description:
+          "Protects a trader's eligible profit share in a funded account in the event of a hard breach.",
+      },
+    ],
+  },
+
+  "2 Step": {
+    phase1: "6%",
+    phase2: "9%",
+    dailyLoss: "±3%",
+    maxLoss: "9%",
+    inactivity: "30 Days",
+    leverage: "5:1 BTC/ETH, 2:1 Others",
+    maxTime: "No max time",
+    profitSplit: "Up to 90%",
+    addOns: [
+      {
+        title: "Payout Protector",
+        cost: "25% Cost",
+        description:
+          "Protects a trader's eligible profit share in a funded account in the event of a hard breach.",
+      },
+    ],
+  },
+};
+
+// Futures has no sheet of its own — falls back to Forex rules.
+const modelRulesByMarket: Record<Market, Record<Model, RuleSet>> = {
+  Forex: forexRules,
+  Futures: forexRules,
+  Crypto: cryptoRules,
 };
 
 /* =========================================================
@@ -912,16 +971,15 @@ export function Challenges() {
       accountSizes.find(
         (item) =>
           item.value === accountSize
-      ) ?? accountSizes[5],
+      ) ?? accountSizes[4],
     [accountSize]
   );
 
-  const rules = modelRules[model];
+  const rules = modelRulesByMarket[market][model];
 
   const pricing = useMemo(() => {
     const original = Math.round(
-      account.price *
-      rules.multiplier *
+      getModelBasePrice(model, account.value) *
       marketMultipliers[market]
     );
 
@@ -936,9 +994,9 @@ export function Challenges() {
       saving: original - sale,
     };
   }, [
-    account.price,
+    account.value,
     market,
-    rules.multiplier,
+    model,
   ]);
 
   async function copyCode(
@@ -1150,11 +1208,9 @@ export function Challenges() {
                     </p>
                   </div>
 
-                  {market === "Forex" && (
-                    <span className="rounded-full border border-white/[0.07] bg-black/25 px-2.5 py-1 text-[9px] font-bold uppercase tracking-[0.12em] text-white/45">
-                      Forex
-                    </span>
-                  )}
+                  <span className="rounded-full border border-white/[0.07] bg-black/25 px-2.5 py-1 text-[9px] font-bold uppercase tracking-[0.12em] text-white/45">
+                    {market}
+                  </span>
 
                 </div>
 
@@ -1403,10 +1459,6 @@ export function Challenges() {
               </div>
 
             </div>
-
-            {/* =================================================
-                RIGHT SIDE
-            ================================================= */}
 
             {/* =================================================
                 RIGHT SIDE
