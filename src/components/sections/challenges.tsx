@@ -336,14 +336,8 @@ const forexRules: Record<Model, RuleSet> = {
     inactivity: "30 Days",
     leverage: "1:50",
     maxTime: "No max time",
-    profitSplit: "80% + Add on upto 90%",
+    profitSplit: "Up to 90%",
     addOns: [
-      {
-        title: "Profit Share Increased to 90%",
-        cost: "20% Cost",
-        description:
-          "Increases the funded account profit share from the standard 80% to 90%.",
-      },
       {
         title: "Payout Protector",
         cost: "25% Cost",
@@ -367,14 +361,8 @@ const forexRules: Record<Model, RuleSet> = {
     inactivity: "30 Days",
     leverage: "1:50",
     maxTime: "No max time",
-    profitSplit: "80% + Add on upto 90%",
+    profitSplit: "Up to 90%",
     addOns: [
-      {
-        title: "Profit Share Increased to 90%",
-        cost: "20% Cost",
-        description:
-          "Increases the funded account profit share from the standard 80% to 90%.",
-      },
       {
         title: "Payout Protector",
         cost: "25% Cost",
