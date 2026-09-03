@@ -51,16 +51,7 @@ const dashboards = [
     image: "/images/dashboard.png",
     eyebrow: "Dashboard Preview",
   },
-  {
-    title: "Accounts",
-    image: "/images/accounts.png",
-    eyebrow: "Account Management",
-  },
-  {
-    title: "Affiliate",
-    image: "/images/affiliate.png",
-    eyebrow: "Partner Program",
-  },
+  
 ];
 
 /* =========================================================
