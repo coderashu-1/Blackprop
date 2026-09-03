@@ -63,20 +63,16 @@ const companyLinks = [
 
 const legalLinks = [
   {
-    label: "Terms & Conditions",
-    href: "/terms",
+    label: "Privacy Policy",
+    href: "https://dashboardanalytix.com/client-terms-and-policies/",
   },
   {
-    label: "Privacy Policy",
-    href: "/privacy",
+    label: "Cookie Policy",
+    href: "https://dashboardanalytix.com/cookie-policy/?v=13b5bfe96f3e",
   },
   {
     label: "Refund Policy",
-    href: "/refund-policy",
-  },
-  {
-    label: "Risk Disclosure",
-    href: "/risk-disclosure",
+    href: "https://dashboardanalytix.com/purchases-and-refunds/?v=13b5bfe96f3e",
   },
 ];
 
@@ -390,31 +386,30 @@ export function Footer() {
 
           <div className="flex flex-wrap gap-x-5 gap-y-2">
             <Link
-              href="/privacy"
+              href="https://dashboardanalytix.com/client-terms-and-policies/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-[12px] text-white/42 transition-colors duration-200 hover:text-[#D4AF37] sm:text-[13px]"
             >
               Privacy
             </Link>
 
             <Link
-              href="/terms"
+              href="https://dashboardanalytix.com/cookie-policy/?v=13b5bfe96f3e"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-[12px] text-white/42 transition-colors duration-200 hover:text-[#D4AF37] sm:text-[13px]"
             >
-              Terms
+              Cookie Policy
             </Link>
 
             <Link
-              href="/refund-policy"
+              href="https://dashboardanalytix.com/purchases-and-refunds/?v=13b5bfe96f3e"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-[12px] text-white/42 transition-colors duration-200 hover:text-[#D4AF37] sm:text-[13px]"
             >
               Refund Policy
-            </Link>
-
-            <Link
-              href="/risk-disclosure"
-              className="text-[12px] text-white/42 transition-colors duration-200 hover:text-[#D4AF37] sm:text-[13px]"
-            >
-              Risk Disclosure
             </Link>
           </div>
         </div>

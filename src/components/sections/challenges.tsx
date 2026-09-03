@@ -130,14 +130,22 @@ const platforms: Platform[] = [
   "cTrader",
 ];
 
+// Short display label override for platform buttons/text — e.g. Forex
+// shows "MTR" instead of the full "MatchTrader" name, per the live app.
+const platformLabels: Partial<Record<Platform, string>> = {
+  MatchTrader: "MTR",
+};
+
 /* ---------------------------------------------------------
    PLATFORMS AVAILABLE PER MARKET
-   - Forex / Crypto: the standard 4-platform lineup
+   - Forex: DXTRADE, MTR (MatchTrader), cTrader, GooeyPro — matches
+     the live purchase flow shown in the reference screenshot.
+   - Crypto: DXTRADE, GooeyPro
    - Futures: DXFUTURE only, per the live purchase flow
 --------------------------------------------------------- */
 
 const platformsByMarket: Record<Market, Platform[]> = {
-  Forex: platforms,
+  Forex: ["DXTRADE", "MatchTrader", "cTrader", "GooeyPro"],
   Crypto: ["DXTRADE", "GooeyPro"],
   Futures: ["DXFUTURE"],
 };
@@ -154,6 +162,7 @@ const accountSizes = [
   { value: 25000, label: "25K" },
   { value: 50000, label: "50K" },
   { value: 100000, label: "100K", popular: true },
+  { value: 200000, label: "200K" },
 ];
 
 const futuresAccountSizes = [
@@ -327,8 +336,14 @@ const forexRules: Record<Model, RuleSet> = {
     inactivity: "30 Days",
     leverage: "1:50",
     maxTime: "No max time",
-    profitSplit: "Up to 90%",
+    profitSplit: "80% + Add on upto 90%",
     addOns: [
+      {
+        title: "Profit Share Increased to 90%",
+        cost: "20% Cost",
+        description:
+          "Increases the funded account profit share from the standard 80% to 90%.",
+      },
       {
         title: "Payout Protector",
         cost: "25% Cost",
@@ -352,8 +367,14 @@ const forexRules: Record<Model, RuleSet> = {
     inactivity: "30 Days",
     leverage: "1:50",
     maxTime: "No max time",
-    profitSplit: "Up to 90%",
+    profitSplit: "80% + Add on upto 90%",
     addOns: [
+      {
+        title: "Profit Share Increased to 90%",
+        cost: "20% Cost",
+        description:
+          "Increases the funded account profit share from the standard 80% to 90%.",
+      },
       {
         title: "Payout Protector",
         cost: "25% Cost",
@@ -1572,7 +1593,7 @@ export function Challenges() {
                             />
 
                             <span className="mt-2.5 text-[12px] font-bold sm:text-[13px]">
-                              {item}
+                              {platformLabels[item] ?? item}
                             </span>
 
                           </div>
@@ -1618,7 +1639,7 @@ export function Challenges() {
                     </p>
 
                     <p className="mt-1.5 text-[13px] font-bold text-[#D4AF37]">
-                      {platform}
+                      {platformLabels[platform] ?? platform}
                     </p>
 
                   </div>
@@ -1712,7 +1733,7 @@ export function Challenges() {
                   <span className="text-[10px] font-medium text-white/40">
                     Platform:{" "}
                     <strong className="text-white/75">
-                      {platform}
+                      {platformLabels[platform] ?? platform}
                     </strong>
                   </span>
 
