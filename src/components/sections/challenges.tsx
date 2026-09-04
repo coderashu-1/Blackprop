@@ -1080,13 +1080,6 @@ function AmexMark() {
   );
 }
 
-function SkrillMark() {
-  return (
-    <span className="text-[12px] font-black">
-      Skrill
-    </span>
-  );
-}
 
 /* =========================================================
    REUSABLE BUTTON
@@ -2009,12 +2002,6 @@ export function Challenges() {
                         name: "American Express",
                         mark: (
                           <AmexMark />
-                        ),
-                      },
-                      {
-                        name: "Skrill",
-                        mark: (
-                          <SkrillMark />
                         ),
                       },
                     ].map((payment) => (

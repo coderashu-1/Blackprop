@@ -64,15 +64,19 @@ const companyLinks = [
 const legalLinks = [
   {
     label: "Privacy Policy",
-    href: "https://dashboardanalytix.com/client-terms-and-policies/",
+    href: "https://dashboardanalytix.com/privacy-policy-3/",
   },
   {
     label: "Cookie Policy",
-    href: "https://dashboardanalytix.com/cookie-policy/?v=13b5bfe96f3e",
+    href: "https://dashboardanalytix.com/cookie-policy/",
   },
   {
     label: "Refund Policy",
-    href: "https://dashboardanalytix.com/purchases-and-refunds/?v=13b5bfe96f3e",
+    href: "https://dashboardanalytix.com/purchases-and-refunds/",
+  },
+  {
+    label: "Terms & Conditions",
+    href: "https://dashboardanalytix.com/client-terms-and-policies/",
   },
 ];
 
@@ -385,32 +389,17 @@ export function Footer() {
           </p>
 
           <div className="flex flex-wrap gap-x-5 gap-y-2">
-            <Link
-              href="https://dashboardanalytix.com/client-terms-and-policies/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[12px] text-white/42 transition-colors duration-200 hover:text-[#D4AF37] sm:text-[13px]"
-            >
-              Privacy
-            </Link>
-
-            <Link
-              href="https://dashboardanalytix.com/cookie-policy/?v=13b5bfe96f3e"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[12px] text-white/42 transition-colors duration-200 hover:text-[#D4AF37] sm:text-[13px]"
-            >
-              Cookie Policy
-            </Link>
-
-            <Link
-              href="https://dashboardanalytix.com/purchases-and-refunds/?v=13b5bfe96f3e"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[12px] text-white/42 transition-colors duration-200 hover:text-[#D4AF37] sm:text-[13px]"
-            >
-              Refund Policy
-            </Link>
+            {legalLinks.map((link) => (
+              <Link
+                key={link.label}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[12px] text-white/42 transition-colors duration-200 hover:text-[#D4AF37] sm:text-[13px]"
+              >
+                {link.label}
+              </Link>
+            ))}
           </div>
         </div>
 
