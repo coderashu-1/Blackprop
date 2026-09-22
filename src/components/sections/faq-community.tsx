@@ -320,7 +320,7 @@ export function FaqCommunity() {
               </p>
 
               <a
-                href="#discord"
+                href="https://discord.com/invite/AXU9YEd4T"
                 className="
                   mx-auto
                   mt-6
