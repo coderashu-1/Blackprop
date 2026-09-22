@@ -155,23 +155,21 @@ function CheckIcon() {
 function BrandMark() {
   return (
     <svg
-      viewBox="0 0 88 88"
+      viewBox="0 0 290 366"
       fill="none"
-      className="h-[46px] w-[46px] min-[380px]:h-[52px] min-[380px]:w-[52px] sm:h-[64px] sm:w-[64px] lg:h-[72px] lg:w-[72px]"
+      color="#FFFFFF"
+      className="h-[46px] w-[36px] min-[380px]:h-[52px] min-[380px]:w-[41px] sm:h-[64px] sm:w-[50px] lg:h-[72px] lg:w-[57px]"
+      shapeRendering="geometricPrecision"
+      preserveAspectRatio="xMidYMid meet"
       aria-hidden="true"
     >
       <path
-        d="M24 17h27.5C65.6 17 75 26.4 75 39.3S65.6 61.7 51.5 61.7H37.8V75H24V17Z"
-        stroke="white"
-        strokeWidth="7"
-        strokeLinecap="round"
-        strokeLinejoin="round"
+        fill="currentColor"
+        d="M28 0H196C244 0 278 48 278 105C278 130 271 150 256 172C277 190 289 213 289 241V267C289 319 249 365 195 365H90V237H161C201 237 230 202 230 168V139C230 104 207 78 177 78H0V25C0 11 12 0 28 0Z"
       />
       <path
-        d="M37.8 31h14.6c5.7 0 9.5 3.2 9.5 8.3 0 5.1-3.8 8.4-9.5 8.4H37.8V31Z"
-        stroke="white"
-        strokeWidth="7"
-        strokeLinejoin="round"
+        fill="currentColor"
+        d="M0 129H157C171 129 181 141 181 156C181 171 171 183 157 183H41V365C18 365 0 352 0 335V129Z"
       />
     </svg>
   );
