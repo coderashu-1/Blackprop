@@ -31,7 +31,6 @@ function BPMark({
         fill="currentColor"
         d="M28 0H196C244 0 278 48 278 105C278 130 271 150 256 172C277 190 289 213 289 241V267C289 319 249 365 195 365H90V237H161C201 237 230 202 230 168V139C230 104 207 78 177 78H0V25C0 11 12 0 28 0Z"
       />
-
       <path
         fill="currentColor"
         d="M0 129H157C171 129 181 141 181 156C181 171 171 183 157 183H41V365C18 365 0 352 0 335V129Z"
@@ -40,453 +39,229 @@ function BPMark({
   );
 }
 
+/* =========================================================
+   DECORATIVE GRAPHICS
+========================================================= */
 
-type SupportCardProps = {
+function SplitGraphic() {
+  return (
+    <div className="relative mx-auto h-[150px] w-full max-w-[250px] sm:h-[165px]">
+      <div className="absolute left-1/2 top-[54%] h-[104px] w-[138px] -translate-x-1/2 -translate-y-1/2 -rotate-[12deg] rounded-[14px] border border-[#9a54e8]/45 bg-[linear-gradient(145deg,#43205e_0%,#2b153e_55%,#17101f_100%)] shadow-[0_22px_45px_rgba(104,32,166,.26)]">
+        <div className="absolute inset-0 rounded-[14px] bg-[radial-gradient(circle_at_55%_45%,rgba(172,91,255,.22),transparent_50%)]" />
+      </div>
+
+      <div className="absolute left-1/2 top-[50%] h-[76px] w-[76px] -translate-x-1/2 -translate-y-1/2 rounded-full border-[8px] border-[#9d4df5]/35">
+        <div className="absolute inset-[5px] rounded-full border-[7px] border-[#b34fff]/75 border-l-transparent border-b-transparent" />
+        <div className="absolute bottom-[4px] left-[5px] h-[18px] w-[18px] rounded-full bg-[#ca68ff]" />
+      </div>
+
+      <div className="absolute left-[13%] top-[50%] h-px w-[26%] border-t border-dashed border-[#9d4df5]/35" />
+      <span className="absolute left-[11%] top-[69%] h-1 w-1 rounded-full bg-[#a941ef]/80" />
+    </div>
+  );
+}
+
+function PayoutGraphic() {
+  return (
+    <div className="relative mx-auto h-[150px] w-full max-w-[250px] sm:h-[165px]">
+      <div className="absolute left-1/2 top-[56%] h-[92px] w-[154px] -translate-x-1/2 -translate-y-1/2 rotate-[-28deg] rounded-[14px] border border-[#a25cf2]/40 bg-[linear-gradient(145deg,#321a49,#1c1328)] shadow-[0_22px_45px_rgba(108,33,173,.28)]" />
+
+      <div className="absolute left-1/2 top-[52%] h-[92px] w-[154px] -translate-x-1/2 -translate-y-1/2 rotate-[30deg] rounded-[14px] border border-[#a25cf2]/40 bg-[linear-gradient(145deg,#351a4d,#1b1226)] shadow-[0_22px_45px_rgba(108,33,173,.26)]" />
+
+      <div className="absolute left-1/2 top-[53%] grid h-[58px] w-[58px] -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border border-[#b86aff]/45 bg-[#1a1024] shadow-[0_0_28px_rgba(171,75,247,.22)]">
+        <BPMark width={17} height={23} color="#d5a0ff" />
+      </div>
+
+      <div className="absolute left-[39%] top-[22%] grid h-[34px] w-[34px] place-items-center rounded-full border border-[#b86aff]/45 bg-[#160f1f] shadow-[0_0_24px_rgba(171,75,247,.18)]">
+        <BPMark width={10} height={14} color="#d5a0ff" />
+      </div>
+
+      <div className="absolute left-[55%] top-[12%] grid h-[28px] w-[28px] place-items-center rounded-full border border-[#b86aff]/45 bg-[#160f1f] shadow-[0_0_22px_rgba(171,75,247,.18)]">
+        <BPMark width={8} height={11} color="#d5a0ff" />
+      </div>
+    </div>
+  );
+}
+
+function ProtectGraphic() {
+  return (
+    <div className="relative mx-auto h-[150px] w-full max-w-[250px] sm:h-[165px]">
+      <div className="absolute left-[22%] top-[27%] h-px w-[40%] rotate-[23deg] bg-[linear-gradient(90deg,transparent,#8f4df1,transparent)]" />
+      <div className="absolute left-[25%] top-[22%] h-px w-[35%] rotate-[23deg] border-t border-dashed border-[#8f4df1]/30" />
+
+      <div className="absolute left-1/2 top-[56%] h-[90px] w-[136px] -translate-x-1/2 -translate-y-1/2 rotate-[-12deg] rounded-[14px] border border-[#9d54e8]/45 bg-[linear-gradient(145deg,#38204f,#18111f)] shadow-[0_22px_45px_rgba(105,35,168,.28)]" />
+
+      <div className="absolute left-1/2 top-[49%] -translate-x-1/2 -translate-y-1/2">
+        <svg
+          viewBox="0 0 100 120"
+          fill="none"
+          className="h-[86px] w-[72px]"
+          aria-hidden="true"
+        >
+          <path
+            d="M50 6C27 6 10 21 10 43c0 31 40 67 40 67s40-36 40-67C90 21 73 6 50 6Z"
+            fill="rgba(176,82,255,.13)"
+            stroke="#C06BFF"
+            strokeWidth="4"
+          />
+          <path
+            d="M50 18C34 18 22 28 22 44c0 21 28 47 28 47s28-26 28-47C78 28 66 18 50 18Z"
+            stroke="#D08BFF"
+            strokeWidth="3"
+          />
+          <circle cx="50" cy="46" r="7" fill="#D07AFF" />
+        </svg>
+      </div>
+    </div>
+  );
+}
+
+/* =========================================================
+   CARD
+========================================================= */
+
+type AddOnCardProps = {
   title: string;
   description: string;
-  icon: React.ReactNode;
-  className?: string;
-  delay?: string;
+  graphic: React.ReactNode;
 };
 
-function ArrowIcon() {
+function AddOnCard({ title, description, graphic }: AddOnCardProps) {
   return (
-    <svg
-      viewBox="0 0 20 20"
-      fill="none"
-      className="h-4 w-4"
-      aria-hidden="true"
+    <article
+      className="
+        group
+        relative
+        overflow-hidden
+        rounded-[18px]
+        border
+        border-[#6f3c8e]/65
+        bg-[linear-gradient(155deg,#21162d_0%,#11131b_38%,#0c0e14_100%)]
+        px-5
+        pb-6
+        pt-4
+        shadow-[0_20px_60px_rgba(43,17,69,.25)]
+        transition-all
+        duration-300
+        hover:-translate-y-1
+        hover:border-[#a558e9]/80
+        hover:shadow-[0_26px_70px_rgba(95,35,150,.30)]
+        sm:px-6
+        sm:pb-7
+        sm:pt-5
+      "
     >
-      <path
-        d="M4 10h11M11 6l4 4-4 4"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_55%_3%,rgba(130,59,203,.28),transparent_42%)]" />
+      <div className="pointer-events-none absolute -right-16 -top-16 h-36 w-36 rounded-full bg-[#8e3fe1]/10 blur-3xl" />
 
-function BookIcon() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      className="h-5 w-5"
-      aria-hidden="true"
-    >
-      <path
-        d="M5 4.5h8.5A2.5 2.5 0 0 1 16 7v12H7.5A2.5 2.5 0 0 1 5 16.5v-12Z"
-        stroke="currentColor"
-        strokeWidth="1.4"
-      />
-      <path
-        d="M16 7h1.5A1.5 1.5 0 0 1 19 8.5V19h-3"
-        stroke="currentColor"
-        strokeWidth="1.4"
-      />
-      <path
-        d="M8.5 9h4M8.5 12h4"
-        stroke="currentColor"
-        strokeWidth="1.4"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
-}
+      <div className="relative">{graphic}</div>
 
-function PlatformIcon() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      className="h-5 w-5"
-      aria-hidden="true"
-    >
-      <rect
-        x="3.5"
-        y="4"
-        width="17"
-        height="12"
-        rx="2"
-        stroke="currentColor"
-        strokeWidth="1.4"
-      />
-      <path
-        d="M9 20h6M12 16v4"
-        stroke="currentColor"
-        strokeWidth="1.4"
-        strokeLinecap="round"
-      />
-      <path
-        d="m7 12 3-3 2 2 4-4"
-        stroke="currentColor"
-        strokeWidth="1.4"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
-function RewardIcon() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      className="h-5 w-5"
-      aria-hidden="true"
-    >
-      <path
-        d="M8 4h8v3.5a4 4 0 0 1-8 0V4Z"
-        stroke="currentColor"
-        strokeWidth="1.4"
-      />
-      <path
-        d="M8 6H5.5v1.5A3.5 3.5 0 0 0 9 11M16 6h2.5v1.5A3.5 3.5 0 0 1 15 11"
-        stroke="currentColor"
-        strokeWidth="1.4"
-      />
-      <path
-        d="M12 12v4M9 20h6M10 16h4v4h-4z"
-        stroke="currentColor"
-        strokeWidth="1.4"
-      />
-    </svg>
-  );
-}
-
-function ChatIcon() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      className="h-5 w-5"
-      aria-hidden="true"
-    >
-      <path
-        d="M5 5.5h14a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-8l-4.5 3v-3H5a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2Z"
-        stroke="currentColor"
-        strokeWidth="1.4"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M8 10h8M8 13h5"
-        stroke="currentColor"
-        strokeWidth="1.4"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
-}
-
-function SupportCard({
-  title,
-  description,
-  icon,
-  className = "",
-  delay = "0s",
-}: SupportCardProps) {
-  return (
-    <div
-      className={`support-float relative z-20 mt-3 w-full sm:absolute sm:mt-0 sm:w-[205px] lg:w-[215px] ${className}`}
-      style={{ animationDelay: delay }}
-    >
-      <div className="group rounded-[20px] border border-black/[0.07] bg-white/92 p-4 shadow-[0_16px_44px_rgba(52,43,19,.08)] backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-[#C69A2B]/25 hover:shadow-[0_25px_65px_rgba(90,65,14,.14)] sm:rounded-[22px] sm:p-5">
-        <div className="flex items-start justify-between">
-          <div className="grid h-10 w-10 place-items-center rounded-xl border border-[#D4AF37]/15 bg-[#D4AF37]/[0.07] text-[#9B7319] sm:h-11 sm:w-11">
-            {icon}
-          </div>
-
-          <div className="grid h-7 w-7 place-items-center rounded-full border border-black/[0.05] bg-[#F5F3ED] text-black/35 transition group-hover:bg-[#111] group-hover:text-white">
-            <ArrowIcon />
-          </div>
-        </div>
-
-        <p className="mt-4 text-[15px] font-black leading-5 tracking-[-0.03em] text-[#111] sm:mt-5 sm:text-base">
+      <div className="relative mt-1">
+        <h3 className="text-[17px] font-bold tracking-[-0.025em] text-white sm:text-[18px]">
           {title}
-        </p>
+        </h3>
 
-        <p className="mt-2 text-[12px] leading-5 text-black/52 sm:text-[13px]">
+        <p className="mt-2 text-[12px] leading-5 text-white/48 sm:text-[13px] sm:leading-6">
           {description}
         </p>
       </div>
-    </div>
+    </article>
   );
 }
 
-function SupportIllustration() {
-  return (
-    <div className="relative mx-auto h-auto w-full max-w-[680px] pt-2 sm:h-[560px] sm:pt-0 lg:h-[610px]">
-      {/* BACKGROUND GLOW */}
-      <div className="pointer-events-none absolute left-1/2 top-1/2 h-[72%] w-[72%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#D4AF37]/[0.08] blur-[100px]" />
-
-      {/* ORBIT LINES */}
-      <div className="pointer-events-none absolute left-1/2 top-[52%] hidden h-[70%] w-[82%] -translate-x-1/2 -translate-y-1/2 rounded-[50%] border border-[#B88A24]/[0.08] sm:block" />
-
-      <div className="pointer-events-none absolute left-1/2 top-[52%] hidden h-[55%] w-[66%] -translate-x-1/2 -translate-y-1/2 rotate-[-12deg] rounded-[50%] border border-dashed border-black/[0.06] sm:block" />
-
-      {/* CENTER CORE */}
-      <div className="relative z-10 mx-auto mb-5 w-fit sm:absolute sm:left-1/2 sm:top-[48%] sm:mb-0 sm:-translate-x-1/2 sm:-translate-y-1/2">
-        <div className="support-core relative grid h-36 w-36 place-items-center rounded-[32px] border border-black/[0.07] bg-[linear-gradient(145deg,#1A1A18,#080808)] shadow-[0_24px_65px_rgba(35,28,8,.20)] sm:h-40 sm:w-40 sm:rounded-[38px] lg:h-44 lg:w-44">
-          <div className="absolute inset-[8px] rounded-[26px] border border-white/[0.06]" />
-
-          <div className="absolute left-1/2 top-0 h-px w-[55%] -translate-x-1/2 bg-gradient-to-r from-transparent via-[#E1BE58] to-transparent" />
-
-          <div>
-            <div className="mx-auto grid h-16 w-16 place-items-center rounded-2xl border border-white/[0.12] bg-white/[0.045] shadow-[0_12px_35px_rgba(0,0,0,.24)]">
-              <BPMark
-                width={31}
-                height={39}
-                color="#FFFFFF"
-                className="drop-shadow-[0_1px_1px_rgba(0,0,0,.75)]"
-              />
-            </div>
-
-            <p className="mt-3 text-center text-[10px] font-black uppercase tracking-[0.15em] text-white/55 sm:text-[11px]">
-              Support
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* SUPPORT CARDS */}
-      <SupportCard
-        title="General FAQ"
-        description="Quick answers to common BlackProp questions."
-        icon={<BookIcon />}
-        className="sm:left-[4%] sm:top-[8%] lg:left-[5%] lg:top-[10%]"
-        delay="0s"
-      />
-
-      <SupportCard
-        title="Platform Help"
-        description="Guidance for your trading workspace and setup."
-        icon={<PlatformIcon />}
-        className="sm:right-[3%] sm:top-[18%] lg:right-[4%] lg:top-[17%]"
-        delay="-1.5s"
-      />
-
-      <SupportCard
-        title="Trading & Rewards"
-        description="Understand objectives, progress and reward access."
-        icon={<RewardIcon />}
-        className="sm:bottom-[5%] sm:left-[14%] lg:bottom-[7%] lg:left-[17%]"
-        delay="-3s"
-      />
-
-      {/* METALLIC PILLARS */}
-      <div className="absolute bottom-[5%] right-[12%] hidden items-end gap-3 sm:flex">
-        <div className="support-pillar h-[85px] w-11 rounded-t-[14px] border border-black/[0.06] bg-[linear-gradient(90deg,#D2D2CE,#FAFAF8,#A9AAA6)] shadow-[0_18px_35px_rgba(40,35,20,.10)]" />
-
-        <div className="support-pillar h-[125px] w-12 rounded-t-[15px] border border-[#D4AF37]/15 bg-[linear-gradient(90deg,#76540D,#E0BD55,#FFF1A0,#987019)] shadow-[0_18px_35px_rgba(83,61,13,.12)]" />
-
-        <div className="support-pillar h-[175px] w-14 rounded-t-[16px] border border-black/[0.06] bg-[linear-gradient(90deg,#959590,#F4F4F0,#B2B2AD)] shadow-[0_18px_35px_rgba(40,35,20,.10)]" />
-      </div>
-
-      {/* MESSAGE CHIP */}
-      <div className="support-float absolute bottom-[26%] right-[7%] z-30 hidden rounded-2xl border border-black/[0.07] bg-white/85 px-3.5 py-3 shadow-[0_16px_40px_rgba(52,42,16,.08)] backdrop-blur-xl sm:block [animation-delay:-2s]">
-        <div className="flex items-center gap-2.5">
-          <div className="grid h-8 w-8 place-items-center rounded-xl bg-[#111] text-[#D4AF37]">
-            <ChatIcon />
-          </div>
-
-          <div>
-            <p className="text-[10px] font-black uppercase tracking-[0.11em] text-black/42">
-              Need help?
-            </p>
-
-            <p className="mt-1 text-[12px] font-bold text-black/70">
-              Reach our support team
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* PARTICLES */}
-      <span className="absolute left-[15%] top-[48%] h-2 w-2 rounded-full bg-[#D4AF37]/55 shadow-[0_0_15px_rgba(212,175,55,.4)]" />
-      <span className="absolute right-[18%] top-[8%] h-1.5 w-1.5 rounded-full bg-black/15" />
-      <span className="absolute bottom-[20%] left-[48%] h-1.5 w-1.5 rounded-full bg-[#D4AF37]/70" />
-    </div>
-  );
-}
+/* =========================================================
+   SUPPORT / ADD-ONS SECTION
+========================================================= */
 
 export function Support() {
   return (
     <section
       id="support"
-      className="relative overflow-hidden bg-[#FBFAF7] py-16 sm:py-20 md:py-24 lg:py-28 xl:py-32"
+      className="relative overflow-hidden bg-[#07090d] px-3 py-10 sm:px-5 sm:py-14 lg:px-6 lg:py-16"
     >
-      {/* BACKGROUND */}
-      <div className="pointer-events-none absolute -right-40 top-[15%] h-[650px] w-[650px] rounded-full bg-[#D4AF37]/[0.055] blur-[160px]" />
-
-      <div className="pointer-events-none absolute -left-52 bottom-[-15%] h-[580px] w-[580px] rounded-full bg-black/[0.018] blur-[140px]" />
-
       <div
-        className="pointer-events-none absolute inset-0 opacity-[0.12]"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(0,0,0,.022) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,.022) 1px, transparent 1px)",
-          backgroundSize: "78px 78px",
-          maskImage:
-            "linear-gradient(to bottom, transparent, black 12%, black 86%, transparent)",
-        }}
-      />
+        className="
+          relative
+          mx-auto
+          max-w-[1380px]
+          overflow-hidden
+          rounded-[26px]
+          border
+          border-[#30223e]
+          bg-[#090b11]
+          px-4
+          pb-10
+          pt-10
+          shadow-[0_28px_90px_rgba(0,0,0,.28)]
+          sm:px-6
+          sm:pb-12
+          sm:pt-12
+          lg:px-14
+          lg:pb-14
+          lg:pt-12
+        "
+      >
+        {/* BACKGROUND EFFECTS */}
+        <div className="pointer-events-none absolute left-1/2 top-[18%] h-[420px] w-[780px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(111,45,177,.22)_0%,rgba(68,24,111,.09)_42%,transparent_72%)]" />
 
-      <div className="relative mx-auto max-w-[1360px] px-4 sm:px-6 lg:px-8">
-        <div className="grid items-start gap-10 md:gap-12 lg:grid-cols-[0.86fr_1.14fr] lg:items-center lg:gap-8">
-          {/* LEFT */}
-          <div className="relative z-20 mx-auto max-w-[560px] text-center lg:mx-0 lg:text-left">
-            <div className="inline-flex items-center gap-2.5 rounded-full bg-[#0A0A0B] px-4 py-2.5 shadow-[0_8px_24px_rgba(0,0,0,.08)]">
-              <BPMark
-                width={14}
-                height={18}
-                color="#FFFFFF"
-                className="shrink-0"
-              />
+        <div className="pointer-events-none absolute inset-x-0 top-[34%] h-[160px] border-t border-[#472263]/40 [border-radius:50%]" />
 
-              <span className="text-[11px] font-black uppercase tracking-[0.16em] text-white/72 sm:text-[12px]">
-                BlackProp Support
-              </span>
-            </div>
+        <div className="pointer-events-none absolute left-[8%] top-[14%] h-1.5 w-1.5 rounded-full bg-white/60 shadow-[0_0_10px_rgba(255,255,255,.35)]" />
+        <div className="pointer-events-none absolute left-[37%] top-[12%] h-1.5 w-1.5 rounded-full bg-[#dfb7ff]/80 shadow-[0_0_12px_rgba(213,150,255,.55)]" />
+        <div className="pointer-events-none absolute right-[14%] top-[14%] h-1.5 w-1.5 rounded-full bg-white/60 shadow-[0_0_10px_rgba(255,255,255,.35)]" />
+        <div className="pointer-events-none absolute right-[7%] top-[24%] h-1 w-1 rounded-full bg-white/75 shadow-[0_0_8px_rgba(255,255,255,.4)]" />
+        <div className="pointer-events-none absolute left-[21%] top-[19%] h-1 w-1 rounded-full bg-[#c185ff]/70" />
+        <div className="pointer-events-none absolute right-[34%] top-[19%] h-1 w-1 rounded-full bg-[#c185ff]/60" />
 
-            <h2 className="mt-7 text-[3.4rem] font-black leading-[0.93] tracking-[-0.065em] text-[#080808] min-[430px]:text-[3.75rem] sm:text-[4.55rem] md:text-[4.8rem] lg:text-[5.15rem] xl:text-[5.45rem]">
-              Help when
-              <span className="block bg-[linear-gradient(100deg,#111_0%,#444_35%,#C89E35_72%,#77520A_100%)] bg-clip-text text-transparent">
-                you need it.
+        {/* HEADER */}
+        <div className="relative mx-auto max-w-[780px] text-center">
+          <p className="text-[9px] font-black uppercase tracking-[0.28em] text-[#c37aff] sm:text-[10px]">
+            Add-ons
+          </p>
+
+          <div className="relative mx-auto mt-2 w-fit">
+            <h2 className="text-[2.3rem] font-black leading-[0.95] tracking-[-0.055em] text-white sm:text-[3rem] lg:text-[3.25rem]">
+              Tailor your{" "}
+              <span className="bg-[linear-gradient(90deg,#c07bff,#b659f1)] bg-clip-text text-transparent">
+                Account
               </span>
             </h2>
 
-            <p className="mx-auto mt-6 max-w-[560px] text-[16px] leading-7 text-black/58 sm:text-[17px] sm:leading-8 lg:mx-0">
-              Find quick answers in our help center or reach out when
-              you need more guidance.
-            </p>
-
-            {/* BUTTONS */}
-            <div className="mt-8 grid w-full grid-cols-1 gap-3 sm:flex sm:w-auto sm:flex-row sm:items-center sm:justify-center lg:justify-start">
-              <a
-                href="#faq"
-                className="gold-button group inline-flex h-14 w-full items-center justify-center gap-3 rounded-xl px-6 text-[14px] font-black text-black sm:w-auto sm:min-w-[170px] sm:text-[15px]"
-              >
-                Explore FAQ
-
-                <span className="transition-transform duration-300 group-hover:translate-x-1">
-                  <ArrowIcon />
-                </span>
-              </a>
-
-              <a
-                href="#contact"
-                className="group inline-flex h-14 w-full items-center justify-center gap-3 rounded-xl border border-black/[0.08] bg-white/75 px-6 text-[14px] font-black text-black/70 shadow-[inset_0_1px_0_white] transition hover:border-black/[0.14] hover:bg-white hover:text-black sm:w-auto sm:min-w-[170px] sm:text-[15px]"
-              >
-                Contact Us
-
-                <span className="transition-transform duration-300 group-hover:translate-x-1">
-                  <ArrowIcon />
-                </span>
-              </a>
-            </div>
-
-            {/* MINI TRUST ROW */}
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 lg:justify-start">
-              {[
-                "Account Help",
-                "Platform Guidance",
-                "Trading Questions",
-              ].map((item) => (
-                <div
-                  key={item}
-                  className="flex items-center gap-2"
-                >
-                  <span className="h-1 w-1 rounded-full bg-[#B4861E]" />
-
-                  <span className="text-[11px] font-bold text-black/45 sm:text-[12px]">
-                    {item}
-                  </span>
-                </div>
-              ))}
-            </div>
+            <div className="pointer-events-none absolute -right-[88px] top-1/2 hidden h-[3px] w-[78px] -translate-y-1/2 rounded-full bg-[linear-gradient(90deg,#c16cff,transparent)] blur-[1px] sm:block" />
           </div>
 
-          {/* RIGHT */}
-          <SupportIllustration />
+          <p className="mx-auto mt-3 max-w-[560px] text-[13px] text-white/48 sm:text-[14px]">
+            Customise your account with unique features at checkout.
+          </p>
         </div>
+
+        {/* CARDS */}
+        <div className="relative mt-10 grid gap-5 md:grid-cols-3 md:gap-6 lg:mt-12 lg:gap-7 xl:gap-8">
+          <AddOnCard
+            title="Increase Performance Split"
+            description="Keep more of what you make by increasing your share to 90%."
+            graphic={<SplitGraphic />}
+          />
+
+          <AddOnCard
+            title="Bi-Weekly Payouts"
+            description="Request payouts more frequently—every two weeks."
+            graphic={<PayoutGraphic />}
+          />
+
+          <AddOnCard
+            title="Performance Protect"
+            description="Withdraw the remaining of your earnings in the event of a drawdown breach."
+            graphic={<ProtectGraphic />}
+          />
+        </div>
+
+        {/* BOTTOM DECORATION */}
+        <div className="pointer-events-none absolute bottom-[28px] left-[9%] h-[3px] w-[95px] rounded-full bg-[#a850f0]/45 blur-[3px]" />
+        <div className="pointer-events-none absolute bottom-[8px] left-1/2 h-[3px] w-[80px] -translate-x-1/2 rounded-full bg-[#a850f0]/45 blur-[5px]" />
       </div>
-
-      <style jsx global>{`
-        .support-float {
-          animation: blackpropSupportFloat 6s ease-in-out infinite;
-          will-change: transform;
-        }
-
-
-        .support-core {
-          animation: blackpropSupportCore 5.5s ease-in-out infinite;
-          will-change: transform;
-        }
-
-        @keyframes blackpropSupportCore {
-          0%,
-          100% {
-            transform: translateY(0) scale(1);
-          }
-
-          50% {
-            transform: translateY(-4px) scale(1.015);
-          }
-        }
-
-        @media (max-width: 639px) {
-          .support-float {
-            animation: none !important;
-            transform: none !important;
-          }
-        }
-
-        .support-pillar {
-          animation: blackpropSupportPillar 5s ease-in-out infinite;
-          transform-origin: bottom;
-        }
-
-        .support-pillar:nth-child(2) {
-          animation-delay: -1.4s;
-        }
-
-        .support-pillar:nth-child(3) {
-          animation-delay: -2.6s;
-        }
-
-        @keyframes blackpropSupportFloat {
-          0%,
-          100% {
-            transform: translateY(0);
-          }
-
-          50% {
-            transform: translateY(-10px);
-          }
-        }
-
-        @keyframes blackpropSupportPillar {
-          0%,
-          100% {
-            transform: translateY(0);
-          }
-
-          50% {
-            transform: translateY(-7px);
-          }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-          .support-float,
-          .support-pillar,
-          .support-core {
-            animation: none;
-          }
-        }
-      `}</style>
     </section>
   );
 }
+
+export default Support;

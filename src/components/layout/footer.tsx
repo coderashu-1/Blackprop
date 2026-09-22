@@ -137,7 +137,7 @@ function FooterLogo() {
       aria-label="BlackProp home"
       className="group inline-flex items-center gap-3.5"
     >
-      <span className="grid h-12 w-12 place-items-center rounded-[15px] border border-white/[0.10] bg-white/[0.035] shadow-[inset_0_1px_0_rgba(255,255,255,.04),0_10px_28px_rgba(0,0,0,.20)] transition duration-300 group-hover:border-white/[0.18] group-hover:bg-white/[0.055]">
+      <span className="grid h-12 w-12 place-items-center rounded-[15px] border border-[#8f4bc1]/30 bg-[#18101f] shadow-[inset_0_1px_0_rgba(255,255,255,.04),0_10px_28px_rgba(0,0,0,.20)] transition duration-300 group-hover:border-[#be6cff]/45 group-hover:bg-[#21142c]">
         <BPMark
           width={22}
           height={28}
@@ -187,7 +187,7 @@ function FooterColumn({
             >
               {link.label}
 
-              <span className="translate-x-[-3px] text-[#D4AF37] opacity-0 transition duration-200 group-hover:translate-x-0 group-hover:opacity-100">
+              <span className="translate-x-[-3px] text-[#be6cff] opacity-0 transition duration-200 group-hover:translate-x-0 group-hover:opacity-100">
                 <ArrowIcon />
               </span>
             </Link>
@@ -204,59 +204,35 @@ function FooterColumn({
 
 export function Footer() {
   return (
-    <footer className="relative overflow-hidden border-t border-white/[0.06] bg-[#030303]">
+    <footer className="relative overflow-hidden border-t border-[#6f36a8]/20 bg-[#05070b]">
       {/* =====================================================
           BACKGROUND
       ====================================================== */}
 
-      <div className="pointer-events-none absolute -left-56 top-20 h-[520px] w-[520px] rounded-full bg-[#D4AF37]/[0.035] blur-[160px]" />
+      <div className="pointer-events-none absolute -left-56 top-20 h-[520px] w-[520px] rounded-full bg-[#8f28f3]/[0.09] blur-[160px]" />
 
-      <div className="pointer-events-none absolute -right-48 bottom-0 h-[500px] w-[500px] rounded-full bg-white/[0.012] blur-[150px]" />
+      <div className="pointer-events-none absolute -right-48 bottom-0 h-[500px] w-[500px] rounded-full bg-[#b36cff]/[0.035] blur-[150px]" />
 
       <div
-        className="pointer-events-none absolute inset-0 opacity-[0.16]"
+        className="pointer-events-none absolute inset-0 opacity-[0.13]"
         style={{
           backgroundImage:
-            "linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px)",
+            "linear-gradient(rgba(190,108,255,.018) 1px, transparent 1px), linear-gradient(90deg, rgba(190,108,255,.018) 1px, transparent 1px)",
           backgroundSize: "80px 80px",
           maskImage: "linear-gradient(to bottom, black, transparent 78%)",
         }}
       />
 
+      <div className="pointer-events-none absolute left-1/2 top-[5%] h-[340px] w-[900px] max-w-[92vw] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(143,40,243,.08)_0%,rgba(143,40,243,.025)_42%,transparent_72%)] blur-[50px]" />
+
+      <div className="pointer-events-none absolute bottom-[-80px] left-1/2 h-[260px] w-[900px] max-w-[94vw] -translate-x-1/2 rounded-full bg-[radial-gradient(ellipse_at_center,rgba(143,40,243,.12)_0%,rgba(112,42,184,.05)_45%,transparent_74%)] blur-[60px]" />
+
       <div className="relative mx-auto max-w-[1380px] px-4 sm:px-6 lg:px-8">
-        {/* =====================================================
-            TOP CTA
-        ====================================================== */}
-
-        <div className="border-b border-white/[0.06] py-10 sm:flex sm:items-center sm:justify-between sm:gap-8 sm:py-14 lg:py-16">
-          <div>
-            <p className="text-[11px] font-black uppercase tracking-[0.16em] text-[#D4AF37] sm:text-[12px]">
-              Ready when you are
-            </p>
-
-            <h2 className="mt-3 max-w-[650px] text-[2.35rem] font-black leading-[1] tracking-[-0.05em] text-white sm:text-[2.8rem] lg:text-[3rem]">
-              Your next trading challenge
-              <span className="text-white/35"> starts here.</span>
-            </h2>
-          </div>
-
-          <Link
-            href="/#challenges"
-            className="gold-button group mt-7 inline-flex h-14 w-full items-center justify-center gap-3 rounded-xl px-7 text-[14px] font-black text-black sm:mt-0 sm:w-auto sm:min-w-[180px] sm:text-[15px]"
-          >
-            Get Funded
-
-            <span className="transition-transform duration-300 group-hover:translate-x-1">
-              <ArrowIcon />
-            </span>
-          </Link>
-        </div>
-
         {/* =====================================================
             MAIN FOOTER
         ====================================================== */}
 
-        <div className="grid grid-cols-2 gap-x-6 gap-y-10 py-11 sm:grid-cols-3 sm:py-14 lg:grid-cols-[1.6fr_.8fr_.8fr_.8fr_.9fr] lg:gap-8 lg:py-16">
+        <div className="grid grid-cols-2 gap-x-6 gap-y-10 py-12 sm:grid-cols-3 sm:py-16 lg:grid-cols-[1.6fr_.8fr_.8fr_.8fr_.9fr] lg:gap-8 lg:py-20">
           {/* BRAND */}
 
           <div className="col-span-2 max-w-[420px] sm:col-span-3 lg:col-span-1 lg:max-w-[350px]">
@@ -269,15 +245,15 @@ export function Footer() {
             </p>
 
             <div className="mt-7 flex flex-wrap gap-2">
-              <span className="rounded-full border border-white/[0.07] bg-white/[0.025] px-3.5 py-2 text-[10px] font-black uppercase tracking-[0.11em] text-white/48 sm:text-[11px]">
+              <span className="rounded-full border border-[#74439a]/24 bg-[#120f18] px-3.5 py-2 text-[10px] font-black uppercase tracking-[0.11em] text-white/48 sm:text-[11px]">
                 Forex
               </span>
 
-              <span className="rounded-full border border-white/[0.07] bg-white/[0.025] px-3.5 py-2 text-[10px] font-black uppercase tracking-[0.11em] text-white/48 sm:text-[11px]">
+              <span className="rounded-full border border-[#74439a]/24 bg-[#120f18] px-3.5 py-2 text-[10px] font-black uppercase tracking-[0.11em] text-white/48 sm:text-[11px]">
                 Futures
               </span>
 
-              <span className="rounded-full border border-white/[0.07] bg-white/[0.025] px-3.5 py-2 text-[10px] font-black uppercase tracking-[0.11em] text-white/48 sm:text-[11px]">
+              <span className="rounded-full border border-[#74439a]/24 bg-[#120f18] px-3.5 py-2 text-[10px] font-black uppercase tracking-[0.11em] text-white/48 sm:text-[11px]">
                 Crypto
               </span>
             </div>
@@ -308,7 +284,7 @@ export function Footer() {
             PLATFORM BAR
         ====================================================== */}
 
-        <div className="flex flex-col gap-5 border-t border-white/[0.06] py-6 sm:flex-row sm:items-center sm:justify-between sm:py-7">
+        <div className="flex flex-col gap-5 border-t border-white/[0.07] py-6 sm:flex-row sm:items-center sm:justify-between sm:py-7">
           <div>
             <p className="text-[11px] font-black uppercase tracking-[0.14em] text-white/42 sm:text-[12px]">
               BlackProp
@@ -323,7 +299,7 @@ export function Footer() {
             {["Secure", "Global", "Trader Focused"].map((item) => (
               <span
                 key={item}
-                className="rounded-lg border border-white/[0.07] bg-white/[0.025] px-3.5 py-2.5 text-[10px] font-black uppercase tracking-[0.10em] text-white/45 sm:text-[11px]"
+                className="rounded-lg border border-[#74439a]/24 bg-[#120f18] px-3.5 py-2.5 text-[10px] font-black uppercase tracking-[0.10em] text-white/45 sm:text-[11px]"
               >
                 {item}
               </span>
@@ -335,7 +311,7 @@ export function Footer() {
             DISCLAIMER
         ====================================================== */}
 
-        <div className="border-t border-white/[0.06] py-7 sm:py-9">
+        <div className="border-t border-white/[0.07] py-7 sm:py-9">
           <div className="max-w-[1180px] text-[12px] font-medium leading-6 text-white/42 sm:text-[13px] sm:leading-7">
             <p>
               <span className="font-bold text-white/62">
@@ -383,7 +359,7 @@ export function Footer() {
             BOTTOM
         ====================================================== */}
 
-        <div className="flex flex-col gap-5 border-t border-white/[0.06] py-6 sm:flex-row sm:items-center sm:justify-between sm:py-7">
+        <div className="flex flex-col gap-5 border-t border-white/[0.07] py-6 sm:flex-row sm:items-center sm:justify-between sm:py-7">
           <p className="text-[12px] text-white/42 sm:text-[13px]">
             © 2026 BlackProp. All rights reserved.
           </p>
@@ -395,7 +371,7 @@ export function Footer() {
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[12px] text-white/42 transition-colors duration-200 hover:text-[#D4AF37] sm:text-[13px]"
+                className="text-[12px] text-white/42 transition-colors duration-200 hover:text-[#be6cff] sm:text-[13px]"
               >
                 {link.label}
               </Link>
@@ -407,12 +383,12 @@ export function Footer() {
             LARGE BRAND WORDMARK
         ====================================================== */}
 
-        <div className="relative hidden overflow-hidden border-t border-white/[0.05] pb-3 pt-6 sm:block">
+        <div className="relative hidden overflow-hidden border-t border-white/[0.06] pb-3 pt-6 sm:block">
           <div className="select-none text-center text-[18vw] font-black leading-[0.75] tracking-[-0.09em] text-white/[0.025] sm:text-[14vw]">
             BLACKPROP
           </div>
 
-          <div className="pointer-events-none absolute left-1/2 top-[62%] h-24 w-[55%] -translate-x-1/2 rounded-full bg-[#D4AF37]/[0.045] blur-[60px]" />
+          <div className="pointer-events-none absolute left-1/2 top-[62%] h-24 w-[55%] -translate-x-1/2 rounded-full bg-[#8f28f3]/[0.08] blur-[60px]" />
         </div>
       </div>
     </footer>

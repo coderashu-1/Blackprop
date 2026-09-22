@@ -1,47 +1,4 @@
-/* =========================================================
-   BLACKPROP SVG LOGO MARK
-   BLACK / WHITE ONLY
-========================================================= */
-
-function BPMark({
-  width = 58,
-  height = 74,
-  color = "#FFFFFF",
-  className = "",
-}: {
-  width?: number | string;
-  height?: number | string;
-  color?: "#000000" | "#FFFFFF";
-  className?: string;
-}) {
-  return (
-    <svg
-      width={width}
-      height={height}
-      viewBox="0 0 290 366"
-      fill="none"
-      color={color}
-      className={className}
-      shapeRendering="geometricPrecision"
-      preserveAspectRatio="xMidYMid meet"
-      aria-hidden="true"
-    >
-      <path
-        fill="currentColor"
-        d="M28 0H196C244 0 278 48 278 105C278 130 271 150 256 172C277 190 289 213 289 241V267C289 319 249 365 195 365H90V237H161C201 237 230 202 230 168V139C230 104 207 78 177 78H0V25C0 11 12 0 28 0Z"
-      />
-
-      <path
-        fill="currentColor"
-        d="M0 129H157C171 129 181 141 181 156C181 171 171 183 157 183H41V365C18 365 0 352 0 335V129Z"
-      />
-    </svg>
-  );
-}
-
-/* =========================================================
-   ICONS
-========================================================= */
+"use client";
 
 function CheckIcon() {
   return (
@@ -54,7 +11,7 @@ function CheckIcon() {
       <path
         d="m4 9.2 3 3 7-7"
         stroke="currentColor"
-        strokeWidth="1.7"
+        strokeWidth="1.8"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
@@ -73,7 +30,7 @@ function ArrowRight() {
       <path
         d="M3.5 10h12M11.5 6l4 4-4 4"
         stroke="currentColor"
-        strokeWidth="1.6"
+        strokeWidth="1.7"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
@@ -81,22 +38,19 @@ function ArrowRight() {
   );
 }
 
-/* =========================================================
-   JOURNEY DATA
-========================================================= */
-
 const journey = [
   {
     number: "01",
     label: "Setup",
     title: "Choose your route",
     description:
-      "Pick the challenge, account size and trading setup that fits you.",
+      "Pick the challenge, account size and trading setup that fits you perfectly.",
     details: [
       "Choose your challenge model",
       "Select your account size",
       "Pick your trading environment",
     ],
+    accent: "from-[#9f63ff] via-[#8f5cff] to-[#d485ff]",
   },
   {
     number: "02",
@@ -109,6 +63,7 @@ const journey = [
       "Trade within program rules",
       "Complete required milestones",
     ],
+    accent: "from-[#a541ff] via-[#d23cff] to-[#7553ff]",
   },
   {
     number: "03",
@@ -121,28 +76,21 @@ const journey = [
       "Build a consistent track record",
       "Reach reward eligibility",
     ],
+    accent: "from-[#7f62ff] via-[#a65cff] to-[#e553af]",
   },
 ];
-
-/* =========================================================
-   MAIN
-========================================================= */
 
 export function HowItWorks() {
   return (
     <section
       id="how-it-works"
-      className="relative overflow-hidden bg-[#FBFAF7] py-14 text-[#080808] sm:py-16 lg:py-20 xl:py-24"
+      className="relative overflow-hidden bg-white py-12 text-[#10182b] sm:py-14 md:py-16 lg:py-20"
     >
-      {/* =====================================================
-          LOCAL ANIMATIONS
-      ====================================================== */}
-
       <style>{`
-        @keyframes bpFadeUp {
+        @keyframes bpStepIn {
           from {
             opacity: 0;
-            transform: translateY(22px);
+            transform: translateY(18px);
           }
           to {
             opacity: 1;
@@ -150,49 +98,13 @@ export function HowItWorks() {
           }
         }
 
-        @keyframes bpFloat {
-          0%, 100% {
-            transform: translateY(0);
-          }
-          50% {
-            transform: translateY(-4px);
-          }
-        }
-
-        @keyframes bpShine {
-          0% {
-            transform: translateX(-160%);
-            opacity: 0;
-          }
-          25% {
-            opacity: 1;
-          }
-          70% {
-            opacity: 0.75;
-          }
-          100% {
-            transform: translateX(260%);
-            opacity: 0;
-          }
-        }
-
         .bp-step-card {
           opacity: 0;
-          animation: bpFadeUp 0.7s cubic-bezier(.2,.75,.25,1) forwards;
-        }
-
-        .bp-logo-float {
-          animation: bpFloat 4s ease-in-out infinite;
-        }
-
-        .bp-shine {
-          animation: bpShine 5.8s ease-in-out infinite;
+          animation: bpStepIn .65s cubic-bezier(.2,.75,.25,1) forwards;
         }
 
         @media (prefers-reduced-motion: reduce) {
-          .bp-step-card,
-          .bp-logo-float,
-          .bp-shine {
+          .bp-step-card {
             animation: none !important;
             opacity: 1 !important;
             transform: none !important;
@@ -200,122 +112,173 @@ export function HowItWorks() {
         }
       `}</style>
 
-      {/* =====================================================
-          SIMPLE BACKGROUND
-      ====================================================== */}
+      {/* soft background lighting */}
+      <div className="pointer-events-none absolute left-1/2 top-[-190px] h-[420px] w-[760px] -translate-x-1/2 rounded-full bg-[#9f4cff]/[0.05] blur-[120px]" />
+      <div className="pointer-events-none absolute bottom-[-220px] left-1/2 h-[360px] w-[900px] -translate-x-1/2 rounded-full bg-[#824cff]/[0.04] blur-[120px]" />
 
-      <div className="pointer-events-none absolute left-1/2 top-[-220px] h-[520px] w-[900px] -translate-x-1/2 rounded-full bg-[#D4AF37]/[0.04] blur-[150px]" />
-
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-black/10 to-transparent" />
-
-      <div className="relative mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
-        {/* =====================================================
-            HEADER
-        ====================================================== */}
-
+      <div className="relative mx-auto max-w-[1180px] px-4 sm:px-6 lg:px-8">
+        {/* header */}
         <div className="mx-auto max-w-[760px] text-center">
-          <p className="text-[10px] font-black uppercase tracking-[0.19em] text-[#916B17] sm:text-[11px] lg:text-[12px]">
+          <p className="text-[10px] font-black uppercase tracking-[0.28em] text-[#8f28f3] sm:text-[11px]">
             How it works
           </p>
 
-          <h2 className="mt-4 text-[2.8rem] font-black leading-[0.95] tracking-[-0.055em] text-[#080808] sm:text-[3.8rem] md:text-[4.3rem] lg:text-[4.7rem] xl:text-[5rem]">
+          <h2 className="mt-3 text-[2.75rem] font-black leading-[0.93] tracking-[-0.055em] text-[#121a2e] sm:text-[3.7rem] md:text-[4.2rem] lg:text-[4.7rem]">
             Three steps.
-            <span className="block text-[#B48723]">
+            <span className="block bg-[linear-gradient(90deg,#a85dff_0%,#b14cff_45%,#d06cff_100%)] bg-clip-text text-transparent">
               One clear path.
             </span>
           </h2>
 
-          <p className="mx-auto mt-5 max-w-[620px] text-[13px] font-medium leading-6 text-black/50 sm:text-[15px] sm:leading-7 lg:text-base">
-            Choose your setup, trade with discipline and progress through the
-            BlackProp journey.
+          <p className="mx-auto mt-5 max-w-[620px] text-[14px] font-semibold leading-6 text-[#536079] sm:text-[15px] sm:leading-7 lg:text-[16px]">
+            Choose your setup, trade with discipline and progress through
+            <span className="hidden sm:inline"><br /></span>
+            the BlackProp journey.
           </p>
         </div>
 
-        {/* =====================================================
-            STEP CARDS
-        ====================================================== */}
-
-        <div className="mt-10 grid gap-4 sm:mt-12 lg:grid-cols-3 lg:gap-5 xl:mt-14">
+        {/* cards */}
+        <div className="mt-12 grid gap-5 md:mt-14 lg:grid-cols-3 lg:gap-6">
           {journey.map((item, index) => (
             <article
               key={item.number}
-              className="bp-step-card group relative overflow-hidden rounded-[24px] border border-black/[0.07] bg-white p-5 shadow-[0_18px_55px_rgba(45,34,10,.045)] transition-all duration-500 hover:-translate-y-1 hover:border-black/[0.12] hover:shadow-[0_28px_70px_rgba(45,34,10,.09)] sm:rounded-[28px] sm:p-6 lg:min-h-[390px] lg:p-7 xl:p-8"
-              style={{
-                animationDelay: `${index * 120}ms`,
-              }}
+              className="
+                bp-step-card
+                group
+                relative
+                overflow-hidden
+                rounded-[24px]
+                border
+                border-[#e9dcfb]
+                bg-white
+                px-5
+                pb-6
+                pt-7
+                shadow-[0_18px_44px_rgba(89,44,142,.08)]
+                transition-all
+                duration-300
+                hover:-translate-y-1
+                hover:shadow-[0_24px_58px_rgba(89,44,142,.13)]
+                sm:px-6
+                sm:pb-7
+                sm:pt-8
+                lg:min-h-[370px]
+              "
+              style={{ animationDelay: `${index * 110}ms` }}
             >
-              {/* animated top highlight */}
-              <div className="pointer-events-none absolute inset-x-0 top-0 h-px overflow-hidden">
-                <div
-                  className="bp-shine h-full w-28 bg-gradient-to-r from-transparent via-[#D4AF37]/80 to-transparent"
-                  style={{
-                    animationDelay: `${index * 0.7}s`,
-                  }}
-                />
-              </div>
+              {/* top line */}
+              <div
+                className={`absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r ${item.accent}`}
+              />
 
-              {/* number + B/W logo */}
-              <div className="flex items-center justify-between">
-                <div className="grid h-11 w-11 place-items-center rounded-full bg-[#0B0B0B] text-[12px] font-black text-white transition-transform duration-500 group-hover:scale-105 sm:h-12 sm:w-12 sm:text-[13px]">
+              <div className="relative flex items-center gap-3">
+                <div
+                  className="
+                    grid
+                    h-10
+                    w-10
+                    place-items-center
+                    rounded-full
+                    bg-[linear-gradient(135deg,#9137ff,#5b38f2)]
+                    text-[12px]
+                    font-black
+                    text-white
+                    shadow-[0_8px_18px_rgba(113,49,235,.28)]
+                    sm:h-11
+                    sm:w-11
+                    sm:text-[13px]
+                  "
+                >
                   {item.number}
                 </div>
 
-                {/* LOGO: BLACK + WHITE ONLY */}
-                <div className="bp-logo-float grid h-10 w-10 place-items-center rounded-xl bg-[#0A0A0A] shadow-[0_8px_22px_rgba(0,0,0,.10)]">
-                  <BPMark
-                    width={14}
-                    height={18}
-                    color="#FFFFFF"
-                  />
-                </div>
+                <span
+                  className="
+                    rounded-full
+                    border
+                    border-[#e8d5ff]
+                    bg-[#fbf7ff]
+                    px-3
+                    py-1.5
+                    text-[9px]
+                    font-black
+                    uppercase
+                    tracking-[0.11em]
+                    text-[#8f28f3]
+                    sm:text-[10px]
+                  "
+                >
+                  {item.label}
+                </span>
               </div>
 
-              {/* content */}
               <div className="mt-7">
-                <p className="text-[9px] font-black uppercase tracking-[0.17em] text-[#916B17] sm:text-[10px] lg:text-[11px]">
-                  {item.label}
-                </p>
-
-                <h3 className="mt-2.5 text-[1.7rem] font-black leading-[1] tracking-[-0.045em] text-[#090909] transition-colors duration-300 sm:text-[1.95rem] lg:text-[2.1rem]">
+                <h3 className="text-[1.65rem] font-black leading-[1.05] tracking-[-0.045em] text-[#11192b] sm:text-[1.8rem] lg:text-[1.95rem]">
                   {item.title}
                 </h3>
 
-                <p className="mt-4 text-[13px] font-medium leading-6 text-black/50 sm:text-[14px] lg:text-[15px] lg:leading-7">
+                <p className="mt-3 text-[13px] font-semibold leading-6 text-[#60708d] sm:text-[14px]">
                   {item.description}
                 </p>
               </div>
 
-              {/* details */}
-              <div className="mt-6 space-y-3 border-t border-black/[0.06] pt-5 lg:mt-7 lg:pt-6">
+              <div className="mt-6 space-y-3 border-t border-[#eee6f8] pt-5">
                 {item.details.map((detail) => (
-                  <div
-                    key={detail}
-                    className="flex items-center gap-2.5"
-                  >
-                    <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-black text-white transition-transform duration-300 group-hover:scale-[1.04]">
+                  <div key={detail} className="flex items-center gap-3">
+                    <span
+                      className="
+                        grid
+                        h-6
+                        w-6
+                        shrink-0
+                        place-items-center
+                        rounded-full
+                        bg-[linear-gradient(135deg,#9137ff,#6b3cf0)]
+                        text-white
+                        shadow-[0_5px_12px_rgba(126,52,239,.20)]
+                      "
+                    >
                       <CheckIcon />
                     </span>
 
-                    <span className="text-[11px] font-semibold leading-5 text-black/58 sm:text-[12px] lg:text-[13px]">
+                    <span className="text-[12px] font-semibold leading-5 text-[#33415b] sm:text-[13px]">
                       {detail}
                     </span>
                   </div>
                 ))}
               </div>
 
-              {/* very subtle bottom glow */}
-              <div className="pointer-events-none absolute bottom-[-80px] right-[-70px] h-[150px] w-[150px] rounded-full bg-[#D4AF37]/[0.035] blur-[45px] transition duration-500 group-hover:bg-[#D4AF37]/[0.07]" />
+              <div className="pointer-events-none absolute -bottom-16 -right-14 h-36 w-36 rounded-full bg-[#9d4cff]/[0.05] blur-[42px]" />
             </article>
           ))}
         </div>
 
-        {/* =====================================================
-            SIMPLE CTA
-        ====================================================== */}
-
-        <div className="mt-5 flex flex-col gap-5 overflow-hidden rounded-[22px] border border-black/[0.07] bg-[#0B0B0B] px-5 py-6 text-white shadow-[0_18px_50px_rgba(0,0,0,.08)] sm:mt-6 sm:flex-row sm:items-center sm:justify-between sm:px-7 sm:py-7 lg:px-8">
-          <div>
-            <p className="text-[9px] font-black uppercase tracking-[0.17em] text-white/45 sm:text-[10px] lg:text-[11px]">
+        {/* CTA */}
+        <div
+          className="
+            relative
+            mt-6
+            flex
+            flex-col
+            gap-5
+            overflow-hidden
+            rounded-[16px]
+            border
+            border-[#211a34]
+            bg-[#11131d]
+            px-6
+            py-6
+            text-white
+            shadow-[0_18px_42px_rgba(16,13,28,.22)]
+            sm:flex-row
+            sm:items-center
+            sm:justify-between
+            sm:px-8
+            sm:py-7
+          "
+        >
+          <div className="relative z-10">
+            <p className="text-[9px] font-black uppercase tracking-[0.18em] text-[#c783ff] sm:text-[10px]">
               Ready to begin?
             </p>
 
@@ -326,19 +289,41 @@ export function HowItWorks() {
 
           <a
             href="#challenges"
-            className="group inline-flex min-h-[52px] w-full items-center justify-center gap-2 rounded-xl bg-white px-6 text-[13px] font-black text-black transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#F2F2F2] hover:shadow-[0_10px_30px_rgba(255,255,255,.08)] sm:w-auto sm:min-w-[165px] sm:text-[14px] lg:min-h-[56px] lg:text-[15px]"
+            className="
+              group
+              relative
+              z-10
+              inline-flex
+              min-h-[52px]
+              w-full
+              items-center
+              justify-center
+              gap-2
+              rounded-[12px]
+              bg-[linear-gradient(90deg,#8d35ff_0%,#7b43ff_48%,#5a4af2_100%)]
+              px-6
+              text-[13px]
+              font-black
+              text-white
+              shadow-[0_12px_28px_rgba(104,61,240,.28)]
+              transition-all
+              duration-300
+              hover:-translate-y-0.5
+              hover:brightness-110
+              sm:w-auto
+              sm:min-w-[170px]
+              sm:text-[14px]
+            "
           >
             Get Funded
             <ArrowRight />
           </a>
-        </div>
 
-        {/* disclaimer */}
-        <p className="mx-auto mt-5 max-w-3xl text-center text-[9px] font-medium leading-5 text-black/35 sm:text-[10px] lg:text-[11px]">
-          Challenge structure, progression and reward eligibility are subject
-          to the final rules and terms of the selected BlackProp program.
-        </p>
+          <div className="pointer-events-none absolute right-[-60px] top-1/2 h-40 w-40 -translate-y-1/2 rounded-full bg-[#8f28f3]/10 blur-[60px]" />
+        </div>
       </div>
     </section>
   );
 }
+
+export default HowItWorks;

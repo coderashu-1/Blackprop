@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState, type ReactNode } from "react";
+import { useMemo, useState } from "react";
 
 
 /* =========================================================
@@ -466,736 +466,151 @@ const modelRulesByMarket: Record<Market, Record<Model, RuleSet>> = {
   Crypto: cryptoRules,
 };
 
+
 /* =========================================================
-   GENERAL ICONS
+   REFERENCE-MATCH CONFIGURATOR UI
 ========================================================= */
 
-function CheckIcon() {
+function TinyBolt() {
   return (
-    <svg
-      viewBox="0 0 20 20"
-      fill="none"
-      className="h-4 w-4"
-      aria-hidden="true"
-    >
-      <circle
-        cx="10"
-        cy="10"
-        r="7"
-        stroke="currentColor"
-        strokeWidth="1.3"
-      />
-
+    <svg viewBox="0 0 20 20" fill="none" className="h-4 w-4" aria-hidden="true">
       <path
-        d="m6.8 10.1 2 2 4.4-4.5"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
-function LockIcon() {
-  return (
-    <svg
-      viewBox="0 0 20 20"
-      fill="none"
-      className="h-4 w-4"
-      aria-hidden="true"
-    >
-      <rect
-        x="4"
-        y="8"
-        width="12"
-        height="9"
-        rx="2.5"
-        stroke="currentColor"
-        strokeWidth="1.4"
-      />
-
-      <path
-        d="M6.5 8V6.2A3.5 3.5 0 0 1 10 2.7a3.5 3.5 0 0 1 3.5 3.5V8"
-        stroke="currentColor"
-        strokeWidth="1.4"
-        strokeLinecap="round"
-      />
-
-      <circle
-        cx="10"
-        cy="12.5"
-        r="1"
+        d="M11.2 1.8 4.8 11h4.8l-.8 7.2 6.4-9.1h-4.7l.7-7.3Z"
         fill="currentColor"
       />
     </svg>
   );
 }
 
-function CopyIcon() {
-  return (
-    <svg
-      viewBox="0 0 18 18"
-      fill="none"
-      className="h-3.5 w-3.5"
-      aria-hidden="true"
-    >
-      <rect
-        x="6"
-        y="6"
-        width="8"
-        height="8"
-        rx="1.5"
-        stroke="currentColor"
-        strokeWidth="1.3"
-      />
-
-      <path
-        d="M11.5 6V4.6A1.6 1.6 0 0 0 9.9 3H4.6A1.6 1.6 0 0 0 3 4.6v5.3a1.6 1.6 0 0 0 1.6 1.6H6"
-        stroke="currentColor"
-        strokeWidth="1.3"
-      />
-    </svg>
-  );
-}
-
-function ArrowIcon() {
-  return (
-    <svg
-      viewBox="0 0 18 18"
-      fill="none"
-      className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
-      aria-hidden="true"
-    >
-      <path
-        d="M3.5 9h10M10 5.5 13.5 9 10 12.5"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
-function TargetIcon() {
-  return (
-    <svg
-      viewBox="0 0 20 20"
-      fill="none"
-      className="h-4 w-4"
-    >
-      <circle
-        cx="9"
-        cy="11"
-        r="6"
-        stroke="currentColor"
-        strokeWidth="1.4"
-      />
-
-      <circle
-        cx="9"
-        cy="11"
-        r="2.5"
-        stroke="currentColor"
-        strokeWidth="1.4"
-      />
-
-      <path
-        d="m12.5 7.5 4-4M13.5 3.5h3v3"
-        stroke="currentColor"
-        strokeWidth="1.4"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
-function LossIcon() {
-  return (
-    <svg
-      viewBox="0 0 20 20"
-      fill="none"
-      className="h-4 w-4"
-    >
-      <path
-        d="M3 5.5 7 9l3-2.5 6 6"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-
-      <path
-        d="M12.5 12.5H16V9"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
-function ShieldIcon() {
-  return (
-    <svg
-      viewBox="0 0 20 20"
-      fill="none"
-      className="h-4 w-4"
-    >
-      <path
-        d="M10 2.5 16 5v4.5c0 3.7-2.2 6.2-6 7.8-3.8-1.6-6-4.1-6-7.8V5l6-2.5Z"
-        stroke="currentColor"
-        strokeWidth="1.35"
-      />
-
-      <path
-        d="m7 10 2 2 4-4"
-        stroke="currentColor"
-        strokeWidth="1.35"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
-function TrophyIcon() {
-  return (
-    <svg
-      viewBox="0 0 20 20"
-      fill="none"
-      className="h-4 w-4"
-    >
-      <path
-        d="M6 4h8v3.5c0 3-1.5 5-4 5s-4-2-4-5V4Z"
-        stroke="currentColor"
-        strokeWidth="1.3"
-      />
-
-      <path
-        d="M6 6H3.7c0 2.8 1.1 4 3.3 4M14 6h2.3c0 2.8-1.1 4-3.3 4M10 12.5V15M7.5 17h5"
-        stroke="currentColor"
-        strokeWidth="1.3"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
-}
-
-function LeverageIcon() {
-  return (
-    <svg
-      viewBox="0 0 20 20"
-      fill="none"
-      className="h-4 w-4"
-    >
-      <path
-        d="M4 14.5 8 10l3 2.5L16 6"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-
-      <path
-        d="M13 6h3v3"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
-}
-
-function CalendarIcon() {
-  return (
-    <svg
-      viewBox="0 0 20 20"
-      fill="none"
-      className="h-4 w-4"
-    >
-      <rect
-        x="3"
-        y="5"
-        width="14"
-        height="12"
-        rx="2"
-        stroke="currentColor"
-        strokeWidth="1.3"
-      />
-
-      <path
-        d="M6.5 3v4M13.5 3v4M3 9h14"
-        stroke="currentColor"
-        strokeWidth="1.3"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
-}
-
-function SplitIcon() {
-  return (
-    <svg
-      viewBox="0 0 20 20"
-      fill="none"
-      className="h-4 w-4"
-    >
-      <path
-        d="M4 4v2c0 2.5 1.5 4 4 4h8M4 16v-2c0-2.5 1.5-4 4-4"
-        stroke="currentColor"
-        strokeWidth="1.4"
-        strokeLinecap="round"
-      />
-
-      <path
-        d="m13 7 3 3-3 3"
-        stroke="currentColor"
-        strokeWidth="1.4"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
-/* =========================================================
-   MARKET ICONS
-========================================================= */
-
-function MarketIcon({
-  market,
+function RowIcon({
+  type,
 }: {
-  market: Market;
+  type:
+    | "target"
+    | "daily"
+    | "loss"
+    | "clock"
+    | "calendar"
+    | "refund"
+    | "reward";
 }) {
-  if (market === "Forex") {
+  const common = "h-[20px] w-[20px]";
+
+  if (type === "target") {
     return (
-      <svg
-        viewBox="0 0 20 20"
-        fill="none"
-        className="h-4 w-4"
-      >
-        <path
-          d="M3 6h12M12 3l3 3-3 3M17 14H5M8 11l-3 3 3 3"
-          stroke="currentColor"
-          strokeWidth="1.45"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
+      <svg viewBox="0 0 20 20" fill="none" className={common} aria-hidden="true">
+        <circle cx="10" cy="10" r="6.6" stroke="currentColor" strokeWidth="1.4" />
+        <circle cx="10" cy="10" r="2.5" stroke="currentColor" strokeWidth="1.4" />
+        <path d="M10 1.8v3M18.2 10h-3M10 18.2v-3M1.8 10h3" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
       </svg>
     );
   }
 
-  if (market === "Futures") {
-    return <LeverageIcon />;
+  if (type === "daily") {
+    return (
+      <svg viewBox="0 0 20 20" fill="none" className={common} aria-hidden="true">
+        <path d="M10 3v12M6.8 11.8 10 15l3.2-3.2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    );
+  }
+
+  if (type === "loss") {
+    return (
+      <svg viewBox="0 0 20 20" fill="none" className={common} aria-hidden="true">
+        <path d="M10 3v10M6.8 10.2 10 13.4l3.2-3.2M4 16.5h12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    );
+  }
+
+  if (type === "clock") {
+    return (
+      <svg viewBox="0 0 20 20" fill="none" className={common} aria-hidden="true">
+        <circle cx="10" cy="11" r="6.2" stroke="currentColor" strokeWidth="1.4" />
+        <path d="M10 7.2v4l2.7 1.6M7.5 2.5h5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+      </svg>
+    );
+  }
+
+  if (type === "calendar") {
+    return (
+      <svg viewBox="0 0 20 20" fill="none" className={common} aria-hidden="true">
+        <rect x="3" y="4.8" width="14" height="12" rx="2" stroke="currentColor" strokeWidth="1.35" />
+        <path d="M6.5 2.8v4M13.5 2.8v4M3 8.3h14" stroke="currentColor" strokeWidth="1.35" strokeLinecap="round" />
+      </svg>
+    );
+  }
+
+  if (type === "refund") {
+    return (
+      <svg viewBox="0 0 20 20" fill="none" className={common} aria-hidden="true">
+        <circle cx="10" cy="10" r="6.3" stroke="currentColor" strokeWidth="1.4" />
+        <path d="M11.8 7.2H9.2a1.5 1.5 0 0 0 0 3h1.5a1.5 1.5 0 1 1 0 3H8M10 5.6v8.8" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" />
+      </svg>
+    );
   }
 
   return (
-    <span className="text-[14px] font-black">
-      ₿
-    </span>
-  );
-}
-
-/* =========================================================
-   ORIGINAL PLATFORM SVG MARKS
-========================================================= */
-
-function TradeLockerMark() {
-  return (
-    <svg
-      viewBox="0 0 42 32"
-      className="h-7 w-9"
-      fill="none"
-    >
-      <path
-        d="M8 8h18v5H13v11H8V8Z"
-        fill="currentColor"
-      />
-
-      <path
-        d="M18 14h16v10H18v-4h11v-2H18v-4Z"
-        fill="currentColor"
-        opacity=".55"
-      />
+    <svg viewBox="0 0 20 20" fill="none" className={common} aria-hidden="true">
+      <rect x="3" y="6" width="14" height="8" rx="1.5" stroke="currentColor" strokeWidth="1.35" />
+      <circle cx="10" cy="10" r="1.7" stroke="currentColor" strokeWidth="1.25" />
+      <path d="M5.5 8.3v3.4M14.5 8.3v3.4" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" />
     </svg>
   );
 }
 
-function VolumetricaMark() {
-  return (
-    <svg
-      viewBox="0 0 42 32"
-      className="h-7 w-9"
-      fill="none"
-    >
-      <path
-        d="M8 24V12M14 24V6M20 24V15M26 24V9M32 24V4"
-        stroke="currentColor"
-        strokeWidth="3"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
-}
-
-function MatchTraderMark() {
-  return (
-    <svg
-      viewBox="0 0 42 32"
-      className="h-7 w-9"
-      fill="none"
-    >
-      <circle
-        cx="21"
-        cy="16"
-        r="4"
-        fill="currentColor"
-      />
-
-      <circle
-        cx="21"
-        cy="5"
-        r="2.5"
-        fill="currentColor"
-        opacity=".5"
-      />
-
-      <circle
-        cx="32"
-        cy="16"
-        r="2.5"
-        fill="currentColor"
-        opacity=".5"
-      />
-
-      <circle
-        cx="21"
-        cy="27"
-        r="2.5"
-        fill="currentColor"
-        opacity=".5"
-      />
-
-      <circle
-        cx="10"
-        cy="16"
-        r="2.5"
-        fill="currentColor"
-        opacity=".5"
-      />
-
-      <path
-        d="M21 7.5v4M29.5 16h-4M21 20.5v4M12.5 16h4"
-        stroke="currentColor"
-        strokeWidth="1.5"
-      />
-    </svg>
-  );
-}
-
-function CTraderMark() {
-  return (
-    <svg
-      viewBox="0 0 42 32"
-      className="h-7 w-9"
-      fill="none"
-    >
-      <path
-        d="M31 8a11 11 0 1 0 0 16"
-        stroke="currentColor"
-        strokeWidth="4"
-        strokeLinecap="round"
-      />
-
-      <path
-        d="M27 5h8v8"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
-function DXFutureMark() {
-  return (
-    <svg
-      viewBox="0 0 42 32"
-      className="h-7 w-9"
-      fill="none"
-    >
-      <path
-        d="M6 6h9l11 20H16L6 6Z"
-        fill="currentColor"
-      />
-
-      <path
-        d="M23 6h9l4 10-4 10h-9l4-10-4-10Z"
-        fill="currentColor"
-        opacity=".55"
-      />
-    </svg>
-  );
-}
-
-function DXTradeMark() {
-  return (
-    <svg
-      viewBox="0 0 42 32"
-      className="h-7 w-9"
-      fill="none"
-    >
-      <path
-        d="M7 6h9c6 0 10 4.5 10 10s-4 10-10 10H7V6Zm5 4.5v11h4c3.2 0 5.5-2.4 5.5-5.5s-2.3-5.5-5.5-5.5h-4Z"
-        fill="currentColor"
-      />
-
-      <path
-        d="M27 6h9v4.5h-9V6Zm0 8.2h8v4.5h-8v-4.5Zm0 8.3h9V27h-9v-4.5Z"
-        fill="currentColor"
-        opacity=".55"
-      />
-    </svg>
-  );
-}
-
-function GooeyProMark() {
-  return (
-    <svg
-      viewBox="0 0 42 32"
-      className="h-7 w-9"
-      fill="none"
-    >
-      <circle
-        cx="14"
-        cy="16"
-        r="9"
-        stroke="currentColor"
-        strokeWidth="2.6"
-      />
-
-      <circle
-        cx="28"
-        cy="16"
-        r="5.5"
-        fill="currentColor"
-        opacity=".55"
-      />
-    </svg>
-  );
-}
-
-function PlatformMark({
-  platform,
-}: {
-  platform: Platform;
-}) {
-  switch (platform) {
-    case "TradeLocker":
-      return <TradeLockerMark />;
-
-    case "Volumetrica":
-      return <VolumetricaMark />;
-
-    case "MatchTrader":
-      return <MatchTraderMark />;
-
-    case "cTrader":
-      return <CTraderMark />;
-
-    case "DXFUTURE":
-      return <DXFutureMark />;
-
-    case "DXTRADE":
-      return <DXTradeMark />;
-
-    case "GooeyPro":
-      return <GooeyProMark />;
+function FooterIcon({ type }: { type: "spread" | "payout" | "infinity" }) {
+  if (type === "spread") {
+    return (
+      <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5" aria-hidden="true">
+        <path d="M4 18V13M8 18V9M12 18v-6M16 18V6M20 18V3" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+        <path d="m4 11 4-4 4 2 8-6" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    );
   }
-}
 
-/* =========================================================
-   PAYMENT SVGs
-========================================================= */
+  if (type === "payout") {
+    return (
+      <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5" aria-hidden="true">
+        <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" strokeWidth="1.5" />
+        <circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="1.5" />
+        <path d="M6 8h2M16 16h2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      </svg>
+    );
+  }
 
-function VisaMark() {
   return (
-    <span className="text-[14px] font-black italic tracking-[-0.06em]">
-      VISA
-    </span>
-  );
-}
-
-function MastercardMark() {
-  return (
-    <svg
-      viewBox="0 0 44 28"
-      className="h-6 w-10"
-    >
-      <circle
-        cx="17"
-        cy="14"
-        r="9"
-        fill="currentColor"
-        opacity=".45"
-      />
-
-      <circle
-        cx="27"
-        cy="14"
-        r="9"
-        fill="currentColor"
-        opacity=".75"
-      />
+    <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5" aria-hidden="true">
+      <path d="M8.2 8.2c-2.4-2.4-6.2-.7-6.2 2.7 0 3.7 4.3 5 6.5 2.5l7-7c2.3-2.3 6.5-.8 6.5 2.7 0 3.5-4.1 5-6.4 2.6l-2.2-2.2" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
     </svg>
   );
 }
 
-function PaypalMark() {
-  return (
-    <span className="text-[13px] font-black italic">
-      PayPal
-    </span>
-  );
+const marketMeta: Record<Market, { title: string; badge: string }> = {
+  Forex: { title: "FOREX/CFD", badge: "INSTANT" },
+  Crypto: { title: "CRYPTO", badge: "PASS IN 1 DAY" },
+  Futures: { title: "FUTURES", badge: "PASS IN 3 DAYS" },
+};
+
+function displayModel(model: Model) {
+  if (model === "1 Step") return "1 Step";
+  if (model === "2 Step") return "2 Steps";
+  return "Instant";
 }
 
-function BitcoinMark() {
-  return (
-    <span className="text-lg font-black">
-      ₿
-    </span>
-  );
+function formatMoney(value: number) {
+  return `$${value.toLocaleString("en-US")}`;
 }
-
-function AmexMark() {
-  return (
-    <span className="text-[11px] font-black">
-      AMEX
-    </span>
-  );
-}
-
-
-/* =========================================================
-   REUSABLE BUTTON
-========================================================= */
-
-function OptionButton({
-  selected,
-  onClick,
-  children,
-  badge,
-}: {
-  selected: boolean;
-  onClick: () => void;
-  children: ReactNode;
-  badge?: string;
-}) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      className={`relative flex min-h-[62px] items-center justify-center rounded-xl border px-3.5 py-3.5 text-[15px] font-bold transition-all duration-300 sm:min-h-[66px] sm:text-base ${selected
-          ? "border-[#D4AF37]/40 bg-[#D4AF37]/[0.09] text-[#EDD06B] shadow-[0_8px_30px_rgba(212,175,55,.07)]"
-          : "border-white/[0.07] bg-white/[0.02] text-white hover:border-white/[0.14] hover:bg-white/[0.04] hover:text-white"
-        }`}
-    >
-      {children}
-
-      {badge && (
-        <span
-          className={`absolute -right-1.5 -top-2 rounded-full px-2 py-0.5 text-[9px] font-black uppercase tracking-[0.08em] ${selected
-              ? "bg-[#D4AF37] text-black"
-              : "border border-white/[0.08] bg-[#161616] text-white"
-            }`}
-        >
-          {badge}
-        </span>
-      )}
-    </button>
-  );
-}
-
-/* =========================================================
-   RULE ROW
-========================================================= */
-
-function RuleRow({
-  icon,
-  label,
-  value,
-  accent = false,
-}: {
-  icon: ReactNode;
-  label: string;
-  value: string;
-  accent?: boolean;
-}) {
-  return (
-    <div className="flex min-h-[66px] items-center justify-between gap-4 border-b border-white/[0.055] px-4 last:border-0 sm:min-h-[70px] sm:px-5">
-
-      <div className="flex items-center gap-3">
-
-        <div
-          className={`grid h-9 w-9 shrink-0 place-items-center rounded-xl border sm:h-10 sm:w-10 ${accent
-              ? "border-[#D4AF37]/20 bg-[#D4AF37]/[0.07] text-[#E0BD54]"
-              : "border-white/[0.06] bg-white/[0.02] text-white"
-            }`}
-        >
-          {icon}
-        </div>
-
-        <span className="text-[13px] font-medium text-white sm:text-sm">
-          {label}
-        </span>
-
-      </div>
-
-      <span
-        className={`text-right text-[13px] font-bold sm:text-sm ${accent
-            ? "text-[#E7C75F]"
-            : "text-white"
-          }`}
-      >
-        {value}
-      </span>
-
-    </div>
-  );
-}
-
-/* =========================================================
-   MAIN COMPONENT
-========================================================= */
 
 export function Challenges() {
-  const [market, setMarket] =
-    useState<Market>("Forex");
-
-  const [model, setModel] =
-    useState<Model>("2 Step");
-
-  const [platform, setPlatform] =
-    useState<Platform>("cTrader");
-
-  const [accountSize, setAccountSize] =
-    useState(100000);
-
-  const [copied, setCopied] =
-    useState<string | null>(null);
+  const [market, setMarket] = useState<Market>("Forex");
+  const [model, setModel] = useState<Model>("1 Step");
+  const [platform, setPlatform] = useState<Platform>("cTrader");
+  const [accountSize, setAccountSize] = useState(100000);
 
   const availableModels = modelsByMarket[market];
   const availableSizes = accountSizesByMarket[market];
   const availablePlatforms = platformsByMarket[market];
 
-  // When switching markets, snap model / account size / platform back to
-  // a valid option for that market (e.g. Futures only has "1 Step" and
-  // its own size tiers + a single platform).
   function handleMarketChange(next: Market) {
     setMarket(next);
 
@@ -1217,864 +632,405 @@ export function Challenges() {
 
   const account = useMemo(
     () =>
-      availableSizes.find(
-        (item) =>
-          item.value === accountSize
-      ) ?? availableSizes[0],
+      availableSizes.find((item) => item.value === accountSize) ??
+      availableSizes[0],
     [accountSize, availableSizes]
   );
 
   const rules = modelRulesByMarket[market][model];
 
-  const pricing = useMemo(() => {
-    const original = getModelBasePrice(
-      market,
-      model,
-      account.value
-    );
+  const sortedSizes = useMemo(
+    () => [...availableSizes].sort((a, b) => b.value - a.value),
+    [availableSizes]
+  );
 
-    const sale = Math.max(
-      1,
-      Math.round(original * 0.6)
-    );
+  function priceFor(value: number) {
+    const original = getModelBasePrice(market, model, value);
+    const sale = Math.max(1, Math.round(original * 0.6));
 
     return {
       original,
       sale,
       saving: original - sale,
     };
-  }, [
-    account.value,
-    market,
-    model,
-  ]);
-
-  async function copyCode(
-    code: string
-  ) {
-    try {
-      await navigator.clipboard.writeText(
-        code
-      );
-
-      setCopied(code);
-
-      window.setTimeout(() => {
-        setCopied(null);
-      }, 1500);
-    } catch {
-      setCopied(null);
-    }
   }
 
-  const features = [
-    "News Trading",
-    "Weekend Holding",
-    "Unlimited Trading Period",
-    "Challenge & Funded Resets",
+  function startCheckout(value: number) {
+    setAccountSize(value);
+
+    const selectedSize =
+      availableSizes.find((item) => item.value === value) ?? account;
+
+    const selectedPrice = priceFor(value);
+
+    alert(
+      `BlackProp checkout selected:\n${market} · ${model} · ${platform} · ${selectedSize.label}\nPrice: $${selectedPrice.sale}`
+    );
+  }
+
+  const rows = [
+    {
+      icon: "target" as const,
+      label: rules.phase2 ? "Profit Target" : "Profit Target",
+      value: (size: number) => (
+        <div className="space-y-0.5 text-center">
+          <div>
+            <span className="text-white/55">PHASE 1 </span>
+            <strong className="text-white">{rules.phase1}</strong>
+          </div>
+          {rules.phase2 && (
+            <div>
+              <span className="text-white/55">PHASE 2 </span>
+              <strong className="text-white">{rules.phase2}</strong>
+            </div>
+          )}
+        </div>
+      ),
+    },
+    {
+      icon: "daily" as const,
+      label: "Max Daily Loss",
+      value: (_size: number) => (
+        <strong className="text-white">{rules.dailyLoss}</strong>
+      ),
+    },
+    {
+      icon: "loss" as const,
+      label: "Max Loss",
+      value: (_size: number) => (
+        <strong className="text-white">{rules.maxLoss}</strong>
+      ),
+    },
+    {
+      icon: "clock" as const,
+      label: "Inactivity Period",
+      value: (_size: number) => (
+        <strong className="text-white">{rules.inactivity}</strong>
+      ),
+    },
+    {
+      icon: "calendar" as const,
+      label: "Trading Period",
+      value: (_size: number) => (
+        <strong className="text-white">{rules.maxTime}</strong>
+      ),
+    },
+    {
+      icon: "refund" as const,
+      label: "Refund",
+      value: (_size: number) => (
+        <div className="flex items-center justify-center gap-2">
+          <span className="text-white">Eligible</span>
+          <span className="rounded border border-emerald-400/30 bg-emerald-400/[0.08] px-2 py-0.5 text-[11px] font-bold text-emerald-300">
+            Terms
+          </span>
+        </div>
+      ),
+    },
+    {
+      icon: "reward" as const,
+      label: "Rewards",
+      value: (_size: number) => (
+        <strong className="text-white">{rules.profitSplit}</strong>
+      ),
+    },
   ];
 
   return (
     <section
       id="challenges"
-      className="relative overflow-hidden bg-[#030303] py-16 sm:py-20 lg:py-24 xl:py-28"
+      className="relative overflow-hidden bg-[#080a0e] py-12 text-white sm:py-16 lg:py-20"
     >
       {/* BACKGROUND */}
-      <div className="pointer-events-none absolute left-1/2 top-[20%] h-[900px] w-[1100px] -translate-x-1/2 rounded-full bg-[#D4AF37]/[0.025] blur-[180px]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_24%,rgba(126,38,209,.08),transparent_34%)]" />
 
-      <div
-        className="pointer-events-none absolute inset-0 opacity-[0.075]"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px)",
-          backgroundSize: "72px 72px",
-          maskImage:
-            "linear-gradient(to bottom, transparent 0%, black 15%, black 88%, transparent)",
-        }}
-      />
+      <div className="relative mx-auto max-w-[1240px] px-4 sm:px-6 lg:px-8">
+        {/* HEADER */}
+        <div className="mx-auto max-w-[760px] text-center">
+          <div className="flex flex-wrap items-center justify-center gap-2 text-[10px] text-white/50 sm:text-[11px]">
+            <span className="rounded-full border border-[#9b4cff]/40 bg-[#2a1239] px-3 py-1 font-black uppercase tracking-[0.08em] text-[#d09aff]">
+              Configurator
+            </span>
+            <span className="hidden h-1 w-1 rounded-full bg-white/35 sm:block" />
+            <span>Institutional Funding Evaluation Phase</span>
+          </div>
 
-      <div className="relative mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
-
-        {/* =====================================================
-            TITLE
-        ====================================================== */}
-
-        <div className="mb-12 text-center">
-
-          <h2 className="text-[2.65rem] font-semibold leading-[0.95] tracking-[-0.055em] text-white sm:text-[3.5rem] lg:text-[4.35rem] xl:text-[4.8rem]">
-            Choose Your{" "}
-            <span className="bg-[linear-gradient(100deg,#fff,#FFFFFF_32%,#F0D16A_70%,#9C7418)] bg-clip-text text-transparent">
-              Account
+          <h2 className="mt-4 text-[2rem] font-black leading-[1.05] tracking-[-0.045em] text-white sm:text-[2.6rem] lg:text-[3rem]">
+            Configure Your{" "}
+            <span className="bg-[linear-gradient(90deg,#d7a7ff,#a84cff)] bg-clip-text text-transparent">
+              Trading Challenge
             </span>
           </h2>
 
-          <div className="mt-5 flex items-center justify-center gap-2 text-[14px] font-medium text-white/80 sm:text-[15px]">
-
-            <span className="text-[#D4AF37]">
-              <LockIcon />
-            </span>
-
-            Transparent BlackProp
-            challenge configuration
-
-          </div>
-
+          <p className="mx-auto mt-3 max-w-[690px] text-[13px] leading-6 text-white/55 sm:text-[14px] lg:text-[15px]">
+            Select your preferred evaluation model, virtual capital tier, and direct
+            bridge execution platform to start trading institutional liquidity.
+          </p>
         </div>
 
-        {/* =====================================================
-            OUTER FRAME
-        ====================================================== */}
+        {/* MARKET TABS */}
+        <div className="mx-auto mt-11 grid max-w-[900px] gap-3 md:grid-cols-3">
+          {markets.map((item) => {
+            const selected = item === market;
+            const meta = marketMeta[item];
 
-        <div className="overflow-hidden rounded-[30px] sm:rounded-[34px] border border-white/[0.08] bg-[#080809] shadow-[0_50px_140px_rgba(0,0,0,.55)]">
-
-          {/* TOP GOLD LIGHT */}
-          <div className="h-px bg-gradient-to-r from-transparent via-[#E4C459]/45 to-transparent" />
-
-          {/* =================================================
-              OFFER BAR
-          ================================================= */}
-
-          <div className="relative overflow-hidden border-b border-white/[0.06] bg-[#0D0C09]">
-
-            <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,transparent,rgba(212,175,55,.055),transparent)]" />
-
-            <div className="relative grid lg:grid-cols-[auto_1fr_1fr]">
-
-              <div className="flex items-center justify-center border-b border-white/[0.06] px-5 py-4 lg:border-b-0 lg:border-r">
-                <span className="rounded-full border border-[#D4AF37]/20 bg-[#D4AF37]/[0.08] px-3.5 py-1.5 text-[11px] font-black uppercase tracking-[0.15em] text-[#E8C866]">
-                  Limited Time
-                </span>
-              </div>
-
-              <div className="flex flex-wrap items-center justify-center gap-3 border-b border-white/[0.06] px-5 py-4 lg:border-b-0 lg:border-r">
-
-                <span className="text-[14px] font-bold text-white sm:text-[15px]">
-                  40% OFF YOUR CHALLENGE
+            return (
+              <button
+                key={item}
+                type="button"
+                onClick={() => handleMarketChange(item)}
+                className={`relative flex min-h-[62px] items-center justify-between rounded-[14px] border px-5 transition-all duration-300 ${
+                  selected
+                    ? "border-[#a94cff] bg-[linear-gradient(135deg,#35164e,#1e1129)] shadow-[0_0_0_1px_rgba(166,72,255,.28),0_12px_35px_rgba(135,44,220,.18)]"
+                    : "border-white/[0.09] bg-[#101117] hover:border-white/[0.16]"
+                }`}
+              >
+                <span className="flex items-center gap-2 text-[14px] font-black sm:text-[15px]">
+                  {item === "Forex" && (
+                    <span className="text-[#ffd33d]">
+                      <TinyBolt />
+                    </span>
+                  )}
+                  {meta.title}
                 </span>
 
-                <button
-                  type="button"
-                  onClick={() =>
-                    copyCode("BLACK40")
-                  }
-                  className="flex items-center gap-2 rounded-lg border border-[#D4AF37]/20 bg-[#D4AF37]/[0.07] px-3.5 py-2.5 text-[12px] font-black tracking-[0.09em] text-[#E4C25B] transition hover:bg-[#D4AF37]/[0.12]"
+                <span
+                  className={`rounded-full border px-2.5 py-1 text-[8px] font-black uppercase tracking-[0.04em] ${
+                    selected
+                      ? "border-[#bd6dff]/50 bg-[#a94cff] text-white"
+                      : "border-white/[0.12] bg-white/[0.055] text-white/65"
+                  }`}
                 >
-                  {copied === "BLACK40"
-                    ? "COPIED"
-                    : "BLACK40"}
-
-                  <CopyIcon />
-                </button>
-
-              </div>
-
-              <div className="flex flex-wrap items-center justify-center gap-3 px-5 py-4">
-
-                <span className="text-[14px] text-white/85">
-                  New trader bonus
+                  {meta.badge}
                 </span>
+              </button>
+            );
+          })}
+        </div>
 
+        {/* MODEL SELECTOR */}
+        <div className="mt-7 flex justify-center">
+          <div className="inline-flex rounded-[14px] border border-white/[0.10] bg-[#101117] p-1.5">
+            {availableModels.map((item) => {
+              const selected = item.name === model;
+
+              return (
                 <button
+                  key={item.name}
                   type="button"
-                  onClick={() =>
-                    copyCode("FIRSTBP")
-                  }
-                  className="flex items-center gap-2 rounded-lg border border-white/[0.08] bg-white/[0.035] px-3.5 py-2.5 text-[12px] font-black tracking-[0.09em] text-white transition hover:bg-white/[0.06]"
+                  onClick={() => setModel(item.name)}
+                  className={`min-w-[100px] rounded-[10px] px-5 py-3 text-[13px] font-bold transition-all sm:text-[14px] ${
+                    selected
+                      ? "bg-[linear-gradient(135deg,#9a49ff,#a83feb)] text-white shadow-[0_8px_20px_rgba(151,65,240,.28)]"
+                      : "text-white/55 hover:text-white"
+                  }`}
                 >
-                  {copied === "FIRSTBP"
-                    ? "COPIED"
-                    : "FIRSTBP"}
-
-                  <CopyIcon />
+                  {displayModel(item.name)}
                 </button>
-
-              </div>
-
-            </div>
-
+              );
+            })}
           </div>
+        </div>
 
-          {/* =================================================
-              MARKET TABS
-          ================================================= */}
+        {/* PLATFORM SELECTOR - compact, keeps original functionality */}
+        <div className="mt-4 flex justify-center">
+          <div className="flex max-w-full gap-1.5 overflow-x-auto rounded-[12px] border border-white/[0.07] bg-[#0d0e13] p-1.5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            {availablePlatforms.map((item) => {
+              const selected = item === platform;
 
-          <div className="border-b border-white/[0.06] p-4 sm:p-5 lg:p-6">
+              return (
+                <button
+                  key={item}
+                  type="button"
+                  onClick={() => setPlatform(item)}
+                  className={`shrink-0 rounded-[8px] px-4 py-2.5 text-[11px] font-bold transition sm:text-[12px] ${
+                    selected
+                      ? "bg-[#2b183b] text-[#cf94ff]"
+                      : "text-white/42 hover:text-white/75"
+                  }`}
+                >
+                  {platformLabels[item] ?? item}
+                </button>
+              );
+            })}
+          </div>
+        </div>
 
-            <div className="grid grid-cols-3 gap-1.5 rounded-2xl border border-white/[0.06] bg-black/35 p-1.5">
-
-              {markets.map((item) => {
-                const selected =
-                  market === item;
-
-                return (
-                  <button
-                    key={item}
-                    type="button"
-                    onClick={() =>
-                      handleMarketChange(item)
-                    }
-                    className={`flex items-center justify-center gap-2.5 rounded-xl px-3 py-3.5 text-[15px] font-bold sm:text-base transition-all ${selected
-                        ? "bg-[linear-gradient(135deg,#F1D46F,#C49425)] text-black shadow-[0_9px_30px_rgba(212,175,55,.12)]"
-                        : "text-white hover:bg-white/[0.04] hover:text-white"
-                      }`}
+        {/* COMPARISON TABLE */}
+        <div className="mt-12 overflow-x-auto pb-2 [scrollbar-width:thin] [scrollbar-color:#3b2452_transparent]">
+          <div className="min-w-[1180px]">
+            <div className="flex gap-4">
+              {/* LABELS */}
+              <div className="w-[210px] shrink-0 pt-[136px]">
+                {rows.map((row, index) => (
+                  <div
+                    key={row.label}
+                    className={`flex h-[58px] items-center gap-3.5 text-[14px] font-medium text-white/78 ${
+                      index === 0 ? "h-[78px]" : ""
+                    }`}
                   >
-                    <MarketIcon
-                      market={item}
-                    />
-
-                    {item}
-                  </button>
-                );
-              })}
-
-            </div>
-
-          </div>
-
-          {/* =================================================
-              TWO COLUMN PLAYGROUND
-          ================================================= */}
-
-          <div className="grid lg:grid-cols-[1.04fr_.96fr]">
-
-            {/* =================================================
-                LEFT SIDE
-            ================================================= */}
-
-            <div className="flex flex-col border-b border-white/[0.06] p-4 sm:p-6 lg:border-b-0 lg:border-r lg:p-7">
-
-              {/* CHALLENGE TYPE */}
-              <div className="rounded-2xl border border-[#D4AF37]/[0.12] bg-[linear-gradient(145deg,rgba(212,175,55,.045),rgba(255,255,255,.012))] p-4 sm:p-5">
-
-                <div className="mb-4 flex flex-wrap items-end justify-between gap-2">
-
-                  <div>
-                    <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#E7C75F]">
-                      Challenge Type
-                    </p>
-
-                    <p className="mt-1.5 text-[12px] leading-5 text-white/45">
-                      {availableModels
-                        .map((item) => item.name)
-                        .join(" · ")}
-                    </p>
-                  </div>
-
-                  <span className="rounded-full border border-white/[0.07] bg-black/25 px-2.5 py-1 text-[9px] font-bold uppercase tracking-[0.12em] text-white/45">
-                    {market}
-                  </span>
-
-                </div>
-
-                <div
-                  className={`grid gap-2.5 ${availableModels.length === 1
-                      ? "mx-auto max-w-[220px] grid-cols-1"
-                      : availableModels.length === 2
-                        ? "grid-cols-2"
-                        : "grid-cols-3"
-                    }`}
-                >
-
-                  {availableModels.map((item) => (
-                    <OptionButton
-                      key={item.name}
-                      selected={model === item.name}
-                      onClick={() =>
-                        setModel(item.name)
-                      }
-                      badge={item.badge}
-                    >
-                      {item.name}
-                    </OptionButton>
-                  ))}
-
-                </div>
-
-              </div>
-              {/* ACCOUNT SIZE */}
-              <div className="mt-4 rounded-2xl border border-white/[0.06] bg-white/[0.015] p-4 sm:p-5">
-
-                <div className="mb-3 flex items-center justify-between">
-
-                  <p className="text-[12px] font-bold uppercase tracking-[0.16em] text-white/90">
-                    Account Size
-                  </p>
-
-                  <span className="text-[11px] font-medium text-white/55 sm:text-[12px]">
-                    Simulated capital
-                  </span>
-
-                </div>
-
-                <div className="grid grid-cols-2 gap-2.5 min-[420px]:grid-cols-3 sm:grid-cols-4 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6">
-
-                  {availableSizes.map(
-                    (item) => (
-                      <OptionButton
-                        key={item.value}
-                        selected={
-                          accountSize ===
-                          item.value
-                        }
-                        onClick={() =>
-                          setAccountSize(
-                            item.value
-                          )
-                        }
-                        badge={
-                          item.popular
-                            ? "Popular"
-                            : undefined
-                        }
-                      >
-                        {item.label}
-                      </OptionButton>
-                    )
-                  )}
-
-                </div>
-
-              </div>
-
-              {/* PLATFORMS */}
-              <div className="mt-4 rounded-2xl border border-white/[0.06] bg-white/[0.015] p-4 sm:p-5">
-
-                <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.18em] text-white">
-                  Platforms
-                </p>
-
-                <div
-                  className={`grid gap-2 ${availablePlatforms.length === 1
-                      ? "mx-auto max-w-[160px] grid-cols-1"
-                      : "grid-cols-2 sm:grid-cols-3"
-                    }`}
-                >
-
-                  {availablePlatforms.map(
-                    (item) => {
-                      const selected =
-                        platform === item;
-
-                      return (
-                        <button
-                          key={item}
-                          type="button"
-                          onClick={() =>
-                            setPlatform(item)
-                          }
-                          className={`group relative min-h-[92px] sm:min-h-[98px] rounded-xl border px-3 py-3 transition-all ${selected
-                              ? "border-[#D4AF37]/35 bg-[#D4AF37]/[0.07] text-[#E7C75F]"
-                              : "border-white/[0.07] bg-black/20 text-white hover:border-white/[0.13] hover:text-white"
-                            }`}
-                        >
-                          <div className="flex h-full flex-col items-center justify-center">
-
-                            <PlatformMark
-                              platform={item}
-                            />
-
-                            <span className="mt-2.5 text-[12px] font-bold sm:text-[13px]">
-                              {platformLabels[item] ?? item}
-                            </span>
-
-                          </div>
-
-                          {item ===
-                            "cTrader" && (
-                              <span className="absolute -right-1.5 -top-2 rounded-full bg-[#D4AF37] px-2 py-0.5 text-[8px] font-black uppercase text-black">
-                                Popular
-                              </span>
-                            )}
-
-                        </button>
-                      );
-                    }
-                  )}
-
-                </div>
-
-              </div>
-
-
-
-              {/* CONFIG SUMMARY */}
-              <div className="mt-4 rounded-2xl border border-[#D4AF37]/[0.12] bg-[#D4AF37]/[0.04] p-4 sm:p-5">
-
-                <div className="flex flex-wrap items-center justify-between gap-3">
-
-                  <div>
-                    <p className="text-[11px] font-bold uppercase tracking-[0.15em] text-white">
-                      Current configuration
-                    </p>
-
-                    <p className="mt-2 text-[15px] font-semibold text-white">
-                      {model} ·{" "}
-                      {market}
-                    </p>
-                  </div>
-
-                  <div className="text-right">
-
-                    <p className="text-[11px] uppercase tracking-[0.11em] text-white">
-                      Platform
-                    </p>
-
-                    <p className="mt-1.5 text-[13px] font-bold text-[#D4AF37]">
-                      {platformLabels[platform] ?? platform}
-                    </p>
-
-                  </div>
-
-                </div>
-
-              </div>
-
-              {/* ADD-ONS AVAILABLE AT PURCHASE */}
-              <div className="mt-4 flex-1 rounded-2xl border border-white/[0.06] bg-[linear-gradient(145deg,rgba(255,255,255,.025),rgba(212,175,55,.025))] p-4 sm:p-5">
-
-                <div className="flex items-start justify-between gap-4">
-
-                  <div>
-                    <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-[#E7C75F]">
-                      Add-ons available at purchase
-                    </p>
-
-                    <p className="mt-2 max-w-[460px] text-[13px] leading-6 text-white/55 sm:text-sm">
-                      Available options update with the selected challenge type.
-                    </p>
-                  </div>
-
-                  <div className="grid h-11 w-11 shrink-0 place-items-center rounded-xl border border-[#D4AF37]/15 bg-[#D4AF37]/[0.055]">
-                    <BPMark
-                      width={18}
-                      height={23}
-                      color="#D4AF37"
-                    />
-                  </div>
-
-                </div>
-
-                <div className="mt-5 grid gap-2.5">
-
-                  {rules.addOns.map((addOn) => (
-                    <div
-                      key={addOn.title}
-                      className="rounded-xl border border-white/[0.055] bg-black/20 px-3.5 py-3.5"
-                    >
-                      <div className="flex items-start gap-3">
-
-                        <span className="mt-0.5 grid h-8 w-8 shrink-0 place-items-center rounded-full bg-[#D4AF37]/[0.08] text-[#D4AF37]">
-                          <CheckIcon />
-                        </span>
-
-                        <div className="min-w-0">
-
-                          <div className="flex flex-wrap items-center gap-2">
-                            <span className="text-[12px] font-bold leading-5 text-white/85 sm:text-[13px]">
-                              {addOn.title}
-                            </span>
-
-                            <span className="rounded-full border border-[#D4AF37]/15 bg-[#D4AF37]/[0.06] px-2 py-0.5 text-[8px] font-black uppercase tracking-[0.08em] text-[#E7C75F]">
-                              {addOn.cost}
-                            </span>
-                          </div>
-
-                          <p className="mt-1.5 text-[10px] leading-[18px] text-white/38 sm:text-[11px] sm:leading-5">
-                            {addOn.description}
-                          </p>
-
-                        </div>
-
-                      </div>
-                    </div>
-                  ))}
-
-                </div>
-
-                <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-white/[0.055] pt-4">
-
-                  <span className="text-[10px] font-medium text-white/40">
-                    Selected:{" "}
-                    <strong className="text-white/75">
-                      {model}
-                    </strong>
-                  </span>
-
-                  <span className="h-1 w-1 rounded-full bg-[#D4AF37]/70" />
-
-                  <span className="text-[10px] font-medium text-white/40">
-                    Market:{" "}
-                    <strong className="text-white/75">
-                      {market}
-                    </strong>
-                  </span>
-
-                  <span className="h-1 w-1 rounded-full bg-[#D4AF37]/70" />
-
-                  <span className="text-[10px] font-medium text-white/40">
-                    Platform:{" "}
-                    <strong className="text-white/75">
-                      {platformLabels[platform] ?? platform}
-                    </strong>
-                  </span>
-
-                </div>
-
-              </div>
-
-            </div>
-
-            {/* =================================================
-                RIGHT SIDE
-            ================================================= */}
-
-            <div className="relative p-4 sm:p-6 lg:p-7">
-
-              <div className="pointer-events-none absolute right-0 top-0 h-80 w-80 rounded-full bg-[#D4AF37]/[0.025] blur-[90px]" />
-
-              {/* SUMMARY HEADER */}
-              <div className="relative mb-4 flex items-center justify-between rounded-2xl border border-white/[0.06] bg-white/[0.015] p-4">
-
-                <div>
-
-                  <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-[#F0D16A]">
-                    BlackProp Account
-                  </p>
-
-                  <div className="mt-2 flex items-end gap-2">
-
-                    <span className="text-[2.2rem] font-black sm:text-[2.45rem] tracking-[-0.055em] text-white">
-                      $
-                      {(account.value / 1000).toFixed(0)}
-                      K
+                    <span className="text-white/55">
+                      <RowIcon type={row.icon} />
                     </span>
-
-                    <span className="mb-1 text-[12px] font-medium text-white/70">
-                      {model}
-                    </span>
-
+                    <span>{row.label}</span>
                   </div>
+                ))}
 
+                <div className="mt-6 px-1 text-[12px] leading-5 text-white/42">
+                  One-time refundable fee
+                  <br />
+                  from
                 </div>
-
-                <div className="grid h-12 w-12 place-items-center rounded-2xl border border-[#D4AF37]/20 bg-[#D4AF37]/[0.07]">
-
-                  <BPMark
-                    width={20}
-                    height={26}
-                    color="#D4AF37"
-                    className="drop-shadow-[0_0_10px_rgba(212,175,55,.15)]"
-                  />
-
-                </div>
-
               </div>
 
-              {/* RULE TABLE */}
-              <div className="overflow-hidden rounded-2xl border border-white/[0.065] bg-black/20">
+              {/* CARDS - badge is kept inside the scroll viewport to prevent clipping */}
+              <div
+                className="grid flex-1 gap-3"
+                style={{
+                  gridTemplateColumns: `repeat(${sortedSizes.length}, minmax(158px, 1fr))`,
+                }}
+              >
+                {sortedSizes.map((item) => {
+                  const selected = item.value === accountSize;
+                  const price = priceFor(item.value);
 
-                <RuleRow
-                  icon={<TargetIcon />}
-                  label={
-                    rules.phase2
-                      ? "Profit Target Phase 1"
-                      : "Profit Target"
-                  }
-                  value={rules.phase1}
-                  accent
-                />
-
-                {rules.phase2 && (
-                  <RuleRow
-                    icon={<TargetIcon />}
-                    label="Profit Target Phase 2"
-                    value={rules.phase2}
-                  />
-                )}
-
-                <RuleRow
-                  icon={<LossIcon />}
-                  label="Daily Loss Limit"
-                  value={rules.dailyLoss}
-                />
-
-                <RuleRow
-                  icon={<ShieldIcon />}
-                  label="Max Drawdown"
-                  value={rules.maxLoss}
-                />
-
-                {rules.consistencyRequirement && (
-                  <RuleRow
-                    icon={<TrophyIcon />}
-                    label="Consistency Requirement"
-                    value={rules.consistencyRequirement}
-                  />
-                )}
-
-                {rules.exposureLimits && (
-                  <RuleRow
-                    icon={<LeverageIcon />}
-                    label="Exposure Limits"
-                    value={rules.exposureLimits}
-                  />
-                )}
-
-                {rules.nonWithdrawableBuffer && (
-                  <RuleRow
-                    icon={<ShieldIcon />}
-                    label="Non-Withdrawable Buffer"
-                    value={rules.nonWithdrawableBuffer}
-                  />
-                )}
-
-                <RuleRow
-                  icon={<CalendarIcon />}
-                  label="Inactivity Period"
-                  value={rules.inactivity}
-                />
-
-                {rules.leverage && (
-                  <RuleRow
-                    icon={<LeverageIcon />}
-                    label="Leverage"
-                    value={rules.leverage}
-                  />
-                )}
-
-                {rules.flatForWeekend && (
-                  <RuleRow
-                    icon={<CalendarIcon />}
-                    label="Flat for Weekend"
-                    value={rules.flatForWeekend}
-                  />
-                )}
-
-                <RuleRow
-                  icon={<CalendarIcon />}
-                  label="Max Time"
-                  value={rules.maxTime}
-                />
-
-                {rules.lockUponPayout && (
-                  <RuleRow
-                    icon={<LockIcon />}
-                    label="Lock Upon Payout"
-                    value={rules.lockUponPayout}
-                  />
-                )}
-
-                <RuleRow
-                  icon={<SplitIcon />}
-                  label="Profit Split"
-                  value={rules.profitSplit}
-                  accent
-                />
-
-              </div>
-
-              {/* PAYMENT / PRICE */}
-              <div className="mt-4 overflow-hidden rounded-[24px] border border-[#D4AF37]/15 bg-[linear-gradient(145deg,rgba(212,175,55,.065),rgba(255,255,255,.015))]">
-
-                <div className="p-5">
-
-                  <div className="flex items-end justify-between gap-4">
-
-                    <div>
-
-                      <p className="text-[11px] font-bold uppercase tracking-[0.15em] text-white">
-                        {rules.purchaseType ?? "Challenge fee"}
-                      </p>
-
-                      <div className="mt-2 flex items-end gap-3">
-
-                        <span className="text-[2.75rem] font-black sm:text-5xl tracking-[-0.055em] text-white">
-                          ${pricing.sale}
+                  return (
+                    <div key={item.value} className="relative min-w-0 pt-[14px]">
+                      {item.popular && (
+                        <span className="absolute left-1/2 top-0 z-30 -translate-x-1/2 whitespace-nowrap rounded-full bg-[linear-gradient(90deg,#9f4cff,#a83df0)] px-3.5 py-1.5 text-[9px] font-black uppercase tracking-[0.03em] text-white shadow-[0_6px_16px_rgba(158,63,241,.28)]">
+                          Best Value
                         </span>
-
-                        <span className="mb-1 text-sm text-white line-through">
-                          $
-                          {
-                            pricing.original
-                          }
-                        </span>
-
-                      </div>
-
-                      <p className="mt-2.5 text-[12px] font-medium text-emerald-400/85">
-                        Save $
-                        {
-                          pricing.saving
-                        }{" "}
-                        with BLACK40
-                      </p>
-
-                      {rules.purchaseType && (
-                        <p className="mt-1.5 text-[11px] font-medium text-white/45">
-                          Renews monthly at ${pricing.original}
-                        </p>
                       )}
 
-                    </div>
-
-                    <div className="text-right">
-
-                      <p className="text-[11px] uppercase tracking-[0.12em] text-white/70">
-                        Account
-                      </p>
-
-                      <p className="mt-1.5 text-xl font-black text-[#E4C25B]">
-                        {
-                          account.label
-                        }
-                      </p>
-
-                    </div>
-
-                  </div>
-
-                  <button
-                    type="button"
-                    onClick={() => {
-                      alert(
-                        `BlackProp checkout selected:\n${market} · ${model} · ${platform} · ${account.label}\nPrice: $${pricing.sale}`
-                      );
-                    }}
-                    className="group relative mt-5 flex w-full items-center justify-center gap-2 overflow-hidden rounded-xl bg-[linear-gradient(135deg,#F4DB7C,#D4AF37_50%,#946A11)] px-5 py-4 text-[15px] font-black sm:text-base text-black shadow-[0_15px_45px_rgba(212,175,55,.15)] transition hover:-translate-y-0.5 hover:shadow-[0_20px_60px_rgba(212,175,55,.25)]"
-                  >
-                    Get Funded
-
-                    <ArrowIcon />
-
-                    <span className="absolute inset-y-0 -left-20 w-12 skew-x-[-20deg] bg-white/40 blur-md transition-all duration-700 group-hover:left-[125%]" />
-                  </button>
-
-                </div>
-
-                {/* REFUND MESSAGE */}
-                <div className="flex items-center justify-center gap-2 border-t border-white/[0.06] px-4 py-3.5 text-[12px] font-medium leading-5 text-white/75">
-
-                  <span className="text-[#D4AF37]">
-                    <LockIcon />
-                  </span>
-
-                  One-time challenge fee ·
-                  refundable under qualifying
-                  BlackProp terms
-
-                </div>
-
-                {/* PAYMENT OPTIONS */}
-                <div className="border-t border-white/[0.06] px-4 py-4">
-
-                  <p className="mb-3 text-center text-[10px] font-bold uppercase tracking-[0.16em] text-white/70">
-                    Payment options
-                  </p>
-
-                  <div className="flex flex-wrap items-center justify-center gap-2">
-
-                    {[
-                      {
-                        name: "Visa",
-                        mark: (
-                          <VisaMark />
-                        ),
-                      },
-                      {
-                        name: "PayPal",
-                        mark: (
-                          <PaypalMark />
-                        ),
-                      },
-                      {
-                        name: "Bitcoin",
-                        mark: (
-                          <BitcoinMark />
-                        ),
-                      },
-                      {
-                        name: "Mastercard",
-                        mark: (
-                          <MastercardMark />
-                        ),
-                      },
-                      {
-                        name: "American Express",
-                        mark: (
-                          <AmexMark />
-                        ),
-                      },
-                    ].map((payment) => (
-                      <div
-                        key={
-                          payment.name
-                        }
-                        title={
-                          payment.name
-                        }
-                        className="grid h-10 min-w-[62px] place-items-center rounded-lg border border-white/[0.07] bg-white/[0.025] px-3 text-white transition hover:border-white/[0.13] hover:text-white"
+                      <article
+                        onClick={() => setAccountSize(item.value)}
+                        className={`relative cursor-pointer overflow-hidden rounded-[15px] border transition-all duration-300 ${
+                          selected
+                            ? "border-[#a94cff] bg-[linear-gradient(180deg,#32204b_0%,#23163a_62%,#15121f_100%)] shadow-[0_0_0_1px_rgba(166,72,255,.28),0_18px_46px_rgba(108,40,178,.17)]"
+                            : "border-white/[0.09] bg-[#101117] hover:border-white/[0.16]"
+                        }`}
                       >
-                        {
-                          payment.mark
-                        }
+
+                        {/* ACCOUNT HEADER */}
+                        <div className="flex h-[120px] flex-col items-center justify-center border-b border-white/[0.055] px-3 text-center">
+                          <span className={`text-[11px] font-bold uppercase tracking-[0.09em] ${selected ? "text-[#c58cff]" : "text-white/48"}`}>
+                            Account
+                          </span>
+                          <strong className="mt-2 text-[24px] font-black tracking-[-0.035em] text-white">
+                            {formatMoney(item.value)}
+                          </strong>
+                        </div>
+
+                        {/* RULE VALUES */}
+                        {rows.map((row, index) => (
+                          <div
+                            key={`${item.value}-${row.label}`}
+                            className={`flex h-[58px] items-center justify-center border-b border-white/[0.045] px-2.5 text-center text-[12px] font-medium leading-5 text-white/76 ${
+                              index === 0 ? "h-[78px]" : ""
+                            }`}
+                          >
+                            {row.value(item.value)}
+                          </div>
+                        ))}
+
+                        {/* PRICE + BUTTON */}
+                        <div className="px-4 pb-5 pt-5 text-center">
+                          <div className="flex items-end justify-center gap-2">
+                            <span className={`text-[27px] font-black tracking-[-0.045em] ${selected ? "text-[#c378ff]" : "text-white"}`}>
+                              {formatMoney(price.sale)}
+                            </span>
+                            {price.original !== price.sale && (
+                              <span className="mb-1 text-[12px] text-white/32 line-through">
+                                {formatMoney(price.original)}
+                              </span>
+                            )}
+                          </div>
+
+                          <button
+                            type="button"
+                            onClick={(event) => {
+                              event.stopPropagation();
+                              startCheckout(item.value);
+                            }}
+                            className="mt-4 flex min-h-[46px] w-full items-center justify-center rounded-[10px] bg-[linear-gradient(90deg,#8c27df,#b23cf6)] px-3 text-[13px] font-black text-white shadow-[0_10px_24px_rgba(156,44,231,.22)] transition hover:brightness-110"
+                          >
+                            Start now
+                          </button>
+                        </div>
+                      </article>
+
+                      {/* BOTTOM SUMMARY BOX */}
+                      <div
+                        className={`mt-3 flex h-[68px] flex-col items-center justify-center rounded-[12px] border text-center ${
+                          selected
+                            ? "border-[#8f3cce]/55 bg-[#15101e]"
+                            : "border-white/[0.08] bg-[#0e1015]"
+                        }`}
+                      >
+                        <strong className={`text-[15px] font-bold ${selected ? "text-[#bd78f3]" : "text-white"}`}>
+                          {rules.profitSplit}
+                        </strong>
+                        <span className="mt-1 text-[10px] font-medium text-white/48">
+                          Reward Terms
+                        </span>
                       </div>
-                    ))}
-
-                  </div>
-
-                </div>
-
+                    </div>
+                  );
+                })}
               </div>
-
             </div>
-
           </div>
-
-          {/* =================================================
-              FOOTER CONDITIONS
-          ================================================= */}
-
-          <div className="grid border-t border-white/[0.06] sm:grid-cols-2 xl:grid-cols-4">
-
-            {features.map(
-              (feature, index) => (
-                <div
-                  key={feature}
-                  className={`flex items-center gap-3 px-5 py-5 ${index !== 3
-                      ? "border-b border-white/[0.055] sm:border-r lg:border-b-0"
-                      : ""
-                    }`}
-                >
-                  <div className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-[#D4AF37]/[0.07] text-[#D4AF37]">
-
-                    <CheckIcon />
-
-                  </div>
-
-                  <span className="text-[13px] font-semibold text-white/85 sm:text-sm">
-                    {feature}
-                  </span>
-
-                </div>
-              )
-            )}
-
-          </div>
-
         </div>
 
-        {/* DISCLAIMER */}
-        <p className="mx-auto mt-6 max-w-3xl px-2 text-center text-[11px] leading-5 text-white/55 sm:text-[12px] sm:leading-6">
-          Pricing, platform availability,
-          account rules, promotional offers
-          and payment methods shown in this
-          frontend are demonstration values
-          until BlackProp&apos;s final
-          commercial terms and checkout
-          integrations are connected.
-        </p>
+        {/* FEATURE FOOTER */}
+        <div className="mt-16 border-t border-[#7f3daa]/35 pt-8">
+          <div className="grid gap-6 md:grid-cols-3 md:gap-0">
+            <div className="flex items-center gap-4 md:border-r md:border-white/[0.07] md:px-4">
+              <div className="grid h-11 w-11 shrink-0 place-items-center rounded-[11px] border border-white/[0.09] bg-[#12131a] text-[#c47cff]">
+                <FooterIcon type="spread" />
+              </div>
+              <div>
+                <h3 className="text-[11px] font-black text-white">
+                  Trade Institutional Spreads
+                </h3>
+                <p className="mt-1 text-[10px] text-white/45">
+                  Raw pricing • Deep liquidity pools • Zero markup
+                </p>
+              </div>
+            </div>
 
+            <div className="flex items-center gap-4 md:border-r md:border-white/[0.07] md:px-6">
+              <div className="grid h-11 w-11 shrink-0 place-items-center rounded-[11px] border border-white/[0.09] bg-[#12131a] text-[#c47cff]">
+                <FooterIcon type="payout" />
+              </div>
+              <div>
+                <h3 className="text-[11px] font-black text-white">
+                  Fast Bi-Weekly Payouts
+                </h3>
+                <p className="mt-1 text-[10px] text-white/45">
+                  Automated on-demand payouts via Crypto or Wire
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-4 md:px-6">
+              <div className="grid h-11 w-11 shrink-0 place-items-center rounded-[11px] border border-white/[0.09] bg-[#12131a] text-[#c47cff]">
+                <FooterIcon type="infinity" />
+              </div>
+              <div>
+                <h3 className="text-[11px] font-black text-white">
+                  Trade Without Expiration
+                </h3>
+                <p className="mt-1 text-[10px] text-white/45">
+                  No calendar time pressure • Flexible evaluation
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );
 }
+
+export default Challenges;

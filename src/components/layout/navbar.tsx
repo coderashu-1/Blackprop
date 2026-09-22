@@ -1,15 +1,10 @@
-
 "use client";
+
 import { useEffect, useRef, useState } from "react";
 
-
-/* =========================================================
-   BLACKPROP SVG LOGO
-========================================================= */
-
 function BPMark({
-  width = 58,
-  height = 74,
+  width = 36,
+  height = 46,
   color = "#FFFFFF",
   className = "",
 }: {
@@ -32,7 +27,6 @@ function BPMark({
         fill="currentColor"
         d="M28 0H196C244 0 278 48 278 105C278 130 271 150 256 172C277 190 289 213 289 241V267C289 319 249 365 195 365H90V237H161C201 237 230 202 230 168V139C230 104 207 78 177 78H0V25C0 11 12 0 28 0Z"
       />
-
       <path
         fill="currentColor"
         d="M0 129H157C171 129 181 141 181 156C181 171 171 183 157 183H41V365C18 365 0 352 0 335V129Z"
@@ -41,66 +35,17 @@ function BPMark({
   );
 }
 
-type DropdownKey = "trading" | "company" | null;
 type Market = "Forex" | "Futures" | "Crypto";
 
 const markets: Market[] = ["Forex", "Futures", "Crypto"];
 
-const tradingLinks = [
-  {
-    label: "How It Works",
-    description: "Your path from challenge to funded trader.",
-    href: "#how-it-works",
-  },
-  {
-    label: "Challenges",
-    description: "Choose the account that matches your trading style.",
-    href: "#challenges",
-  },
-  {
-    label: "Rewards",
-    description: "Explore rewards, scaling and trader benefits.",
-    href: "#rewards",
-  },
+const navLinks = [
+  { label: "Trading", href: "#challenges" },
+  { label: "Affiliate", href: "#affiliate" },
+  { label: "Competition", href: "#competition" },
+  { label: "Company", href: "#about" },
+  { label: "FAQ", href: "#faq" },
 ];
-
-const companyLinks = [
-  {
-    label: "About BlackProp",
-    description: "Learn about our mission and trading ecosystem.",
-    href: "#about",
-  },
-  {
-    label: "Contact",
-    description: "Talk with the BlackProp support team.",
-    href: "#contact",
-  },
-];
-
-/* =========================================================
-   ICONS
-========================================================= */
-
-function Chevron({ open = false }: { open?: boolean }) {
-  return (
-    <svg
-      viewBox="0 0 16 16"
-      fill="none"
-      aria-hidden="true"
-      className={`h-4 w-4 transition-transform duration-300 ${
-        open ? "rotate-180" : ""
-      }`}
-    >
-      <path
-        d="M3.5 6L8 10L12.5 6"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
 
 function CopyIcon() {
   return (
@@ -117,40 +62,16 @@ function CopyIcon() {
         height="7"
         rx="1.25"
         stroke="currentColor"
-        strokeWidth="1.4"
+        strokeWidth="1.35"
       />
-
       <path
         d="M10.25 5.25V4A1.25 1.25 0 0 0 9 2.75H4A1.25 1.25 0 0 0 2.75 4v5A1.25 1.25 0 0 0 4 10.25h1.25"
         stroke="currentColor"
-        strokeWidth="1.4"
+        strokeWidth="1.35"
       />
     </svg>
   );
 }
-
-function ArrowUpRight() {
-  return (
-    <svg
-      viewBox="0 0 16 16"
-      fill="none"
-      aria-hidden="true"
-      className="h-4 w-4"
-    >
-      <path
-        d="M4 12L12 4M6.2 4H12v5.8"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
-/* =========================================================
-   MARKET ICONS
-========================================================= */
 
 function MarketIcon({ market }: { market: Market }) {
   if (market === "Forex") {
@@ -187,7 +108,6 @@ function MarketIcon({ market }: { market: Market }) {
           strokeLinecap="round"
           strokeLinejoin="round"
         />
-
         <path
           d="M12.8 6.2h3.4v3.4"
           stroke="currentColor"
@@ -202,598 +122,276 @@ function MarketIcon({ market }: { market: Market }) {
   return (
     <span
       aria-hidden="true"
-      className="flex h-4 w-4 shrink-0 items-center justify-center text-[16px] font-black leading-none"
+      className="flex h-4 w-4 items-center justify-center rounded-full bg-white/10 text-[11px] font-black"
     >
       ₿
     </span>
   );
 }
 
-/* =========================================================
-   NAVBAR
-========================================================= */
+function MenuIcon({ open }: { open: boolean }) {
+  return (
+    <span className="relative block h-5 w-6" aria-hidden="true">
+      <span
+        className={`absolute left-0 top-[4px] h-[1.5px] w-6 rounded-full bg-current transition duration-300 ${
+          open ? "translate-y-[6px] rotate-45" : ""
+        }`}
+      />
+      <span
+        className={`absolute left-0 top-[10px] h-[1.5px] w-6 rounded-full bg-current transition duration-300 ${
+          open ? "opacity-0" : ""
+        }`}
+      />
+      <span
+        className={`absolute left-0 top-[16px] h-[1.5px] w-6 rounded-full bg-current transition duration-300 ${
+          open ? "-translate-y-[6px] -rotate-45" : ""
+        }`}
+      />
+    </span>
+  );
+}
 
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [openDropdown, setOpenDropdown] =
-    useState<DropdownKey>(null);
-
   const [copied, setCopied] = useState(false);
-
   const navRef = useRef<HTMLElement>(null);
 
-  /* =======================================================
-     CLOSE DROPDOWN OUTSIDE
-  ======================================================= */
-
   useEffect(() => {
-    function handleOutsideClick(event: MouseEvent) {
-      if (
-        navRef.current &&
-        !navRef.current.contains(event.target as Node)
-      ) {
-        setOpenDropdown(null);
-      }
-    }
-
-    function handleEscape(event: KeyboardEvent) {
-      if (event.key === "Escape") {
-        setOpenDropdown(null);
+    const handleOutside = (event: MouseEvent) => {
+      if (navRef.current && !navRef.current.contains(event.target as Node)) {
         setMobileOpen(false);
       }
-    }
+    };
 
-    document.addEventListener(
-      "mousedown",
-      handleOutsideClick,
-    );
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setMobileOpen(false);
+    };
 
-    document.addEventListener(
-      "keydown",
-      handleEscape,
-    );
+    document.addEventListener("mousedown", handleOutside);
+    document.addEventListener("keydown", handleEscape);
 
     return () => {
-      document.removeEventListener(
-        "mousedown",
-        handleOutsideClick,
-      );
-
-      document.removeEventListener(
-        "keydown",
-        handleEscape,
-      );
+      document.removeEventListener("mousedown", handleOutside);
+      document.removeEventListener("keydown", handleEscape);
     };
   }, []);
-
-  /* =======================================================
-     COPY PROMO
-  ======================================================= */
 
   async function copyPromoCode() {
     try {
       await navigator.clipboard.writeText("BLACK40");
-
       setCopied(true);
-
-      window.setTimeout(() => {
-        setCopied(false);
-      }, 1400);
+      window.setTimeout(() => setCopied(false), 1400);
     } catch {
       setCopied(false);
     }
   }
 
-  function closeMobile() {
-    setMobileOpen(false);
-    setOpenDropdown(null);
-  }
-
   return (
-    <header className="relative z-50">
-      {/* GOLD AMBIENT */}
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-28 bg-[radial-gradient(circle_at_50%_-100%,rgba(212,175,55,0.18),transparent_68%)]" />
-
-      {/* =====================================================
-          TOP MARKET BAR
-      ====================================================== */}
-
-      <div className="relative border-b border-white/[0.06] bg-[#050505]/95 backdrop-blur-xl">
-        <div className="mx-auto flex min-h-10 max-w-[1440px] items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
-          {/* MARKET DISPLAY (NO TOGGLE) */}
-          <div className="flex items-center gap-3">
-            <span className="hidden text-[11px] font-semibold uppercase tracking-[0.2em] text-white/25 xl:block">
+    <header
+      className="
+        relative
+        z-50
+        h-[54px]
+        bg-[#020304]
+        text-white
+        sm:h-[58px]
+        lg:h-[56px]
+      "
+    >
+      {/* TOP MARKET / OFFER BAR */}
+      <div className="relative h-full border-b border-white/[0.07] bg-[#020304]">
+        <div
+          className="
+            mx-auto
+            flex
+            h-full
+            w-full
+            items-center
+            justify-between
+            gap-4
+            px-4
+            sm:px-6
+            lg:px-5
+            xl:px-6
+          "
+        >
+          {/* LEFT */}
+          <div className="flex min-w-0 items-center gap-3">
+            <span className="hidden text-[10px] font-black uppercase tracking-[0.28em] text-white/52 md:block">
               Markets
             </span>
 
-            <div className="flex items-center gap-2 rounded-xl border border-white/[0.07] bg-white/[0.025] px-3 py-1.5">
+            <div className="flex items-center gap-2.5 rounded-full border border-white/[0.12] bg-[#1a1c21] px-3 py-1.5">
               {markets.map((market) => (
                 <span
                   key={market}
-                  className="flex items-center gap-1.5 text-[12px] font-semibold text-white/55"
+                  className="flex items-center gap-1.5 whitespace-nowrap text-[10px] font-semibold text-white/85 sm:text-[11px]"
                 >
-                  <MarketIcon market={market} />
+                  <span className="text-white/45">
+                    <MarketIcon market={market} />
+                  </span>
                   {market}
                 </span>
               ))}
             </div>
           </div>
 
-          {/* UTILITY */}
-          <div className="flex items-center gap-4">
-            <div className="hidden items-center gap-2 md:flex">
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-40" />
+          {/* RIGHT */}
+          <div className="hidden items-center gap-4 sm:flex">
+            <span className="rounded-full border border-[#9e5aff]/55 bg-[#34154f] px-4 py-1 text-[9px] font-black uppercase tracking-[0.16em] text-[#c798ff]">
+              Launch Offer
+            </span>
 
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
-              </span>
-            </div>
+            <span className="hidden text-[10px] font-medium text-white/76 md:inline lg:text-[11px]">
+              Start your BlackProp journey with{" "}
+              <strong className="font-black text-white">40% OFF</strong>
+            </span>
 
-            <span className="hidden h-4 w-px bg-white/[0.08] md:block" />
-
-            <a
-              href="#faq"
-              className="text-[12px] font-medium text-white/50 transition hover:text-[#E8C866]"
+            <button
+              type="button"
+              onClick={copyPromoCode}
+              className="inline-flex items-center gap-1.5 rounded-full border border-[#9e5aff]/45 bg-[#15111b] px-3.5 py-1.5 text-[9px] font-black tracking-[0.14em] text-[#d7b0ff]"
             >
-              Help Center
-            </a>
+              {copied ? "COPIED" : "BLACK40"}
+              <CopyIcon />
+            </button>
           </div>
-        </div>
-      </div>
-
-      {/* =====================================================
-          PROMO BAR
-      ====================================================== */}
-
-      <div className="relative overflow-hidden border-b border-[#D4AF37]/[0.12] bg-[#090806]/95">
-        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,transparent,rgba(212,175,55,0.065),transparent)]" />
-
-        <div className="relative mx-auto flex min-h-9 max-w-[1440px] items-center justify-center gap-2.5 px-4 py-1.5 text-center">
-          <span className="hidden rounded-full border border-[#D4AF37]/20 bg-[#D4AF37]/[0.07] px-2 py-0.5 text-[9px] font-bold uppercase tracking-[0.16em] text-[#E8C866] sm:inline">
-            Launch Offer
-          </span>
-
-          <span className="text-[12px] text-white/60 sm:text-[13px]">
-            Start your BlackProp journey with{" "}
-            <strong className="font-semibold text-white">
-              40% OFF
-            </strong>
-          </span>
 
           <button
             type="button"
             onClick={copyPromoCode}
-            className="inline-flex items-center gap-1.5 rounded-lg border border-[#D4AF37]/20 bg-[#D4AF37]/[0.07] px-2.5 py-1 text-[11px] font-bold tracking-[0.09em] text-[#E8C866] transition hover:border-[#D4AF37]/40 hover:bg-[#D4AF37]/[0.12]"
+            className="inline-flex items-center gap-1.5 rounded-full border border-[#9e5aff]/35 bg-[#1d1428] px-3 py-1.5 text-[9px] font-black tracking-[0.1em] text-[#cda6ff] sm:hidden"
           >
             {copied ? "COPIED" : "BLACK40"}
-
             <CopyIcon />
           </button>
         </div>
       </div>
 
-      {/* =====================================================
-          MAIN NAVBAR
-      ====================================================== */}
-
-      <div className="relative border-b border-white/[0.06] bg-[#050505]/90 shadow-[0_16px_55px_rgba(0,0,0,0.35)] backdrop-blur-2xl">
-        <nav
-          ref={navRef}
-          className="relative mx-auto flex h-[76px] max-w-[1440px] items-center justify-between px-4 sm:px-6 lg:px-8"
+      {/* FLOATING NAV - overlays the Hero exactly like reference */}
+      <nav
+        ref={navRef}
+        className="
+          absolute
+          left-1/2
+          top-[calc(100%+18px)]
+          z-50
+          flex
+          h-[58px]
+          w-[calc(100%-32px)]
+          -translate-x-1/2
+          items-center
+          justify-between
+          rounded-full
+          border
+          border-white/[0.12]
+          bg-[#181021]/94
+          px-5
+          shadow-[0_16px_50px_rgba(20,5,36,.38),inset_0_1px_0_rgba(255,255,255,.035)]
+          backdrop-blur-2xl
+          sm:w-[88%]
+          sm:px-6
+          md:w-[84%]
+          lg:h-[62px]
+          lg:w-[80%]
+          lg:px-7
+          xl:max-w-[1640px]
+        "
+      >
+        {/* LOGO */}
+        <a
+          href="#home"
+          aria-label="BlackProp home"
+          className="group flex shrink-0 items-center gap-2.5"
         >
-          {/* SIMPLE WHITE BLACKPROP LOGO
-              Mobile: icon on the left, wordmark centered
-              Desktop: icon + wordmark together on the left */}
-          <a
-            href="/"
-            aria-label="BlackProp home"
-            className="group flex shrink-0 items-center lg:gap-3"
-          >
-            <BPMark
-              width={31}
-              height={40}
-              color="#FFFFFF"
-              className="shrink-0 transition-opacity duration-300 group-hover:opacity-80 sm:h-[42px] sm:w-[33px]"
-            />
+          <BPMark
+            width={30}
+            height={38}
+            color="#FFFFFF"
+            className="shrink-0 transition-opacity duration-300 group-hover:opacity-80 lg:h-[42px] lg:w-[33px]"
+          />
+          <span className="text-[20px] font-bold tracking-[-0.045em] text-white sm:text-[21px] lg:text-[23px]">
+            BlackProp
+          </span>
+        </a>
 
-            <span className="absolute left-1/2 -translate-x-1/2 whitespace-nowrap text-[27px] font-bold leading-none tracking-[-0.045em] text-white sm:text-[29px] lg:static lg:translate-x-0 lg:text-[26px]">
-              BlackProp
-            </span>
+        {/* LINKS */}
+        <div className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-1 lg:flex">
+          {navLinks.map((item) => (
+            <a
+              key={item.label}
+              href={item.href}
+              className="rounded-full px-3.5 py-2 text-[12px] font-medium text-white/72 transition hover:bg-white/[0.045] hover:text-white xl:px-4 xl:text-[13px]"
+            >
+              {item.label}
+            </a>
+          ))}
+        </div>
+
+        {/* RIGHT */}
+        <div className="ml-auto hidden items-center gap-5 sm:flex">
+          <a
+            href="#login"
+            className="text-[12px] font-medium text-white/82 transition hover:text-white lg:text-[13px]"
+          >
+            Login
           </a>
 
-          {/* =================================================
-              DESKTOP LINKS
-          ================================================= */}
+          <a
+            href="#challenges"
+            className="inline-flex min-h-[36px] items-center justify-center rounded-full bg-white px-5 text-[12px] font-bold text-[#17131c] shadow-[0_6px_20px_rgba(255,255,255,.13)] transition hover:-translate-y-0.5 hover:bg-[#f5f1f8] lg:min-h-[38px] lg:px-6 lg:text-[13px]"
+          >
+            Get Funded
+          </a>
+        </div>
 
-          <div className="absolute left-1/2 hidden -translate-x-1/2 items-center lg:flex">
-            {/* TRADING */}
-            <div className="relative">
-              <button
-                type="button"
-                onClick={() =>
-                  setOpenDropdown(
-                    openDropdown === "trading"
-                      ? null
-                      : "trading",
-                  )
-                }
-                className={`flex items-center gap-1.5 rounded-xl px-3.5 py-2.5 text-[15px] font-medium transition ${
-                  openDropdown === "trading"
-                    ? "bg-white/[0.05] text-white"
-                    : "text-white/60 hover:bg-white/[0.035] hover:text-white"
-                }`}
-              >
-                Trading
+        {/* MOBILE MENU */}
+        <button
+          type="button"
+          aria-expanded={mobileOpen}
+          aria-label={mobileOpen ? "Close navigation menu" : "Open navigation menu"}
+          onClick={() => setMobileOpen((current) => !current)}
+          className="ml-auto grid h-9 w-9 place-items-center rounded-full border border-white/[0.10] bg-white/[0.04] text-white sm:ml-4 lg:hidden"
+        >
+          <MenuIcon open={mobileOpen} />
+        </button>
 
-                <Chevron
-                  open={
-                    openDropdown === "trading"
-                  }
-                />
-              </button>
-
-              {/* TRADING DROPDOWN */}
-              {openDropdown === "trading" && (
-                <div className="absolute left-1/2 top-[calc(100%+14px)] w-[340px] -translate-x-1/2 overflow-hidden rounded-2xl border border-white/[0.09] bg-[#0A0A0B] p-2 shadow-[0_30px_90px_rgba(0,0,0,0.7)]">
-                  <div className="px-3 pb-2 pt-2">
-                    <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#D4AF37]/70">
-                      Trading
-                    </p>
-                  </div>
-
-                  {tradingLinks.map((item) => (
-                    <a
-                      key={item.label}
-                      href={item.href}
-                      onClick={() =>
-                        setOpenDropdown(null)
-                      }
-                      className="group flex items-center justify-between rounded-xl px-3 py-3 transition hover:bg-white/[0.04]"
-                    >
-                      <div className="min-w-0">
-                        <div className="text-[15px] font-semibold text-white/85 transition group-hover:text-[#E8C866]">
-                          {item.label}
-                        </div>
-
-                        <div className="mt-1 text-[12px] leading-5 text-white/38">
-                          {item.description}
-                        </div>
-                      </div>
-
-                      <span className="ml-4 shrink-0 text-white/25 transition group-hover:text-[#D4AF37]">
-                        <ArrowUpRight />
-                      </span>
-                    </a>
-                  ))}
-                </div>
-              )}
+        {mobileOpen && (
+          <div className="absolute inset-x-0 top-[calc(100%+10px)] overflow-hidden rounded-[22px] border border-white/[0.10] bg-[#0d0d13]/98 p-4 shadow-[0_30px_90px_rgba(0,0,0,.72)] backdrop-blur-2xl lg:hidden">
+            <div className="grid gap-1">
+              {navLinks.map((item) => (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  onClick={() => setMobileOpen(false)}
+                  className="rounded-xl px-4 py-3 text-[14px] font-semibold text-white/78 transition hover:bg-[#271531] hover:text-white"
+                >
+                  {item.label}
+                </a>
+              ))}
             </div>
 
-            {/* AFFILIATE */}
-            <a
-              href="#affiliate"
-              className="rounded-xl px-3.5 py-2.5 text-[15px] font-medium text-white/60 transition hover:bg-white/[0.035] hover:text-white"
-            >
-              Affiliate
-            </a>
-
-            {/* COMPETITION */}
-            <a
-              href="#competition"
-              className="relative rounded-xl px-3.5 py-2.5 text-[15px] font-medium text-white/60 transition hover:bg-white/[0.035] hover:text-white"
-            >
-              Competition
-
-              <span className="absolute right-1 top-0 rounded-full bg-[#D4AF37]/10 px-1.5 py-0.5 text-[7px] font-bold uppercase tracking-wider text-[#D4AF37]">
-                Free
-              </span>
-            </a>
-
-            {/* COMPANY */}
-            <div className="relative">
-              <button
-                type="button"
-                onClick={() =>
-                  setOpenDropdown(
-                    openDropdown === "company"
-                      ? null
-                      : "company",
-                  )
-                }
-                className={`flex items-center gap-1.5 rounded-xl px-3.5 py-2.5 text-[15px] font-medium transition ${
-                  openDropdown === "company"
-                    ? "bg-white/[0.05] text-white"
-                    : "text-white/60 hover:bg-white/[0.035] hover:text-white"
-                }`}
-              >
-                Company
-
-                <Chevron
-                  open={
-                    openDropdown === "company"
-                  }
-                />
-              </button>
-
-              {/* COMPANY DROPDOWN */}
-              {openDropdown === "company" && (
-                <div className="absolute left-1/2 top-[calc(100%+14px)] w-[320px] -translate-x-1/2 overflow-hidden rounded-2xl border border-white/[0.09] bg-[#0A0A0B] p-2 shadow-[0_30px_90px_rgba(0,0,0,0.7)]">
-                  <div className="px-3 pb-2 pt-2">
-                    <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#D4AF37]/70">
-                      BlackProp
-                    </p>
-                  </div>
-
-                  {companyLinks.map((item) => (
-                    <a
-                      key={item.label}
-                      href={item.href}
-                      onClick={() =>
-                        setOpenDropdown(null)
-                      }
-                      className="group flex items-center justify-between rounded-xl px-3 py-3 transition hover:bg-white/[0.04]"
-                    >
-                      <div className="min-w-0">
-                        <div className="text-[15px] font-semibold text-white/85 transition group-hover:text-[#E8C866]">
-                          {item.label}
-                        </div>
-
-                        <div className="mt-1 text-[12px] leading-5 text-white/38">
-                          {item.description}
-                        </div>
-                      </div>
-
-                      <span className="ml-4 shrink-0 text-white/25 transition group-hover:text-[#D4AF37]">
-                        <ArrowUpRight />
-                      </span>
-                    </a>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            {/* FAQ */}
-            <a
-              href="#faq"
-              className="rounded-xl px-3.5 py-2.5 text-[15px] font-medium text-white/60 transition hover:bg-white/[0.035] hover:text-white"
-            >
-              FAQ
-            </a>
-          </div>
-
-          {/* =================================================
-              RIGHT SIDE
-          ================================================= */}
-
-          <div className="ml-auto flex items-center gap-2">
-            <div className="hidden items-center gap-2 sm:flex">
+            <div className="mt-3 grid grid-cols-2 gap-2 border-t border-white/[0.08] pt-4">
               <a
                 href="#login"
-                className="rounded-xl border border-white/[0.09] bg-white/[0.025] px-4 py-2.5 text-[15px] font-medium text-white/70 transition hover:border-white/[0.16] hover:bg-white/[0.055] hover:text-white"
+                onClick={() => setMobileOpen(false)}
+                className="rounded-xl border border-white/[0.10] px-4 py-3 text-center text-[13px] font-semibold text-white/80"
               >
-                Log In
+                Login
               </a>
-
               <a
                 href="#challenges"
-                className="group relative overflow-hidden rounded-xl bg-[linear-gradient(135deg,#F2D675_0%,#D4AF37_45%,#A57B18_100%)] px-5 py-2.5 text-[15px] font-bold text-[#080808] shadow-[0_8px_28px_rgba(212,175,55,0.17)] transition hover:-translate-y-0.5 hover:shadow-[0_12px_35px_rgba(212,175,55,0.25)]"
+                onClick={() => setMobileOpen(false)}
+                className="rounded-xl bg-white px-4 py-3 text-center text-[13px] font-bold text-[#17131c]"
               >
-                <span className="relative z-10 flex items-center gap-2">
-                  Get Funded
-
-                  <ArrowUpRight />
-                </span>
-
-                <span className="absolute inset-y-0 -left-16 w-12 skew-x-[-20deg] bg-white/35 blur-sm transition-all duration-700 group-hover:left-[120%]" />
+                Get Funded
               </a>
             </div>
-
-            {/* MOBILE MENU BUTTON */}
-            <button
-              type="button"
-              aria-expanded={mobileOpen}
-              aria-label={
-                mobileOpen
-                  ? "Close navigation menu"
-                  : "Open navigation menu"
-              }
-              onClick={() => {
-                setMobileOpen(
-                  (current) => !current,
-                );
-
-                setOpenDropdown(null);
-              }}
-              className="grid h-10 w-10 place-items-center rounded-xl border border-white/[0.09] bg-white/[0.025] text-white lg:hidden"
-            >
-              <span className="relative block h-4 w-5">
-                <span
-                  className={`absolute left-0 block h-px w-5 bg-current transition-all duration-300 ${
-                    mobileOpen
-                      ? "top-[7px] rotate-45"
-                      : "top-1"
-                  }`}
-                />
-
-                <span
-                  className={`absolute left-0 block h-px w-5 bg-current transition-all duration-300 ${
-                    mobileOpen
-                      ? "bottom-[8px] -rotate-45"
-                      : "bottom-1"
-                  }`}
-                />
-              </span>
-            </button>
           </div>
-
-          {/* =================================================
-              MOBILE MENU
-          ================================================= */}
-
-          {mobileOpen && (
-            <div className="absolute inset-x-4 top-[calc(100%+10px)] max-h-[calc(100vh-180px)] overflow-y-auto rounded-3xl border border-white/[0.09] bg-[#080809] p-4 shadow-[0_35px_100px_rgba(0,0,0,0.75)] sm:inset-x-6 lg:hidden">
-              {/* MOBILE MARKET DISPLAY */}
-              <div className="mb-4">
-                <p className="mb-2 px-2 text-[9px] font-bold uppercase tracking-[0.2em] text-white/25">
-                  Markets
-                </p>
-
-                <div className="flex items-center justify-around rounded-2xl border border-white/[0.07] bg-white/[0.025] p-3">
-                  {markets.map((market) => (
-                    <div
-                      key={market}
-                      className="flex items-center gap-1.5 text-[12px] font-semibold text-white/55"
-                    >
-                      <MarketIcon market={market} />
-                      {market}
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* MOBILE TRADING */}
-              <div className="border-t border-white/[0.07] pt-3">
-                <button
-                  type="button"
-                  onClick={() =>
-                    setOpenDropdown(
-                      openDropdown === "trading"
-                        ? null
-                        : "trading",
-                    )
-                  }
-                  className="flex w-full items-center justify-between rounded-xl px-3 py-3 text-left text-[15px] font-semibold text-white"
-                >
-                  Trading
-
-                  <Chevron
-                    open={
-                      openDropdown ===
-                      "trading"
-                    }
-                  />
-                </button>
-
-                {openDropdown === "trading" && (
-                  <div className="space-y-1 pb-2">
-                    {tradingLinks.map((item) => (
-                      <a
-                        key={item.label}
-                        href={item.href}
-                        onClick={closeMobile}
-                        className="block rounded-xl px-4 py-2.5 transition hover:bg-white/[0.04]"
-                      >
-                        <div className="text-[14px] text-white/72">
-                          {item.label}
-                        </div>
-
-                        <div className="mt-0.5 text-[11px] leading-4 text-white/34">
-                          {item.description}
-                        </div>
-                      </a>
-                    ))}
-                  </div>
-                )}
-              </div>
-
-              {/* AFFILIATE */}
-              <a
-                href="#affiliate"
-                onClick={closeMobile}
-                className="block rounded-xl px-3 py-3 text-[15px] font-semibold text-white"
-              >
-                Affiliate
-              </a>
-
-              {/* COMPETITION */}
-              <a
-                href="#competition"
-                onClick={closeMobile}
-                className="flex items-center justify-between rounded-xl px-3 py-3 text-[15px] font-semibold text-white"
-              >
-                Trading Competition
-
-                <span className="rounded-full bg-[#D4AF37]/10 px-2 py-0.5 text-[8px] uppercase tracking-wider text-[#D4AF37]">
-                  Free
-                </span>
-              </a>
-
-              {/* MOBILE COMPANY */}
-              <div className="border-y border-white/[0.07] py-2">
-                <button
-                  type="button"
-                  onClick={() =>
-                    setOpenDropdown(
-                      openDropdown === "company"
-                        ? null
-                        : "company",
-                    )
-                  }
-                  className="flex w-full items-center justify-between rounded-xl px-3 py-3 text-left text-[15px] font-semibold text-white"
-                >
-                  Company
-
-                  <Chevron
-                    open={
-                      openDropdown ===
-                      "company"
-                    }
-                  />
-                </button>
-
-                {openDropdown === "company" && (
-                  <div className="space-y-1 pb-2">
-                    {companyLinks.map((item) => (
-                      <a
-                        key={item.label}
-                        href={item.href}
-                        onClick={closeMobile}
-                        className="block rounded-xl px-4 py-2.5 transition hover:bg-white/[0.04]"
-                      >
-                        <div className="text-[14px] text-white/72">
-                          {item.label}
-                        </div>
-
-                        <div className="mt-0.5 text-[11px] leading-4 text-white/34">
-                          {item.description}
-                        </div>
-                      </a>
-                    ))}
-                  </div>
-                )}
-              </div>
-
-              {/* FAQ */}
-              <a
-                href="#faq"
-                onClick={closeMobile}
-                className="block rounded-xl px-3 py-3 text-[15px] font-semibold text-white"
-              >
-                FAQ
-              </a>
-
-              {/* MOBILE CTA */}
-              <div className="mt-4 grid grid-cols-2 gap-2 border-t border-white/[0.07] pt-4 sm:hidden">
-                <a
-                  href="#login"
-                  onClick={closeMobile}
-                  className="rounded-xl border border-white/[0.09] px-4 py-3 text-center text-[14px] font-medium text-white/75"
-                >
-                  Log In
-                </a>
-
-                <a
-                  href="#challenges"
-                  onClick={closeMobile}
-                  className="rounded-xl bg-[linear-gradient(135deg,#F2D675,#D4AF37,#A57B18)] px-4 py-3 text-center text-[14px] font-bold text-black"
-                >
-                  Get Funded
-                </a>
-              </div>
-            </div>
-          )}
-        </nav>
-      </div>
+        )}
+      </nav>
     </header>
   );
 }
+
+export default Navbar;

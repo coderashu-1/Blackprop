@@ -14,6 +14,10 @@ import { Support } from "@/components/sections/support";
 import { Testimony } from "@/components/sections/testimony";
 import { CommunityCTA } from "@/components/sections/community-cta";
 import { Rewards } from "@/components/sections/rewards";
+import { TrustedCompanion } from "@/components/sections/trusted-companion";
+
+import { FaqCommunity } from "@/components/sections/faq-community";
+
 
 
 export default function Home() {
@@ -21,17 +25,19 @@ export default function Home() {
     <main className="min-h-screen overflow-hidden bg-[var(--background)]">
       <Navbar />
       <Hero />
-      {/* <ProofStats /> */}
+      <ProofStats />
       <Challenges />
+      <HowItWorks />
+      <Support />
       <ProfitCalculator />
       <Rewards />
       <Testimony />
       <DashboardShowcase />
-      <GlobalAccess />
-      <Support />
-      <CommunityCTA />
-      <HowItWorks />
       <WhyTradersLove />
+      {/* <GlobalAccess /> */}
+      {/* <CommunityCTA /> */}
+      <FaqCommunity/>
+      <TrustedCompanion />
       <Footer />
     </main>
   );
