@@ -491,7 +491,6 @@ function RowIcon({
     | "loss"
     | "clock"
     | "calendar"
-    | "refund"
     | "reward";
 }) {
   const common = "h-[20px] w-[20px]";
@@ -716,18 +715,6 @@ export function Challenges() {
       ),
     },
     {
-      icon: "refund" as const,
-      label: "Refund",
-      value: (_size: number) => (
-        <div className="flex items-center justify-center gap-2">
-          <span className="text-white">Eligible</span>
-          <span className="rounded border border-emerald-400/30 bg-emerald-400/[0.08] px-2 py-0.5 text-[11px] font-bold text-emerald-300">
-            Terms
-          </span>
-        </div>
-      ),
-    },
-    {
       icon: "reward" as const,
       label: "Rewards",
       value: (_size: number) => (
@@ -747,13 +734,7 @@ export function Challenges() {
       <div className="relative mx-auto max-w-[1240px] px-4 sm:px-6 lg:px-8">
         {/* HEADER */}
         <div className="mx-auto max-w-[760px] text-center">
-          <div className="flex flex-wrap items-center justify-center gap-2 text-[10px] text-white/50 sm:text-[11px]">
-            <span className="rounded-full border border-[#9b4cff]/40 bg-[#2a1239] px-3 py-1 font-black uppercase tracking-[0.08em] text-[#d09aff]">
-              Configurator
-            </span>
-            <span className="hidden h-1 w-1 rounded-full bg-white/35 sm:block" />
-            <span>Institutional Funding Evaluation Phase</span>
-          </div>
+          
 
           <h2 className="mt-4 text-[2rem] font-black leading-[1.05] tracking-[-0.045em] text-white sm:text-[2.6rem] lg:text-[3rem]">
             Configure Your{" "}
@@ -857,8 +838,8 @@ export function Challenges() {
         </div>
 
         {/* COMPARISON TABLE */}
-        <div className="mt-12 overflow-x-auto pb-2 [scrollbar-width:thin] [scrollbar-color:#3b2452_transparent]">
-          <div className="min-w-[1180px]">
+        <div className="mt-12">
+          <div>
             <div className="flex gap-4">
               {/* LABELS */}
               <div className="w-[210px] shrink-0 pt-[136px]">
@@ -866,7 +847,7 @@ export function Challenges() {
                   <div
                     key={row.label}
                     className={`flex h-[58px] items-center gap-3.5 text-[14px] font-medium text-white/78 ${
-                      index === 0 ? "h-[78px]" : ""
+                      index === 0 ? "h-[64px]" : ""
                     }`}
                   >
                     <span className="text-white/55">
@@ -876,26 +857,19 @@ export function Challenges() {
                   </div>
                 ))}
 
-                <div className="mt-6 px-1 text-[12px] leading-5 text-white/42">
-                  One-time refundable fee
-                  <br />
-                  from
-                </div>
+
               </div>
 
               {/* CARDS - badge is kept inside the scroll viewport to prevent clipping */}
               <div
-                className="grid flex-1 gap-3"
-                style={{
-                  gridTemplateColumns: `repeat(${sortedSizes.length}, minmax(158px, 1fr))`,
-                }}
+                className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6"
               >
                 {sortedSizes.map((item) => {
                   const selected = item.value === accountSize;
                   const price = priceFor(item.value);
 
                   return (
-                    <div key={item.value} className="relative min-w-0 pt-[14px]">
+                    <div key={item.value} className="relative pt-[14px] min-w-0">
                       {item.popular && (
                         <span className="absolute left-1/2 top-0 z-30 -translate-x-1/2 whitespace-nowrap rounded-full bg-[linear-gradient(90deg,#9f4cff,#a83df0)] px-3.5 py-1.5 text-[9px] font-black uppercase tracking-[0.03em] text-white shadow-[0_6px_16px_rgba(158,63,241,.28)]">
                           Best Value
@@ -912,11 +886,11 @@ export function Challenges() {
                       >
 
                         {/* ACCOUNT HEADER */}
-                        <div className="flex h-[120px] flex-col items-center justify-center border-b border-white/[0.055] px-3 text-center">
+                        <div className="flex h-[95px] flex-col items-center justify-center border-b border-white/[0.055] px-3 text-center">
                           <span className={`text-[11px] font-bold uppercase tracking-[0.09em] ${selected ? "text-[#c58cff]" : "text-white/48"}`}>
                             Account
                           </span>
-                          <strong className="mt-2 text-[24px] font-black tracking-[-0.035em] text-white">
+                          <strong className="mt-2 text-[20px] font-black tracking-[-0.035em] text-white">
                             {formatMoney(item.value)}
                           </strong>
                         </div>
@@ -925,8 +899,8 @@ export function Challenges() {
                         {rows.map((row, index) => (
                           <div
                             key={`${item.value}-${row.label}`}
-                            className={`flex h-[58px] items-center justify-center border-b border-white/[0.045] px-2.5 text-center text-[12px] font-medium leading-5 text-white/76 ${
-                              index === 0 ? "h-[78px]" : ""
+                            className={`flex h-[48px] items-center justify-center border-b border-white/[0.045] px-2.5 text-center text-[12px] font-medium leading-5 text-white/76 ${
+                              index === 0 ? "h-[64px]" : ""
                             }`}
                           >
                             {row.value(item.value)}
@@ -936,7 +910,7 @@ export function Challenges() {
                         {/* PRICE + BUTTON */}
                         <div className="px-4 pb-5 pt-5 text-center">
                           <div className="flex items-end justify-center gap-2">
-                            <span className={`text-[27px] font-black tracking-[-0.045em] ${selected ? "text-[#c378ff]" : "text-white"}`}>
+                            <span className={`text-[22px] font-black tracking-[-0.045em] ${selected ? "text-[#c378ff]" : "text-white"}`}>
                               {formatMoney(price.sale)}
                             </span>
                             {price.original !== price.sale && (
@@ -983,7 +957,7 @@ export function Challenges() {
         </div>
 
         {/* FEATURE FOOTER */}
-        <div className="mt-16 border-t border-[#7f3daa]/35 pt-8">
+        {/* <div className="mt-16 border-t border-[#7f3daa]/35 pt-8">
           <div className="grid gap-6 md:grid-cols-3 md:gap-0">
             <div className="flex items-center gap-4 md:border-r md:border-white/[0.07] md:px-4">
               <div className="grid h-11 w-11 shrink-0 place-items-center rounded-[11px] border border-white/[0.09] bg-[#12131a] text-[#c47cff]">
@@ -1027,7 +1001,7 @@ export function Challenges() {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   );

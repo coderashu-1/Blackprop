@@ -423,7 +423,7 @@ export function WhyTradersLove() {
             lg:gap-8
           "
         >
-          {/* STATS */}
+          {/* STATS
           <div
             className="
               grid
@@ -461,9 +461,9 @@ export function WhyTradersLove() {
                 Average Payout Dispatch
               </p>
             </div>
-          </div>
+          </div> */}
 
-          {/* ACTIONS */}
+          {/* ACTIONS
           <div
             className="
               flex
@@ -547,7 +547,7 @@ export function WhyTradersLove() {
               </span>
               <ArrowRight />
             </a>
-          </div>
+          </div> */}
         </div>
       </div>
     </section>

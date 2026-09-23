@@ -21,7 +21,7 @@ function CheckIcon() {
 
 const heroBenefits = [
   "Industry Leading Dashboard",
-  "Trade Stocks & more",
+  "Trade Forex and Crypto",
   "Tailored Accounts at Checkout",
   "Over 150+ Symbols To Trade",
   "Exclusive Discounts For Our Traders",
@@ -109,22 +109,20 @@ export function Hero() {
               xl:text-[4rem]
             "
           >
-            The Prop Firm{" "}
-            <span className="bg-[linear-gradient(90deg,#bb75ff_0%,#9a4cff_55%,#8c46f3_100%)] bg-clip-text text-transparent">
-              Designed
-            </span>
+            PROVE YOUR EDGE{" "}
+           
 
             <span className="block bg-[linear-gradient(90deg,#e2c8ff_0%,#b96dff_45%,#9d4fff_100%)] bg-clip-text text-transparent">
-              For Every Trader
+              WE WILL BACK IT.
             </span>
           </h1>
 
           <p className="mx-auto mt-5 max-w-[600px] text-[12px] font-medium leading-[1.65] text-white/74 sm:text-[13px] lg:text-[14px]">
-            Join traders worldwide and become a funded trader with the world&apos;s
+            Prove your trading process, meet clear objectives, and earn the opportunity to trade
             <span className="hidden sm:inline">
               <br />
             </span>{" "}
-            most trusted prop firm.
+            with BlackProp capital.
           </p>
 
           <div className="mt-7 flex justify-center">

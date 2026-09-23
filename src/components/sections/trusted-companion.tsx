@@ -284,7 +284,7 @@ export function TrustedCompanion() {
               "
             >
               A trusted companion
-              <span className="block">on your crypto journey</span>
+              <span className="block">on your funding journey</span>
             </h2>
 
             {/* DESCRIPTION */}

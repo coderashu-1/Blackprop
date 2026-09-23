@@ -73,6 +73,13 @@ const SUBSCRIBED_KEY = "bp_email_subscribed";
 const SNOOZE_KEY = "bp_email_popup_snooze_until";
 const SNOOZE_DAYS = 7;
 
+// Popup timing controls
+const ACTIVITY_FIRST_DELAY = 12000;
+const ACTIVITY_VISIBLE_TIME = 6000;
+const ACTIVITY_NEXT_DELAY_MIN = 12000;
+const ACTIVITY_NEXT_DELAY_MAX = 18000;
+const EMAIL_POPUP_DELAY = 6500;
+
 /* =========================================================
    ICONS
 ========================================================= */
@@ -194,6 +201,7 @@ function ActivityPopup({
   const [visible, setVisible] = useState(false);
   const [index, setIndex] = useState(0);
   const soundArmed = useRef(false);
+  const soundPlayed = useRef(false);
 
   useEffect(() => {
     const armSound = () => {
@@ -218,21 +226,24 @@ function ActivityPopup({
     const show = () => {
       setVisible(true);
 
-      if (soundArmed.current) {
+      // Play only once for every popup appearance.
+      if (soundArmed.current && !soundPlayed.current) {
+        soundPlayed.current = true;
         playSoftPing();
       }
 
       hideTimer = window.setTimeout(() => {
         setVisible(false);
+        soundPlayed.current = false;
 
         nextTimer = window.setTimeout(() => {
           setIndex((current) => (current + 1) % items.length);
           show();
-        }, 6500 + Math.random() * 4500);
-      }, 5200);
+        }, ACTIVITY_NEXT_DELAY_MIN + Math.random() * (ACTIVITY_NEXT_DELAY_MAX - ACTIVITY_NEXT_DELAY_MIN));
+      }, ACTIVITY_VISIBLE_TIME);
     };
 
-    const firstTimer = window.setTimeout(show, 5500);
+    const firstTimer = window.setTimeout(show, ACTIVITY_FIRST_DELAY);
 
     return () => {
       window.clearTimeout(firstTimer);
@@ -247,40 +258,44 @@ function ActivityPopup({
 
   return (
     <div
-      className={`fixed bottom-[max(12px,env(safe-area-inset-bottom))] left-3 right-3 z-[80] mx-auto w-auto max-w-[340px] transition-all duration-500 sm:bottom-6 sm:left-6 sm:right-auto sm:mx-0 sm:w-[340px] ${
+      className={`fixed bottom-[max(12px,env(safe-area-inset-bottom))] left-3 right-3 z-[80] mx-auto w-auto w-[calc(100vw-24px)] max-w-[340px] transition-all duration-500 sm:bottom-6 sm:left-6 sm:right-auto sm:mx-0 sm:w-[340px] ${
         visible
           ? "translate-y-0 opacity-100"
           : "pointer-events-none translate-y-5 opacity-0"
       }`}
       aria-live="polite"
     >
-      <div className="relative overflow-hidden rounded-[18px] border border-[#8f4bc1]/30 bg-[#111019]/95 p-3.5 text-white shadow-[0_18px_55px_rgba(40,13,68,.38)] backdrop-blur-2xl sm:rounded-[20px] sm:p-4">
+      <div className="relative overflow-hidden rounded-[18px] border border-[#dfcdf3] bg-[#fffaf5] p-3.5 text-[#17121f] shadow-[0_18px_55px_rgba(0,0,0,.18)] backdrop-blur-2xl sm:rounded-[20px] sm:p-4">
         <div className="absolute inset-x-[14%] top-0 h-px bg-gradient-to-r from-transparent via-[#be6cff]/80 to-transparent shadow-[0_0_12px_rgba(190,108,255,.45)]" />
 
-        <div className="flex items-center gap-3">
-          <div className="relative grid h-10 w-10 shrink-0 place-items-center rounded-[12px] border border-[#8f4bc1]/30 bg-[#1c1426] shadow-[inset_0_1px_0_rgba(255,255,255,.04)]">
-            <BPMark width={16} height={21} color="#FFFFFF" />
+        <div className="flex items-start gap-3">
+          <div className="relative grid h-10 w-10 shrink-0 place-items-center rounded-[12px] border border-[#8f4bc1]/30 bg-[#f1e8ff] shadow-[inset_0_1px_0_rgba(255,255,255,.8)]">
+            <BPMark width={16} height={21} color="#17121f" />
 
-            <span className="absolute -bottom-1 -right-1 grid h-[18px] w-[18px] place-items-center rounded-full border-2 border-[#111019] bg-[#2a1738] text-[10px]">
+            <span className="absolute -bottom-1 -right-1 grid h-[18px] w-[18px] place-items-center rounded-full border-2 border-[#fffaf5] bg-[#eadcff] text-[10px]">
               {item.flag}
             </span>
           </div>
 
-          <div className="min-w-0 flex-1">
+          <div className="min-w-0 flex-1 pr-2">
             <div className="flex items-center gap-2">
               <span className="h-1.5 w-1.5 rounded-full bg-[#be6cff] shadow-[0_0_8px_rgba(190,108,255,.75)]" />
 
-              <p className="text-[9px] font-black uppercase tracking-[0.13em] text-[#c9a4ea]/70 sm:text-[10px]">
+              <p className="text-[9px] font-black uppercase tracking-[0.13em] text-[#7c5a99] sm:text-[10px]">
                 Live community activity
               </p>
             </div>
 
-            <p className="mt-1.5 text-[12px] font-bold leading-5 text-white/90 sm:text-[13px]">
+            <p className="mt-1.5 text-[11px] font-bold leading-4 text-[#21182b] sm:text-[13px] sm:leading-5">
               {item.message ??
-                `${item.challenge} Challenge is popular with traders in ${item.country}.`}
+                `${item.challenge} Challenge is popular with traders.`}
             </p>
 
-            <p className="mt-1 text-[9px] font-medium text-white/35 sm:text-[10px]">
+            <p className="mt-1 text-[11px] font-bold text-[#6d4a8a]">
+              {item.flag} {item.country}
+            </p>
+
+            <p className="mt-1 text-[9px] font-medium text-[#75677f] sm:text-[10px]">
               BlackProp • just now
             </p>
           </div>
@@ -315,7 +330,7 @@ function EmailCaptureModal() {
 
     const timer = window.setTimeout(() => {
       setOpen(true);
-    }, 1800);
+    }, EMAIL_POPUP_DELAY);
 
     return () => window.clearTimeout(timer);
   }, []);
@@ -419,7 +434,7 @@ function EmailCaptureModal() {
         </button>
 
         <div className="relative p-5 pb-[max(1.5rem,env(safe-area-inset-bottom))] sm:p-8 md:p-9">
-          <div className="flex items-center gap-3.5 pr-12">
+          <div className="flex items-start gap-3.5 pr-12">
             <div className="grid h-12 w-12 shrink-0 place-items-center rounded-[15px] border border-[#8f4bc1]/30 bg-[#1a1323] shadow-[inset_0_1px_0_rgba(255,255,255,.04)]">
               <BPMark
                 width={21}
@@ -481,7 +496,7 @@ function EmailCaptureModal() {
           ) : (
             <form onSubmit={handleSubmit} className="mt-7">
               <div className="rounded-[18px] border border-[#7c438f]/30 bg-[#15121c] p-2.5 shadow-[inset_0_1px_0_rgba(255,255,255,.025)] sm:flex sm:items-center sm:p-2">
-                <div className="flex min-w-0 flex-1 items-center">
+                <div className="flex min-w-0 flex-1 pr-2 items-center">
                   <span className="ml-3 text-[#be6cff]">
                     <MailIcon />
                   </span>

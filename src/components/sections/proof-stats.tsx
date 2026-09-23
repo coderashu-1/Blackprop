@@ -10,7 +10,7 @@ const benefits = [
   },
   {
     title: "Advanced Support",
-    text: "Dedicated support via Live chat, email, or WhatsApp",
+    text: "Dedicated support via Live chat, email",
     icon: "support" as BenefitIconName,
   },
   {
@@ -214,7 +214,7 @@ export function ProofStats() {
               <div className="inline-flex items-center gap-2.5 rounded-full border border-[#8e4fc4]/45 bg-[#2a163a]/65 px-4 py-2 backdrop-blur-md">
                 <span className="h-2 w-2 rounded-full bg-[#b974ff]" />
                 <span className="text-[9px] font-black uppercase tracking-[0.19em] text-[#c49bea] sm:text-[10px]">
-                  Institutional Simulation
+                  Simulated Trading.
                 </span>
               </div>
 
@@ -242,9 +242,7 @@ export function ProofStats() {
 
                 <span className="hidden h-1 w-1 rounded-full bg-[#b66bff] sm:inline-block" />
 
-                <span className="rounded-[5px] border border-[#8e4fc4]/55 bg-[#1c1525]/80 px-3 py-1.5 text-[10px] font-black uppercase tracking-[0.09em] text-[#c99bf4] sm:text-[11px]">
-                  Scaling Available
-                </span>
+                
               </div>
             </div>
           </div>

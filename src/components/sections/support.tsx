@@ -239,7 +239,7 @@ export function Support() {
         <div className="relative mt-10 grid gap-5 md:grid-cols-3 md:gap-6 lg:mt-12 lg:gap-7 xl:gap-8">
           <AddOnCard
             title="Increase Performance Split"
-            description="Keep more of what you make by increasing your share to 90%."
+            description="Keep more of what you make by increasing your share to 100%."
             graphic={<SplitGraphic />}
           />
 

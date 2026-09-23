@@ -9,7 +9,7 @@ const faqs = [
       "Choose the challenge that fits your goals, select your account size and platform, then complete checkout to begin your BlackProp journey.",
   },
   {
-    question: "How do I become an FTMO Trader?",
+    question: "How do I become an Blackprop Trader?",
     answer:
       "Complete the selected evaluation while following the defined trading objectives. Once the requirements are met, you can progress to the next stage.",
   },
@@ -320,7 +320,7 @@ export function FaqCommunity() {
               </p>
 
               <a
-                href="https://discord.com/invite/AXU9YEd4T"
+                href="https://discord.gg/D3HxGh6DXt"
                 className="
                   mx-auto
                   mt-6
@@ -358,8 +358,8 @@ export function FaqCommunity() {
                   alt="BlackProp mobile dashboard"
                   className="absolute h-full w-full object-contain object-bottom"
                   style={{
-                    bottom: "-3%",
-                    left: "-16%",
+                    bottom: "-15%",
+                    left: "0%",
                     transform: "scale(1.6)",
                     transformOrigin: "center bottom",
                   }}
