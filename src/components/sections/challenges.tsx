@@ -539,14 +539,6 @@ function RowIcon({
     );
   }
 
-  if (type === "refund") {
-    return (
-      <svg viewBox="0 0 20 20" fill="none" className={common} aria-hidden="true">
-        <circle cx="10" cy="10" r="6.3" stroke="currentColor" strokeWidth="1.4" />
-        <path d="M11.8 7.2H9.2a1.5 1.5 0 0 0 0 3h1.5a1.5 1.5 0 1 1 0 3H8M10 5.6v8.8" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" />
-      </svg>
-    );
-  }
 
   return (
     <svg viewBox="0 0 20 20" fill="none" className={common} aria-hidden="true">
