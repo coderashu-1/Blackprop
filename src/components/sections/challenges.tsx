@@ -138,10 +138,6 @@ const platformLabels: Partial<Record<Platform, string>> = {
 
 /* ---------------------------------------------------------
    PLATFORMS AVAILABLE PER MARKET
-   - Forex: DXTRADE, MTR (MatchTrader), cTrader, GooeyPro — matches
-     the live purchase flow shown in the reference screenshot.
-   - Crypto: DXTRADE, GooeyPro
-   - Futures: DXFUTURE only, per the live purchase flow
 --------------------------------------------------------- */
 
 const platformsByMarket: Record<Market, Platform[]> = {
@@ -152,8 +148,8 @@ const platformsByMarket: Record<Market, Platform[]> = {
 
 /* ---------------------------------------------------------
    ACCOUNT SIZES PER MARKET
-   Forex / Crypto share the standard tier list. Futures uses its
-   own tiers ($25K – $150K), matching the live purchase flow.
+   Matches the "All Challenges" sheet exactly — every market
+   (Forex, Futures, Crypto) uses the same 6 tiers: 5K → 200K.
 --------------------------------------------------------- */
 
 const accountSizes = [
@@ -165,101 +161,73 @@ const accountSizes = [
   { value: 200000, label: "200K" },
 ];
 
-const futuresAccountSizes = [
-  { value: 25000, label: "25K" },
-  { value: 50000, label: "50K" },
-  { value: 75000, label: "75K" },
-  { value: 100000, label: "100K", popular: true },
-  { value: 150000, label: "150K" },
-];
-
 const accountSizesByMarket: Record<
   Market,
   { value: number; label: string; popular?: boolean }[]
 > = {
   Forex: accountSizes,
   Crypto: accountSizes,
-  Futures: futuresAccountSizes,
+  Futures: accountSizes,
 };
 
 /* ---------------------------------------------------------
-   CFD/FOREX PRICING
-   Source: "Plans & Workflows" sheet. The first "Example" row
-   ($10,000 → $85 / $110) is a template row and is intentionally
-   excluded — only the real per-size prices below it are used.
+   PRICING — taken directly from the "All Challenges" sheet
+   (Challenge fee / Challenge Fees rows), 22 Sep 2026.
 --------------------------------------------------------- */
 
-const cfdPricing: Record<"1 Step" | "2 Step", Record<number, number>> = {
+const cfdPricing: Record<"1 Step" | "2 Step" | "Instant", Record<number, number>> = {
   "1 Step": {
     5000: 35,
     10000: 75,
     25000: 190,
     50000: 375,
     100000: 750,
-    200000: 1099,
-    400000: 3600,
+    200000: 1600,
   },
   "2 Step": {
-    5000: 25,
-    10000: 50,
-    25000: 125,
-    50000: 225,
-    100000: 450,
-    200000: 1099,
-    400000: 2200,
+    5000: 48,
+    10000: 95,
+    25000: 238,
+    50000: 428,
+    100000: 855,
+    200000: 2088,
+  },
+  Instant: {
+    5000: 90,
+    10000: 132,
+    25000: 282,
+    50000: 366,
+    100000: 666,
+    200000: 1198,
   },
 };
-
-// Instant funding isn't in the pricing sheet, so its price is derived
-// from the 2 Step price at the same size using the prior Instant/2-Step
-// price ratio (1.65 / 0.92) as a placeholder until real Instant pricing
-// is provided.
-const INSTANT_PRICE_RATIO = 1.65 / 0.92;
-
-/* ---------------------------------------------------------
-   CRYPTO PRICING
-   Confirmed live values: 1 Step $5K = $45, 2 Step $5K = $35
-   (seen at checkout). Other tiers are extrapolated from those
-   confirmed prices using the same 1 Step (~1.29x) and 2 Step
-   (~1.4x) markup over the equivalent CFD/Forex price — replace
-   with real values once the full crypto price sheet is available.
---------------------------------------------------------- */
 
 const cryptoPricing: Record<"1 Step" | "2 Step", Record<number, number>> = {
   "1 Step": {
     5000: 45,
-    10000: 96,
-    25000: 244,
-    50000: 482,
-    100000: 964,
-    200000: 1413,
-    400000: 4629,
+    10000: 95,
+    25000: 250,
+    50000: 525,
+    100000: 1050,
+    200000: 2150,
   },
   "2 Step": {
     5000: 35,
-    10000: 70,
-    25000: 175,
-    50000: 315,
-    100000: 630,
-    200000: 1539,
-    400000: 3080,
+    10000: 80,
+    25000: 210,
+    50000: 430,
+    100000: 900,
+    200000: 2000,
   },
 };
 
-/* ---------------------------------------------------------
-   FUTURES PRICING
-   Only the $25,000 One Step price ($150, confirmed at checkout)
-   is real. The remaining tiers are estimated using the same
-   scaling pattern seen across the other markets' size tiers —
-   swap in real values once the full futures price sheet lands.
---------------------------------------------------------- */
-
 const futuresPricing: Record<number, number> = {
-  25000: 150,
-  50000: 275,
-  75000: 375,
-  100000: 450,
-  150000: 650,
+  5000: 45,
+  10000: 95,
+  25000: 250,
+  50000: 525,
+  100000: 1050,
+  200000: 2150,
 };
 
 function getModelBasePrice(
@@ -276,49 +244,36 @@ function getModelBasePrice(
       return cryptoPricing[model][accountValue] ?? 0;
     }
     // Crypto has no Instant tier in the UI — fall back defensively.
-    return cfdPricing["2 Step"][accountValue] ?? 0;
+    return cryptoPricing["2 Step"][accountValue] ?? 0;
   }
 
   // Forex
-  if (model === "1 Step" || model === "2 Step") {
-    return cfdPricing[model][accountValue];
-  }
-
-  const twoStepPrice = cfdPricing["2 Step"][accountValue];
-  return Math.round(twoStepPrice * INSTANT_PRICE_RATIO);
+  return cfdPricing[model][accountValue] ?? 0;
 }
 
 /* ---------------------------------------------------------
-   TRADING RULES — PER MARKET
-   Forex rules come from "Instant FOREX Final", "One step FOREX
-   Final" and "2 step Forex Final". Crypto rules come from "Crypto
-   One Step Overview" and "Crypto Two Step Overview" (no Instant
-   tier exists for Crypto). Futures rules come from the live "One
-   Step Futures Assessment" purchase page/overview.
+   TRADING RULES — PER MARKET (from "All Challenges" sheet)
 --------------------------------------------------------- */
 
 const forexRules: Record<Model, RuleSet> = {
   Instant: {
-    phase1: "N/A",
+    phase1: "N/A (already funded)",
     dailyLoss: "3%",
-    maxLoss: "6%",
-    inactivity: "30 Days",
-    leverage: "1:50",
-    maxTime: "No max time",
-    flatForWeekend: "Yes",
-    profitSplit: "80% + Add on upto 100%",
+    maxLoss: "5% (Trailing)",
+    inactivity: "5 days @ ½% per day",
+    maxTime: "15% (no single day > 25% of profits)",
+    flatForWeekend: "Available with Add-On",
+    profitSplit: "80%",
     addOns: [
+      {
+        title: "Profit Share Boost",
+        cost: "20% Cost",
+        description: "Increases the funded account profit share.",
+      },
       {
         title: "Hold Over Weekend",
         cost: "10% Cost",
-        description:
-          "Disables the Flat for Weekend requirement so positions can remain open over the weekend.",
-      },
-      {
-        title: "Profit Share Increased to 90%",
-        cost: "20% Cost",
-        description:
-          "Increases the funded account profit share from the standard 80% to 90%.",
+        description: "Allows positions to remain open over the weekend.",
       },
       {
         title: "Payout Protector",
@@ -331,24 +286,23 @@ const forexRules: Record<Model, RuleSet> = {
 
   "1 Step": {
     phase1: "10%",
-    dailyLoss: "3%",
+    dailyLoss: "5%",
     maxLoss: "6%",
     inactivity: "30 Days",
-    leverage: "1:50",
     maxTime: "No max time",
-    profitSplit: "Up to 90%",
+    profitSplit: "80%",
     addOns: [
-      {
-        title: "Payout Protector",
-        cost: "25% Cost",
-        description:
-          "Protects an eligible profit share in a funded account in the event of a hard breach.",
-      },
       {
         title: "Remove Lock Upon Payout",
         cost: "25% Cost",
         description:
           "Disables the post-payout maximum drawdown lock at the account starting balance.",
+      },
+      {
+        title: "Payout Protector",
+        cost: "25% Cost",
+        description:
+          "Protects an eligible profit share in a funded account in the event of a hard breach.",
       },
     ],
   },
@@ -357,23 +311,27 @@ const forexRules: Record<Model, RuleSet> = {
     phase1: "8%",
     phase2: "5%",
     dailyLoss: "5%",
-    maxLoss: "10%",
+    maxLoss: "8% (Static)",
     inactivity: "30 Days",
-    leverage: "1:50",
     maxTime: "No max time",
-    profitSplit: "Up to 90%",
+    profitSplit: "80%",
     addOns: [
       {
-        title: "Payout Protector",
-        cost: "25% Cost",
-        description:
-          "Protects an eligible profit share in a funded account in the event of a hard breach.",
+        title: "100% Payout",
+        cost: "20% Cost",
+        description: "Unlocks a full 100% payout on the funded account.",
       },
       {
         title: "Remove Lock Upon Payout",
         cost: "25% Cost",
         description:
           "Disables the post-payout maximum drawdown lock at the account starting balance.",
+      },
+      {
+        title: "Payout Protector",
+        cost: "25% Cost",
+        description:
+          "Protects an eligible profit share in a funded account in the event of a hard breach.",
       },
     ],
   },
@@ -386,10 +344,9 @@ const cryptoRules: Record<Model, RuleSet> = {
 
   "1 Step": {
     phase1: "9%",
-    dailyLoss: "±3%",
+    dailyLoss: "+/- 3%",
     maxLoss: "6%",
-    inactivity: "30 Days",
-    leverage: "5:1 BTC/ETH, 2:1 Others",
+    inactivity: "Weekend trading enabled",
     maxTime: "No max time",
     profitSplit: "90%",
     addOns: [
@@ -405,10 +362,9 @@ const cryptoRules: Record<Model, RuleSet> = {
   "2 Step": {
     phase1: "6%",
     phase2: "9%",
-    dailyLoss: "±3%",
+    dailyLoss: "+/- 3%",
     maxLoss: "9%",
-    inactivity: "30 Days",
-    leverage: "5:1 BTC/ETH, 2:1 Others",
+    inactivity: "Weekend trading enabled",
     maxTime: "No max time",
     profitSplit: "90%",
     addOns: [
@@ -427,31 +383,18 @@ const cryptoRules: Record<Model, RuleSet> = {
 // Record<Model, RuleSet> type — they're never selectable in the UI
 // when market === "Futures".
 const futuresOneStepRules: RuleSet = {
-  phase1: "6%",
+  phase1: "Assessment 6%",
   dailyLoss: "None",
-  maxLoss: "6% (Intraday Equity HWM)",
+  maxLoss: "Trailing, plan specific (Intraday Equity HWM)",
   inactivity: "30 Days",
   maxTime: "No max time",
-  profitSplit: "80% (90% with add-on)",
+  profitSplit: "80%",
   consistencyRequirement: "33.33% Assessment / 33.33% Funded",
-  exposureLimits: "1 Contract / 10 Micros",
-  nonWithdrawableBuffer: "6% (Funded only)",
+  exposureLimits: "Plan specific",
+  nonWithdrawableBuffer: "Non-withdrawable, funded phase only",
   lockUponPayout: "No",
   purchaseType: "Monthly Subscription",
-  addOns: [
-    {
-      title: "Profit Share Boost to 90%",
-      cost: "15% Cost",
-      description:
-        "Increases the funded account profit share from the standard 80% to 90%.",
-    },
-    {
-      title: "Payout Protector",
-      cost: "25% Cost",
-      description:
-        "Protects an eligible profit share in a funded account in the event of a hard breach.",
-    },
-  ],
+  addOns: [],
 };
 
 const futuresRules: Record<Model, RuleSet> = {
@@ -549,37 +492,110 @@ function RowIcon({
   );
 }
 
-function FooterIcon({ type }: { type: "spread" | "payout" | "infinity" }) {
-  if (type === "spread") {
-    return (
-      <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5" aria-hidden="true">
-        <path d="M4 18V13M8 18V9M12 18v-6M16 18V6M20 18V3" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-        <path d="m4 11 4-4 4 2 8-6" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    );
-  }
+/* =========================================================
+   PAYMENT ICONS
+========================================================= */
 
-  if (type === "payout") {
-    return (
-      <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5" aria-hidden="true">
-        <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" strokeWidth="1.5" />
-        <circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="1.5" />
-        <path d="M6 8h2M16 16h2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-      </svg>
-    );
-  }
-
+function VisaMark() {
   return (
-    <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5" aria-hidden="true">
-      <path d="M8.2 8.2c-2.4-2.4-6.2-.7-6.2 2.7 0 3.7 4.3 5 6.5 2.5l7-7c2.3-2.3 6.5-.8 6.5 2.7 0 3.5-4.1 5-6.4 2.6l-2.2-2.2" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+    <span className="italic font-black tracking-tight text-[15px] sm:text-[17px]">
+      VISA
+    </span>
+  );
+}
+
+function PayPalMark() {
+  return (
+    <span className="italic font-black tracking-tight text-[14px] sm:text-[16px]">
+      PayPal
+    </span>
+  );
+}
+
+function BitcoinMark() {
+  return (
+    <svg viewBox="0 0 32 32" className="h-7 w-7 sm:h-8 sm:w-8" aria-hidden="true">
+      <circle cx="16" cy="16" r="15" fill="#f7931a" />
+      <path
+        fill="#ffffff"
+        d="M22.3 14.1c.3-2.1-1.3-3.2-3.5-4l.7-2.8-1.7-.4-.7 2.7c-.5-.1-.9-.2-1.4-.3l.7-2.7-1.7-.4-.7 2.8c-.4-.1-.7-.2-1.1-.3v-.01l-2.3-.6-.4 1.8s1.2.3 1.2.3c.7.2.8.6.8 1l-.8 3.2c0 .03.1.03.1.05l-.1-.03-1.1 4.5c-.1.2-.3.5-.8.4 0 0-1.2-.3-1.2-.3l-.9 1.9 2.2.5c.4.1.8.2 1.2.3l-.7 2.8 1.7.4.7-2.8c.5.1.9.2 1.4.3l-.7 2.8 1.7.4.7-2.8c2.9.5 5.1.3 6-2.3.7-2-0-3.2-1.5-4 1.1-.2 1.9-1 2.1-2.5Zm-3.9 5.4c-.5 2-4 1-5.1.7l.9-3.6c1.1.3 4.7.8 4.2 2.9Zm.5-5.4c-.5 1.8-3.4.9-4.3.7l.8-3.3c.9.2 4 .7 3.5 2.6Z"
+      />
     </svg>
   );
 }
 
-const marketMeta: Record<Market, { title: string; badge: string }> = {
-  Forex: { title: "FOREX/CFD", badge: "INSTANT" },
-  Crypto: { title: "CRYPTO", badge: "PASS IN 1 DAY" },
-  Futures: { title: "FUTURES", badge: "PASS IN 3 DAYS" },
+function CardNetworkMark() {
+  return (
+    <span className="flex items-center" aria-hidden="true">
+      <span className="h-6 w-6 rounded-full bg-white/55 sm:h-7 sm:w-7" />
+      <span className="-ml-2.5 h-6 w-6 rounded-full bg-white/25 sm:h-7 sm:w-7" />
+    </span>
+  );
+}
+
+function AmexMark() {
+  return (
+    <span className="font-black tracking-tight text-[14px] sm:text-[15px]">
+      AMEX
+    </span>
+  );
+}
+
+function UpiMark() {
+  return (
+    <span className="font-black tracking-tight text-[15px] sm:text-[16px]">
+      UPI
+    </span>
+  );
+}
+
+const paymentOptions: {
+  key: string;
+  render: () => JSX.Element;
+  highlight?: boolean;
+}[] = [
+  { key: "visa", render: VisaMark },
+  { key: "paypal", render: PayPalMark },
+  { key: "bitcoin", render: BitcoinMark, highlight: true },
+  { key: "network", render: CardNetworkMark },
+  { key: "amex", render: AmexMark },
+  { key: "upi", render: UpiMark },
+];
+
+function PaymentOptions() {
+  return (
+    <div className="mt-14 sm:mt-16">
+      <p className="text-center text-[11px] font-bold uppercase tracking-[0.18em] text-white/45 sm:text-[12px]">
+        Payment Options
+      </p>
+
+      <div className="mt-5 flex flex-wrap items-center justify-center gap-2 sm:gap-4">
+        {paymentOptions.map((option) => {
+          const Content = option.render;
+          return (
+            <div
+              key={option.key}
+              className={`flex h-[46px] w-[72px] items-center justify-center rounded-[10px] border text-white transition-all sm:h-[64px] sm:w-[124px] sm:rounded-[12px] ${
+                option.highlight
+                  ? "border-[#f7931a] bg-[linear-gradient(135deg,#3a2308,#1c1408)] shadow-[0_0_0_1px_rgba(247,147,26,.35),0_10px_26px_rgba(247,147,26,.18)]"
+                  : "border-white/[0.10] bg-[#101117]"
+              }`}
+            >
+              <span className="scale-75 sm:scale-100">
+                <Content />
+              </span>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+const marketMeta: Record<Market, { title: string }> = {
+  Forex: { title: "FOREX/CFD" },
+  Crypto: { title: "CRYPTO" },
+  Futures: { title: "FUTURES" },
 };
 
 function displayModel(model: Model) {
@@ -662,11 +678,11 @@ export function Challenges() {
   const rows = [
     {
       icon: "target" as const,
-      label: rules.phase2 ? "Profit Target" : "Profit Target",
+      label: "Profit Target",
       value: (size: number) => (
         <div className="space-y-0.5 text-center">
           <div>
-            <span className="text-white/55">PHASE 1 </span>
+            <span className="text-white/55">{rules.phase2 ? "PHASE 1 " : ""}</span>
             <strong className="text-white">{rules.phase1}</strong>
           </div>
           {rules.phase2 && (
@@ -718,7 +734,7 @@ export function Challenges() {
   return (
     <section
       id="challenges"
-      className="relative overflow-hidden bg-[#080a0e] py-12 text-white sm:py-16 lg:py-20"
+      className="relative overflow-hidden bg-[#080a0e] pb-12 pt-4 text-white sm:pb-16 sm:pt-6 lg:pb-20 lg:pt-8"
     >
       {/* BACKGROUND */}
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_24%,rgba(126,38,209,.08),transparent_34%)]" />
@@ -726,9 +742,7 @@ export function Challenges() {
       <div className="relative mx-auto max-w-[1240px] px-4 sm:px-6 lg:px-8">
         {/* HEADER */}
         <div className="mx-auto max-w-[760px] text-center">
-          
-
-          <h2 className="mt-4 text-[2rem] font-black leading-[1.05] tracking-[-0.045em] text-white sm:text-[2.6rem] lg:text-[3rem]">
+          <h2 className="mt-0 text-[2rem] font-black leading-[1.05] tracking-[-0.045em] text-white sm:text-[2.6rem] lg:text-[3rem]">
             Configure Your{" "}
             <span className="bg-[linear-gradient(90deg,#d7a7ff,#a84cff)] bg-clip-text text-transparent">
               Trading Challenge
@@ -741,8 +755,8 @@ export function Challenges() {
           </p>
         </div>
 
-        {/* MARKET TABS */}
-        <div className="mx-auto mt-11 grid max-w-[900px] gap-3 md:grid-cols-3">
+        {/* MARKET TABS (badges removed) */}
+        <div className="mx-auto mt-6 grid max-w-[900px] gap-3 md:grid-cols-3">
           {markets.map((item) => {
             const selected = item === market;
             const meta = marketMeta[item];
@@ -752,13 +766,13 @@ export function Challenges() {
                 key={item}
                 type="button"
                 onClick={() => handleMarketChange(item)}
-                className={`relative flex min-h-[62px] items-center justify-between rounded-[14px] border px-5 transition-all duration-300 ${
+                className={`relative flex min-h-[46px] items-center justify-center rounded-[12px] border px-3 py-2 transition-all duration-300 ${
                   selected
                     ? "border-[#a94cff] bg-[linear-gradient(135deg,#35164e,#1e1129)] shadow-[0_0_0_1px_rgba(166,72,255,.28),0_12px_35px_rgba(135,44,220,.18)]"
                     : "border-white/[0.09] bg-[#101117] hover:border-white/[0.16]"
                 }`}
               >
-                <span className="flex items-center gap-2 text-[14px] font-black sm:text-[15px]">
+                <span className="flex items-center gap-1.5 text-[12px] font-black sm:text-[15px]">
                   {item === "Forex" && (
                     <span className="text-[#ffd33d]">
                       <TinyBolt />
@@ -766,24 +780,14 @@ export function Challenges() {
                   )}
                   {meta.title}
                 </span>
-
-                <span
-                  className={`rounded-full border px-2.5 py-1 text-[8px] font-black uppercase tracking-[0.04em] ${
-                    selected
-                      ? "border-[#bd6dff]/50 bg-[#a94cff] text-white"
-                      : "border-white/[0.12] bg-white/[0.055] text-white/65"
-                  }`}
-                >
-                  {meta.badge}
-                </span>
               </button>
             );
           })}
         </div>
 
         {/* MODEL SELECTOR */}
-        <div className="mt-7 flex justify-center">
-          <div className="inline-flex rounded-[14px] border border-white/[0.10] bg-[#101117] p-1.5">
+        <div className="mt-4 flex justify-center overflow-x-auto px-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div className="inline-flex shrink-0 rounded-[12px] border border-white/[0.10] bg-[#101117] p-1">
             {availableModels.map((item) => {
               const selected = item.name === model;
 
@@ -792,7 +796,7 @@ export function Challenges() {
                   key={item.name}
                   type="button"
                   onClick={() => setModel(item.name)}
-                  className={`min-w-[100px] rounded-[10px] px-5 py-3 text-[13px] font-bold transition-all sm:text-[14px] ${
+                  className={`min-w-[70px] rounded-[8px] px-3 py-1.5 text-[12px] font-bold transition-all sm:min-w-[90px] sm:px-4 sm:py-2 sm:text-[13px] ${
                     selected
                       ? "bg-[linear-gradient(135deg,#9a49ff,#a83feb)] text-white shadow-[0_8px_20px_rgba(151,65,240,.28)]"
                       : "text-white/55 hover:text-white"
@@ -829,16 +833,16 @@ export function Challenges() {
           </div>
         </div>
 
-        {/* COMPARISON TABLE */}
+        {/* COMPARISON TABLE — horizontally scrollable on mobile, sticky label column */}
         <div className="mt-12">
-          <div>
-            <div className="flex gap-4">
-              {/* LABELS */}
-              <div className="w-[210px] shrink-0 pt-[136px]">
+          <div className="-mx-4 overflow-x-auto px-4 pb-2 [scrollbar-width:thin] sm:mx-0 sm:px-0">
+            <div className="flex min-w-max gap-3 sm:min-w-0 sm:gap-4">
+              {/* LABELS — sticky on the left while the cards scroll */}
+              <div className="sticky left-0 z-20 w-[132px] shrink-0 bg-[#080a0e] pt-[136px] sm:relative sm:w-[190px] lg:w-[210px]">
                 {rows.map((row, index) => (
                   <div
                     key={row.label}
-                    className={`flex h-[58px] items-center gap-3.5 text-[14px] font-medium text-white/78 ${
+                    className={`flex h-[58px] items-center gap-2.5 text-[12px] font-medium text-white/78 sm:gap-3.5 sm:text-[14px] ${
                       index === 0 ? "h-[64px]" : ""
                     }`}
                   >
@@ -848,20 +852,19 @@ export function Challenges() {
                     <span>{row.label}</span>
                   </div>
                 ))}
-
-
               </div>
 
-              {/* CARDS - badge is kept inside the scroll viewport to prevent clipping */}
-              <div
-                className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6"
-              >
+              {/* CARDS */}
+              <div className="flex gap-3 sm:grid sm:grid-cols-3 sm:gap-3 lg:grid-cols-6">
                 {sortedSizes.map((item) => {
                   const selected = item.value === accountSize;
                   const price = priceFor(item.value);
 
                   return (
-                    <div key={item.value} className="relative pt-[14px] min-w-0">
+                    <div
+                      key={item.value}
+                      className="relative w-[150px] shrink-0 pt-[14px] sm:w-auto sm:min-w-0"
+                    >
                       {item.popular && (
                         <span className="absolute left-1/2 top-0 z-30 -translate-x-1/2 whitespace-nowrap rounded-full bg-[linear-gradient(90deg,#9f4cff,#a83df0)] px-3.5 py-1.5 text-[9px] font-black uppercase tracking-[0.03em] text-white shadow-[0_6px_16px_rgba(158,63,241,.28)]">
                           Best Value
@@ -876,7 +879,6 @@ export function Challenges() {
                             : "border-white/[0.09] bg-[#101117] hover:border-white/[0.16]"
                         }`}
                       >
-
                         {/* ACCOUNT HEADER */}
                         <div className="flex h-[95px] flex-col items-center justify-center border-b border-white/[0.055] px-3 text-center">
                           <span className={`text-[11px] font-bold uppercase tracking-[0.09em] ${selected ? "text-[#c58cff]" : "text-white/48"}`}>
@@ -891,7 +893,7 @@ export function Challenges() {
                         {rows.map((row, index) => (
                           <div
                             key={`${item.value}-${row.label}`}
-                            className={`flex h-[48px] items-center justify-center border-b border-white/[0.045] px-2.5 text-center text-[12px] font-medium leading-5 text-white/76 ${
+                            className={`flex h-[58px] items-center justify-center border-b border-white/[0.045] px-2 text-center text-[11px] font-medium leading-4 text-white/76 sm:px-2.5 sm:text-[12px] sm:leading-5 ${
                               index === 0 ? "h-[64px]" : ""
                             }`}
                           >
@@ -900,13 +902,13 @@ export function Challenges() {
                         ))}
 
                         {/* PRICE + BUTTON */}
-                        <div className="px-4 pb-5 pt-5 text-center">
+                        <div className="px-3 pb-5 pt-5 text-center sm:px-4">
                           <div className="flex items-end justify-center gap-2">
-                            <span className={`text-[22px] font-black tracking-[-0.045em] ${selected ? "text-[#c378ff]" : "text-white"}`}>
+                            <span className={`text-[20px] font-black tracking-[-0.045em] sm:text-[22px] ${selected ? "text-[#c378ff]" : "text-white"}`}>
                               {formatMoney(price.sale)}
                             </span>
                             {price.original !== price.sale && (
-                              <span className="mb-1 text-[12px] text-white/32 line-through">
+                              <span className="mb-1 text-[11px] text-white/32 line-through sm:text-[12px]">
                                 {formatMoney(price.original)}
                               </span>
                             )}
@@ -946,54 +948,13 @@ export function Challenges() {
               </div>
             </div>
           </div>
+          <p className="mt-2 text-center text-[10px] text-white/30 sm:hidden">
+            Swipe sideways to compare all account sizes →
+          </p>
         </div>
 
-        {/* FEATURE FOOTER */}
-        {/* <div className="mt-16 border-t border-[#7f3daa]/35 pt-8">
-          <div className="grid gap-6 md:grid-cols-3 md:gap-0">
-            <div className="flex items-center gap-4 md:border-r md:border-white/[0.07] md:px-4">
-              <div className="grid h-11 w-11 shrink-0 place-items-center rounded-[11px] border border-white/[0.09] bg-[#12131a] text-[#c47cff]">
-                <FooterIcon type="spread" />
-              </div>
-              <div>
-                <h3 className="text-[11px] font-black text-white">
-                  Trade Institutional Spreads
-                </h3>
-                <p className="mt-1 text-[10px] text-white/45">
-                  Raw pricing • Deep liquidity pools • Zero markup
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-4 md:border-r md:border-white/[0.07] md:px-6">
-              <div className="grid h-11 w-11 shrink-0 place-items-center rounded-[11px] border border-white/[0.09] bg-[#12131a] text-[#c47cff]">
-                <FooterIcon type="payout" />
-              </div>
-              <div>
-                <h3 className="text-[11px] font-black text-white">
-                  Fast Bi-Weekly Payouts
-                </h3>
-                <p className="mt-1 text-[10px] text-white/45">
-                  Automated on-demand payouts via Crypto or Wire
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-4 md:px-6">
-              <div className="grid h-11 w-11 shrink-0 place-items-center rounded-[11px] border border-white/[0.09] bg-[#12131a] text-[#c47cff]">
-                <FooterIcon type="infinity" />
-              </div>
-              <div>
-                <h3 className="text-[11px] font-black text-white">
-                  Trade Without Expiration
-                </h3>
-                <p className="mt-1 text-[10px] text-white/45">
-                  No calendar time pressure • Flexible evaluation
-                </p>
-              </div>
-            </div>
-          </div>
-        </div> */}
+        {/* PAYMENT OPTIONS */}
+        <PaymentOptions />
       </div>
     </section>
   );
