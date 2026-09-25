@@ -158,7 +158,7 @@ const accountSizes = [
   { value: 10000, label: "10K" },
   { value: 25000, label: "25K" },
   { value: 50000, label: "50K" },
-  { value: 100000, label: "100K", popular: true },
+  { value: 100000, label: "100K" },
   { value: 200000, label: "200K" },
 ];
 
@@ -170,6 +170,21 @@ const accountSizesByMarket: Record<
   Crypto: accountSizes,
   Futures: accountSizes,
 };
+
+/* Best Value placement from the new official challenge sheet:
+   Forex 1 Step / 2 Step -> $50K
+   Forex Instant -> $100K
+   Futures 1 Step -> $100K
+   Crypto 1 Step / 2 Step -> $100K
+*/
+function isBestValue(market: Market, model: Model, accountValue: number) {
+  if (market === "Forex") {
+    if (model === "1 Step" || model === "2 Step") return accountValue === 50000;
+    return accountValue === 100000;
+  }
+
+  return accountValue === 100000;
+}
 
 /* ---------------------------------------------------------
    PRICING — taken directly from the "All Challenges" sheet
@@ -746,6 +761,13 @@ function formatMoney(value: number) {
   return `$${value.toLocaleString("en-US")}`;
 }
 
+function formatMoneyExact(value: number) {
+  return `$${value.toLocaleString("en-US", {
+    minimumFractionDigits: value % 1 === 0 ? 0 : 2,
+    maximumFractionDigits: 2,
+  })}`;
+}
+
 export function Challenges() {
   const [market, setMarket] = useState<Market>("Forex");
   const [model, setModel] = useState<Model>("1 Step");
@@ -789,15 +811,15 @@ export function Challenges() {
     [availableSizes]
   );
 
-  // Pricing is shown exactly as the Excel challenge fee.
-  // No discount / 40% calculation is applied.
+  // Challenge fees in the new sheet are shown with a 30% discount.
   function priceFor(value: number) {
-    const price = getModelBasePrice(market, model, value);
+    const original = getModelBasePrice(market, model, value);
+    const sale = Math.round(original * 0.7 * 100) / 100;
 
     return {
-      original: price,
-      sale: price,
-      saving: 0,
+      original,
+      sale,
+      saving: Math.round((original - sale) * 100) / 100,
     };
   }
 
@@ -1139,7 +1161,7 @@ export function Challenges() {
                       key={item.value}
                       className="relative w-[148px] shrink-0 pt-[14px] sm:w-auto sm:min-w-0"
                     >
-                      {item.popular && (
+                      {isBestValue(market, model, item.value) && (
                         <span className="absolute left-1/2 top-0 z-30 -translate-x-1/2 whitespace-nowrap rounded-full bg-[linear-gradient(90deg,#9f4cff,#a83df0)] px-3.5 py-1.5 text-[9px] font-black uppercase tracking-[0.03em] text-white shadow-[0_6px_16px_rgba(158,63,241,.28)]">
                           Best Value
                         </span>
@@ -1189,13 +1211,18 @@ export function Challenges() {
                                 Start now
                               </button>
                             ) : row.kind === "price" ? (
-                              <strong
-                                className={`text-[20px] font-black tracking-[-0.045em] sm:text-[22px] ${
-                                  selected ? "text-[#c378ff]" : "text-white"
-                                }`}
-                              >
-                                {formatMoney(price.sale)}
-                              </strong>
+                              <div className="flex flex-col items-center justify-center leading-tight">
+                                <span className="text-[8px] font-semibold text-white/45 sm:text-[9px]">
+                                  {formatMoneyExact(price.original)} -30% =
+                                </span>
+                                <strong
+                                  className={`mt-0.5 text-[19px] font-black tracking-[-0.045em] sm:text-[21px] ${
+                                    selected ? "text-[#c378ff]" : "text-white"
+                                  }`}
+                                >
+                                  {formatMoneyExact(price.sale)}
+                                </strong>
+                              </div>
                             ) : (
                               <strong className="font-semibold text-white">
                                 {row.values?.[item.value] ?? row.value}

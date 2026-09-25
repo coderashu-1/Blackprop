@@ -385,9 +385,9 @@ export function FaqCommunity() {
                   alt="BlackProp mobile dashboard"
                   className="absolute h-full w-full object-contain object-bottom"
                   style={{
-                    bottom: "-15%",
+                    bottom: "2%",
                     left: "0%",
-                    transform: "scale(1.6)",
+                    transform: "scale(1.4)",
                     transformOrigin: "center bottom",
                   }}
                 />
