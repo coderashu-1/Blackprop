@@ -61,6 +61,7 @@ function PlusIcon({ open }: { open: boolean }) {
       `}
     >
       <span className="absolute h-px w-[9px] rounded-full bg-current" />
+
       <span
         className={`absolute h-[9px] w-px rounded-full bg-current transition-all duration-300 ${
           open ? "rotate-90 opacity-0" : ""
@@ -75,7 +76,7 @@ function DiscordIcon() {
     <svg
       viewBox="0 0 24 24"
       fill="currentColor"
-      className="h-[17px] w-[17px]"
+      className="h-[21px] w-[21px] sm:h-[22px] sm:w-[22px]"
       aria-hidden="true"
     >
       <path d="M19.54 5.34A16.4 16.4 0 0 0 15.47 4l-.2.4c1.35.36 2.55.9 3.56 1.55a13.74 13.74 0 0 0-13.66 0A14.4 14.4 0 0 1 8.73 4.4L8.53 4c-1.42.24-2.8.69-4.07 1.34C1.9 9.18 1.2 12.92 1.55 16.6a16.46 16.46 0 0 0 5 2.53l1.22-1.67a10.3 10.3 0 0 1-1.92-.92l.47-.35c3.7 1.7 7.7 1.7 11.36 0l.48.35c-.62.37-1.27.68-1.93.92l1.22 1.67a16.4 16.4 0 0 0 5-2.53c.41-4.27-.72-7.97-2.91-11.26ZM8.1 14.4c-1.08 0-1.98-1-1.98-2.23s.87-2.23 1.98-2.23c1.12 0 2 .99 1.98 2.23 0 1.23-.88 2.23-1.98 2.23Zm7.8 0c-1.08 0-1.98-1-1.98-2.23s.87-2.23 1.98-2.23c1.12 0 2 .99 1.98 2.23 0 1.23-.86 2.23-1.98 2.23Z" />
@@ -88,7 +89,7 @@ function ArrowUpRight() {
     <svg
       viewBox="0 0 20 20"
       fill="none"
-      className="h-[15px] w-[15px]"
+      className="h-[18px] w-[18px]"
       aria-hidden="true"
     >
       <path
@@ -139,6 +140,7 @@ export function FaqCommunity() {
       <div className="pointer-events-none absolute bottom-[6px] left-1/2 h-px w-[88%] -translate-x-1/2 bg-[linear-gradient(90deg,transparent,rgba(145,67,229,.42),transparent)] shadow-[0_0_18px_rgba(128,47,212,.35)]" />
 
       <div className="relative mx-auto w-full max-w-[1030px]">
+
         {/* =====================================================
             FAQ
         ====================================================== */}
@@ -221,12 +223,6 @@ export function FaqCommunity() {
 
         {/* =====================================================
             COMMUNITY BANNER
-
-            IMPORTANT:
-            - outer wrapper is overflow-visible
-            - top of phone can extend outside banner
-            - larger FAQ -> banner gap prevents overlap
-            - image hidden entirely below md
         ====================================================== */}
         <div
           className="
@@ -243,7 +239,7 @@ export function FaqCommunity() {
             lg:rounded-[26px]
           "
         >
-          {/* CLIPPED BANNER BACKGROUND ONLY */}
+          {/* CLIPPED BANNER BACKGROUND */}
           <div
             className="
               pointer-events-none
@@ -258,6 +254,7 @@ export function FaqCommunity() {
             "
           >
             <div className="absolute inset-0 bg-[linear-gradient(95deg,rgba(255,255,255,.035),transparent_38%,rgba(20,6,30,.13)_100%)]" />
+
             <div className="absolute -right-[90px] -top-[90px] h-[300px] w-[300px] rounded-full bg-[#34104c]/24 blur-[80px]" />
           </div>
 
@@ -319,38 +316,68 @@ export function FaqCommunity() {
                 other BlackProp traders.
               </p>
 
-              <a
-                href="https://discord.gg/D3HxGh6DXt"
-                className="
-                  mx-auto
-                  mt-6
-                  inline-flex
-                  min-h-[44px]
-                  w-fit
-                  items-center
-                  gap-[10px]
-                  rounded-[10px]
-                  bg-[linear-gradient(90deg,#6159f6,#5d6df8)]
-                  px-[18px]
-                  text-[11px]
-                  font-black
-                  uppercase
-                  text-white
-                  shadow-[0_12px_28px_rgba(61,52,183,.24)]
-                  transition
-                  hover:-translate-y-0.5
-                  hover:brightness-110
-                  sm:text-[12px]
-                  md:mx-0
-                "
-              >
-                <DiscordIcon />
-                Join Discord
-                <ArrowUpRight />
-              </a>
+              {/* =====================================================
+                  DISCORD BUTTON
+                  - Larger
+                  - Brighter
+                  - Centered
+                  - Highly visible
+                  - Opens in new tab
+              ====================================================== */}
+              <div className="mt-7 flex w-full justify-center md:mt-8">
+                <a
+                  href="https://discord.gg/D3HxGh6DXt"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Join BlackProp Discord community"
+                  className="
+                    relative
+                    z-30
+                    inline-flex
+                    min-h-[54px]
+                    w-[210px]
+                    cursor-pointer
+                    items-center
+                    justify-center
+                    gap-3
+                    rounded-[13px]
+                    border
+                    border-white/25
+                    bg-[linear-gradient(135deg,#5865F2_0%,#6d5dfc_50%,#8b5cf6_100%)]
+                    px-6
+                    text-[13px]
+                    font-black
+                    uppercase
+                    tracking-[0.04em]
+                    text-white
+                    opacity-100
+                    shadow-[0_14px_35px_rgba(88,101,242,.50),0_0_25px_rgba(139,92,246,.25)]
+                    transition-all
+                    duration-200
+                    hover:-translate-y-1
+                    hover:scale-[1.02]
+                    hover:brightness-110
+                    hover:shadow-[0_18px_42px_rgba(88,101,242,.60),0_0_32px_rgba(139,92,246,.35)]
+                    active:translate-y-0
+                    active:scale-[0.99]
+                    sm:min-h-[58px]
+                    sm:w-[225px]
+                    sm:text-[14px]
+                    md:mx-auto
+                  "
+                >
+                  <DiscordIcon />
+
+                  <span className="whitespace-nowrap">
+                    Join Discord
+                  </span>
+
+                  <ArrowUpRight />
+                </a>
+              </div>
             </div>
 
-            {/* PHONE AREA — HIDDEN ON MOBILE */}
+            {/* PHONE AREA */}
             <div className="relative hidden min-h-0 overflow-visible md:block">
               <div className="absolute inset-0 overflow-visible">
                 <img

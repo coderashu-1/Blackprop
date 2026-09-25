@@ -19,6 +19,34 @@ function CheckIcon() {
   );
 }
 
+function TrustpilotStar() {
+  return (
+    <span className="grid h-[28px] w-[28px] place-items-center bg-[#00b67a] text-white">
+      <svg
+        viewBox="0 0 24 24"
+        className="h-[19px] w-[19px]"
+        fill="currentColor"
+        aria-hidden="true"
+      >
+        <path d="m12 2.2 2.95 6.02 6.64.97-4.8 4.68 1.13 6.61L12 17.36l-5.92 3.12 1.13-6.61-4.8-4.68 6.64-.97L12 2.2Z" />
+      </svg>
+    </span>
+  );
+}
+
+function TrustpilotLogo() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className="h-7 w-7 text-[#00b67a]"
+      fill="currentColor"
+      aria-hidden="true"
+    >
+      <path d="M12 1.8 14.45 9.1H22.2l-6.25 4.52 2.38 7.3L12 16.45 5.67 20.92l2.38-7.3L1.8 9.1h7.75L12 1.8Z" />
+    </svg>
+  );
+}
+
 const heroBenefits = [
   "Industry Leading Dashboard",
   "Trade Forex and Crypto",
@@ -47,11 +75,14 @@ export function Hero() {
       <div className="pointer-events-none absolute inset-0 -z-20 bg-[radial-gradient(ellipse_at_center_20%,rgba(104,35,174,.34)_0%,rgba(61,25,98,.18)_34%,rgba(16,13,26,.92)_68%,#0b0c13_100%)]" />
 
       <div className="pointer-events-none absolute left-0 top-[20%] -z-20 h-[78%] w-[18%] bg-[linear-gradient(90deg,rgba(76,29,123,.46),rgba(76,29,123,.16),transparent)] blur-[16px]" />
+
       <div className="pointer-events-none absolute right-0 top-[20%] -z-20 h-[78%] w-[18%] bg-[linear-gradient(270deg,rgba(76,29,123,.46),rgba(76,29,123,.16),transparent)] blur-[16px]" />
 
       {/* THREE CONTOUR FRAMES */}
       <div className="pointer-events-none absolute bottom-[-30px] left-[2.1%] right-[2.1%] top-[22px] -z-10 rounded-t-[190px] border-x border-t border-[#7f45b9]/18" />
+
       <div className="pointer-events-none absolute bottom-[-30px] left-[3.5%] right-[3.5%] top-[40px] -z-10 rounded-t-[170px] border-x border-t border-[#8749c1]/16" />
+
       <div className="pointer-events-none absolute bottom-[-30px] left-[4.7%] right-[4.7%] top-[58px] -z-10 rounded-t-[150px] border-x border-t border-[#8c4dc7]/13" />
 
       {/* BLACK HERO SHELL */}
@@ -83,11 +114,14 @@ export function Hero() {
         "
       >
         <div className="pointer-events-none absolute -left-12 top-1/4 h-[65%] w-28 rounded-full bg-[#8f28f3]/14 blur-[60px]" />
+
         <div className="pointer-events-none absolute -right-12 top-1/4 h-[65%] w-28 rounded-full bg-[#8f28f3]/14 blur-[60px]" />
 
         <div className="relative z-10 mx-auto w-full max-w-[780px] -translate-y-2 text-center sm:-translate-y-3">
+          {/* TOP TRUSTED BADGE */}
           <div className="inline-flex items-center gap-2.5 rounded-full border border-[#9952e9]/42 bg-[#131117]/88 px-4 py-2 shadow-[0_6px_20px_rgba(0,0,0,.25)] backdrop-blur-xl">
             <span className="h-1.5 w-1.5 rounded-full bg-[#b56dff] shadow-[0_0_8px_rgba(181,109,255,.9)]" />
+
             <span className="text-[8px] font-black uppercase tracking-[0.22em] text-[#ddd2e8] sm:text-[9px]">
               Your Trusted Trading Partner
             </span>
@@ -110,8 +144,6 @@ export function Hero() {
             "
           >
             PROVE YOUR EDGE{" "}
-           
-
             <span className="block bg-[linear-gradient(90deg,#e2c8ff_0%,#b96dff_45%,#9d4fff_100%)] bg-clip-text text-transparent">
               WE WILL BACK IT.
             </span>
@@ -125,6 +157,7 @@ export function Hero() {
             with BlackProp capital.
           </p>
 
+          {/* CTA */}
           <div className="mt-7 flex justify-center">
             <a
               href="#challenges"
@@ -153,8 +186,73 @@ export function Hero() {
               Get Funded Now
             </a>
           </div>
+
+          {/* TRUSTPILOT REVIEW ROW */}
+          <a
+            href="https://www.trustpilot.com/review/blackpropfunding.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="View BlackProp reviews on Trustpilot"
+            className="
+              mx-auto
+              mt-7
+              flex
+              w-fit
+              items-center
+              justify-center
+              gap-2
+              rounded-lg
+              px-2
+              py-1.5
+              text-white
+              transition-all
+              duration-200
+              hover:scale-[1.02]
+              sm:mt-8
+              sm:gap-2.5
+            "
+          >
+            {/* Excellent */}
+            <span
+              className="
+                text-[18px]
+                font-bold
+                tracking-[-0.02em]
+                text-white
+                sm:text-[20px]
+              "
+            >
+              Excellent
+            </span>
+
+            {/* 4 STARS */}
+            <span className="flex items-center gap-[3px]">
+              <TrustpilotStar />
+              <TrustpilotStar />
+              <TrustpilotStar />
+              <TrustpilotStar />
+            </span>
+
+            {/* TRUSTPILOT LOGO + TEXT */}
+            <span className="ml-1 flex items-center gap-1.5">
+              <TrustpilotLogo />
+
+              <span
+                className="
+                  text-[17px]
+                  font-semibold
+                  tracking-[-0.02em]
+                  text-white
+                  sm:text-[19px]
+                "
+              >
+                Trustpilot
+              </span>
+            </span>
+          </a>
         </div>
 
+        {/* BENEFITS */}
         <div
           className="
             absolute
@@ -201,6 +299,7 @@ export function Hero() {
               <span className="grid h-5 w-5 place-items-center rounded-full bg-[#342054] text-[#b77cff]">
                 <CheckIcon />
               </span>
+
               <span className="whitespace-nowrap">{benefit}</span>
             </div>
           ))}

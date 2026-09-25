@@ -383,8 +383,32 @@ export function Footer() {
             LARGE BRAND WORDMARK
         ====================================================== */}
 
-        <div className="relative hidden overflow-hidden border-t border-white/[0.06] pb-3 pt-6 sm:block">
-          <div className="select-none text-center text-[18vw] font-black leading-[0.75] tracking-[-0.09em] text-white/[0.025] sm:text-[14vw]">
+        <div
+          className="
+            relative
+            block
+            overflow-hidden
+            border-t
+            border-white/[0.06]
+            pb-3
+            pt-6
+            sm:pt-8
+          "
+        >
+          <div
+            className="
+              select-none
+              whitespace-nowrap
+              text-center
+              text-[11vw]
+              font-black
+              leading-[0.8]
+              tracking-[-0.09em]
+              text-white/[0.045]
+              sm:text-[14vw]
+              lg:text-[13vw]
+            "
+          >
             BLACKPROP
           </div>
 
@@ -394,3 +418,5 @@ export function Footer() {
     </footer>
   );
 }
+
+export default Footer;
