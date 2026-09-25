@@ -244,7 +244,7 @@ export function Navbar() {
 
             <span className="hidden text-[10px] font-medium text-white/76 md:inline lg:text-[11px]">
               Start your BlackProp journey with{" "}
-              <strong className="font-black text-white">40% OFF</strong>
+              <strong className="font-black text-white">30% OFF</strong>
             </span>
 
             <button
