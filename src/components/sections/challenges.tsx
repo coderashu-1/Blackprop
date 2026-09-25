@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, type ReactElement } from "react";
 
 
 /* =========================================================
@@ -69,22 +69,23 @@ type AddOn = {
 };
 
 type RuleSet = {
-  phase1: string;
-  phase2?: string;
-  dailyLoss: string;
+  profitTarget: string;
+  profitTargetPhase2?: string;
+  maxDailyLoss: string;
   maxLoss: string;
-  inactivity: string;
-  leverage?: string;
-  maxTime: string;
-  flatForWeekend?: string;
-  profitSplit: string;
-  // Futures-specific extra fields (optional so Forex/Crypto rule sets
-  // don't need to define them).
-  consistencyRequirement?: string;
-  exposureLimits?: string;
-  nonWithdrawableBuffer?: string;
-  lockUponPayout?: string;
-  purchaseType?: string;
+  inactivityPeriod?: string;
+  tradingPeriod?: string;
+  minTradingDays?: string;
+  minProfitableDays?: string;
+  consistency?: string;
+  profitBuffer?: string;
+  weekendHold?: string;
+  weekendTrading?: string;
+  buffer?: string;
+  contractLimits?: string;
+  rewards: string;
+  billing?: string;
+  payouts?: string;
   addOns: AddOn[];
 };
 
@@ -256,144 +257,88 @@ function getModelBasePrice(
 --------------------------------------------------------- */
 
 const forexRules: Record<Model, RuleSet> = {
-  Instant: {
-    phase1: "N/A (already funded)",
-    dailyLoss: "3%",
-    maxLoss: "5% (Trailing)",
-    inactivity: "5 days @ ½% per day",
-    maxTime: "15% (no single day > 25% of profits)",
-    flatForWeekend: "Available with Add-On",
-    profitSplit: "80%",
-    addOns: [
-      {
-        title: "Profit Share Boost",
-        cost: "20% Cost",
-        description: "Increases the funded account profit share.",
-      },
-      {
-        title: "Hold Over Weekend",
-        cost: "10% Cost",
-        description: "Allows positions to remain open over the weekend.",
-      },
-      {
-        title: "Payout Protector",
-        cost: "25% Cost",
-        description:
-          "Protects an eligible profit share in a funded account in the event of a hard breach.",
-      },
-    ],
-  },
-
   "1 Step": {
-    phase1: "10%",
-    dailyLoss: "5%",
+    profitTarget: "PHASE 1  10%",
+    maxDailyLoss: "5%",
     maxLoss: "6%",
-    inactivity: "30 Days",
-    maxTime: "No max time",
-    profitSplit: "80%",
+    inactivityPeriod: "30 Days",
+    tradingPeriod: "No max time",
+    rewards: "80%",
     addOns: [
-      {
-        title: "Remove Lock Upon Payout",
-        cost: "25% Cost",
-        description:
-          "Disables the post-payout maximum drawdown lock at the account starting balance.",
-      },
-      {
-        title: "Payout Protector",
-        cost: "25% Cost",
-        description:
-          "Protects an eligible profit share in a funded account in the event of a hard breach.",
-      },
+      { title: "Remove Lock on Payout", cost: "25%", description: "Remove Lock on Payout" },
+      { title: "Payout Protector", cost: "25%", description: "Payout Protector" },
     ],
   },
 
   "2 Step": {
-    phase1: "8%",
-    phase2: "5%",
-    dailyLoss: "5%",
+    profitTarget: "8% Phase 1  /  5% Phase 2",
+    maxDailyLoss: "5%",
     maxLoss: "8% (Static)",
-    inactivity: "30 Days",
-    maxTime: "No max time",
-    profitSplit: "80%",
+    minTradingDays: "5",
+    inactivityPeriod: "30 Days",
+    rewards: "80%",
     addOns: [
-      {
-        title: "100% Payout",
-        cost: "20% Cost",
-        description: "Unlocks a full 100% payout on the funded account.",
-      },
-      {
-        title: "Remove Lock Upon Payout",
-        cost: "25% Cost",
-        description:
-          "Disables the post-payout maximum drawdown lock at the account starting balance.",
-      },
-      {
-        title: "Payout Protector",
-        cost: "25% Cost",
-        description:
-          "Protects an eligible profit share in a funded account in the event of a hard breach.",
-      },
+      { title: "100% Payout", cost: "20%", description: "100% Payout" },
+      { title: "Remove Lock on Payout", cost: "25%", description: "Remove Lock on Payout" },
+      { title: "Payout Protector", cost: "25%", description: "Payout Protector" },
+    ],
+  },
+
+  Instant: {
+    profitTarget: "N/A (already funded)",
+    maxDailyLoss: "3%",
+    maxLoss: "5% (Trailing)",
+    minProfitableDays: "5 days @ ½% per day",
+    consistency: "15% (no single day > 25% of total profits)",
+    profitBuffer: "3% (see FAQ)",
+    weekendHold: "Available with Add-On",
+    rewards: "80%",
+    addOns: [
+      { title: "Profit Share", cost: "20%", description: "Profit Share" },
+      { title: "Hold Weekend", cost: "10%", description: "Hold Weekend" },
+      { title: "Payout Protector", cost: "25%", description: "Payout Protector" },
     ],
   },
 };
 
 const cryptoRules: Record<Model, RuleSet> = {
-  // Crypto has no Instant sheet/tier — kept only so the Record<Model, RuleSet>
-  // type is satisfied. Instant is never selectable when market === "Crypto".
   Instant: forexRules.Instant,
 
   "1 Step": {
-    phase1: "9%",
-    dailyLoss: "+/- 3%",
+    profitTarget: "9%",
+    maxDailyLoss: "+/- 3% gain/loss range",
     maxLoss: "6%",
-    inactivity: "Weekend trading enabled",
-    maxTime: "No max time",
-    profitSplit: "90%",
+    weekendTrading: "Enabled",
+    rewards: "90%",
     addOns: [
-      {
-        title: "Payout Protector",
-        cost: "25% Cost",
-        description:
-          "Protects a trader's eligible profit share in a funded account in the event of a hard breach.",
-      },
+      { title: "Payout Protector", cost: "25%", description: "Payout Protector" },
     ],
   },
 
   "2 Step": {
-    phase1: "6%",
-    phase2: "9%",
-    dailyLoss: "+/- 3%",
+    profitTarget: "Phase 1  6%",
+    profitTargetPhase2: "Phase 2  9%",
+    maxDailyLoss: "+/- 3% gain/loss range",
     maxLoss: "9%",
-    inactivity: "Weekend trading enabled",
-    maxTime: "No max time",
-    profitSplit: "90%",
+    weekendTrading: "Enabled",
+    rewards: "90%",
     addOns: [
-      {
-        title: "Payout Protector",
-        cost: "25% Cost",
-        description:
-          "Protects a trader's eligible profit share in a funded account in the event of a hard breach.",
-      },
+      { title: "Payout Protector", cost: "25%", description: "Payout Protector" },
     ],
   },
 };
 
-// Futures only has a "One Step" assessment. Instant / 2 Step keys are
-// filled with the One Step rule set purely to satisfy the
-// Record<Model, RuleSet> type — they're never selectable in the UI
-// when market === "Futures".
 const futuresOneStepRules: RuleSet = {
-  phase1: "Assessment 6%",
-  dailyLoss: "None",
-  maxLoss: "Trailing, plan specific (Intraday Equity HWM)",
-  inactivity: "30 Days",
-  maxTime: "No max time",
-  profitSplit: "80%",
-  consistencyRequirement: "33.33% Assessment / 33.33% Funded",
-  exposureLimits: "Plan specific",
-  nonWithdrawableBuffer: "Non-withdrawable, funded phase only",
-  lockUponPayout: "No",
-  purchaseType: "Monthly Subscription",
+  profitTarget: "Assessment 6%",
+  maxDailyLoss: "None",
+  maxLoss: "Trailing, plan specific, Intraday Equity HWM",
+  consistency: "33.33% Assessment / 33.33% Funded",
+  buffer: "Non-withdrawable, funded phase only",
+  contractLimits: "Plan specific",
+  inactivityPeriod: "30 Days",
+  rewards: "80%",
+  billing: "Monthly subscription, no activation fee",
+  payouts: "On demand — buffer, consistency, review, active account",
   addOns: [],
 };
 
@@ -409,7 +354,100 @@ const modelRulesByMarket: Record<Market, Record<Model, RuleSet>> = {
   Crypto: cryptoRules,
 };
 
+/* =========================================================
+   EXACT EXCEL PRICING — 22 SEP 2026
+========================================================= */
 
+const exactPricing: Record<
+  Market,
+  Record<string, Record<number, number>>
+> = {
+  Forex: {
+    "1 Step": {
+      5000: 35, 10000: 75, 25000: 190,
+      50000: 375, 100000: 750, 200000: 1600,
+    },
+    "2 Step": {
+      5000: 48, 10000: 95, 25000: 238,
+      50000: 428, 100000: 855, 200000: 2088,
+    },
+    Instant: {
+      5000: 90, 10000: 132, 25000: 282,
+      50000: 366, 100000: 666, 200000: 1198,
+    },
+  },
+  Futures: {
+    "1 Step": {
+      5000: 45, 10000: 95, 25000: 250,
+      50000: 525, 100000: 1050, 200000: 2150,
+    },
+  },
+  Crypto: {
+    "1 Step": {
+      5000: 45, 10000: 95, 25000: 250,
+      50000: 525, 100000: 1050, 200000: 2150,
+    },
+    "2 Step": {
+      5000: 35, 10000: 80, 25000: 210,
+      50000: 430, 100000: 900, 200000: 2000,
+    },
+  },
+};
+
+/* =========================================================
+   EXACT EXCEL ADD-ON CALCULATIONS
+========================================================= */
+
+const exactAddOnPricing: Record<
+  Market,
+  Record<string, Record<number, Record<string, string>>>
+> = {
+  Forex: {
+    "1 Step": {
+      5000: { "Remove Lock on Payout": "+$8.75 (25%)", "Payout Protector": "+$8.75 (25%)" },
+      10000: { "Remove Lock on Payout": "+$18.75 (25%)", "Payout Protector": "+$18.75 (25%)" },
+      25000: { "Remove Lock on Payout": "+$47.50 (25%)", "Payout Protector": "+$47.50 (25%)" },
+      50000: { "Remove Lock on Payout": "+$93.75 (25%)", "Payout Protector": "+$93.75 (25%)" },
+      100000: { "Remove Lock on Payout": "+$187.50 (25%)", "Payout Protector": "+$187.50 (25%)" },
+      200000: { "Remove Lock on Payout": "+$274.75 (25%)", "Payout Protector": "+$274.75 (25%)" },
+    },
+    "2 Step": {
+      5000: { "100% Payout": "$417.60 (20%)", "Remove Lock on Payout": "$522.00 (25%)", "Payout Protector": "$522.00 (25%)" },
+      10000: { "100% Payout": "$171.00 (20%)", "Remove Lock on Payout": "$213.75 (25%)", "Payout Protector": "$213.75 (25%)" },
+      25000: { "100% Payout": "$85.60 (20%)", "Remove Lock on Payout": "$107.00 (25%)", "Payout Protector": "$107.00 (25%)" },
+      50000: { "100% Payout": "$47.60 (20%)", "Remove Lock on Payout": "$59.50 (25%)", "Payout Protector": "$59.50 (25%)" },
+      100000: { "100% Payout": "$19.00 (20%)", "Remove Lock on Payout": "$23.75 (25%)", "Payout Protector": "$23.75 (25%)" },
+      200000: { "100% Payout": "$9.60 (20%)", "Remove Lock on Payout": "$12.00 (25%)", "Payout Protector": "$12.00 (25%)" },
+    },
+    Instant: {
+      5000: { "Profit Share": "$18.00 (20%)", "Hold Weekend": "$9.00 (10%)", "Payout Protector": "$22.50 (25%)" },
+      10000: { "Profit Share": "$26.40 (20%)", "Hold Weekend": "$13.20 (10%)", "Payout Protector": "$33.00 (25%)" },
+      25000: { "Profit Share": "$56.40 (20%)", "Hold Weekend": "$28.20 (10%)", "Payout Protector": "$70.50 (25%)" },
+      50000: { "Profit Share": "$73.20 (20%)", "Hold Weekend": "$36.60 (10%)", "Payout Protector": "$91.50 (25%)" },
+      100000: { "Profit Share": "$133.20 (20%)", "Hold Weekend": "$66.60 (10%)", "Payout Protector": "$166.50 (25%)" },
+      200000: { "Profit Share": "$239.60 (20%)", "Hold Weekend": "$119.80 (10%)", "Payout Protector": "$299.50 (25%)" },
+    },
+  },
+  Futures: { "1 Step": {} },
+  Crypto: {
+    "1 Step": {
+      5000: { "Payout Protector": "$11.25 (25%)" },
+      10000: { "Payout Protector": "$23.75 (25%)" },
+      25000: { "Payout Protector": "$62.50 (25%)" },
+      50000: { "Payout Protector": "$131.25 (25%)" },
+      100000: { "Payout Protector": "$262.50 (25%)" },
+      200000: { "Payout Protector": "$537.50 (25%)" },
+    },
+    "2 Step": {
+      5000: { "Payout Protector": "$8.75 (25%)" },
+      10000: { "Payout Protector": "$20.00 (25%)" },
+      25000: { "Payout Protector": "$52.50 (25%)" },
+      50000: { "Payout Protector": "$107.50 (25%)" },
+      100000: { "Payout Protector": "$225.00 (25%)" },
+      200000: { "Payout Protector": "$500.00 (25%)" },
+    },
+  },
+};
 /* =========================================================
    REFERENCE-MATCH CONFIGURATOR UI
 ========================================================= */
@@ -498,66 +536,146 @@ function RowIcon({
 
 function VisaMark() {
   return (
-    <span className="italic font-black tracking-tight text-[15px] sm:text-[17px]">
-      VISA
-    </span>
+    <svg
+      viewBox="0 0 64 24"
+      className="h-7 w-[58px] sm:h-9 sm:w-[78px]"
+      aria-label="Visa"
+    >
+      <text
+        x="2"
+        y="18"
+        fill="white"
+        fontSize="20"
+        fontWeight="900"
+        fontStyle="italic"
+        fontFamily="Arial, Helvetica, sans-serif"
+        letterSpacing="-1"
+      >
+        VISA
+      </text>
+    </svg>
   );
 }
 
 function PayPalMark() {
   return (
-    <span className="italic font-black tracking-tight text-[14px] sm:text-[16px]">
-      PayPal
-    </span>
+    <svg
+      viewBox="0 0 86 30"
+      className="h-7 w-[70px] sm:h-9 sm:w-[88px]"
+      aria-label="PayPal"
+    >
+      <path
+        d="M17 4h9.2c5.7 0 8.6 3.1 7.6 7.8-.8 3.8-3.5 6.1-7.6 6.1h-3.7l-1.3 6H15l4.2-19.9H17Z"
+        fill="#3b7ddd"
+      />
+      <path
+        d="M13 7h8.8c5.7 0 8.7 3 7.7 7.7-.8 3.8-3.5 6.1-7.6 6.1h-3.5l-1.3 6h-6.2L15.1 7H13Z"
+        fill="#fff"
+        opacity=".92"
+      />
+      <text
+        x="36"
+        y="20"
+        fill="white"
+        fontSize="13"
+        fontWeight="800"
+        fontFamily="Arial, Helvetica, sans-serif"
+      >
+        PayPal
+      </text>
+    </svg>
   );
 }
 
 function BitcoinMark() {
   return (
-    <svg viewBox="0 0 32 32" className="h-7 w-7 sm:h-8 sm:w-8" aria-hidden="true">
-      <circle cx="16" cy="16" r="15" fill="#f7931a" />
+    <svg
+      viewBox="0 0 40 40"
+      className="h-8 w-8 sm:h-9 sm:w-9"
+      aria-label="Bitcoin"
+    >
+      <circle cx="20" cy="20" r="18" fill="#f7931a" />
       <path
-        fill="#ffffff"
-        d="M22.3 14.1c.3-2.1-1.3-3.2-3.5-4l.7-2.8-1.7-.4-.7 2.7c-.5-.1-.9-.2-1.4-.3l.7-2.7-1.7-.4-.7 2.8c-.4-.1-.7-.2-1.1-.3v-.01l-2.3-.6-.4 1.8s1.2.3 1.2.3c.7.2.8.6.8 1l-.8 3.2c0 .03.1.03.1.05l-.1-.03-1.1 4.5c-.1.2-.3.5-.8.4 0 0-1.2-.3-1.2-.3l-.9 1.9 2.2.5c.4.1.8.2 1.2.3l-.7 2.8 1.7.4.7-2.8c.5.1.9.2 1.4.3l-.7 2.8 1.7.4.7-2.8c2.9.5 5.1.3 6-2.3.7-2-0-3.2-1.5-4 1.1-.2 1.9-1 2.1-2.5Zm-3.9 5.4c-.5 2-4 1-5.1.7l.9-3.6c1.1.3 4.7.8 4.2 2.9Zm.5-5.4c-.5 1.8-3.4.9-4.3.7l.8-3.3c.9.2 4 .7 3.5 2.6Z"
+        fill="white"
+        d="M24.8 17.2c.4-2.4-1.5-3.7-4.2-4.6l.8-3.1-1.9-.5-.8 3c-.5-.1-1-.2-1.5-.3l.8-3-1.9-.5-.8 3.1c-.4-.1-.8-.2-1.2-.3l-2.6-.7-.5 2 1.4.4c.8.2.9.7.8 1.2l-.9 3.5.1.1-.1-.1-1.3 5.1c-.1.3-.4.6-1 .4l-1.4-.4-1 2.1 2.5.7c.5.1.9.3 1.4.4l-.8 3.1 1.9.5.8-3.1c.5.1 1 .2 1.5.3l-.8 3.1 1.9.5.8-3.1c3.3.6 5.8.3 6.8-2.7.8-2.3-.1-3.6-1.8-4.5 1.3-.3 2.2-1.2 2.5-2.7Zm-4.5 6.2c-.6 2.3-4.6 1.1-5.8.8l1-4.1c1.2.3 5.4.9 4.8 3.3Zm.6-6.1c-.6 2.1-3.9 1-4.9.8l.9-3.7c1 .2 4.6.8 4 2.9Z"
       />
     </svg>
   );
 }
 
-function CardNetworkMark() {
+function MastercardMark() {
   return (
-    <span className="flex items-center" aria-hidden="true">
-      <span className="h-6 w-6 rounded-full bg-white/55 sm:h-7 sm:w-7" />
-      <span className="-ml-2.5 h-6 w-6 rounded-full bg-white/25 sm:h-7 sm:w-7" />
-    </span>
+    <svg
+      viewBox="0 0 72 44"
+      className="h-8 w-[58px] sm:h-10 sm:w-[68px]"
+      aria-label="Mastercard"
+    >
+      <circle cx="29" cy="22" r="15" fill="#eb001b" />
+      <circle cx="43" cy="22" r="15" fill="#f79e1b" fillOpacity=".95" />
+      <path
+        d="M36 10.7a15.2 15.2 0 0 0 0 22.6 15.2 15.2 0 0 0 0-22.6Z"
+        fill="#ff5f00"
+      />
+    </svg>
   );
 }
 
 function AmexMark() {
   return (
-    <span className="font-black tracking-tight text-[14px] sm:text-[15px]">
-      AMEX
-    </span>
+    <svg
+      viewBox="0 0 72 40"
+      className="h-8 w-[60px] sm:h-9 sm:w-[70px]"
+      aria-label="American Express"
+    >
+      <rect x="1" y="3" width="70" height="34" rx="5" fill="#2aa8e0" />
+      <text
+        x="36"
+        y="25"
+        textAnchor="middle"
+        fill="white"
+        fontSize="13"
+        fontWeight="900"
+        fontFamily="Arial, Helvetica, sans-serif"
+      >
+        AMEX
+      </text>
+    </svg>
   );
 }
 
 function UpiMark() {
   return (
-    <span className="font-black tracking-tight text-[15px] sm:text-[16px]">
-      UPI
-    </span>
+    <svg
+      viewBox="0 0 74 34"
+      className="h-8 w-[64px] sm:h-9 sm:w-[72px]"
+      aria-label="UPI"
+    >
+      <path d="M7 4h8l-5 26H2L7 4Z" fill="#5f259f" />
+      <path d="M18 4h8l-5 26h-8l5-26Z" fill="#ef7c24" />
+      <text
+        x="49"
+        y="24"
+        textAnchor="middle"
+        fill="white"
+        fontSize="14"
+        fontWeight="900"
+        fontFamily="Arial, Helvetica, sans-serif"
+      >
+        UPI
+      </text>
+    </svg>
   );
 }
 
 const paymentOptions: {
   key: string;
-  render: () => React.ReactElement;
+  render: () => ReactElement;
   highlight?: boolean;
 }[] = [
   { key: "visa", render: VisaMark },
   { key: "paypal", render: PayPalMark },
   { key: "bitcoin", render: BitcoinMark, highlight: true },
-  { key: "network", render: CardNetworkMark },
+  { key: "mastercard", render: MastercardMark },
   { key: "amex", render: AmexMark },
   { key: "upi", render: UpiMark },
 ];
@@ -572,18 +690,17 @@ function PaymentOptions() {
       <div className="mt-5 flex flex-wrap items-center justify-center gap-2 sm:gap-4">
         {paymentOptions.map((option) => {
           const Content = option.render;
+
           return (
             <div
               key={option.key}
-              className={`flex h-[46px] w-[72px] items-center justify-center rounded-[10px] border text-white transition-all sm:h-[64px] sm:w-[124px] sm:rounded-[12px] ${
+              className={`flex h-[50px] w-[84px] items-center justify-center rounded-[10px] border text-white transition-all sm:h-[66px] sm:w-[126px] sm:rounded-[12px] ${
                 option.highlight
                   ? "border-[#f7931a] bg-[linear-gradient(135deg,#3a2308,#1c1408)] shadow-[0_0_0_1px_rgba(247,147,26,.35),0_10px_26px_rgba(247,147,26,.18)]"
                   : "border-white/[0.10] bg-[#101117]"
               }`}
             >
-              <span className="scale-75 sm:scale-100">
-                <Content />
-              </span>
+              <Content />
             </div>
           );
         })}
@@ -652,13 +769,11 @@ export function Challenges() {
   );
 
   function priceFor(value: number) {
-    const original = getModelBasePrice(market, model, value);
-    const sale = Math.max(1, Math.round(original * 0.6));
-
+    const price = getModelBasePrice(market, model, value);
     return {
-      original,
-      sale,
-      saving: original - sale,
+      original: price,
+      sale: price,
+      saving: 0,
     };
   }
 
@@ -675,61 +790,130 @@ export function Challenges() {
     );
   }
 
-  const rows = [
-    {
-      icon: "target" as const,
-      label: "Profit Target",
-      value: (size: number) => (
-        <div className="space-y-0.5 text-center">
-          <div>
-            <span className="text-white/55">{rules.phase2 ? "PHASE 1 " : ""}</span>
-            <strong className="text-white">{rules.phase1}</strong>
-          </div>
-          {rules.phase2 && (
-            <div>
-              <span className="text-white/55">PHASE 2 </span>
-              <strong className="text-white">{rules.phase2}</strong>
-            </div>
-          )}
-        </div>
-      ),
+  const rows = useMemo(
+    () => {
+      const r = modelRulesByMarket[market][model];
+
+      const baseRows: {
+        icon: "target" | "daily" | "loss" | "clock" | "calendar" | "reward";
+        label: string;
+        value: string;
+      }[] = [];
+
+      if (r.profitTargetPhase2) {
+        baseRows.push({
+          icon: "target",
+          label: "Profit Target Phase 1",
+          value: r.profitTarget,
+        });
+        baseRows.push({
+          icon: "target",
+          label: "Profit Target Phase 2",
+          value: r.profitTargetPhase2,
+        });
+      } else {
+        baseRows.push({
+          icon: "target",
+          label: "Profit Target",
+          value: r.profitTarget,
+        });
+      }
+
+      baseRows.push(
+        { icon: "daily", label: "Max Daily Loss", value: r.maxDailyLoss },
+        { icon: "loss", label: "Max Loss", value: r.maxLoss }
+      );
+
+      if (r.minTradingDays) {
+        baseRows.push({
+          icon: "calendar",
+          label: "Min trading days",
+          value: r.minTradingDays,
+        });
+      }
+
+      if (r.minProfitableDays) {
+        baseRows.push({
+          icon: "calendar",
+          label: "Min profitable days",
+          value: r.minProfitableDays,
+        });
+      }
+
+      if (r.consistency) {
+        baseRows.push({
+          icon: "calendar",
+          label: "Consistency",
+          value: r.consistency,
+        });
+      }
+
+      if (r.profitBuffer) {
+        baseRows.push({
+          icon: "calendar",
+          label: "Profit buffer",
+          value: r.profitBuffer,
+        });
+      }
+
+      if (r.weekendHold) {
+        baseRows.push({
+          icon: "calendar",
+          label: "Weekend hold",
+          value: r.weekendHold,
+        });
+      }
+
+      if (r.weekendTrading) {
+        baseRows.push({
+          icon: "calendar",
+          label: "Weekend trading",
+          value: r.weekendTrading,
+        });
+      }
+
+      if (r.buffer) {
+        baseRows.push({
+          icon: "calendar",
+          label: "Buffer",
+          value: r.buffer,
+        });
+      }
+
+      if (r.contractLimits) {
+        baseRows.push({
+          icon: "calendar",
+          label: "Contract limits",
+          value: r.contractLimits,
+        });
+      }
+
+      if (r.inactivityPeriod) {
+        baseRows.push({
+          icon: "clock",
+          label: "Inactivity Period",
+          value: r.inactivityPeriod,
+        });
+      }
+
+      if (r.tradingPeriod) {
+        baseRows.push({
+          icon: "calendar",
+          label: "Trading Period",
+          value: r.tradingPeriod,
+        });
+      }
+
+      baseRows.push({
+        icon: "reward",
+        label: "Rewards",
+        value: r.rewards,
+      });
+
+      return baseRows;
     },
-    {
-      icon: "daily" as const,
-      label: "Max Daily Loss",
-      value: (_size: number) => (
-        <strong className="text-white">{rules.dailyLoss}</strong>
-      ),
-    },
-    {
-      icon: "loss" as const,
-      label: "Max Loss",
-      value: (_size: number) => (
-        <strong className="text-white">{rules.maxLoss}</strong>
-      ),
-    },
-    {
-      icon: "clock" as const,
-      label: "Inactivity Period",
-      value: (_size: number) => (
-        <strong className="text-white">{rules.inactivity}</strong>
-      ),
-    },
-    {
-      icon: "calendar" as const,
-      label: "Trading Period",
-      value: (_size: number) => (
-        <strong className="text-white">{rules.maxTime}</strong>
-      ),
-    },
-    {
-      icon: "reward" as const,
-      label: "Rewards",
-      value: (_size: number) => (
-        <strong className="text-white">{rules.profitSplit}</strong>
-      ),
-    },
-  ];
+    [market, model]
+  );
 
   return (
     <section
@@ -833,20 +1017,22 @@ export function Challenges() {
           </div>
         </div>
 
-        {/* COMPARISON TABLE — horizontally scrollable on mobile, sticky label column */}
+        {/* EXCEL-MATCHED COMPARISON TABLE */}
         <div className="mt-12">
           <div className="-mx-4 overflow-x-auto px-4 pb-2 [scrollbar-width:thin] sm:mx-0 sm:px-0">
             <div className="flex min-w-max gap-3 sm:min-w-0 sm:gap-4">
-              {/* LABELS — sticky on the left while the cards scroll */}
-              <div className="sticky left-0 z-20 w-[132px] shrink-0 bg-[#080a0e] pt-[136px] sm:relative sm:w-[190px] lg:w-[210px]">
+              {/* LEFT LABEL COLUMN — same row heights as every account card */}
+              <div className="sticky left-0 z-20 w-[158px] shrink-0 bg-[#080a0e] pt-[109px] sm:relative sm:w-[210px] lg:w-[225px]">
                 {rows.map((row, index) => (
                   <div
-                    key={row.label}
-                    className={`flex h-[58px] items-center gap-2.5 text-[12px] font-medium text-white/78 sm:gap-3.5 sm:text-[14px] ${
-                      index === 0 ? "h-[64px]" : ""
-                    }`}
+                    key={`${row.label}-${index}`}
+                    className={`flex ${
+                      index === 0 && rows.length > 0
+                        ? "min-h-[64px]"
+                        : "min-h-[58px]"
+                    } items-center gap-2.5 border-b border-transparent pr-2 text-[11px] font-medium leading-[1.2] text-white/78 sm:gap-3 sm:text-[13px] lg:text-[14px]`}
                   >
-                    <span className="text-white/55">
+                    <span className="shrink-0 text-white/55">
                       <RowIcon type={row.icon} />
                     </span>
                     <span>{row.label}</span>
@@ -854,7 +1040,7 @@ export function Challenges() {
                 ))}
               </div>
 
-              {/* CARDS */}
+              {/* ACCOUNT CARDS */}
               <div className="flex gap-3 sm:grid sm:grid-cols-3 sm:gap-3 lg:grid-cols-6">
                 {sortedSizes.map((item) => {
                   const selected = item.value === accountSize;
@@ -879,9 +1065,12 @@ export function Challenges() {
                             : "border-white/[0.09] bg-[#101117] hover:border-white/[0.16]"
                         }`}
                       >
-                        {/* ACCOUNT HEADER */}
                         <div className="flex h-[95px] flex-col items-center justify-center border-b border-white/[0.055] px-3 text-center">
-                          <span className={`text-[11px] font-bold uppercase tracking-[0.09em] ${selected ? "text-[#c58cff]" : "text-white/48"}`}>
+                          <span
+                            className={`text-[11px] font-bold uppercase tracking-[0.09em] ${
+                              selected ? "text-[#c58cff]" : "text-white/48"
+                            }`}
+                          >
                             Account
                           </span>
                           <strong className="mt-2 text-[20px] font-black tracking-[-0.035em] text-white">
@@ -889,29 +1078,30 @@ export function Challenges() {
                           </strong>
                         </div>
 
-                        {/* RULE VALUES */}
                         {rows.map((row, index) => (
                           <div
-                            key={`${item.value}-${row.label}`}
-                            className={`flex h-[58px] items-center justify-center border-b border-white/[0.045] px-2 text-center text-[11px] font-medium leading-4 text-white/76 sm:px-2.5 sm:text-[12px] sm:leading-5 ${
-                              index === 0 ? "h-[64px]" : ""
-                            }`}
+                            key={`${item.value}-${row.label}-${index}`}
+                            className={`flex ${
+                              index === 0 && rows.length > 0
+                                ? "min-h-[64px]"
+                                : "min-h-[58px]"
+                            } items-center justify-center border-b border-white/[0.045] px-2 text-center text-[10px] font-medium leading-4 text-white/76 sm:px-2.5 sm:text-[11px] sm:leading-5 lg:text-[12px]`}
                           >
-                            {row.value(item.value)}
+                            <strong className="font-semibold text-white">
+                              {row.value}
+                            </strong>
                           </div>
                         ))}
 
-                        {/* PRICE + BUTTON */}
                         <div className="px-3 pb-5 pt-5 text-center sm:px-4">
                           <div className="flex items-end justify-center gap-2">
-                            <span className={`text-[20px] font-black tracking-[-0.045em] sm:text-[22px] ${selected ? "text-[#c378ff]" : "text-white"}`}>
+                            <span
+                              className={`text-[20px] font-black tracking-[-0.045em] sm:text-[22px] ${
+                                selected ? "text-[#c378ff]" : "text-white"
+                              }`}
+                            >
                               {formatMoney(price.sale)}
                             </span>
-                            {price.original !== price.sale && (
-                              <span className="mb-1 text-[11px] text-white/32 line-through sm:text-[12px]">
-                                {formatMoney(price.original)}
-                              </span>
-                            )}
                           </div>
 
                           <button
@@ -927,7 +1117,6 @@ export function Challenges() {
                         </div>
                       </article>
 
-                      {/* BOTTOM SUMMARY BOX */}
                       <div
                         className={`mt-3 flex h-[68px] flex-col items-center justify-center rounded-[12px] border text-center ${
                           selected
@@ -935,8 +1124,12 @@ export function Challenges() {
                             : "border-white/[0.08] bg-[#0e1015]"
                         }`}
                       >
-                        <strong className={`text-[15px] font-bold ${selected ? "text-[#bd78f3]" : "text-white"}`}>
-                          {rules.profitSplit}
+                        <strong
+                          className={`text-[15px] font-bold ${
+                            selected ? "text-[#bd78f3]" : "text-white"
+                          }`}
+                        >
+                          {modelRulesByMarket[market][model].rewards}
                         </strong>
                         <span className="mt-1 text-[10px] font-medium text-white/48">
                           Reward Terms
@@ -948,6 +1141,7 @@ export function Challenges() {
               </div>
             </div>
           </div>
+
           <p className="mt-2 text-center text-[10px] text-white/30 sm:hidden">
             Swipe sideways to compare all account sizes →
           </p>

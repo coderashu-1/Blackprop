@@ -263,7 +263,7 @@ function ActivityPopup({
         bottom-[calc(max(10px,env(safe-area-inset-bottom))+1vh)]
         left-3
         z-[80]
-        w-[285px]
+        w-[275px]
         max-w-[calc(100vw-24px)]
         transition-all
         duration-400
@@ -281,12 +281,12 @@ function ActivityPopup({
         className="
           relative
           overflow-hidden
-          rounded-[14px]
+          rounded-[16px]
           border
           border-[#dfcdf3]
           bg-[#fffaf5]/95
           px-3
-          py-2.5
+          py-2
           text-[#17121f]
           shadow-[0_10px_35px_rgba(0,0,0,.15)]
           backdrop-blur-xl
@@ -298,7 +298,7 @@ function ActivityPopup({
         {/* subtle top glow */}
         <div className="absolute inset-x-[18%] top-0 h-px bg-gradient-to-r from-transparent via-[#be6cff]/80 to-transparent" />
 
-        <div className="flex items-center gap-2.5">
+        <div className="flex items-center gap-2">
           {/* Logo + flag */}
           <div
             className="
@@ -345,29 +345,31 @@ function ActivityPopup({
 
           {/* Content */}
           <div className="min-w-0 flex-1">
-            <div className="flex items-center gap-1.5">
-              <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[#be6cff] shadow-[0_0_7px_rgba(190,108,255,.7)]" />
+            <div className="flex min-w-0 flex-col">
+              <div className="flex min-w-0 items-center gap-1.5">
+                <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[#00b67a] shadow-[0_0_7px_rgba(0,182,122,.45)]" />
 
-              <p className="truncate text-[9px] font-black uppercase tracking-[0.1em] text-[#7c5a99] sm:text-[10px]">
-                Community activity
+                <p className="truncate text-[8px] font-black uppercase tracking-[0.08em] text-[#7f7f7f] sm:text-[10px] sm:tracking-[0.1em]">
+                  Live community activity
+                </p>
+              </div>
+
+              <p className="mt-0.5 text-[10px] font-bold leading-[14px] text-[#171717] sm:text-[12px] sm:leading-[18px]">
+                {item.message || `${item.challenge} Challenge is popular with traders`}
+                {!item.message && (
+                  <span className="block">
+                    in {item.country}.
+                  </span>
+                )}
+              </p>
+
+              <p className="mt-0.5 text-[8px] font-medium leading-3 text-[#8a8a8a] sm:text-[11px] sm:leading-4">
+                BlackProp • just now
               </p>
             </div>
-
-            <p className="mt-0.5 truncate text-[11px] font-bold leading-4 text-[#21182b] sm:text-[12px] sm:leading-[18px]">
-              {item.challenge} Challenge
-              <span className="font-medium text-[#75677f]">
-                {" "}
-                • {item.country}
-              </span>
-            </p>
-          </div>
-
-          {/* Compact time */}
-          <span className="shrink-0 self-start pt-0.5 text-[8px] font-semibold text-[#9a899f] sm:text-[9px]">
-            now
-          </span>
         </div>
       </div>
+    </div>
     </div>
   );
 }

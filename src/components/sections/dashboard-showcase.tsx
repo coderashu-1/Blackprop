@@ -67,225 +67,277 @@ export function DashboardShowcase() {
     <section
       id="dashboard"
       className="
-      relative isolate overflow-hidden bg-[#05070b]
-      pb-0
-      pt-10
-      sm:pt-14
-      lg:pt-18
+        relative
+        isolate
+        overflow-hidden
+        bg-[#05070b]
+        pb-0
+        pt-10
+        sm:pt-14
+        lg:pt-18
       "
     >
+      {/* =====================================================
+          BACKGROUND
+      ====================================================== */}
 
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-[420px] bg-[linear-gradient(180deg,#2f0f4e_0%,#3b145f_20%,#2b1045_52%,rgba(11,8,18,.96)_78%,rgba(5,7,11,0)_100%)]" />
+      <div
+        className="
+          pointer-events-none
+          absolute
+          inset-x-0
+          top-0
+          h-[420px]
+          bg-[linear-gradient(180deg,#2f0f4e_0%,#3b145f_20%,#2b1045_52%,rgba(11,8,18,.96)_78%,rgba(5,7,11,0)_100%)]
+        "
+      />
 
-      <div className="pointer-events-none absolute left-1/2 top-[150px] h-[350px] w-[900px] max-w-[95vw] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(167,52,247,.30)_0%,rgba(143,40,243,.16)_35%,rgba(71,26,109,.06)_58%,transparent_75%)] blur-[12px]" />
+      <div
+        className="
+          pointer-events-none
+          absolute
+          left-1/2
+          top-[150px]
+          h-[350px]
+          w-[900px]
+          max-w-[95vw]
+          -translate-x-1/2
+          rounded-full
+          bg-[radial-gradient(circle,rgba(167,52,247,.30)_0%,rgba(143,40,243,.16)_35%,rgba(71,26,109,.06)_58%,transparent_75%)]
+          blur-[12px]
+        "
+      />
 
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center_top,transparent_0%,transparent_42%,rgba(0,0,0,.18)_72%,rgba(0,0,0,.46)_100%)]" />
+      <div
+        className="
+          pointer-events-none
+          absolute
+          inset-0
+          bg-[radial-gradient(ellipse_at_center_top,transparent_0%,transparent_42%,rgba(0,0,0,.18)_72%,rgba(0,0,0,.46)_100%)]
+        "
+      />
 
+      {/* =====================================================
+          CONTENT
+      ====================================================== */}
 
       <div className="relative mx-auto w-full max-w-[1240px] px-4 sm:px-6 lg:px-8">
 
+        {/* =====================================================
+            HEADING
+        ====================================================== */}
 
         <div className="mx-auto max-w-[860px] text-center">
 
-          <div className="inline-flex items-center gap-2.5 rounded-full border border-[#8f28f3]/35 bg-[#17101f]/85 px-3 py-1.5 shadow-[0_8px_26px_rgba(0,0,0,.28)] backdrop-blur-xl">
+          {/* TRUST BADGE */}
 
-            <span className="grid h-5 w-5 place-items-center rounded-[6px] border border-[#a734f7]/45 bg-[#271531] text-[#be6cff]">
-              <BPMark width={8} height={11} color="#be6cff"/>
+          <div
+            className="
+              inline-flex
+              items-center
+              gap-2.5
+              rounded-full
+              border
+              border-[#8f28f3]/35
+              bg-[#17101f]/85
+              px-3
+              py-1.5
+              shadow-[0_8px_26px_rgba(0,0,0,.28)]
+              backdrop-blur-xl
+            "
+          >
+            <span
+              className="
+                grid
+                h-5
+                w-5
+                place-items-center
+                rounded-[6px]
+                border
+                border-[#a734f7]/45
+                bg-[#271531]
+                text-[#be6cff]
+              "
+            >
+              <BPMark
+                width={8}
+                height={11}
+                color="#be6cff"
+              />
             </span>
 
-            <span className="text-[10px] font-extrabold uppercase tracking-[0.12em] text-[#d8d4e0]">
+            <span
+              className="
+                text-[10px]
+                font-extrabold
+                uppercase
+                tracking-[0.12em]
+                text-[#d8d4e0]
+              "
+            >
               Built for professional traders
             </span>
-
           </div>
 
+          {/* HEADING */}
 
           <h2
-          className="
-          mt-5
-          text-[2.4rem]
-          font-black
-          uppercase
-          leading-[0.95]
-          tracking-[-0.055em]
-          text-white
-          sm:text-[4rem]
-          md:text-[5rem]
-          lg:text-[5.6rem]
-          "
+            className="
+              mt-5
+              text-[2.4rem]
+              font-black
+              uppercase
+              leading-[0.95]
+              tracking-[-0.055em]
+              text-white
+              sm:text-[4rem]
+              md:text-[5rem]
+              lg:text-[5.6rem]
+            "
           >
             Custom
+
             <span className="block">
               Dashboard{" "}
-              <span className="bg-[linear-gradient(90deg,#a734f7_0%,#be6cff_52%,#d06cff_100%)] bg-clip-text text-transparent">
+
+              <span
+                className="
+                  bg-[linear-gradient(90deg,#a734f7_0%,#be6cff_52%,#d06cff_100%)]
+                  bg-clip-text
+                  text-transparent
+                "
+              >
                 View
               </span>
             </span>
-
           </h2>
 
+          {/* DESCRIPTION */}
 
-          <p className="mx-auto mt-4 max-w-[710px] text-[13px] font-medium leading-5 text-[#9aa0b2] sm:text-[16px] sm:leading-7">
-            A focused BlackProp workspace for account monitoring, performance
-            analysis and reward tracking.
+          <p
+            className="
+              mx-auto
+              mt-4
+              max-w-[710px]
+              text-[13px]
+              font-medium
+              leading-5
+              text-[#9aa0b2]
+              sm:text-[16px]
+              sm:leading-7
+            "
+          >
+            A focused BlackProp workspace for account monitoring,
+            performance analysis and reward tracking.
           </p>
-
         </div>
 
+        {/* =====================================================
+            DASHBOARD IMAGE
+        ====================================================== */}
 
+        <div
+          className="
+            relative
+            mx-auto
+            mt-8
+            w-full
+            max-w-[1120px]
+            sm:mt-12
+            lg:mt-14
+          "
+        >
+          {/* IMAGE GLOW */}
 
-        <div className="relative mx-auto mt-8 w-full max-w-[1120px] sm:mt-12 lg:mt-14">
+          <div
+            className="
+              pointer-events-none
+              absolute
+              left-1/2
+              top-[46%]
+              h-[420px]
+              w-[86%]
+              -translate-x-1/2
+              -translate-y-1/2
+              rounded-full
+              bg-[#8f28f3]/[0.10]
+              blur-[100px]
+            "
+          />
 
+          {/* =================================================
+              MAIN DASHBOARD CONTAINER
 
-          <div className="pointer-events-none absolute left-1/2 top-[46%] h-[420px] w-[86%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#8f28f3]/[0.10] blur-[100px]" />
+              Removed:
+              - Dashboard Preview header
+              - BlackProp Dashboard footer
+          ================================================== */}
 
-
-          <div className="relative overflow-hidden rounded-[4px] border border-[#2a2136] bg-[#0b0d12] shadow-[0_40px_120px_rgba(0,0,0,.58)]">
-
-
-            <div className="
-            flex 
-            h-[55px]
-            sm:h-[72px]
-            items-center
-            justify-between
-            border-b
-            border-white/[0.055]
-            bg-[linear-gradient(180deg,#17101f_0%,#121018_100%)]
-            px-3
-            sm:px-6
-            ">
-
-
-              <div className="rounded-[6px] border border-[#8f28f3]/55 bg-[#30104d] px-2.5 py-1.5 sm:px-3 sm:py-2">
-
-                <span className="text-[8px] font-extrabold uppercase tracking-[0.12em] text-[#dcbcff] sm:text-[10px]">
-                  Dashboard Preview
-                </span>
-
-              </div>
-
-
-              <div className="flex items-center gap-2">
-
-                <span className="h-1.5 w-1.5 rounded-full bg-[#be6cff]" />
-
-                <span className="hidden text-[10px] font-bold uppercase tracking-[0.08em] text-[#8f93a6] sm:block">
-                  Interface Preview
-                </span>
-
-              </div>
-
-
-            </div>
-
-
-
-            <div className="
-            relative 
-            mx-3
-            mt-2
-            overflow-hidden
-            rounded-[14px]
-            border
-            border-[#1f2330]
-            bg-[#080a0f]
-            sm:mx-5
-            ">
-
-
-              <div className="
+          <div
+            className="
               relative
-              aspect-[16/9]
-              w-full
-              ">
-
-                <Image
-                  src="/images/dashboard.png"
-                  alt="BlackProp dashboard preview"
-                  fill
-                  priority
-                  sizes="(max-width:640px) 94vw,1080px"
-                  className="object-contain object-center"
-                />
-
-              </div>
-
+              overflow-hidden
+              rounded-[14px]
+              border
+              border-[#2a2136]
+              bg-[#080a0f]
+              shadow-[0_40px_120px_rgba(0,0,0,.58)]
+              sm:rounded-[18px]
+            "
+          >
+            <div
+              className="
+                relative
+                aspect-[16/9]
+                w-full
+              "
+            >
+              <Image
+                src="/images/dashboard.png"
+                alt="BlackProp dashboard preview"
+                fill
+                priority
+                sizes="(max-width:640px) 94vw,1080px"
+                className="
+                  object-contain
+                  object-center
+                "
+              />
             </div>
-
-
-
-
-            <div className="
-            flex
-            min-h-[62px]
-            items-center
-            justify-between
-            gap-3
-            bg-[linear-gradient(180deg,#0b0d12,#080a0e)]
-            px-4
-            py-3
-            sm:min-h-[78px]
-            sm:px-7
-            ">
-
-
-              <div className="flex min-w-0 items-center gap-3">
-
-                <div className="grid h-7 w-7 shrink-0 place-items-center rounded-[7px] border border-[#a734f7]/35 bg-[#271531] text-[#be6cff]">
-
-                  <BPMark width={10} height={14} color="#be6cff"/>
-
-                </div>
-
-
-                <div className="min-w-0">
-
-                  <p className="text-[9px] font-black uppercase tracking-[0.12em] text-[#667089]">
-                    BlackProp Dashboard
-                  </p>
-
-                  <p className="text-[12px] font-semibold text-white">
-                    Dashboard
-                  </p>
-
-                </div>
-
-              </div>
-
-
-
-              <div className="flex items-center gap-2 text-[#be6cff]">
-
-                <ShieldIcon/>
-
-                <span className="hidden text-[10px] font-semibold uppercase tracking-[0.08em] text-[#858da1] sm:block">
-                  Product Preview
-                </span>
-
-              </div>
-
-
-            </div>
-
-
           </div>
 
+          {/* BOTTOM GLOW */}
 
-
-          <div className="pointer-events-none mx-auto h-8 w-[90%] -translate-y-1 bg-[radial-gradient(ellipse_at_center_top,rgba(143,40,243,.12),transparent_68%)] blur-[24px]" />
-
-
+          <div
+            className="
+              pointer-events-none
+              mx-auto
+              h-8
+              w-[90%]
+              -translate-y-1
+              bg-[radial-gradient(ellipse_at_center_top,rgba(143,40,243,.12),transparent_68%)]
+              blur-[24px]
+            "
+          />
         </div>
-
       </div>
 
+      {/* =====================================================
+          BOTTOM FADE
+      ====================================================== */}
 
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[100px] bg-[linear-gradient(180deg,transparent,#05070b)]" />
-
+      <div
+        className="
+          pointer-events-none
+          absolute
+          inset-x-0
+          bottom-0
+          h-[100px]
+          bg-[linear-gradient(180deg,transparent,#05070b)]
+        "
+      />
     </section>
   );
 }
-
 
 export default DashboardShowcase;
