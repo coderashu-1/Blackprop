@@ -48,9 +48,9 @@ const rightFeatures: Feature[] = [
     icon: "spread",
   },
   {
-    title: "Raw Institutional Spreads",
+    title: "Crypto Deposits and Withdrawals",
     description:
-      "Direct liquidity feeds with 0.0 pip raw spreads, low latency execution, and zero news restrictions.",
+      "Fast crypto funding options with secure deposits and withdrawals, flexible processing, and reliable wallet transfers.",
     icon: "spread",
   },
 ];

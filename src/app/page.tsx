@@ -30,11 +30,12 @@ export default function Home() {
       <HowItWorks />
       <Support />
       <ProfitCalculator />
-      <Rewards />
-      <Testimony />
+      <GlobalAccess />
+
+      {/* <Rewards /> */}
+      {/* <Testimony /> */}
       <DashboardShowcase />
       <WhyTradersLove />
-      {/* <GlobalAccess /> */}
       {/* <CommunityCTA /> */}
       <FaqCommunity/>
       <TrustedCompanion />
