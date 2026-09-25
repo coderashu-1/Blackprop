@@ -961,14 +961,6 @@ export function Challenges() {
         value: r.rewards,
       });
 
-      // Challenge fee is shown as its own row and uses the exact
-      // Excel fee. There is no 40% or other discount calculation.
-      baseRows.push({
-        icon: "reward",
-        label: "Challenge fee",
-        kind: "price",
-      });
-
       if (r.billing) {
         baseRows.push({
           icon: "calendar",
@@ -997,6 +989,15 @@ export function Challenges() {
             addOnPricing[size.value]?.[addOn.title] ??
             `${addOn.cost}`;
         });
+
+      // Challenge fee is intentionally the final comparison row,
+      // immediately before the Start now CTA row.
+      baseRows.push({
+        icon: "reward",
+        label: "Challenge fee",
+        kind: "price",
+      });
+
 
         baseRows.push({
           icon: "reward",
