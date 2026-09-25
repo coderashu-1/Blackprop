@@ -228,7 +228,7 @@ export function FaqCommunity() {
           className="
             relative
             mx-auto
-            mt-20
+            mt-14
             overflow-visible
             rounded-[22px]
             sm:mt-24
@@ -264,7 +264,7 @@ export function FaqCommunity() {
               relative
               z-10
               grid
-              min-h-[350px]
+              min-h-[610px]
               grid-cols-1
               md:min-h-[400px]
               md:grid-cols-[47%_53%]
@@ -377,15 +377,46 @@ export function FaqCommunity() {
               </div>
             </div>
 
-            {/* PHONE AREA */}
-            <div className="relative hidden min-h-0 overflow-visible md:block">
-              <div className="absolute inset-0 overflow-visible">
+            {/* PHONE AREA
+                Desktop: original overlapping composition.
+                Mobile: image is shown below the copy, centered and sized
+                responsively so it is actually visible on small screens.
+            */}
+            <div
+              className="
+                relative
+                mt-1
+                h-[260px]
+                w-full
+                overflow-visible
+                sm:h-[320px]
+                md:mt-0
+                md:h-auto
+                md:min-h-0
+              "
+            >
+              <div
+                className="
+                  absolute inset-0
+                  flex items-end justify-center
+                  overflow-visible
+                  md:block
+                "
+              >
                 <img
                   src="/images/community-phone.png"
                   alt="BlackProp mobile dashboard"
-                  className="absolute h-full w-full object-contain object-bottom"
+                  className="
+                    relative
+                    h-[285px]
+                    w-auto
+                    max-w-[92%]
+                    object-contain object-bottom
+                    sm:h-[350px]
+                    md:absolute md:h-full md:w-full md:max-w-none
+                  "
                   style={{
-                    bottom: "2%",
+                    bottom: "15%",
                     left: "0%",
                     transform: "scale(1.4)",
                     transformOrigin: "center bottom",
@@ -394,7 +425,7 @@ export function FaqCommunity() {
               </div>
 
               {/* subtle base shadow */}
-              <div className="pointer-events-none absolute bottom-[-8px] left-1/2 h-[40px] w-[86%] -translate-x-1/2 rounded-full bg-black/40 blur-[18px]" />
+              <div className="pointer-events-none absolute bottom-[-8px] left-1/2 h-[32px] w-[72%] -translate-x-1/2 rounded-full bg-black/40 blur-[18px] md:h-[40px] md:w-[86%]" />
             </div>
           </div>
         </div>

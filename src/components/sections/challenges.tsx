@@ -990,20 +990,19 @@ export function Challenges() {
             `${addOn.cost}`;
         });
 
-      // Challenge fee is intentionally the final comparison row,
-      // immediately before the Start now CTA row.
-      baseRows.push({
-        icon: "reward",
-        label: "Challenge fee",
-        kind: "price",
-      });
-
-
         baseRows.push({
           icon: "reward",
           label: `Add-on: ${addOn.title}`,
           values,
         });
+      });
+
+      // Challenge fee is shown exactly once per account column,
+      // immediately below the last add-on (including Payout Protector).
+      baseRows.push({
+        icon: "reward",
+        label: "Challenge fee",
+        kind: "price",
       });
 
       // Keep the CTA row for alignment, but do not show a "Button" label
@@ -1122,8 +1121,122 @@ export function Challenges() {
           </div>
         </div>
 
-        {/* EXCEL-MATCHED COMPARISON TABLE */}
-        <div className="mt-12">
+        {/* MOBILE CHALLENGE CARD — mobile only */}
+        <div className="mt-8 sm:hidden">
+          <div className="mb-3 text-center">
+            <p className="text-[10px] font-black uppercase tracking-[0.18em] text-white/40">
+              Choose Account Size
+            </p>
+          </div>
+
+          <div className="grid grid-cols-3 gap-2">
+            {sortedSizes.map((item) => {
+              const selected = item.value === accountSize;
+
+              return (
+                <button
+                  key={`mobile-size-${item.value}`}
+                  type="button"
+                  onClick={() => setAccountSize(item.value)}
+                  className={`relative min-h-[42px] rounded-[10px] border px-2 py-2 text-[12px] font-black transition-all ${
+                    selected
+                      ? "border-[#a94cff] bg-[linear-gradient(135deg,#35164e,#1e1129)] text-white shadow-[0_0_0_1px_rgba(166,72,255,.25),0_8px_20px_rgba(135,44,220,.14)]"
+                      : "border-white/[0.09] bg-[#101117] text-white/55"
+                  }`}
+                >
+                  {isBestValue(market, model, item.value) && (
+                    <span className="absolute -right-1 -top-1 rounded-full bg-[#a94cff] px-1.5 py-0.5 text-[7px] font-black uppercase text-white">
+                      Best
+                    </span>
+                  )}
+                  {item.label}
+                </button>
+              );
+            })}
+          </div>
+
+          <article
+            className={`mt-3 overflow-hidden rounded-[16px] border ${
+              isBestValue(market, model, accountSize)
+                ? "border-[#a94cff] bg-[linear-gradient(180deg,#32204b_0%,#23163a_58%,#15121f_100%)] shadow-[0_0_0_1px_rgba(166,72,255,.24),0_18px_45px_rgba(108,40,178,.15)]"
+                : "border-white/[0.09] bg-[#101117]"
+            }`}
+          >
+            <div className="relative flex min-h-[96px] flex-col items-center justify-center border-b border-white/[0.06] px-4 text-center">
+              {isBestValue(market, model, accountSize) && (
+                <span className="absolute right-3 top-3 rounded-full bg-[linear-gradient(90deg,#9f4cff,#a83df0)] px-2.5 py-1 text-[8px] font-black uppercase tracking-[0.04em] text-white">
+                  Best Value
+                </span>
+              )}
+
+              <span className="text-[10px] font-bold uppercase tracking-[0.12em] text-[#c58cff]">
+                Account Size
+              </span>
+              <strong className="mt-1.5 text-[28px] font-black tracking-[-0.045em] text-white">
+                {formatMoney(accountSize)}
+              </strong>
+            </div>
+
+            <div>
+              {rows
+                .filter((row) => row.kind !== "button")
+                .map((row, index) => {
+                  const isPrice = row.kind === "price";
+                  const value = row.values?.[accountSize] ?? row.value ?? "—";
+
+                  return (
+                    <div
+                      key={`mobile-row-${row.label}-${index}`}
+                      className={`flex items-center justify-between gap-4 border-b border-white/[0.055] px-4 py-3 ${
+                        isPrice ? "min-h-[88px]" : "min-h-[58px]"
+                      }`}
+                    >
+                      <div className="flex min-w-0 items-center gap-2.5">
+                        <span className="shrink-0 text-white/45">
+                          <RowIcon type={row.icon} />
+                        </span>
+                        <span className="text-[11px] font-medium leading-[1.25] text-white/68">
+                          {row.label}
+                        </span>
+                      </div>
+
+                      {isPrice ? (
+                        <div className="shrink-0 text-right leading-tight">
+                          <span className="block text-[10px] font-semibold text-white/40 line-through">
+                            {formatMoneyExact(priceFor(accountSize).original)}
+                          </span>
+                          <strong className="mt-0.5 block text-[23px] font-black tracking-[-0.045em] text-[#c378ff]">
+                            {formatMoneyExact(priceFor(accountSize).sale)}
+                          </strong>
+                        </div>
+                      ) : (
+                        <strong className="max-w-[52%] shrink-0 text-right text-[11px] font-semibold leading-[1.35] text-white">
+                          {value}
+                        </strong>
+                      )}
+                    </div>
+                  );
+                })}
+            </div>
+
+            <div className="p-3">
+              <button
+                type="button"
+                onClick={() => startCheckout(accountSize)}
+                className="flex min-h-[50px] w-full items-center justify-center rounded-[11px] bg-[linear-gradient(90deg,#8c27df,#b23cf6)] px-4 text-[14px] font-black text-white shadow-[0_10px_24px_rgba(156,44,231,.22)] transition hover:brightness-110"
+              >
+                Start now
+              </button>
+            </div>
+          </article>
+
+          <p className="mt-3 text-center text-[9px] leading-4 text-white/30">
+            Select an account size above to view its complete challenge details.
+          </p>
+        </div>
+
+        {/* DESKTOP / TABLET COMPARISON TABLE — unchanged */}
+        <div className="mt-12 hidden sm:block">
           <div className="-mx-4 overflow-x-auto px-4 pb-2 [scrollbar-width:thin] sm:mx-0 sm:px-0">
             <div className="flex min-w-max gap-2 sm:min-w-0 sm:gap-2">
               {/* LEFT LABEL COLUMN — same row heights as every account card */}
@@ -1213,8 +1326,8 @@ export function Challenges() {
                               </button>
                             ) : row.kind === "price" ? (
                               <div className="flex flex-col items-center justify-center leading-tight">
-                                <span className="text-[8px] font-semibold text-white/45 sm:text-[9px]">
-                                  {formatMoneyExact(price.original)} -30% =
+                                <span className="text-[9px] font-semibold text-white/40 line-through sm:text-[10px]">
+                                  {formatMoneyExact(price.original)}
                                 </span>
                                 <strong
                                   className={`mt-0.5 text-[19px] font-black tracking-[-0.045em] sm:text-[21px] ${
@@ -1231,19 +1344,13 @@ export function Challenges() {
                             )}
                           </div>
                         ))}
-
                       </article>
-
                     </div>
                   );
                 })}
               </div>
             </div>
           </div>
-
-          <p className="mt-2 text-center text-[10px] text-white/30 sm:hidden">
-            Swipe sideways to compare all account sizes →
-          </p>
         </div>
 
         {/* PAYMENT OPTIONS */}
