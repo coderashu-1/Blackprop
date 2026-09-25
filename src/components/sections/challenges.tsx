@@ -645,25 +645,13 @@ function AmexMark() {
 
 function UpiMark() {
   return (
-    <svg
-      viewBox="0 0 74 34"
-      className="h-8 w-[64px] sm:h-9 sm:w-[72px]"
-      aria-label="UPI"
-    >
-      <path d="M7 4h8l-5 26H2L7 4Z" fill="#5f259f" />
-      <path d="M18 4h8l-5 26h-8l5-26Z" fill="#ef7c24" />
-      <text
-        x="49"
-        y="24"
-        textAnchor="middle"
-        fill="white"
-        fontSize="14"
-        fontWeight="900"
-        fontFamily="Arial, Helvetica, sans-serif"
-      >
-        UPI
-      </text>
-    </svg>
+    <img
+      src="https://upload.wikimedia.org/wikipedia/commons/6/6f/UPI_logo.svg"
+      alt="UPI"
+      className="h-auto w-[64px] sm:w-[78px]"
+      loading="lazy"
+      decoding="async"
+    />
   );
 }
 
@@ -687,7 +675,7 @@ function PaymentOptions() {
         Payment Options
       </p>
 
-      <div className="mt-5 flex flex-wrap items-center justify-center gap-2 sm:gap-4">
+      <div className="mt-5 flex flex-wrap items-center justify-center gap-1.5 sm:gap-2">
         {paymentOptions.map((option) => {
           const Content = option.render;
 
@@ -768,8 +756,11 @@ export function Challenges() {
     [availableSizes]
   );
 
+  // Pricing is shown exactly as the Excel challenge fee.
+  // No discount / 40% calculation is applied.
   function priceFor(value: number) {
     const price = getModelBasePrice(market, model, value);
+
     return {
       original: price,
       sale: price,
@@ -797,7 +788,8 @@ export function Challenges() {
       const baseRows: {
         icon: "target" | "daily" | "loss" | "clock" | "calendar" | "reward";
         label: string;
-        value: string;
+        value?: string;
+        values?: Record<number, string>;
       }[] = [];
 
       if (r.profitTargetPhase2) {
@@ -806,6 +798,7 @@ export function Challenges() {
           label: "Profit Target Phase 1",
           value: r.profitTarget,
         });
+
         baseRows.push({
           icon: "target",
           label: "Profit Target Phase 2",
@@ -821,7 +814,7 @@ export function Challenges() {
 
       baseRows.push(
         { icon: "daily", label: "Max Daily Loss", value: r.maxDailyLoss },
-        { icon: "loss", label: "Max Loss", value: r.maxLoss }
+        { icon: "loss", label: "Max Loss", value: r.maxLoss },
       );
 
       if (r.minTradingDays) {
@@ -904,16 +897,47 @@ export function Challenges() {
         });
       }
 
-      baseRows.push({
-        icon: "reward",
-        label: "Rewards",
-        value: r.rewards,
+      if (r.billing) {
+        baseRows.push({
+          icon: "calendar",
+          label: "Billing",
+          value: r.billing,
+        });
+      }
+
+      if (r.payouts) {
+        baseRows.push({
+          icon: "calendar",
+          label: "Payouts",
+          value: r.payouts,
+        });
+      }
+
+      // Add-ons are shown as full comparison rows and use the exact
+      // per-account amounts from the Excel sheet.
+      const addOnPricing = exactAddOnPricing[market]?.[model] ?? {};
+
+      r.addOns.forEach((addOn) => {
+        const values: Record<number, string> = {};
+
+        availableSizes.forEach((size) => {
+          values[size.value] =
+            addOnPricing[size.value]?.[addOn.title] ??
+            `${addOn.cost}`;
+        });
+
+        baseRows.push({
+          icon: "reward",
+          label: `Add-on: ${addOn.title}`,
+          values,
+        });
       });
 
       return baseRows;
     },
-    [market, model]
+    [market, model, availableSizes],
   );
+
 
   return (
     <section
@@ -1020,7 +1044,7 @@ export function Challenges() {
         {/* EXCEL-MATCHED COMPARISON TABLE */}
         <div className="mt-12">
           <div className="-mx-4 overflow-x-auto px-4 pb-2 [scrollbar-width:thin] sm:mx-0 sm:px-0">
-            <div className="flex min-w-max gap-3 sm:min-w-0 sm:gap-4">
+            <div className="flex min-w-max gap-2 sm:min-w-0 sm:gap-2">
               {/* LEFT LABEL COLUMN — same row heights as every account card */}
               <div className="sticky left-0 z-20 w-[158px] shrink-0 bg-[#080a0e] pt-[109px] sm:relative sm:w-[210px] lg:w-[225px]">
                 {rows.map((row, index) => (
@@ -1041,7 +1065,7 @@ export function Challenges() {
               </div>
 
               {/* ACCOUNT CARDS */}
-              <div className="flex gap-3 sm:grid sm:grid-cols-3 sm:gap-3 lg:grid-cols-6">
+              <div className="flex gap-2 sm:grid sm:grid-cols-3 sm:gap-2 lg:grid-cols-6">
                 {sortedSizes.map((item) => {
                   const selected = item.value === accountSize;
                   const price = priceFor(item.value);
@@ -1049,7 +1073,7 @@ export function Challenges() {
                   return (
                     <div
                       key={item.value}
-                      className="relative w-[150px] shrink-0 pt-[14px] sm:w-auto sm:min-w-0"
+                      className="relative w-[148px] shrink-0 pt-[14px] sm:w-auto sm:min-w-0"
                     >
                       {item.popular && (
                         <span className="absolute left-1/2 top-0 z-30 -translate-x-1/2 whitespace-nowrap rounded-full bg-[linear-gradient(90deg,#9f4cff,#a83df0)] px-3.5 py-1.5 text-[9px] font-black uppercase tracking-[0.03em] text-white shadow-[0_6px_16px_rgba(158,63,241,.28)]">
@@ -1088,13 +1112,13 @@ export function Challenges() {
                             } items-center justify-center border-b border-white/[0.045] px-2 text-center text-[10px] font-medium leading-4 text-white/76 sm:px-2.5 sm:text-[11px] sm:leading-5 lg:text-[12px]`}
                           >
                             <strong className="font-semibold text-white">
-                              {row.value}
+                              {row.values?.[item.value] ?? row.value}
                             </strong>
                           </div>
                         ))}
 
                         <div className="px-3 pb-5 pt-5 text-center sm:px-4">
-                          <div className="flex items-end justify-center gap-2">
+                          <div className="flex items-end justify-center">
                             <span
                               className={`text-[20px] font-black tracking-[-0.045em] sm:text-[22px] ${
                                 selected ? "text-[#c378ff]" : "text-white"
@@ -1117,24 +1141,6 @@ export function Challenges() {
                         </div>
                       </article>
 
-                      <div
-                        className={`mt-3 flex h-[68px] flex-col items-center justify-center rounded-[12px] border text-center ${
-                          selected
-                            ? "border-[#8f3cce]/55 bg-[#15101e]"
-                            : "border-white/[0.08] bg-[#0e1015]"
-                        }`}
-                      >
-                        <strong
-                          className={`text-[15px] font-bold ${
-                            selected ? "text-[#bd78f3]" : "text-white"
-                          }`}
-                        >
-                          {modelRulesByMarket[market][model].rewards}
-                        </strong>
-                        <span className="mt-1 text-[10px] font-medium text-white/48">
-                          Reward Terms
-                        </span>
-                      </div>
                     </div>
                   );
                 })}
