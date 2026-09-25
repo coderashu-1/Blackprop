@@ -551,7 +551,7 @@ function UpiMark() {
 
 const paymentOptions: {
   key: string;
-  render: () => JSX.Element;
+  render: () => React.ReactElement;
   highlight?: boolean;
 }[] = [
   { key: "visa", render: VisaMark },
