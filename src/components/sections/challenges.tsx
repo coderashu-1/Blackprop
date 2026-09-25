@@ -589,17 +589,50 @@ function PayPalMark() {
 
 function BitcoinMark() {
   return (
-    <svg
-      viewBox="0 0 40 40"
-      className="h-8 w-8 sm:h-9 sm:w-9"
-      aria-label="Bitcoin"
+    <div
+      className="flex items-center justify-center -space-x-2.5 sm:-space-x-3"
+      aria-label="Supported cryptocurrencies"
+      role="img"
     >
-      <circle cx="20" cy="20" r="18" fill="#f7931a" />
-      <path
-        fill="white"
-        d="M24.8 17.2c.4-2.4-1.5-3.7-4.2-4.6l.8-3.1-1.9-.5-.8 3c-.5-.1-1-.2-1.5-.3l.8-3-1.9-.5-.8 3.1c-.4-.1-.8-.2-1.2-.3l-2.6-.7-.5 2 1.4.4c.8.2.9.7.8 1.2l-.9 3.5.1.1-.1-.1-1.3 5.1c-.1.3-.4.6-1 .4l-1.4-.4-1 2.1 2.5.7c.5.1.9.3 1.4.4l-.8 3.1 1.9.5.8-3.1c.5.1 1 .2 1.5.3l-.8 3.1 1.9.5.8-3.1c3.3.6 5.8.3 6.8-2.7.8-2.3-.1-3.6-1.8-4.5 1.3-.3 2.2-1.2 2.5-2.7Zm-4.5 6.2c-.6 2.3-4.6 1.1-5.8.8l1-4.1c1.2.3 5.4.9 4.8 3.3Zm.6-6.1c-.6 2.1-3.9 1-4.9.8l.9-3.7c1 .2 4.6.8 4 2.9Z"
-      />
-    </svg>
+      {/* Bitcoin */}
+      <span className="relative z-[1] flex h-6 w-6 items-center justify-center rounded-full border border-[#101117] bg-[#f7931a] shadow-[0_1px_4px_rgba(0,0,0,.25)] sm:h-7 sm:w-7">
+        <svg viewBox="0 0 32 32" className="h-4 w-4 sm:h-[17px] sm:w-[17px]" aria-hidden="true">
+          <path
+            fill="white"
+            d="M19.8 14.2c.3-1.8-1.1-2.8-3.1-3.5l.6-2.3-1.5-.4-.6 2.2c-.4-.1-.8-.2-1.1-.2l.6-2.2-1.5-.4-.6 2.3-1.1-.3-2-.5-.4 1.6 1.1.3c.6.2.7.5.6 1l-.6 2.7.1.1-.1-.1-.9 4c-.1.3-.3.5-.8.4l-1.1-.3-.7 1.7 1.9.5c.4.1.7.2 1.1.3l-.6 2.3 1.5.4.6-2.3c.4.1.8.2 1.1.3l-.6 2.3 1.5.4.6-2.3c2.5.4 4.4.2 5.2-2.1.6-1.8-.1-2.8-1.4-3.5 1-.2 1.7-.9 2-2Zm-3.5 4.7c-.5 1.8-3.5.9-4.4.6l.8-3.1c.9.2 4.1.7 3.6 2.5Zm.5-4.6c-.4 1.6-2.9.8-3.7.6l.7-2.8c.8.2 3.5.6 3 2.2Z"
+          />
+        </svg>
+      </span>
+
+      {/* Ethereum */}
+      <span className="relative z-[2] flex h-6 w-6 items-center justify-center rounded-full border border-[#101117] bg-[#627eea] shadow-[0_1px_4px_rgba(0,0,0,.25)] sm:h-7 sm:w-7">
+        <svg viewBox="0 0 32 32" className="h-4 w-4 sm:h-[17px] sm:w-[17px]" aria-hidden="true">
+          <path fill="white" d="m16 4 7 11-7 4-7-4 7-11Z" opacity=".9" />
+          <path fill="white" d="m16 20 7-4-7 12-7-12 7 4Z" opacity=".7" />
+        </svg>
+      </span>
+
+      {/* Tether / USDT */}
+      <span className="relative z-[3] flex h-6 w-6 items-center justify-center rounded-full border border-[#101117] bg-[#26a17b] shadow-[0_1px_4px_rgba(0,0,0,.25)] sm:h-7 sm:w-7">
+        <svg viewBox="0 0 32 32" className="h-4 w-4 sm:h-[17px] sm:w-[17px]" aria-hidden="true">
+          <path fill="white" d="M8 7h16v4h-6v14h-4V11H8V7Zm2 7h12v3H10v-3Z" />
+        </svg>
+      </span>
+
+      {/* USD coin */}
+      <span className="relative z-[4] flex h-6 w-6 items-center justify-center rounded-full border-2 border-white/80 bg-[#149bd7] shadow-[0_1px_4px_rgba(0,0,0,.25)] sm:h-7 sm:w-7">
+        <span className="text-[13px] font-black leading-none text-white sm:text-[14px]">$</span>
+      </span>
+
+      {/* Solana */}
+      <span className="relative z-[5] flex h-6 w-6 items-center justify-center rounded-full border border-[#101117] bg-[#14151d] shadow-[0_1px_4px_rgba(0,0,0,.25)] sm:h-7 sm:w-7">
+        <svg viewBox="0 0 32 32" className="h-4 w-4 sm:h-[17px] sm:w-[17px]" aria-hidden="true">
+          <path fill="#4be3c2" d="M8 8h14l3 3H11L8 8Zm3 6h14l-3 3H8l3-3Zm-3 6h14l3 3H11l-3-3Z" />
+        </svg>
+      </span>
+
+
+    </div>
   );
 }
 
@@ -662,7 +695,7 @@ const paymentOptions: {
 }[] = [
   { key: "visa", render: VisaMark },
   { key: "paypal", render: PayPalMark },
-  { key: "bitcoin", render: BitcoinMark, highlight: true },
+  { key: "crypto", render: BitcoinMark, highlight: true },
   { key: "mastercard", render: MastercardMark },
   { key: "amex", render: AmexMark },
   { key: "upi", render: UpiMark },
@@ -790,6 +823,7 @@ export function Challenges() {
         label: string;
         value?: string;
         values?: Record<number, string>;
+        kind?: "text" | "price" | "button";
       }[] = [];
 
       if (r.profitTargetPhase2) {
@@ -897,6 +931,22 @@ export function Challenges() {
         });
       }
 
+      // Rewards is a dedicated comparison row — it must stay visible
+      // for every model, matching the Excel.
+      baseRows.push({
+        icon: "reward",
+        label: "Rewards",
+        value: r.rewards,
+      });
+
+      // Challenge fee is shown as its own row and uses the exact
+      // Excel fee. There is no 40% or other discount calculation.
+      baseRows.push({
+        icon: "reward",
+        label: "Challenge fee",
+        kind: "price",
+      });
+
       if (r.billing) {
         baseRows.push({
           icon: "calendar",
@@ -931,6 +981,14 @@ export function Challenges() {
           label: `Add-on: ${addOn.title}`,
           values,
         });
+      });
+
+      // Keep the CTA row for alignment, but do not show a "Button" label
+      // in the left-hand comparison column.
+      baseRows.push({
+        icon: "reward",
+        label: "",
+        kind: "button",
       });
 
       return baseRows;
@@ -1051,15 +1109,21 @@ export function Challenges() {
                   <div
                     key={`${row.label}-${index}`}
                     className={`flex ${
-                      index === 0 && rows.length > 0
-                        ? "min-h-[64px]"
-                        : "min-h-[58px]"
+                      row.kind === "button"
+                        ? "min-h-[74px]"
+                        : index === 0
+                          ? "min-h-[64px]"
+                          : "min-h-[58px]"
                     } items-center gap-2.5 border-b border-transparent pr-2 text-[11px] font-medium leading-[1.2] text-white/78 sm:gap-3 sm:text-[13px] lg:text-[14px]`}
                   >
-                    <span className="shrink-0 text-white/55">
-                      <RowIcon type={row.icon} />
-                    </span>
-                    <span>{row.label}</span>
+                    {row.kind !== "button" && (
+                      <>
+                        <span className="shrink-0 text-white/55">
+                          <RowIcon type={row.icon} />
+                        </span>
+                        <span>{row.label}</span>
+                      </>
+                    )}
                   </div>
                 ))}
               </div>
@@ -1106,39 +1170,40 @@ export function Challenges() {
                           <div
                             key={`${item.value}-${row.label}-${index}`}
                             className={`flex ${
-                              index === 0 && rows.length > 0
-                                ? "min-h-[64px]"
-                                : "min-h-[58px]"
+                              row.kind === "button"
+                                ? "min-h-[74px]"
+                                : index === 0
+                                  ? "min-h-[64px]"
+                                  : "min-h-[58px]"
                             } items-center justify-center border-b border-white/[0.045] px-2 text-center text-[10px] font-medium leading-4 text-white/76 sm:px-2.5 sm:text-[11px] sm:leading-5 lg:text-[12px]`}
                           >
-                            <strong className="font-semibold text-white">
-                              {row.values?.[item.value] ?? row.value}
-                            </strong>
+                            {row.kind === "button" ? (
+                              <button
+                                type="button"
+                                onClick={(event) => {
+                                  event.stopPropagation();
+                                  startCheckout(item.value);
+                                }}
+                                className="mx-auto flex min-h-[46px] w-full items-center justify-center rounded-[10px] bg-[linear-gradient(90deg,#8c27df,#b23cf6)] px-3 text-[13px] font-black text-white shadow-[0_10px_24px_rgba(156,44,231,.22)] transition hover:brightness-110"
+                              >
+                                Start now
+                              </button>
+                            ) : row.kind === "price" ? (
+                              <strong
+                                className={`text-[20px] font-black tracking-[-0.045em] sm:text-[22px] ${
+                                  selected ? "text-[#c378ff]" : "text-white"
+                                }`}
+                              >
+                                {formatMoney(price.sale)}
+                              </strong>
+                            ) : (
+                              <strong className="font-semibold text-white">
+                                {row.values?.[item.value] ?? row.value}
+                              </strong>
+                            )}
                           </div>
                         ))}
 
-                        <div className="px-3 pb-5 pt-5 text-center sm:px-4">
-                          <div className="flex items-end justify-center">
-                            <span
-                              className={`text-[20px] font-black tracking-[-0.045em] sm:text-[22px] ${
-                                selected ? "text-[#c378ff]" : "text-white"
-                              }`}
-                            >
-                              {formatMoney(price.sale)}
-                            </span>
-                          </div>
-
-                          <button
-                            type="button"
-                            onClick={(event) => {
-                              event.stopPropagation();
-                              startCheckout(item.value);
-                            }}
-                            className="mt-4 flex min-h-[46px] w-full items-center justify-center rounded-[10px] bg-[linear-gradient(90deg,#8c27df,#b23cf6)] px-3 text-[13px] font-black text-white shadow-[0_10px_24px_rgba(156,44,231,.22)] transition hover:brightness-110"
-                          >
-                            Start now
-                          </button>
-                        </div>
                       </article>
 
                     </div>
