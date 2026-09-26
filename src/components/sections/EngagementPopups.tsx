@@ -260,16 +260,16 @@ function ActivityPopup({
   return (
     <div
       className={`fixed
-        bottom-[calc(max(10px,env(safe-area-inset-bottom))+1vh)]
+        bottom-[calc(max(10px,env(safe-area-inset-bottom)))]
         left-3
         z-[80]
-        w-[275px]
+        w-[310px]
         max-w-[calc(100vw-24px)]
         transition-all
         duration-400
         sm:bottom-[calc(20px+1vh)]
         sm:left-5
-        sm:w-[330px]
+        sm:w-[390px]
         ${
           visible
             ? "translate-y-0 opacity-100"

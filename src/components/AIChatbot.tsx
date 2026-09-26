@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function RobotIcon() {
   return (
@@ -15,6 +15,15 @@ function RobotIcon() {
   );
 }
 
+function LoadingRing() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-6 w-6 animate-spin" aria-hidden="true">
+      <circle cx="12" cy="12" r="9" stroke="#3A2450" strokeWidth="3" fill="none" opacity="0.4" />
+      <path d="M21 12a9 9 0 0 0-9-9" stroke="#BE6CFF" strokeWidth="3" fill="none" strokeLinecap="round" />
+    </svg>
+  );
+}
+
 type Message = { sender: "bot" | "user"; text: string };
 type FAQ = { q: string; a: string; cat: string };
 
@@ -23,6 +32,9 @@ type FAQ = { q: string; a: string; cat: string };
 /*   - Crypto Only Plan FAQs (Mar 2026)                                 */
 /*   - Two-Step Rules Custom Plan (Sept 2026)                           */
 /*   - Instant Funding Custom Rules v2                                  */
+/*   - Crypto Two-Step Rules (Mar 2026)                                 */
+/*   - FPFX Tech 1-Step Futures Assessment Rules & FAQ (Jul 2026)       */
+/*   - WL2 FAQ (Mar 2026)                                               */
 /* ------------------------------------------------------------------ */
 const FAQS: FAQ[] = [
   // ---------------- CRYPTO ONLY PLAN ----------------
@@ -112,6 +124,115 @@ const FAQS: FAQ[] = [
   { cat: "Instant Funding Plan", q: "How will I see the charge on my Statement?", a: "Charges appear under the name Dashboardanalytix.com." },
   { cat: "Instant Funding Plan", q: "How are taxes handled?", a: "You're treated as an independent contractor and are responsible for all taxes on your gains." },
   { cat: "Instant Funding Plan", q: "How are affiliates credited?", a: "Affiliates are credited when a user creates an account via their referral link or discount code." },
+
+  // ---------------- CRYPTO TWO-STEP PLAN (NEW) ----------------
+  { cat: "Crypto Two-Step Plan", q: "What are the Step 1, Step 2 and Funded requirements at a glance?", a: "Growth Target: 6% (Step 1), 9% (Step 2), none on Funded. Max Drawdown: 9% (equity-based, static, applies at every stage). Inactivity: 30 days at every stage. Leverage: 5:1 on BTC/ETH, 2:1 on other coins. Daily Cap Limit: +/-3% at every stage. Funded Profit Share: 90%. There's no maximum time limit to complete either step." },
+  { cat: "Crypto Two-Step Plan", q: "What constitutes a Breach?", a: "A breach means you violated the Max Drawdown rule. If you breach, you'll fail the Assessment or have your Funded Account taken away." },
+  { cat: "Crypto Two-Step Plan", q: "How do you calculate the 3% Daily Cap Limit?", a: "The Daily Cap Limit is the maximum percentage of your starting balance your account can move in a day, calculated from the previous day's equity and resetting at 5 PM EST. If assets move more than 3% of your starting balance from the prior day's equity in either direction, positions are closed and the account is locked until the next trading day. Example: 100k starting balance, 3% Daily Cap — if the account finishes the day at 101k equity, the next day's limits are 101k +/- 3k (98k - 104k)." },
+  { cat: "Crypto Two-Step Plan", q: "How do you calculate the Maximum Drawdown?", a: "The Maximum Drawdown is initially set at 9% and is static, so it stays the same value for as long as the account is active. Example: a $100,000 starting balance can draw down to $91,000 before breaching. Even if the account's closed balance later grows to $102,000, the Maximum Drawdown stays at $91,000 regardless of how high the account goes." },
+  { cat: "Crypto Two-Step Plan", q: "What is the Payout Protector add-on and how much does it cost?", a: "Payout Protector is an optional point-of-sale add-on, priced at 25% of the account cost, that protects a trader's eligible profit share in a Funded Account in the event of a hard breach." },
+  { cat: "Crypto Two-Step Plan", q: "Can I hold positions over the weekend?", a: "Yes." },
+  { cat: "Crypto Two-Step Plan", q: "Is there a breach for inactivity?", a: "Yes. You'll be considered inactive and your account will be breached if there's no trading activity for 30 consecutive days." },
+  { cat: "Crypto Two-Step Plan", q: "How long does it take to receive my funded account?", a: "Upon passing your Assessment, you'll receive instructions to complete KYC and the Trader Agreement. Once both are done, your Funded Account is created, funded, and issued typically within 24-48 business hours." },
+  { cat: "Crypto Two-Step Plan", q: "Once I pass the Assessment am I provided with a demo or funded account?", a: "You're provided with a funded account backed by our capital. This capital is notional and may not match the amount actually on deposit with the Liquidity Provider. Notional funding doesn't impact your trading conditions." },
+  { cat: "Crypto Two-Step Plan", q: "Do we manipulate the pricing or executions you receive in your funded account?", a: "No. We don't have any control over pricing from the liquidity provider or over the executions on your trades." },
+  { cat: "Crypto Two-Step Plan", q: "Who is the counterparty to my trades?", a: "To manage risk and minimize transaction costs, we may act as the direct counterparty to certain trades, executed at Liquidity Provider prices. Your gain/loss isn't calculated any differently, though this creates a potential conflict of interest since such trades don't result in a net gain or loss to us." },
+  { cat: "Crypto Two-Step Plan", q: "Am I subject to any position limits?", a: "Your maximum position is determined by your available margin. We reserve the right to increase margin requirements, amend leverage limits, limit open positions, or revise drawdown halt levels at any time, and may refuse to accept any order." },
+  { cat: "Crypto Two-Step Plan", q: "What are the rules for the funded account?", a: "Exactly the same as your Assessment account, except the funded account has no profit target." },
+  { cat: "Crypto Two-Step Plan", q: "If I have a breach in my funded account and there are gains, do I forfeit those gains?", a: "Yes. Any accumulated gains in the account will be forfeited on a hard breach unless you've purchased the Payout Protector add-on." },
+  { cat: "Crypto Two-Step Plan", q: "How do I withdraw the gains in my funded account?", a: "Request a withdrawal any time from your trader dashboard, no more than once every 30 days, via the Withdraw Profits button. Gains are distributed through the available outbound payment solutions, and methods/options may change over time." },
+  { cat: "Crypto Two-Step Plan", q: "When can I withdraw the gains and how does that affect my Maximum Drawdown?", a: "Your first withdrawal can be requested any time, subject to the 90/10 profit split; after that, every 30 days. The drawdown doesn't reset on withdrawal. Example: account grows from $100,000 to $120,000, and you withdraw $16,000 at a 90/10 split — you receive $14,400, we retain $1,600, the balance drops to $104,000, and your Maximum Drawdown stays at $94,000 (so you could still lose up to $10,000 before breaching)." },
+  { cat: "Crypto Two-Step Plan", q: "Do I have to use one of your accounts for the Assessment or can I use my own?", a: "You must use an account we provide, since our risk management software is synced to it to track your performance and rule violations in real time." },
+  { cat: "Crypto Two-Step Plan", q: "What Countries are accepted?", a: "Traders from all countries can take part, excluding OFAC-listed countries or as otherwise limited at the Company's discretion." },
+  { cat: "Crypto Two-Step Plan", q: "What is the minimum age I must be to be part of your program?", a: "At least 18, or the minimum legal age in your country, to purchase an assessment." },
+  { cat: "Crypto Two-Step Plan", q: "Where do I track the progress of my account?", a: "You'll have access to a trader dashboard that updates roughly every 60 seconds. Monitoring your breach levels is your responsibility." },
+  { cat: "Crypto Two-Step Plan", q: "What Platform can I trade on?", a: "All trades are executed on the DXtrade platform." },
+  { cat: "Crypto Two-Step Plan", q: "What products can I trade?", a: "Any products streamed by the Liquidity Provider into the available platform." },
+  { cat: "Crypto Two-Step Plan", q: "What is the leverage?", a: "Up to 5:1 leverage on BTC and ETH. Other cryptocurrencies on the platform are 2:1." },
+  { cat: "Crypto Two-Step Plan", q: "What are the trading hours?", a: "Set by the cryptocurrency exchange or Liquidity Provider(s) and are generally open 24 hours. Holidays can affect available trading hours." },
+  { cat: "Crypto Two-Step Plan", q: "Are commissions charged on the trading activity?", a: "Cryptocurrency trading is subject to a percentage-based commission rate of 0.05% of the total notional trade volume, charged per side (USD amount * 0.0005)." },
+  { cat: "Crypto Two-Step Plan", q: "Can I use an Automated Strategy?", a: "No — DXTrade does not support automated strategies." },
+  { cat: "Crypto Two-Step Plan", q: "What is the policy on Prohibited Trading Activity?", a: "Prohibited trading includes exploiting pricing/platform errors or latency, using non-public or insider information, front-running, trading that jeopardizes the Liquidity Provider relationship or creates regulatory issues, using third-party or off-the-shelf pass strategies, switching strategies between assessment and funded stages, and arbitraging accounts. Violations can lead to termination and forfeiture of fees, and trading activity may be reviewed before a funded account is issued." },
+  { cat: "Crypto Two-Step Plan", q: "Can I trade during News Events?", a: "Opening a position within 3 minutes before or after a News Event is prohibited. Violating positions may be closed with the P&L removed, leverage reduced, or the account breached, at the Company's sole discretion." },
+  { cat: "Crypto Two-Step Plan", q: "How will I see the charge on my Statement?", a: "Charges come across in the name of dashboardanalytix.com." },
+  { cat: "Crypto Two-Step Plan", q: "How are taxes handled?", a: "You're treated as an independent contractor and are responsible for any and all taxes on your gains." },
+  { cat: "Crypto Two-Step Plan", q: "How are affiliates credited?", a: "Affiliates are credited for referrals when a user creates an account using a link or discount code provided by the Affiliate." },
+
+  // ---------------- 1-STEP FUTURES PLAN (NEW) ----------------
+  { cat: "1-Step Futures Plan", q: "What is the 1-Step Futures Assessment Plan?", a: "A streamlined, monthly-subscription futures program with a direct path from Assessment to Funded trading — one Assessment account, no multi-phase challenge. Reach the growth target, keep your best trading day within 33.33% of total profits, and stay above the Max Trailing Loss; there's no minimum trading-day requirement, so a consistent trader can complete it in as few as 3 trading days." },
+  { cat: "1-Step Futures Plan", q: "What account sizes and rules are available on this plan?", a: "Sizes: $25,000, $50,000, $75,000, $100,000, $150,000. Growth Target: 6% of starting balance at every size. Daily Drawdown: none. Max Drawdown: 6%/4%/3.33%/3%/3% respectively (Intraday Equity High-Water-Mark type). Consistency Requirement: 33.33%. Funded non-withdrawable buffer matches the Max Drawdown %. Profit Split: 80%. Minimum Trading Days: none. Inactivity: 30 days. Contract Limits (Standard/Micro): 1/10, 3/30, 6/60, 9/90, 12/120 respectively." },
+  { cat: "1-Step Futures Plan", q: "How do I achieve a Funded account?", a: "Reach the applicable profit growth target, stay above the Max Trailing Loss, and keep your consistency ratio at or below 33.33%. Once met, complete KYC and sign the Trader Agreement — your Funded account is then generated." },
+  { cat: "1-Step Futures Plan", q: "When do I get the payout?", a: "Assessment gains aren't withdrawable. Payout eligibility begins once you're Funded and generate eligible gains, subject to the 33.33% funded consistency requirement, the non-withdrawable profit buffer, payout review, and the 80% trader profit split. There's no listed withdrawal delay, but withdrawals aren't permitted from breached accounts." },
+  { cat: "1-Step Futures Plan", q: "How does the monthly subscription work?", a: "Billing begins on your initial purchase date and renews monthly while the account is active and unbreached, across both the Assessment and Funded phases. The subscription ends if the account breaches or you manually cancel — manual cancellation also breaches the account. No refunds for partial months; final pricing may vary by platform." },
+  { cat: "1-Step Futures Plan", q: "What is the Consistency Requirement?", a: "Calculated as (best trading day P&L / total P&L) x 100. It must be 33.33% or lower in both the Assessment and Funded phases, so a trader can't complete the requirement on fewer than 3 profitable trading days. It's not a breach rule by itself, but must be met to pass the Assessment or request a payout." },
+  { cat: "1-Step Futures Plan", q: "What is the Profit Buffer?", a: "The required amount of profit on a Funded account that must remain in the account and can't be withdrawn — it's not a fee and isn't deducted. Only profit above the buffer is potentially withdrawable, and the 80% trader split applies to that withdrawable amount. Example: on a $100,000 account with a $3,000 buffer, equity of $104,000 makes $1,000 withdrawable ($800 after the split); equity of $106,000 makes $3,000 withdrawable ($2,400 after the split)." },
+  { cat: "1-Step Futures Plan", q: "Do I lose my account if I do not meet the Consistency Requirement?", a: "No, it's not a breach rule by itself — but it must be met before you can pass the Assessment or request a payout." },
+  { cat: "1-Step Futures Plan", q: "What is a Profit Target?", a: "The Growth Target is the profit amount you must reach during the Assessment to qualify for a Funded account, subject to the other Assessment requirements. Assessment profits are not withdrawable." },
+  { cat: "1-Step Futures Plan", q: "Is there a Daily Loss Limit?", a: "No Daily Loss Limit, but traders must always stay within the Max Trailing Loss." },
+  { cat: "1-Step Futures Plan", q: "How do you calculate the Max Drawdown (Maximum Trailing Loss)?", a: "It trails from the highest intraday equity high-water mark reached, not just end-of-day balance, and locks permanently once it reaches your starting balance. Example: $100,000 account, $3,000 Max Trailing Loss — breach starts at $97,000; if intraday equity rises to $101,200, the breach level becomes $98,200; if equity later reaches $103,000, the breach level locks at $100,000 and won't rise further." },
+  { cat: "1-Step Futures Plan", q: "Can I reset my account if I lose it?", a: "No — you'll need to purchase a new account if you breach for any reason." },
+  { cat: "1-Step Futures Plan", q: "Can I hold positions over the weekend?", a: "No. All positions must be closed and open orders cancelled at 15:55 CST each weekday." },
+  { cat: "1-Step Futures Plan", q: "What is a Futures contract?", a: "A standardized amount of an underlying asset — e.g. one E-mini S&P 500 (ES) contract represents $50 times the index price, and one crude oil (CL) contract represents 1,000 barrels. See the product appendix for the full list." },
+  { cat: "1-Step Futures Plan", q: "How do I complete the CME market data attestation requirements?", a: "On DXFutures, log in to attest to the market data feeds agreement and confirm your Non-Professional status. You may need to fill in fields like job title and employer — these are mandatory but not validated. Professional data subscriber status isn't supported; all users must qualify as Non-Professional under CME rules." },
+  { cat: "1-Step Futures Plan", q: "What are the Market Data Fees?", a: "Fees covering real-time exchange price data are included in your purchase." },
+  { cat: "1-Step Futures Plan", q: "Is there a breach for inactivity?", a: "Yes — 30 days across all phases. You must place an executed trade at least once every 30 days to retain the account, and the inactivity timer can't be paused at any phase." },
+  { cat: "1-Step Futures Plan", q: "Do I need to complete KYC or sign a trader contract to start trading?", a: "KYC and the Trader Agreement are required after passing the Assessment and prior to receiving a Funded account." },
+  { cat: "1-Step Futures Plan", q: "What happens if I do not pass KYC?", a: "Your account will be closed." },
+  { cat: "1-Step Futures Plan", q: "Do we manipulate the pricing or executions you receive in your Funded Futures accounts?", a: "No — we operate at arm's length with liquidity providers and exchanges. Pricing and executions come from third parties and aren't modified, and we don't mark up spreads, commissions, or swaps." },
+  { cat: "1-Step Futures Plan", q: "Who is the counterparty to my trades?", a: "During simulated phases, trades execute against liquidity from your trading platform, designed to mimic real-market pricing. Once Funded, pricing and execution come directly from the exchange(s) you trade on." },
+  { cat: "1-Step Futures Plan", q: "Am I subject to any position limits?", a: "Yes — each account has a maximum contract limit based on starting balance, enforced across all products (a 1:10 ratio between one E-mini and ten Micro contracts). Example: a $50,000 account is limited to 3 standard E-mini contracts, or 30 micro contracts, in total, aggregated across all open positions." },
+  { cat: "1-Step Futures Plan", q: "What Countries are accepted?", a: "Traders from all countries can take part, excluding OFAC-listed countries or as otherwise limited at the Company's discretion." },
+  { cat: "1-Step Futures Plan", q: "What is the minimum age requirement to be part of your program?", a: "At least 18, or the minimum legal age in your country, to purchase a Futures Assessment account." },
+  { cat: "1-Step Futures Plan", q: "Where do I track the progress of my account?", a: "You'll get access to a trader dashboard, updated in near real time. Monitoring your breach levels is your responsibility." },
+  { cat: "1-Step Futures Plan", q: "What Platforms can I trade on?", a: "DXFutures only, via web or the Apple iOS mobile app. Third-party trading platforms aren't supported." },
+  { cat: "1-Step Futures Plan", q: "What products can I trade?", a: "Futures products only, listed on CME, COMEX, NYMEX and CBOT. See the product appendix for the full list." },
+  { cat: "1-Step Futures Plan", q: "Am I required to trade the front-month futures contract?", a: "Yes — you must trade the front-month (most liquid) contract for each product. Trading out-month contracts is prohibited and may cost you the account. CME Group's Product Slate shows current front-month status." },
+  { cat: "1-Step Futures Plan", q: "What are the trading hours for Futures products?", a: "Trades can be placed from the 17:00 CST CME Globex Open and held until 15:55 CST. On non-holiday days, open positions/orders are closed or cancelled at 15:55 CST; positions can't be held over weekends. Around holidays, auto-liquidation may not occur at the half-time close, so you're responsible for closing positions yourself." },
+  { cat: "1-Step Futures Plan", q: "What happens if I do not close the trade?", a: "Positions are closed for you at 15:55 CST on regular trading days. Failing to close before a holiday market close can result in loss of the account." },
+  { cat: "1-Step Futures Plan", q: "Do your accounts charge commissions?", a: "Assessment and Funded Futures accounts receive the same pricing and commissions charged by the Liquidity Provider or exchanges to other self-funded retail accounts — see the product appendix for per-instrument commission charges." },
+  { cat: "1-Step Futures Plan", q: "Can I use an Automated Strategy?", a: "Yes, subject to our Prohibited Trading policy." },
+  { cat: "1-Step Futures Plan", q: "What is the policy on Prohibited Trading Activity?", a: "Prohibited trading includes exploiting pricing/platform errors or latency, using insider information, front-running, jeopardizing Liquidity Provider or exchange relationships, using third-party or off-the-shelf pass strategies, arbitraging a funded account, and gambling-style excessive risk-taking such as maxing leverage for a single price move. Violations can mean termination and forfeiture of fees, and trading may be reviewed before a funded account is issued." },
+  { cat: "1-Step Futures Plan", q: "Can I trade during News Events?", a: "Trading during news events isn't prohibited, but traders must exercise heightened caution given the increased volatility and reduced liquidity, and are solely responsible for managing their positions around scheduled news releases." },
+  { cat: "1-Step Futures Plan", q: "How will I see charges on my Statement?", a: "Charges come across in the name of Dashboardanalytix.com." },
+  { cat: "1-Step Futures Plan", q: "How are taxes handled?", a: "You're treated as an independent contractor and are responsible for any and all taxes on your gains." },
+  { cat: "1-Step Futures Plan", q: "How are affiliates credited?", a: "Affiliates are credited for referrals when a user creates an account using a link or discount code provided by the Affiliate." },
+
+  // ---------------- WL2 PLAN (NEW) ----------------
+  { cat: "WL2 Plan", q: "What are the rules for the Funded Account?", a: "Exactly the same as your Assessment account, except the Funded Account has no profit target." },
+  { cat: "WL2 Plan", q: "Can I use an Automated Strategy?", a: "Yes, subject to our Prohibited Trading policy." },
+  { cat: "WL2 Plan", q: "How do you calculate the Daily Loss Limit?", a: "The max amount an account may lose in a single day, resetting at 5:00 PM EST, calculated from the greater of the prior day's end-of-day balance (closed P&L only) or end-of-day equity (balance + open P&L) — so open profit at reset raises the limit, and open losses don't shrink it below balance. Example: $100,000 account, 5% Daily Loss Limit, equity of $102,000 at reset (open profit) — 5% of $102,000 ($5,100) means breach at $96,900. With no open positions or open positions at a loss, the limit is based on the $100,000 balance instead, breaching at $95,000." },
+  { cat: "WL2 Plan", q: "How do you calculate the Max Drawdown (STATIC)?", a: "Initially set at 6% and static, based on CLOSED BALANCE, so it stays locked at that value however high the account grows (you can still separately violate the Daily Loss Limit). Example: $100,000 starting balance locks the drawdown floor at $94,000. All plans have \"Lock Upon Payout\" enabled by default, which permanently locks the Max Drawdown at the original starting balance once you submit a payout request — you can purchase an add-on for 25% of the purchase price to disable this." },
+  { cat: "WL2 Plan", q: "If I have a hard breach in my Funded Account and there are gains, do I forfeit those gains?", a: "Yes, unless you've purchased the Payout Protector add-on." },
+  { cat: "WL2 Plan", q: "What is Payout Protector?", a: "An optional add-on that lets you still receive a payout on gains despite a breach, provided all other withdrawal conditions are met and the account isn't otherwise in violation of the Terms and Conditions." },
+  { cat: "WL2 Plan", q: "How does Payout Protector work?", a: "Example: a $100,000 Funded account with $8,000 in gains breaches. Without Payout Protector, the account closes and the $8,000 is forfeited. With it, the account still closes, but you still receive your portion of the $8,000." },
+  { cat: "WL2 Plan", q: "Does Payout Protector prevent my account from breaching?", a: "No — the account is still considered breached on a rule violation. It only protects your gain from forfeiture." },
+  { cat: "WL2 Plan", q: "Is Payout Protector required?", a: "No, it's entirely optional and must be selected at purchase." },
+  { cat: "WL2 Plan", q: "How are taxes handled?", a: "You're treated as an independent contractor and are responsible for all taxes on your gains." },
+  { cat: "WL2 Plan", q: "How will I see the charge on my Statement?", a: "Charges come across in the name of dashboardanalytix.com." },
+  { cat: "WL2 Plan", q: "What is the minimum age I must be to be part of your program?", a: "At least 18, or the minimum legal age in your country, to purchase an assessment." },
+  { cat: "WL2 Plan", q: "Is there a breach for inactivity?", a: "Yes — no trading activity for 30 consecutive days will breach the account." },
+  { cat: "WL2 Plan", q: "Am I subject to any position limits?", a: "Your maximum position is determined by available margin. We reserve the right to increase margin requirements, limit open positions, and revise drawdown halt levels at any time; we or the Broker may refuse any order." },
+  { cat: "WL2 Plan", q: "Do we manipulate the pricing or executions you receive in your Funded Account?", a: "No — we have no control over pricing from the liquidity provider or over your trade executions." },
+  { cat: "WL2 Plan", q: "How do I withdraw the gains in my Funded Account?", a: "Request a withdrawal any time from your trader dashboard, no more than once every 30 days, via the Withdraw Profits button. Gains are paid through the available outbound payment solutions, which may change over time." },
+  { cat: "WL2 Plan", q: "How Long does it take to receive my Funded Account?", a: "Once KYC and the Trader Agreement are completed (with supporting documentation), your Funded Account is created, funded, and issued typically within 24-48 business hours." },
+  { cat: "WL2 Plan", q: "Once I pass the Assessment am I provided with a demo or live account?", a: "You're provided with a funded account backed by our capital. This capital is notional and may not match the amount actually on deposit with the Liquidity Provider; notional funding doesn't affect your trading conditions." },
+  { cat: "WL2 Plan", q: "When can I withdraw the gains and how does that affect my Maximum Drawdown?", a: "Your first withdrawal can be requested any time, subject to an 80/20 profit split; then every 30 days after. The drawdown doesn't reset on withdrawal. Example: account grows from $100,000 to $120,000, you withdraw $16,000 — you receive $12,800, we retain $3,200, and the Maximum Drawdown locks at the starting balance unless you bought the add-on to disable that lock. Withdrawing all your profit would violate the Maximum Drawdown rule and lose the account." },
+  { cat: "WL2 Plan", q: "Who is the counterparty to my trades?", a: "For risk management and cost purposes, we may act as direct counterparty to certain trades, executed at arm's-length third-party prices. Your gain/loss isn't calculated differently, though this creates a potential conflict of interest since such trades don't net a gain or loss to us." },
+  { cat: "WL2 Plan", q: "Can I trade during News Events?", a: "Opening a position within 3 minutes before or after a News Event is prohibited — violating positions may be closed with P&L removed, leverage reduced, or the account breached, at the Company's discretion." },
+  { cat: "WL2 Plan", q: "Do I have to use one of your accounts for the Assessment or can I use my own?", a: "You must use an account we provide, since our risk management software is synced to it to analyze performance and rule violations in real time." },
+  { cat: "WL2 Plan", q: "Do your accounts charge commissions?", a: "Funded accounts receive the same pricing and commissions as charged by our Liquidity Provider to other self-funded retail trading accounts." },
+  { cat: "WL2 Plan", q: "How are affiliates credited?", a: "Affiliates are credited for referrals when a user creates an account using a link or discount code provided by the Affiliate." },
+  { cat: "WL2 Plan", q: "What are the trading hours?", a: "Generally set by the Liquidity Provider unless set by our rules. Check per-symbol hours: DXtrade (right-click symbol > Instrument Info), MatchTrader (click symbol > Info), cTrader (Symbol Window > Market Hours)." },
+  { cat: "WL2 Plan", q: "What Countries are accepted?", a: "Traders from all countries can take part, excluding OFAC-listed countries or as otherwise limited at the Company's discretion." },
+  { cat: "WL2 Plan", q: "What is the leverage?", a: "Up to 50:1 on Forex and Metals, 10:1 on Indices, 5:1 on Oil, and 2:1 on Cryptocurrencies." },
+  { cat: "WL2 Plan", q: "What is the policy on Prohibited Trading Activity?", a: "Prohibited trading includes exploiting pricing/platform errors or latency, using non-public or insider info, front-running, jeopardizing Liquidity Provider relationships or creating regulatory issues, using third-party or off-the-shelf pass strategies, switching strategies between assessment and funded stages, arbitraging accounts, and trading within 3 minutes of a News Event. Violations can mean termination and forfeiture of fees, with trading activity reviewed before a funded account is issued." },
+  { cat: "WL2 Plan", q: "What Platform can I trade on?", a: "Integrated with DXtrade, MatchTrader and cTrader via GooeyTrade." },
+  { cat: "WL2 Plan", q: "What products can I trade?", a: "Any products streamed by the Liquidity Provider, including FX pairs, CFD Indices, Commodities, Metals and Cryptocurrencies." },
+  { cat: "WL2 Plan", q: "Where do I track the progress of my account?", a: "You get access to a trader dashboard that updates roughly every 60 seconds. Monitoring your breach levels is your responsibility." },
+  { cat: "WL2 Plan", q: "What is 1 lot equal to on the Trading Platform?", a: "Forex: 1 lot = $100k notional. Index: 1 lot = 1 contract (SPX500 = 10 contracts, JPN225 = 500 contracts). Cryptos: 1 lot = 1 coin. Silver: 1 lot = 5,000 oz. Gold: 1 lot = 100 oz. Oil: 1 lot = 100 barrels." },
+  { cat: "WL2 Plan", q: "What is the difference between a Hard Breach and Soft Breach rule?", a: "Soft breach: we close the trades that violated the rule, but you can keep trading. Hard breach: you violated the Daily Loss Limit or Max Drawdown rule — either fails your Assessment or removes your Funded Account." },
+  { cat: "WL2 Plan", q: "Can I hold positions over the weekend?", a: "Yes, positions can be held over the weekend." },
+  { cat: "WL2 Plan", q: "How many Assessments and/or Funded accounts may I have active at one time?", a: "Evaluation limits: only one evaluation of a specific account size and plan tier at a time across all platforms (e.g. one 100k One-Step and one 100k Two-Step can run together, but not two 100k One-Step evaluations across different platforms). Maximum $1 million in active evaluation plans per person, made up of different sizes/tiers. Maximum $1 million in active funded plans per person — with two passed accounts of the same size, you can either run one at a time and wait for a breach, or combine them into one double-size account if neither has traded yet. There's no limit on compounding: you can grow a funded account to any balance, including well beyond $1 million." },
 ];
 
 const CATEGORIES = Array.from(new Set(FAQS.map((f) => f.cat)));
@@ -136,9 +257,35 @@ function findBestMatch(input: string): FAQ | null {
 
 export function AIChatbot() {
   const [open, setOpen] = useState(false);
+  const [opening, setOpening] = useState(false);
+  const [visible, setVisible] = useState(false);
   const [messages, setMessages] = useState<Message[]>([{ sender: "bot", text: GREETING }]);
   const [view, setView] = useState<"categories" | "questions" | "answer">("categories");
   const [activeCat, setActiveCat] = useState<string | null>(null);
+
+  // Fade/scale the panel in a frame after it mounts, so the transition classes animate.
+  useEffect(() => {
+    if (open) {
+      const raf = requestAnimationFrame(() => setVisible(true));
+      return () => cancelAnimationFrame(raf);
+    }
+  }, [open]);
+
+  function handleTriggerClick() {
+    if (opening) return; // ignore rapid double-clicks while loading
+    if (open) {
+      // closing: animate out, then unmount
+      setVisible(false);
+      window.setTimeout(() => setOpen(false), 220);
+      return;
+    }
+    // opening: show a short loading state on the trigger, then reveal the panel
+    setOpening(true);
+    window.setTimeout(() => {
+      setOpening(false);
+      setOpen(true);
+    }, 550);
+  }
 
   function pickCategory(cat: string) {
     setActiveCat(cat);
@@ -174,19 +321,26 @@ export function AIChatbot() {
       {/* CHAT TRIGGER */}
       <button
         type="button"
-        onClick={() => setOpen((c) => !c)}
+        onClick={handleTriggerClick}
         aria-label={open ? "Close BlackProp AI chat" : "Open BlackProp AI chat"}
         aria-expanded={open}
-        className="fixed bottom-[max(16px,env(safe-area-inset-bottom))] right-4 z-[300] flex h-14 w-14 items-center justify-center rounded-full border border-[#BE6CFF]/35 bg-[linear-gradient(135deg,#6557FF_0%,#8F28F3_50%,#B23CF6_100%)] shadow-[0_16px_45px_rgba(143,40,243,.38),0_0_24px_rgba(190,108,255,.16)] transition-all duration-300 hover:-translate-y-1 hover:scale-105 hover:shadow-[0_20px_55px_rgba(143,40,243,.46),0_0_30px_rgba(190,108,255,.22)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#BE6CFF] focus-visible:ring-offset-2 focus-visible:ring-offset-[#05070B] sm:bottom-6 sm:right-6 sm:h-16 sm:w-16"
+        aria-busy={opening}
+        disabled={opening}
+        className="fixed bottom-[max(16px,env(safe-area-inset-bottom))] right-4 z-[300] flex h-14 w-14 items-center justify-center rounded-full border border-[#BE6CFF]/35 bg-[linear-gradient(135deg,#6557FF_0%,#8F28F3_50%,#B23CF6_100%)] shadow-[0_16px_45px_rgba(143,40,243,.38),0_0_24px_rgba(190,108,255,.16)] transition-all duration-300 hover:-translate-y-1 hover:scale-105 hover:shadow-[0_20px_55px_rgba(143,40,243,.46),0_0_30px_rgba(190,108,255,.22)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#BE6CFF] focus-visible:ring-offset-2 focus-visible:ring-offset-[#05070B] disabled:cursor-wait disabled:opacity-90 sm:bottom-6 sm:right-6 sm:h-16 sm:w-16"
       >
         <div className="flex h-11 w-11 items-center justify-center rounded-full border border-white/[0.08] bg-[#0B0C13] shadow-[inset_0_1px_0_rgba(255,255,255,.04)] sm:h-12 sm:w-12">
-          <RobotIcon />
+          {opening ? <LoadingRing /> : <RobotIcon />}
         </div>
       </button>
 
       {/* CHAT PANEL */}
       {open && (
-        <div className="fixed bottom-[84px] left-3 right-3 z-[300] mx-auto w-auto max-w-[380px] overflow-hidden rounded-[24px] border border-[#8F4BC1]/30 bg-[#0D0D14]/95 text-white shadow-[0_35px_100px_rgba(23,6,40,.72),0_0_50px_rgba(143,40,243,.12)] backdrop-blur-2xl sm:bottom-24 sm:left-auto sm:right-6 sm:mx-0 sm:w-[380px] sm:rounded-[26px]">
+        <div
+          className={
+            "fixed bottom-[84px] left-3 right-3 z-[300] mx-auto w-auto max-w-[380px] origin-bottom-right overflow-hidden rounded-[24px] border border-[#8F4BC1]/30 bg-[#0D0D14]/95 text-white shadow-[0_35px_100px_rgba(23,6,40,.72),0_0_50px_rgba(143,40,243,.12)] backdrop-blur-2xl transition-all duration-200 ease-out sm:bottom-24 sm:left-auto sm:right-6 sm:mx-0 sm:w-[380px] sm:rounded-[26px] " +
+            (visible ? "translate-y-0 scale-100 opacity-100" : "translate-y-2 scale-95 opacity-0")
+          }
+        >
           <div className="pointer-events-none absolute inset-x-[12%] top-0 h-px bg-gradient-to-r from-transparent via-[#BE6CFF]/90 to-transparent shadow-[0_0_16px_rgba(190,108,255,.45)]" />
           <div className="pointer-events-none absolute -right-24 -top-24 h-56 w-56 rounded-full bg-[#8F28F3]/15 blur-[80px]" />
 

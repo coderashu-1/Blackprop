@@ -17,7 +17,7 @@ const leftFeatures: Feature[] = [
   {
     title: "Up to $200K Accounts",
     description:
-      "Built for serious career progression with incremental capital bumps every milestone.",
+      "Scale your capital in steps as you prove consistent profitability and build your prop trading career.",
     icon: "capital",
   },
   {
@@ -27,30 +27,30 @@ const leftFeatures: Feature[] = [
     icon: "split",
   },
   {
-    title: "Swift Reward Access",
+    title: "Add-on - Payout Protector",
     description:
-      "Average <8 hour automated dispatch to crypto wallets, direct debit, or bank wire without lockups.",
+      "Trade with confidence knowing your profits are safeguarded with insurance coverage against platform risk.",
     icon: "reward",
   },
 ];
 
 const rightFeatures: Feature[] = [
   {
-    title: "No Time Limit",
+    title: "Request Demo Accounts",
     description:
-      "Trade patiently without artificial calendar deadlines, mandatory rush days, or expiry stress.",
+      "Test-drive with zero risk to refine your strategy before committing capital to live trading.",
     icon: "time",
   },
   {
-    title: "Raw Institutional Spreads",
+    title: "Multiple Trading Platform to Select",
     description:
-      "Direct liquidity feeds with 0.0 pip raw spreads, low latency execution, and zero news restrictions.",
+      "Trade your preferred instruments across multiple Platform.",
     icon: "spread",
   },
   {
     title: "Crypto Deposits and Withdrawals",
     description:
-      "Fast crypto funding options with secure deposits and withdrawals, flexible processing, and reliable wallet transfers.",
+      "Fund instantly via Bitcoin, Ethereum, USDC, with transparent on-chain settlement.",
     icon: "spread",
   },
 ];

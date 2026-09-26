@@ -149,17 +149,25 @@ const platformsByMarket: Record<Market, Platform[]> = {
 
 /* ---------------------------------------------------------
    ACCOUNT SIZES PER MARKET
-   Matches the "All Challenges" sheet exactly — every market
-   (Forex, Futures, Crypto) uses the same 6 tiers: 5K → 200K.
+   Matches the official Excel exactly:
+   Forex/Crypto use 5K → 200K; Futures uses 25K → 150K.
 --------------------------------------------------------- */
 
 const accountSizes = [
-  { value: 5000, label: "5K" },
-  { value: 10000, label: "10K" },
-  { value: 25000, label: "25K" },
-  { value: 50000, label: "50K" },
-  { value: 100000, label: "100K" },
   { value: 200000, label: "200K" },
+  { value: 100000, label: "100K" },
+  { value: 50000, label: "50K" },
+  { value: 25000, label: "25K" },
+  { value: 10000, label: "10K" },
+  { value: 5000, label: "5K" },
+];
+
+const futuresAccountSizes = [
+  { value: 150000, label: "150K" },
+  { value: 100000, label: "100K" },
+  { value: 75000, label: "75K" },
+  { value: 50000, label: "50K" },
+  { value: 25000, label: "25K" },
 ];
 
 const accountSizesByMarket: Record<
@@ -168,7 +176,7 @@ const accountSizesByMarket: Record<
 > = {
   Forex: accountSizes,
   Crypto: accountSizes,
-  Futures: accountSizes,
+  Futures: futuresAccountSizes,
 };
 
 /* Best Value placement from the new official challenge sheet:
@@ -238,12 +246,11 @@ const cryptoPricing: Record<"1 Step" | "2 Step", Record<number, number>> = {
 };
 
 const futuresPricing: Record<number, number> = {
-  5000: 45,
-  10000: 95,
-  25000: 250,
-  50000: 525,
-  100000: 1050,
-  200000: 2150,
+  25000: 150,
+  50000: 170,
+  75000: 245,
+  100000: 330,
+  150000: 360,
 };
 
 function getModelBasePrice(
@@ -304,7 +311,7 @@ const forexRules: Record<Model, RuleSet> = {
     maxDailyLoss: "3%",
     maxLoss: "5% (Trailing)",
     minProfitableDays: "5 days @ ½% per day",
-    consistency: "15% (no single day > 25% of total profits)",
+    consistency: "15%",
     profitBuffer: "3% (see FAQ)",
     weekendHold: "Available with Add-On",
     rewards: "80%",
@@ -393,8 +400,8 @@ const exactPricing: Record<
   },
   Futures: {
     "1 Step": {
-      5000: 45, 10000: 95, 25000: 250,
-      50000: 525, 100000: 1050, 200000: 2150,
+      25000: 150, 50000: 170, 75000: 245,
+      100000: 330, 150000: 360,
     },
   },
   Crypto: {
@@ -424,7 +431,7 @@ const exactAddOnPricing: Record<
       25000: { "Remove Lock on Payout": "+$47.50 (25%)", "Payout Protector": "+$47.50 (25%)" },
       50000: { "Remove Lock on Payout": "+$93.75 (25%)", "Payout Protector": "+$93.75 (25%)" },
       100000: { "Remove Lock on Payout": "+$187.50 (25%)", "Payout Protector": "+$187.50 (25%)" },
-      200000: { "Remove Lock on Payout": "+$274.75 (25%)", "Payout Protector": "+$274.75 (25%)" },
+      200000: { "Remove Lock on Payout": "$400(25%)", "Payout Protector": "$400(25%)" },
     },
     "2 Step": {
       5000: { "100% Payout": "$417.60 (20%)", "Remove Lock on Payout": "$522.00 (25%)", "Payout Protector": "$522.00 (25%)" },
@@ -546,16 +553,12 @@ function RowIcon({
 }
 
 /* =========================================================
-   PAYMENT ICONS
+   PAYMENT + PAYOUT OPTIONS
 ========================================================= */
 
 function VisaMark() {
   return (
-    <svg
-      viewBox="0 0 64 24"
-      className="h-7 w-[58px] sm:h-9 sm:w-[78px]"
-      aria-label="Visa"
-    >
+    <svg viewBox="0 0 64 24" className="h-7 w-[58px] sm:h-8 sm:w-[68px]" aria-label="Visa">
       <text
         x="2"
         y="18"
@@ -574,11 +577,7 @@ function VisaMark() {
 
 function PayPalMark() {
   return (
-    <svg
-      viewBox="0 0 86 30"
-      className="h-7 w-[70px] sm:h-9 sm:w-[88px]"
-      aria-label="PayPal"
-    >
+    <svg viewBox="0 0 86 30" className="h-7 w-[70px] sm:h-8 sm:w-[80px]" aria-label="PayPal">
       <path
         d="M17 4h9.2c5.7 0 8.6 3.1 7.6 7.8-.8 3.8-3.5 6.1-7.6 6.1h-3.7l-1.3 6H15l4.2-19.9H17Z"
         fill="#3b7ddd"
@@ -602,62 +601,9 @@ function PayPalMark() {
   );
 }
 
-function BitcoinMark() {
-  return (
-    <div
-      className="flex items-center justify-center -space-x-2.5 sm:-space-x-3"
-      aria-label="Supported cryptocurrencies"
-      role="img"
-    >
-      {/* Bitcoin */}
-      <span className="relative z-[1] flex h-6 w-6 items-center justify-center rounded-full border border-[#101117] bg-[#f7931a] shadow-[0_1px_4px_rgba(0,0,0,.25)] sm:h-7 sm:w-7">
-        <svg viewBox="0 0 32 32" className="h-4 w-4 sm:h-[17px] sm:w-[17px]" aria-hidden="true">
-          <path
-            fill="white"
-            d="M19.8 14.2c.3-1.8-1.1-2.8-3.1-3.5l.6-2.3-1.5-.4-.6 2.2c-.4-.1-.8-.2-1.1-.2l.6-2.2-1.5-.4-.6 2.3-1.1-.3-2-.5-.4 1.6 1.1.3c.6.2.7.5.6 1l-.6 2.7.1.1-.1-.1-.9 4c-.1.3-.3.5-.8.4l-1.1-.3-.7 1.7 1.9.5c.4.1.7.2 1.1.3l-.6 2.3 1.5.4.6-2.3c.4.1.8.2 1.1.3l-.6 2.3 1.5.4.6-2.3c2.5.4 4.4.2 5.2-2.1.6-1.8-.1-2.8-1.4-3.5 1-.2 1.7-.9 2-2Zm-3.5 4.7c-.5 1.8-3.5.9-4.4.6l.8-3.1c.9.2 4.1.7 3.6 2.5Zm.5-4.6c-.4 1.6-2.9.8-3.7.6l.7-2.8c.8.2 3.5.6 3 2.2Z"
-          />
-        </svg>
-      </span>
-
-      {/* Ethereum */}
-      <span className="relative z-[2] flex h-6 w-6 items-center justify-center rounded-full border border-[#101117] bg-[#627eea] shadow-[0_1px_4px_rgba(0,0,0,.25)] sm:h-7 sm:w-7">
-        <svg viewBox="0 0 32 32" className="h-4 w-4 sm:h-[17px] sm:w-[17px]" aria-hidden="true">
-          <path fill="white" d="m16 4 7 11-7 4-7-4 7-11Z" opacity=".9" />
-          <path fill="white" d="m16 20 7-4-7 12-7-12 7 4Z" opacity=".7" />
-        </svg>
-      </span>
-
-      {/* Tether / USDT */}
-      <span className="relative z-[3] flex h-6 w-6 items-center justify-center rounded-full border border-[#101117] bg-[#26a17b] shadow-[0_1px_4px_rgba(0,0,0,.25)] sm:h-7 sm:w-7">
-        <svg viewBox="0 0 32 32" className="h-4 w-4 sm:h-[17px] sm:w-[17px]" aria-hidden="true">
-          <path fill="white" d="M8 7h16v4h-6v14h-4V11H8V7Zm2 7h12v3H10v-3Z" />
-        </svg>
-      </span>
-
-      {/* USD coin */}
-      <span className="relative z-[4] flex h-6 w-6 items-center justify-center rounded-full border-2 border-white/80 bg-[#149bd7] shadow-[0_1px_4px_rgba(0,0,0,.25)] sm:h-7 sm:w-7">
-        <span className="text-[13px] font-black leading-none text-white sm:text-[14px]">$</span>
-      </span>
-
-      {/* Solana */}
-      <span className="relative z-[5] flex h-6 w-6 items-center justify-center rounded-full border border-[#101117] bg-[#14151d] shadow-[0_1px_4px_rgba(0,0,0,.25)] sm:h-7 sm:w-7">
-        <svg viewBox="0 0 32 32" className="h-4 w-4 sm:h-[17px] sm:w-[17px]" aria-hidden="true">
-          <path fill="#4be3c2" d="M8 8h14l3 3H11L8 8Zm3 6h14l-3 3H8l3-3Zm-3 6h14l3 3H11l-3-3Z" />
-        </svg>
-      </span>
-
-
-    </div>
-  );
-}
-
 function MastercardMark() {
   return (
-    <svg
-      viewBox="0 0 72 44"
-      className="h-8 w-[58px] sm:h-10 sm:w-[68px]"
-      aria-label="Mastercard"
-    >
+    <svg viewBox="0 0 72 44" className="h-8 w-[58px] sm:h-9 sm:w-[64px]" aria-label="Mastercard">
       <circle cx="29" cy="22" r="15" fill="#eb001b" />
       <circle cx="43" cy="22" r="15" fill="#f79e1b" fillOpacity=".95" />
       <path
@@ -670,11 +616,7 @@ function MastercardMark() {
 
 function AmexMark() {
   return (
-    <svg
-      viewBox="0 0 72 40"
-      className="h-8 w-[60px] sm:h-9 sm:w-[70px]"
-      aria-label="American Express"
-    >
+    <svg viewBox="0 0 72 40" className="h-8 w-[60px] sm:h-9 sm:w-[66px]" aria-label="American Express">
       <rect x="1" y="3" width="70" height="34" rx="5" fill="#2aa8e0" />
       <text
         x="36"
@@ -693,55 +635,134 @@ function AmexMark() {
 
 function UpiMark() {
   return (
-    <img
-      src="https://upload.wikimedia.org/wikipedia/commons/6/6f/UPI_logo.svg"
-      alt="UPI"
-      className="h-auto w-[64px] sm:w-[78px]"
-      loading="lazy"
-      decoding="async"
-    />
+    <div
+      className="flex h-8 min-w-[64px] items-center justify-center rounded-[7px] bg-white px-2 sm:h-9 sm:min-w-[70px]"
+      aria-label="UPI"
+    >
+      <span className="text-[18px] font-black italic tracking-[-0.06em] text-[#6b3df5]">
+        UPI
+      </span>
+    </div>
   );
 }
 
-const paymentOptions: {
-  key: string;
-  render: () => ReactElement;
-  highlight?: boolean;
-}[] = [
-  { key: "visa", render: VisaMark },
-  { key: "paypal", render: PayPalMark },
-  { key: "crypto", render: BitcoinMark, highlight: true },
-  { key: "mastercard", render: MastercardMark },
-  { key: "amex", render: AmexMark },
-  { key: "upi", render: UpiMark },
-];
-
-function PaymentOptions() {
+function CryptoPayoutMark() {
   return (
-    <div className="mt-14 sm:mt-16">
-      <p className="text-center text-[11px] font-bold uppercase tracking-[0.18em] text-white/45 sm:text-[12px]">
-        Payment Options
-      </p>
-
-      <div className="mt-5 flex flex-wrap items-center justify-center gap-1.5 sm:gap-2">
-        {paymentOptions.map((option) => {
-          const Content = option.render;
-
-          return (
-            <div
-              key={option.key}
-              className={`flex h-[50px] w-[84px] items-center justify-center rounded-[10px] border text-white transition-all sm:h-[66px] sm:w-[126px] sm:rounded-[12px] ${
-                option.highlight
-                  ? "border-[#f7931a] bg-[linear-gradient(135deg,#3a2308,#1c1408)] shadow-[0_0_0_1px_rgba(247,147,26,.35),0_10px_26px_rgba(247,147,26,.18)]"
-                  : "border-white/[0.10] bg-[#101117]"
-              }`}
-            >
-              <Content />
-            </div>
-          );
-        })}
-      </div>
+    <div className="flex items-center gap-3" aria-label="Crypto payout">
+      <span className="relative flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[#f7931a]/40 bg-[radial-gradient(circle_at_30%_25%,#ffb347,#f7931a_58%,#a84b00)] shadow-[0_7px_22px_rgba(247,147,26,.24)]">
+        <svg viewBox="0 0 32 32" className="h-5 w-5" aria-hidden="true">
+          <path
+            fill="white"
+            d="M19.8 14.2c.3-1.8-1.1-2.8-3.1-3.5l.6-2.3-1.5-.4-.6 2.2c-.4-.1-.8-.2-1.1-.2l.6-2.2-1.5-.4-.6 2.3-1.1-.3-2-.5-.4 1.6 1.1.3c.6.2.7.5.6 1l-.6 2.7.1.1-.1-.1-.9 4c-.1.3-.3.5-.8.4l-1.1-.3-.7 1.7 1.9.5c.4.1.7.2 1.1.3l-.6 2.3 1.5.4.6-2.3c.4.1.8.2 1.1.3l-.6 2.3 1.5.4.6-2.3c2.5.4 4.4.2 5.2-2.1.6-1.8-.1-2.8-1.4-3.5 1-.2 1.7-.9 2-2Zm-3.5 4.7c-.5 1.8-3.5.9-4.4.6l.8-3.1c.9.2 4.1.7 3.6 2.5Zm.5-4.6c-.4 1.6-2.9.8-3.7.6l.7-2.8c.8.2 3.5.6 3 2.2Z"
+          />
+        </svg>
+      </span>
+      <span className="text-left">
+        <span className="block text-[12px] font-black uppercase tracking-[0.13em] text-white sm:text-[13px]">
+          Crypto
+        </span>
+        <span className="mt-0.5 block text-[9px] font-medium text-white/42 sm:text-[10px]">
+          Fast digital payouts
+        </span>
+      </span>
     </div>
+  );
+}
+
+function RisePayoutMark() {
+  return (
+    <div className="flex items-center gap-3" aria-label="RISE payout">
+      <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[13px] border border-[#a94cff]/40 bg-[linear-gradient(145deg,#32164c,#17101f)] shadow-[0_7px_22px_rgba(169,76,255,.20)]">
+        <span className="text-[17px] font-black italic tracking-[-0.08em] text-[#d8a5ff]">
+          R
+        </span>
+      </span>
+      <span className="text-left">
+        <span className="block text-[12px] font-black uppercase tracking-[0.13em] text-white sm:text-[13px]">
+          RISE
+        </span>
+        <span className="mt-0.5 block text-[9px] font-medium text-white/42 sm:text-[10px]">
+          Secure payout network
+        </span>
+      </span>
+    </div>
+  );
+}
+
+function PaymentPayoutOptions() {
+  return (
+    <section className="mx-auto mt-10 w-full max-w-[1120px] px-1 sm:mt-14">
+      <div className="relative overflow-hidden rounded-[24px] border border-white/[0.08] bg-[#090a0f] p-4 shadow-[0_24px_80px_rgba(0,0,0,.28)] sm:rounded-[30px] sm:p-6 lg:p-7">
+        <div className="pointer-events-none absolute -left-24 -top-24 h-56 w-56 rounded-full bg-[#a94cff]/[0.07] blur-3xl" />
+        <div className="pointer-events-none absolute -bottom-24 -right-24 h-56 w-56 rounded-full bg-[#a94cff]/[0.05] blur-3xl" />
+
+        <div className="relative z-10">
+          <div className="mb-5 text-center sm:mb-7">
+            <div className="mx-auto mb-2.5 flex items-center justify-center gap-2.5">
+              <span className="h-px w-8 bg-gradient-to-r from-transparent to-[#a94cff]/70 sm:w-14" />
+              <span className="text-[10px] font-black uppercase tracking-[0.25em] text-[#c58cff] sm:text-[11px]">
+                Payment &amp; Payout
+              </span>
+              <span className="h-px w-8 bg-gradient-to-l from-transparent to-[#a94cff]/70 sm:w-14" />
+            </div>
+            <p className="text-[10px] font-medium text-white/35 sm:text-[12px]">
+              Simple, secure and flexible
+            </p>
+          </div>
+
+          <div className="grid gap-4 lg:grid-cols-2">
+            {/* PAYMENT OPTIONS */}
+            <div className="relative overflow-hidden rounded-[20px] border border-white/[0.08] bg-white/[0.025] p-4 sm:p-5">
+              <div className="pointer-events-none absolute -right-12 -top-12 h-32 w-32 rounded-full bg-[#a94cff]/[0.08] blur-3xl" />
+              <div className="relative z-10">
+                <div className="mb-4 flex items-center justify-between gap-3">
+                  <div>
+                    <p className="text-[11px] font-black uppercase tracking-[0.18em] text-white sm:text-[13px]">Payment Options</p>
+                    <p className="mt-1 text-[9px] text-white/35 sm:text-[11px]">Pay securely with your preferred method</p>
+                  </div>
+                  <span className="shrink-0 rounded-full border border-[#a94cff]/20 bg-[#a94cff]/[0.07] px-2.5 py-1 text-[8px] font-bold uppercase tracking-[0.12em] text-[#c58cff] sm:text-[9px]">Secure</span>
+                </div>
+                <div className="grid grid-cols-2 gap-2 sm:grid-cols-5">
+                  {[
+                    { key: "visa", label: "Visa", render: VisaMark },
+                    { key: "mastercard", label: "Mastercard", render: MastercardMark },
+                    { key: "amex", label: "Amex", render: AmexMark },
+                    { key: "paypal", label: "PayPal", render: PayPalMark },
+                    { key: "upi", label: "UPI", render: UpiMark },
+                  ].map((option) => {
+                    const Content = option.render;
+                    return (
+                      <div key={option.key} className="flex min-h-[56px] items-center justify-center rounded-[12px] border border-white/[0.07] bg-[#0d0f14] px-2 transition-all duration-200 hover:border-white/[0.16] hover:bg-white/[0.045] sm:min-h-[68px]" aria-label={option.label}>
+                        <Content />
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+
+            {/* PAYOUT OPTIONS */}
+            <div className="relative overflow-hidden rounded-[20px] border border-[#a94cff]/15 bg-[linear-gradient(145deg,rgba(169,76,255,.055),rgba(255,255,255,.018))] p-4 sm:p-5">
+              <div className="pointer-events-none absolute -left-12 -top-12 h-32 w-32 rounded-full bg-[#a94cff]/[0.09] blur-3xl" />
+              <div className="relative z-10">
+                <div className="mb-4">
+                  <p className="text-[11px] font-black uppercase tracking-[0.18em] text-white sm:text-[13px]">Payout Options</p>
+                  <p className="mt-1 text-[9px] text-white/35 sm:text-[11px]">Choose how you want to receive your payout</p>
+                </div>
+                <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
+                  <div className="flex min-h-[68px] items-center rounded-[14px] border border-[#f7931a]/20 bg-[linear-gradient(135deg,rgba(247,147,26,.07),rgba(13,15,20,.92))] px-4 transition-all duration-200 hover:border-[#f7931a]/40 hover:bg-[rgba(247,147,26,.08)]">
+                    <CryptoPayoutMark />
+                  </div>
+                  <div className="flex min-h-[68px] items-center rounded-[14px] border border-[#a94cff]/20 bg-[linear-gradient(135deg,rgba(169,76,255,.08),rgba(13,15,20,.92))] px-4 transition-all duration-200 hover:border-[#a94cff]/45 hover:bg-[rgba(169,76,255,.08)]">
+                    <RisePayoutMark />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -811,7 +832,7 @@ export function Challenges() {
     [availableSizes]
   );
 
-  // Challenge fees in the new sheet are shown with a 30% discount.
+  // Challenge fees use the exact 30% discounted values shown in the official Excel.
   function priceFor(value: number) {
     const original = getModelBasePrice(market, model, value);
     const sale = Math.round(original * 0.7 * 100) / 100;
@@ -1240,7 +1261,7 @@ export function Challenges() {
           <div className="-mx-4 overflow-x-auto px-4 pb-2 [scrollbar-width:thin] sm:mx-0 sm:px-0">
             <div className="flex min-w-max gap-2 sm:min-w-0 sm:gap-2">
               {/* LEFT LABEL COLUMN — same row heights as every account card */}
-              <div className="sticky left-0 z-20 w-[158px] shrink-0 bg-[#080a0e] pt-[109px] sm:relative sm:w-[210px] lg:w-[225px]">
+              <div className="sticky left-0 z-20 w-[245px] shrink-0 bg-[#080a0e] pt-[109px] sm:relative sm:w-[245px]">
                 {rows.map((row, index) => (
                   <div
                     key={`${row.label}-${index}`}
@@ -1265,7 +1286,7 @@ export function Challenges() {
               </div>
 
               {/* ACCOUNT CARDS */}
-              <div className="flex gap-2 sm:grid sm:grid-cols-3 sm:gap-2 lg:grid-cols-6">
+              <div className="flex min-w-max gap-3">
                 {sortedSizes.map((item) => {
                   const selected = item.value === accountSize;
                   const price = priceFor(item.value);
@@ -1273,7 +1294,7 @@ export function Challenges() {
                   return (
                     <div
                       key={item.value}
-                      className="relative w-[148px] shrink-0 pt-[14px] sm:w-auto sm:min-w-0"
+                      className="relative w-[188px] min-w-[188px] shrink-0 pt-[14px]"
                     >
                       {isBestValue(market, model, item.value) && (
                         <span className="absolute left-1/2 top-0 z-30 -translate-x-1/2 whitespace-nowrap rounded-full bg-[linear-gradient(90deg,#9f4cff,#a83df0)] px-3.5 py-1.5 text-[9px] font-black uppercase tracking-[0.03em] text-white shadow-[0_6px_16px_rgba(158,63,241,.28)]">
@@ -1311,7 +1332,7 @@ export function Challenges() {
                                 : index === 0
                                   ? "min-h-[64px]"
                                   : "min-h-[58px]"
-                            } items-center justify-center border-b border-white/[0.045] px-2 text-center text-[10px] font-medium leading-4 text-white/76 sm:px-2.5 sm:text-[11px] sm:leading-5 lg:text-[12px]`}
+                            } items-center justify-center border-b border-white/[0.045] px-3 text-center text-[10px] font-medium leading-[1.35] text-white/76 sm:px-3 sm:text-[11px] sm:leading-5 lg:text-[12px]`}
                           >
                             {row.kind === "button" ? (
                               <button
@@ -1353,8 +1374,8 @@ export function Challenges() {
           </div>
         </div>
 
-        {/* PAYMENT OPTIONS */}
-        <PaymentOptions />
+        {/* PAYMENT + PAYOUT OPTIONS */}
+        <PaymentPayoutOptions />
       </div>
     </section>
   );
