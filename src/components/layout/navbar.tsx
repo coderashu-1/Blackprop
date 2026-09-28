@@ -242,10 +242,10 @@ export function Navbar() {
               Launch Offer
             </span> */}
 
-            <span className="hidden text-[10px] font-medium text-white md:inline lg:text-[14px]">
-              Start your BlackProp journey with{" "}
-              <strong className="font-black text-white">30% OFF</strong>
-            </span>
+            <span className="hidden text-[10px] font-black text-white md:inline lg:text-[14px]">
+  Start your BlackProp journey with{" "}
+  <strong className="font-black text-white">30% OFF</strong>
+</span>
 
             <button
               type="button"

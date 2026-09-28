@@ -197,42 +197,42 @@ const FAQS: FAQ[] = [
   { cat: "1-Step Futures Plan", q: "How are taxes handled?", a: "You're treated as an independent contractor and are responsible for any and all taxes on your gains." },
   { cat: "1-Step Futures Plan", q: "How are affiliates credited?", a: "Affiliates are credited for referrals when a user creates an account using a link or discount code provided by the Affiliate." },
 
-  // ---------------- WL2 PLAN (NEW) ----------------
-  { cat: "WL2 Plan", q: "What are the rules for the Funded Account?", a: "Exactly the same as your Assessment account, except the Funded Account has no profit target." },
-  { cat: "WL2 Plan", q: "Can I use an Automated Strategy?", a: "Yes, subject to our Prohibited Trading policy." },
-  { cat: "WL2 Plan", q: "How do you calculate the Daily Loss Limit?", a: "The max amount an account may lose in a single day, resetting at 5:00 PM EST, calculated from the greater of the prior day's end-of-day balance (closed P&L only) or end-of-day equity (balance + open P&L) — so open profit at reset raises the limit, and open losses don't shrink it below balance. Example: $100,000 account, 5% Daily Loss Limit, equity of $102,000 at reset (open profit) — 5% of $102,000 ($5,100) means breach at $96,900. With no open positions or open positions at a loss, the limit is based on the $100,000 balance instead, breaching at $95,000." },
-  { cat: "WL2 Plan", q: "How do you calculate the Max Drawdown (STATIC)?", a: "Initially set at 6% and static, based on CLOSED BALANCE, so it stays locked at that value however high the account grows (you can still separately violate the Daily Loss Limit). Example: $100,000 starting balance locks the drawdown floor at $94,000. All plans have \"Lock Upon Payout\" enabled by default, which permanently locks the Max Drawdown at the original starting balance once you submit a payout request — you can purchase an add-on for 25% of the purchase price to disable this." },
-  { cat: "WL2 Plan", q: "If I have a hard breach in my Funded Account and there are gains, do I forfeit those gains?", a: "Yes, unless you've purchased the Payout Protector add-on." },
-  { cat: "WL2 Plan", q: "What is Payout Protector?", a: "An optional add-on that lets you still receive a payout on gains despite a breach, provided all other withdrawal conditions are met and the account isn't otherwise in violation of the Terms and Conditions." },
-  { cat: "WL2 Plan", q: "How does Payout Protector work?", a: "Example: a $100,000 Funded account with $8,000 in gains breaches. Without Payout Protector, the account closes and the $8,000 is forfeited. With it, the account still closes, but you still receive your portion of the $8,000." },
-  { cat: "WL2 Plan", q: "Does Payout Protector prevent my account from breaching?", a: "No — the account is still considered breached on a rule violation. It only protects your gain from forfeiture." },
-  { cat: "WL2 Plan", q: "Is Payout Protector required?", a: "No, it's entirely optional and must be selected at purchase." },
-  { cat: "WL2 Plan", q: "How are taxes handled?", a: "You're treated as an independent contractor and are responsible for all taxes on your gains." },
-  { cat: "WL2 Plan", q: "How will I see the charge on my Statement?", a: "Charges come across in the name of dashboardanalytix.com." },
-  { cat: "WL2 Plan", q: "What is the minimum age I must be to be part of your program?", a: "At least 18, or the minimum legal age in your country, to purchase an assessment." },
-  { cat: "WL2 Plan", q: "Is there a breach for inactivity?", a: "Yes — no trading activity for 30 consecutive days will breach the account." },
-  { cat: "WL2 Plan", q: "Am I subject to any position limits?", a: "Your maximum position is determined by available margin. We reserve the right to increase margin requirements, limit open positions, and revise drawdown halt levels at any time; we or the Broker may refuse any order." },
-  { cat: "WL2 Plan", q: "Do we manipulate the pricing or executions you receive in your Funded Account?", a: "No — we have no control over pricing from the liquidity provider or over your trade executions." },
-  { cat: "WL2 Plan", q: "How do I withdraw the gains in my Funded Account?", a: "Request a withdrawal any time from your trader dashboard, no more than once every 30 days, via the Withdraw Profits button. Gains are paid through the available outbound payment solutions, which may change over time." },
-  { cat: "WL2 Plan", q: "How Long does it take to receive my Funded Account?", a: "Once KYC and the Trader Agreement are completed (with supporting documentation), your Funded Account is created, funded, and issued typically within 24-48 business hours." },
-  { cat: "WL2 Plan", q: "Once I pass the Assessment am I provided with a demo or live account?", a: "You're provided with a funded account backed by our capital. This capital is notional and may not match the amount actually on deposit with the Liquidity Provider; notional funding doesn't affect your trading conditions." },
-  { cat: "WL2 Plan", q: "When can I withdraw the gains and how does that affect my Maximum Drawdown?", a: "Your first withdrawal can be requested any time, subject to an 80/20 profit split; then every 30 days after. The drawdown doesn't reset on withdrawal. Example: account grows from $100,000 to $120,000, you withdraw $16,000 — you receive $12,800, we retain $3,200, and the Maximum Drawdown locks at the starting balance unless you bought the add-on to disable that lock. Withdrawing all your profit would violate the Maximum Drawdown rule and lose the account." },
-  { cat: "WL2 Plan", q: "Who is the counterparty to my trades?", a: "For risk management and cost purposes, we may act as direct counterparty to certain trades, executed at arm's-length third-party prices. Your gain/loss isn't calculated differently, though this creates a potential conflict of interest since such trades don't net a gain or loss to us." },
-  { cat: "WL2 Plan", q: "Can I trade during News Events?", a: "Opening a position within 3 minutes before or after a News Event is prohibited — violating positions may be closed with P&L removed, leverage reduced, or the account breached, at the Company's discretion." },
-  { cat: "WL2 Plan", q: "Do I have to use one of your accounts for the Assessment or can I use my own?", a: "You must use an account we provide, since our risk management software is synced to it to analyze performance and rule violations in real time." },
-  { cat: "WL2 Plan", q: "Do your accounts charge commissions?", a: "Funded accounts receive the same pricing and commissions as charged by our Liquidity Provider to other self-funded retail trading accounts." },
-  { cat: "WL2 Plan", q: "How are affiliates credited?", a: "Affiliates are credited for referrals when a user creates an account using a link or discount code provided by the Affiliate." },
-  { cat: "WL2 Plan", q: "What are the trading hours?", a: "Generally set by the Liquidity Provider unless set by our rules. Check per-symbol hours: DXtrade (right-click symbol > Instrument Info), MatchTrader (click symbol > Info), cTrader (Symbol Window > Market Hours)." },
-  { cat: "WL2 Plan", q: "What Countries are accepted?", a: "Traders from all countries can take part, excluding OFAC-listed countries or as otherwise limited at the Company's discretion." },
-  { cat: "WL2 Plan", q: "What is the leverage?", a: "Up to 50:1 on Forex and Metals, 10:1 on Indices, 5:1 on Oil, and 2:1 on Cryptocurrencies." },
-  { cat: "WL2 Plan", q: "What is the policy on Prohibited Trading Activity?", a: "Prohibited trading includes exploiting pricing/platform errors or latency, using non-public or insider info, front-running, jeopardizing Liquidity Provider relationships or creating regulatory issues, using third-party or off-the-shelf pass strategies, switching strategies between assessment and funded stages, arbitraging accounts, and trading within 3 minutes of a News Event. Violations can mean termination and forfeiture of fees, with trading activity reviewed before a funded account is issued." },
-  { cat: "WL2 Plan", q: "What Platform can I trade on?", a: "Integrated with DXtrade, MatchTrader and cTrader via GooeyTrade." },
-  { cat: "WL2 Plan", q: "What products can I trade?", a: "Any products streamed by the Liquidity Provider, including FX pairs, CFD Indices, Commodities, Metals and Cryptocurrencies." },
-  { cat: "WL2 Plan", q: "Where do I track the progress of my account?", a: "You get access to a trader dashboard that updates roughly every 60 seconds. Monitoring your breach levels is your responsibility." },
-  { cat: "WL2 Plan", q: "What is 1 lot equal to on the Trading Platform?", a: "Forex: 1 lot = $100k notional. Index: 1 lot = 1 contract (SPX500 = 10 contracts, JPN225 = 500 contracts). Cryptos: 1 lot = 1 coin. Silver: 1 lot = 5,000 oz. Gold: 1 lot = 100 oz. Oil: 1 lot = 100 barrels." },
-  { cat: "WL2 Plan", q: "What is the difference between a Hard Breach and Soft Breach rule?", a: "Soft breach: we close the trades that violated the rule, but you can keep trading. Hard breach: you violated the Daily Loss Limit or Max Drawdown rule — either fails your Assessment or removes your Funded Account." },
-  { cat: "WL2 Plan", q: "Can I hold positions over the weekend?", a: "Yes, positions can be held over the weekend." },
-  { cat: "WL2 Plan", q: "How many Assessments and/or Funded accounts may I have active at one time?", a: "Evaluation limits: only one evaluation of a specific account size and plan tier at a time across all platforms (e.g. one 100k One-Step and one 100k Two-Step can run together, but not two 100k One-Step evaluations across different platforms). Maximum $1 million in active evaluation plans per person, made up of different sizes/tiers. Maximum $1 million in active funded plans per person — with two passed accounts of the same size, you can either run one at a time and wait for a breach, or combine them into one double-size account if neither has traded yet. There's no limit on compounding: you can grow a funded account to any balance, including well beyond $1 million." },
+  // ---------------- BlackProp Rules (NEW) ----------------
+  { cat: "BlackProp Rules", q: "What are the rules for the Funded Account?", a: "Exactly the same as your Assessment account, except the Funded Account has no profit target." },
+  { cat: "BlackProp Rules", q: "Can I use an Automated Strategy?", a: "Yes, subject to our Prohibited Trading policy." },
+  { cat: "BlackProp Rules", q: "How do you calculate the Daily Loss Limit?", a: "The max amount an account may lose in a single day, resetting at 5:00 PM EST, calculated from the greater of the prior day's end-of-day balance (closed P&L only) or end-of-day equity (balance + open P&L) — so open profit at reset raises the limit, and open losses don't shrink it below balance. Example: $100,000 account, 5% Daily Loss Limit, equity of $102,000 at reset (open profit) — 5% of $102,000 ($5,100) means breach at $96,900. With no open positions or open positions at a loss, the limit is based on the $100,000 balance instead, breaching at $95,000." },
+  { cat: "BlackProp Rules", q: "How do you calculate the Max Drawdown (STATIC)?", a: "Initially set at 6% and static, based on CLOSED BALANCE, so it stays locked at that value however high the account grows (you can still separately violate the Daily Loss Limit). Example: $100,000 starting balance locks the drawdown floor at $94,000. All plans have \"Lock Upon Payout\" enabled by default, which permanently locks the Max Drawdown at the original starting balance once you submit a payout request — you can purchase an add-on for 25% of the purchase price to disable this." },
+  { cat: "BlackProp Rules", q: "If I have a hard breach in my Funded Account and there are gains, do I forfeit those gains?", a: "Yes, unless you've purchased the Payout Protector add-on." },
+  { cat: "BlackProp Rules", q: "What is Payout Protector?", a: "An optional add-on that lets you still receive a payout on gains despite a breach, provided all other withdrawal conditions are met and the account isn't otherwise in violation of the Terms and Conditions." },
+  { cat: "BlackProp Rules", q: "How does Payout Protector work?", a: "Example: a $100,000 Funded account with $8,000 in gains breaches. Without Payout Protector, the account closes and the $8,000 is forfeited. With it, the account still closes, but you still receive your portion of the $8,000." },
+  { cat: "BlackProp Rules", q: "Does Payout Protector prevent my account from breaching?", a: "No — the account is still considered breached on a rule violation. It only protects your gain from forfeiture." },
+  { cat: "BlackProp Rules", q: "Is Payout Protector required?", a: "No, it's entirely optional and must be selected at purchase." },
+  { cat: "BlackProp Rules", q: "How are taxes handled?", a: "You're treated as an independent contractor and are responsible for all taxes on your gains." },
+  { cat: "BlackProp Rules", q: "How will I see the charge on my Statement?", a: "Charges come across in the name of dashboardanalytix.com." },
+  { cat: "BlackProp Rules", q: "What is the minimum age I must be to be part of your program?", a: "At least 18, or the minimum legal age in your country, to purchase an assessment." },
+  { cat: "BlackProp Rules", q: "Is there a breach for inactivity?", a: "Yes — no trading activity for 30 consecutive days will breach the account." },
+  { cat: "BlackProp Rules", q: "Am I subject to any position limits?", a: "Your maximum position is determined by available margin. We reserve the right to increase margin requirements, limit open positions, and revise drawdown halt levels at any time; we or the Broker may refuse any order." },
+  { cat: "BlackProp Rules", q: "Do we manipulate the pricing or executions you receive in your Funded Account?", a: "No — we have no control over pricing from the liquidity provider or over your trade executions." },
+  { cat: "BlackProp Rules", q: "How do I withdraw the gains in my Funded Account?", a: "Request a withdrawal any time from your trader dashboard, no more than once every 30 days, via the Withdraw Profits button. Gains are paid through the available outbound payment solutions, which may change over time." },
+  { cat: "BlackProp Rules", q: "How Long does it take to receive my Funded Account?", a: "Once KYC and the Trader Agreement are completed (with supporting documentation), your Funded Account is created, funded, and issued typically within 24-48 business hours." },
+  { cat: "BlackProp Rules", q: "Once I pass the Assessment am I provided with a demo or live account?", a: "You're provided with a funded account backed by our capital. This capital is notional and may not match the amount actually on deposit with the Liquidity Provider; notional funding doesn't affect your trading conditions." },
+  { cat: "BlackProp Rules", q: "When can I withdraw the gains and how does that affect my Maximum Drawdown?", a: "Your first withdrawal can be requested any time, subject to an 80/20 profit split; then every 30 days after. The drawdown doesn't reset on withdrawal. Example: account grows from $100,000 to $120,000, you withdraw $16,000 — you receive $12,800, we retain $3,200, and the Maximum Drawdown locks at the starting balance unless you bought the add-on to disable that lock. Withdrawing all your profit would violate the Maximum Drawdown rule and lose the account." },
+  { cat: "BlackProp Rules", q: "Who is the counterparty to my trades?", a: "For risk management and cost purposes, we may act as direct counterparty to certain trades, executed at arm's-length third-party prices. Your gain/loss isn't calculated differently, though this creates a potential conflict of interest since such trades don't net a gain or loss to us." },
+  { cat: "BlackProp Rules", q: "Can I trade during News Events?", a: "Opening a position within 3 minutes before or after a News Event is prohibited — violating positions may be closed with P&L removed, leverage reduced, or the account breached, at the Company's discretion." },
+  { cat: "BlackProp Rules", q: "Do I have to use one of your accounts for the Assessment or can I use my own?", a: "You must use an account we provide, since our risk management software is synced to it to analyze performance and rule violations in real time." },
+  { cat: "BlackProp Rules", q: "Do your accounts charge commissions?", a: "Funded accounts receive the same pricing and commissions as charged by our Liquidity Provider to other self-funded retail trading accounts." },
+  { cat: "BlackProp Rules", q: "How are affiliates credited?", a: "Affiliates are credited for referrals when a user creates an account using a link or discount code provided by the Affiliate." },
+  { cat: "BlackProp Rules", q: "What are the trading hours?", a: "Generally set by the Liquidity Provider unless set by our rules. Check per-symbol hours: DXtrade (right-click symbol > Instrument Info), MatchTrader (click symbol > Info), cTrader (Symbol Window > Market Hours)." },
+  { cat: "BlackProp Rules", q: "What Countries are accepted?", a: "Traders from all countries can take part, excluding OFAC-listed countries or as otherwise limited at the Company's discretion." },
+  { cat: "BlackProp Rules", q: "What is the leverage?", a: "Up to 50:1 on Forex and Metals, 10:1 on Indices, 5:1 on Oil, and 2:1 on Cryptocurrencies." },
+  { cat: "BlackProp Rules", q: "What is the policy on Prohibited Trading Activity?", a: "Prohibited trading includes exploiting pricing/platform errors or latency, using non-public or insider info, front-running, jeopardizing Liquidity Provider relationships or creating regulatory issues, using third-party or off-the-shelf pass strategies, switching strategies between assessment and funded stages, arbitraging accounts, and trading within 3 minutes of a News Event. Violations can mean termination and forfeiture of fees, with trading activity reviewed before a funded account is issued." },
+  { cat: "BlackProp Rules", q: "What Platform can I trade on?", a: "Integrated with DXtrade, MatchTrader and cTrader via GooeyTrade." },
+  { cat: "BlackProp Rules", q: "What products can I trade?", a: "Any products streamed by the Liquidity Provider, including FX pairs, CFD Indices, Commodities, Metals and Cryptocurrencies." },
+  { cat: "BlackProp Rules", q: "Where do I track the progress of my account?", a: "You get access to a trader dashboard that updates roughly every 60 seconds. Monitoring your breach levels is your responsibility." },
+  { cat: "BlackProp Rules", q: "What is 1 lot equal to on the Trading Platform?", a: "Forex: 1 lot = $100k notional. Index: 1 lot = 1 contract (SPX500 = 10 contracts, JPN225 = 500 contracts). Cryptos: 1 lot = 1 coin. Silver: 1 lot = 5,000 oz. Gold: 1 lot = 100 oz. Oil: 1 lot = 100 barrels." },
+  { cat: "BlackProp Rules", q: "What is the difference between a Hard Breach and Soft Breach rule?", a: "Soft breach: we close the trades that violated the rule, but you can keep trading. Hard breach: you violated the Daily Loss Limit or Max Drawdown rule — either fails your Assessment or removes your Funded Account." },
+  { cat: "BlackProp Rules", q: "Can I hold positions over the weekend?", a: "Yes, positions can be held over the weekend." },
+  { cat: "BlackProp Rules", q: "How many Assessments and/or Funded accounts may I have active at one time?", a: "Evaluation limits: only one evaluation of a specific account size and plan tier at a time across all platforms (e.g. one 100k One-Step and one 100k Two-Step can run together, but not two 100k One-Step evaluations across different platforms). Maximum $1 million in active evaluation plans per person, made up of different sizes/tiers. Maximum $1 million in active funded plans per person — with two passed accounts of the same size, you can either run one at a time and wait for a breach, or combine them into one double-size account if neither has traded yet. There's no limit on compounding: you can grow a funded account to any balance, including well beyond $1 million." },
 ];
 
 const CATEGORIES = Array.from(new Set(FAQS.map((f) => f.cat)));
@@ -262,6 +262,7 @@ export function AIChatbot() {
   const [messages, setMessages] = useState<Message[]>([{ sender: "bot", text: GREETING }]);
   const [view, setView] = useState<"categories" | "questions" | "answer">("categories");
   const [activeCat, setActiveCat] = useState<string | null>(null);
+  const [searchQuery, setSearchQuery] = useState("");
 
   // Fade/scale the panel in a frame after it mounts, so the transition classes animate.
   useEffect(() => {
@@ -299,22 +300,36 @@ export function AIChatbot() {
   }
 
   function backToCategories() {
+    setSearchQuery("");
     setView("categories");
     setActiveCat(null);
     setMessages((prev) => [...prev, { sender: "bot", text: "Which plan would you like to ask about?" }]);
   }
 
   function backToQuestions() {
+    setSearchQuery("");
     setView("questions");
   }
 
   function restartConversation() {
+    setSearchQuery("");
     setMessages([{ sender: "bot", text: GREETING }]);
     setView("categories");
     setActiveCat(null);
   }
 
   const questionsForCat = activeCat ? FAQS.filter((f) => f.cat === activeCat) : [];
+
+  const searchResults = searchQuery.trim()
+    ? FAQS.filter((faq) => {
+        const query = searchQuery.toLowerCase().trim();
+        return (
+          faq.q.toLowerCase().includes(query) ||
+          faq.a.toLowerCase().includes(query) ||
+          faq.cat.toLowerCase().includes(query)
+        );
+      }).slice(0, 12)
+    : [];
 
   return (
     <>
@@ -337,7 +352,7 @@ export function AIChatbot() {
       {open && (
         <div
           className={
-            "fixed bottom-[84px] left-3 right-3 z-[300] mx-auto w-auto max-w-[380px] origin-bottom-right overflow-hidden rounded-[24px] border border-[#8F4BC1]/30 bg-[#0D0D14]/95 text-white shadow-[0_35px_100px_rgba(23,6,40,.72),0_0_50px_rgba(143,40,243,.12)] backdrop-blur-2xl transition-all duration-200 ease-out sm:bottom-24 sm:left-auto sm:right-6 sm:mx-0 sm:w-[380px] sm:rounded-[26px] " +
+            "fixed bottom-[92px] left-3 right-3 z-[300] mx-auto w-auto max-w-[380px] origin-bottom-right overflow-hidden rounded-[24px] border border-[#8F4BC1]/30 bg-[#0D0D14]/95 text-white shadow-[0_35px_100px_rgba(23,6,40,.72),0_0_50px_rgba(143,40,243,.12)] backdrop-blur-2xl transition-all duration-200 ease-out sm:bottom-28 sm:left-auto sm:right-6 sm:mx-0 sm:w-[380px] sm:rounded-[26px] " +
             (visible ? "translate-y-0 scale-100 opacity-100" : "translate-y-2 scale-95 opacity-0")
           }
         >
@@ -359,7 +374,7 @@ export function AIChatbot() {
           </div>
 
           {/* MESSAGES */}
-          <div className="relative h-[300px] space-y-3 overflow-y-auto p-4 [scrollbar-color:#3A2450_transparent] [scrollbar-width:thin] sm:h-[330px]">
+          <div className="relative h-[220px] space-y-3 overflow-y-auto p-4 [scrollbar-color:#3A2450_transparent] [scrollbar-width:thin] sm:h-[250px]">
             {messages.map((message, index) => (
               <div
                 key={`${message.sender}-${index}`}
@@ -376,59 +391,176 @@ export function AIChatbot() {
 
           {/* OPTIONS */}
           <div className="relative max-h-[220px] overflow-y-auto border-t border-white/[0.08] bg-[#0F0F17] p-4">
-            {view === "categories" && (
-              <div className="mb-3 flex flex-wrap gap-2">
-                {CATEGORIES.map((cat) => (
-                  <button
-                    key={cat}
-                    type="button"
-                    onClick={() => pickCategory(cat)}
-                    className="rounded-full border border-[#BE6CFF]/25 bg-[#8F28F3]/[0.10] px-3 py-2 text-[11px] font-bold text-[#D3A3FF] transition-all duration-200 hover:border-[#BE6CFF]/45 hover:bg-[#8F28F3]/[0.18] hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#BE6CFF]/70 sm:text-xs"
-                  >
-                    {cat}
-                  </button>
-                ))}
-              </div>
-            )}
+            {/* SEARCH */}
+            <div className="mb-3">
+              <div className="relative">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-white/35"
+                  aria-hidden="true"
+                >
+                  <circle cx="11" cy="11" r="6.5" stroke="currentColor" strokeWidth="1.8" />
+                  <path
+                    d="m16 16 4 4"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                    strokeLinecap="round"
+                  />
+                </svg>
 
-            {view === "questions" && (
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Search FAQs..."
+                  aria-label="Search FAQs"
+                  className="w-full rounded-xl border border-white/[0.08] bg-[#171822] py-2.5 pl-9 pr-9 text-[12px] font-medium text-white outline-none placeholder:text-white/30 transition focus:border-[#BE6CFF]/40 focus:bg-[#1A1923] focus:ring-1 focus:ring-[#BE6CFF]/20 sm:text-[13px]"
+                />
+
+                {searchQuery && (
+                  <button
+                    type="button"
+                    onClick={() => setSearchQuery("")}
+                    aria-label="Clear search"
+                    className="absolute right-2.5 top-1/2 flex h-6 w-6 -translate-y-1/2 items-center justify-center rounded-full text-white/35 transition hover:bg-white/[0.06] hover:text-white"
+                  >
+                    ×
+                  </button>
+                )}
+              </div>
+            </div>
+
+            {/* SEARCH RESULTS */}
+            {searchQuery.trim() ? (
+              <div className="space-y-2">
+                {searchResults.length > 0 ? (
+                  <>
+                    <p className="mb-2 text-[10px] font-bold uppercase tracking-[0.12em] text-white/30">
+                      {searchResults.length === 12
+                        ? "Top results"
+                        : `${searchResults.length} result${searchResults.length === 1 ? "" : "s"}`}
+                    </p>
+
+                    {searchResults.map((faq, i) => (
+                      <button
+                        key={`${faq.cat}-${i}`}
+                        type="button"
+                        onClick={() => {
+                          askQuestion(faq);
+                          setSearchQuery("");
+                        }}
+                        className="w-full rounded-xl border border-[#BE6CFF]/20 bg-[#8F28F3]/[0.08] px-3 py-2.5 text-left transition-all duration-200 hover:border-[#BE6CFF]/45 hover:bg-[#8F28F3]/[0.16] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#BE6CFF]/70"
+                      >
+                        <span className="block text-[11px] font-bold leading-4 text-[#D3A3FF] sm:text-xs">
+                          {faq.q}
+                        </span>
+                        <span className="mt-1 block text-[9px] font-medium uppercase tracking-[0.08em] text-white/30">
+                          {faq.cat}
+                        </span>
+                      </button>
+                    ))}
+                  </>
+                ) : (
+                  <div className="rounded-xl border border-white/[0.06] bg-[#171822] px-3 py-4 text-center">
+                    <p className="text-[12px] font-semibold text-white/55">
+                      No matching FAQs found.
+                    </p>
+                    <p className="mt-1 text-[10px] text-white/30">
+                      Try a different keyword.
+                    </p>
+                  </div>
+                )}
+              </div>
+            ) : (
               <>
-                <div className="mb-3 flex flex-col gap-2">
-                  {questionsForCat.map((faq, i) => (
+                {/* BACK OPTIONS — kept at the TOP */}
+                {view === "questions" && (
+                  <div className="mb-3 flex items-center justify-between gap-2">
                     <button
-                      key={i}
                       type="button"
-                      onClick={() => askQuestion(faq)}
-                      className="rounded-xl border border-[#BE6CFF]/25 bg-[#8F28F3]/[0.10] px-3 py-2 text-left text-[11px] font-bold text-[#D3A3FF] transition-all duration-200 hover:border-[#BE6CFF]/45 hover:bg-[#8F28F3]/[0.18] hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#BE6CFF]/70 sm:text-xs"
+                      onClick={backToCategories}
+                      className="inline-flex items-center gap-1.5 rounded-lg px-2 py-1 text-[11px] font-semibold text-white/45 transition hover:bg-white/[0.05] hover:text-[#C98AFF] sm:text-xs"
                     >
-                      {faq.q}
+                      ← Back to plans
                     </button>
-                  ))}
-                </div>
-                <button type="button" onClick={backToCategories} className="mb-2 text-[11px] font-medium text-white/35 underline decoration-white/15 underline-offset-4 transition hover:text-[#C98AFF] sm:text-xs">
-                  ← Back to plans
-                </button>
+
+                    <span className="text-[10px] font-medium text-white/25">
+                      {activeCat}
+                    </span>
+                  </div>
+                )}
+
+                {view === "answer" && (
+                  <div className="mb-3 flex flex-wrap items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={backToQuestions}
+                      className="inline-flex items-center gap-1.5 rounded-lg border border-[#BE6CFF]/20 bg-[#8F28F3]/[0.08] px-3 py-1.5 text-[10px] font-bold text-[#D3A3FF] transition hover:border-[#BE6CFF]/40 hover:bg-[#8F28F3]/[0.16] hover:text-white sm:text-[11px]"
+                    >
+                      ← More {activeCat} FAQs
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={backToCategories}
+                      className="inline-flex items-center gap-1.5 rounded-lg border border-white/[0.08] bg-white/[0.025] px-3 py-1.5 text-[10px] font-bold text-white/45 transition hover:border-[#BE6CFF]/30 hover:bg-[#8F28F3]/[0.10] hover:text-white sm:text-[11px]"
+                    >
+                      Switch plan
+                    </button>
+                  </div>
+                )}
+
+                {view === "categories" && (
+                  <p className="mb-3 text-[10px] font-medium text-white/30">
+                    Choose a plan to browse its FAQs.
+                  </p>
+                )}
+
+                {view === "categories" && (
+                  <div className="mb-3 flex flex-wrap gap-2">
+                    {CATEGORIES.map((cat) => (
+                      <button
+                        key={cat}
+                        type="button"
+                        onClick={() => pickCategory(cat)}
+                        className="rounded-full border border-[#BE6CFF]/25 bg-[#8F28F3]/[0.10] px-3 py-2 text-[11px] font-bold text-[#D3A3FF] transition-all duration-200 hover:border-[#BE6CFF]/45 hover:bg-[#8F28F3]/[0.18] hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#BE6CFF]/70 sm:text-xs"
+                      >
+                        {cat}
+                      </button>
+                    ))}
+                  </div>
+                )}
+
+                {view === "questions" && (
+                  <div className="mb-3 flex flex-col gap-2">
+                    {questionsForCat.map((faq, i) => (
+                      <button
+                        key={i}
+                        type="button"
+                        onClick={() => askQuestion(faq)}
+                        className="rounded-xl border border-[#BE6CFF]/25 bg-[#8F28F3]/[0.10] px-3 py-2 text-left text-[11px] font-bold text-[#D3A3FF] transition-all duration-200 hover:border-[#BE6CFF]/45 hover:bg-[#8F28F3]/[0.18] hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#BE6CFF]/70 sm:text-xs"
+                      >
+                        {faq.q}
+                      </button>
+                    ))}
+                  </div>
+                )}
               </>
             )}
 
-            {view === "answer" && (
-              <div className="mb-3 flex flex-wrap gap-2">
-                <button type="button" onClick={backToQuestions} className="rounded-full border border-[#BE6CFF]/25 bg-[#8F28F3]/[0.10] px-3 py-2 text-[11px] font-bold text-[#D3A3FF] hover:border-[#BE6CFF]/45 hover:bg-[#8F28F3]/[0.18] hover:text-white sm:text-xs">
-                  ← More {activeCat} FAQs
-                </button>
-                <button type="button" onClick={backToCategories} className="rounded-full border border-[#BE6CFF]/25 bg-[#8F28F3]/[0.10] px-3 py-2 text-[11px] font-bold text-[#D3A3FF] hover:border-[#BE6CFF]/45 hover:bg-[#8F28F3]/[0.18] hover:text-white sm:text-xs">
-                  Switch plan
-                </button>
-              </div>
-            )}
-
-            <button
-              type="button"
-              onClick={restartConversation}
-              className="text-[11px] font-medium text-white/35 underline decoration-white/15 underline-offset-4 transition hover:text-[#C98AFF] sm:text-xs"
-            >
-              Restart conversation
-            </button>
+            <div className="mt-2 border-t border-white/[0.05] pt-2">
+              <button
+                type="button"
+                onClick={() => {
+                  setSearchQuery("");
+                  restartConversation();
+                }}
+                className="text-[11px] font-medium text-white/35 underline decoration-white/15 underline-offset-4 transition hover:text-[#C98AFF] sm:text-xs"
+              >
+                Restart conversation
+              </button>
+            </div>
           </div>
         </div>
       )}

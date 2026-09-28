@@ -1,3 +1,4 @@
+
 import Link from "next/link";
 
 /* =========================================================
@@ -85,14 +86,11 @@ const socialLinks = [
     label: "Discord",
     href: "https://discord.gg/AXU9YEd4T",
   },
-  {
-    label: "Telegram",
-    href: "https://t.me/+r5HfFcX32Tw4M2Y1",
-  },
-  {
-    label: "Instagram",
-    href: "https://www.instagram.com/blackpropcom/",
-  },
+
+  // {
+  //   label: "Instagram",
+  //   href: "https://www.instagram.com/blackpropcom/",
+  // },
   {
     label: "YouTube",
     href: "https://www.youtube.com/channel/UCvdMQKZnAI2-EmuG9a_MycA",
@@ -102,6 +100,97 @@ const socialLinks = [
     href: "https://x.com/Blackpropcom",
   },
 ];
+
+/* =========================================================
+   SOCIAL ICONS
+========================================================= */
+
+function SocialIcon({
+  name,
+  className = "",
+}: {
+  name: string;
+  className?: string;
+}) {
+  const commonProps = {
+    className: `h-4 w-4 ${className}`,
+    viewBox: "0 0 24 24",
+    fill: "none",
+    xmlns: "http://www.w3.org/2000/svg",
+    "aria-hidden": true,
+  };
+
+  if (name === "Discord") {
+    return (
+      <svg {...commonProps}>
+        <path
+          d="M19.54 5.32A16.2 16.2 0 0 0 15.5 4l-.5 1.02a14.7 14.7 0 0 0-6 0L8.5 4a16.2 16.2 0 0 0-4.04 1.32C1.9 9.28 1.2 13.14 1.55 16.95A16.3 16.3 0 0 0 6.5 19.5l1.2-1.65c-.65-.24-1.27-.54-1.85-.9l.45-.34c3.57 1.68 7.83 1.68 11.36 0l.46.34c-.59.36-1.21.66-1.86.9l1.2 1.65a16.3 16.3 0 0 0 4.95-2.55c.42-4.42-.72-8.24-2.87-11.63ZM8.55 15.05c-1.06 0-1.93-.98-1.93-2.18s.85-2.19 1.93-2.19 1.95.99 1.93 2.19c0 1.2-.85 2.18-1.93 2.18Zm6.9 0c-1.06 0-1.93-.98-1.93-2.18s.85-2.19 1.93-2.19 1.95.99 1.93 2.19c0 1.2-.85 2.18-1.93 2.18Z"
+          fill="currentColor"
+        />
+      </svg>
+    );
+  }
+
+  if (name === "Telegram") {
+    return (
+      <svg {...commonProps}>
+        <path
+          d="M21.6 4.2 18.5 19c-.23 1.05-.85 1.3-1.72.81l-4.72-3.48-2.28 2.2c-.25.25-.46.46-.94.46l.34-4.81 8.76-7.91c.38-.34-.08-.53-.59-.19L6.52 12.7 1.9 11.25c-1.01-.32-1.03-1.01.21-1.5L20.17 2.7c.84-.31 1.58.2 1.43 1.5Z"
+          fill="currentColor"
+        />
+      </svg>
+    );
+  }
+
+  if (name === "Instagram") {
+    return (
+      <svg {...commonProps}>
+        <rect
+          x="3"
+          y="3"
+          width="18"
+          height="18"
+          rx="5"
+          stroke="currentColor"
+          strokeWidth="1.8"
+        />
+        <circle
+          cx="12"
+          cy="12"
+          r="4.2"
+          stroke="currentColor"
+          strokeWidth="1.8"
+        />
+        <circle cx="17.4" cy="6.7" r="1.1" fill="currentColor" />
+      </svg>
+    );
+  }
+
+  if (name === "YouTube") {
+    return (
+      <svg {...commonProps}>
+        <path
+          d="M21.58 7.19a2.97 2.97 0 0 0-2.09-2.1C17.65 4.6 12 4.6 12 4.6s-5.65 0-7.49.49a2.97 2.97 0 0 0-2.09 2.1C1.93 9.03 1.93 12 1.93 12s0 2.97.49 4.81a2.97 2.97 0 0 0 2.09 2.1c1.84.49 7.49.49 7.49.49s5.65 0 7.49-.49a2.97 2.97 0 0 0 2.09-2.1c.49-1.84.49-4.81.49-4.81s0-2.97-.49-4.81Z"
+          fill="currentColor"
+        />
+        <path d="m10 15.5 5-3.5-5-3.5v7Z" fill="#05070b" />
+      </svg>
+    );
+  }
+
+  if (name === "X / Twitter") {
+    return (
+      <svg {...commonProps}>
+        <path
+          d="M18.9 2H22l-6.77 7.74L23.2 22h-6.24l-4.89-6.39L6.48 22H3.36l7.24-8.28L2.8 2h6.4l4.42 5.84L18.9 2Zm-1.1 17.8h1.73L8.27 4.1H6.41L17.8 19.8Z"
+          fill="currentColor"
+        />
+      </svg>
+    );
+  }
+
+  return null;
+}
 
 /* =========================================================
    ARROW
@@ -199,6 +288,45 @@ function FooterColumn({
 }
 
 /* =========================================================
+   SOCIAL COLUMN
+========================================================= */
+
+function SocialColumn() {
+  return (
+    <div>
+      <p className="text-[12px] font-black uppercase tracking-[0.15em] text-white/78 sm:text-[13px]">
+        Socials
+      </p>
+
+      <div className="mt-4 flex flex-col gap-2.5 sm:mt-5 sm:gap-3">
+        {socialLinks.map((social) => (
+          <Link
+            key={social.label}
+            href={social.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Visit BlackProp on ${social.label}`}
+            className="group flex w-fit items-center gap-3 rounded-xl py-1.5 text-white/48 transition-all duration-200 hover:text-white"
+          >
+            <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg border border-white/[0.07] bg-white/[0.025] text-white/55 transition-all duration-200 group-hover:border-[#be6cff]/40 group-hover:bg-[#8f28f3]/10 group-hover:text-[#be6cff]">
+              <SocialIcon name={social.label} />
+            </span>
+
+            <span className="text-[14px] font-medium sm:text-[15px]">
+              {social.label}
+            </span>
+
+            <span className="ml-0.5 translate-x-[-3px] text-[#be6cff] opacity-0 transition duration-200 group-hover:translate-x-0 group-hover:opacity-100">
+              <ArrowIcon />
+            </span>
+          </Link>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* =========================================================
    FOOTER
 ========================================================= */
 
@@ -259,25 +387,13 @@ export function Footer() {
             </div>
           </div>
 
-          <FooterColumn
-            title="Trading"
-            links={tradingLinks}
-          />
+          <FooterColumn title="Trading" links={tradingLinks} />
 
-          <FooterColumn
-            title="Company"
-            links={companyLinks}
-          />
+          <FooterColumn title="Company" links={companyLinks} />
 
-          <FooterColumn
-            title="Socials"
-            links={socialLinks}
-          />
+          <SocialColumn />
 
-          <FooterColumn
-            title="Legal"
-            links={legalLinks}
-          />
+          <FooterColumn title="Legal" links={legalLinks} />
         </div>
 
         {/* =====================================================
@@ -291,7 +407,7 @@ export function Footer() {
             </p>
 
             <p className="mt-1.5 text-[13px] font-medium text-white/50 sm:text-[14px]">
-              Premium trading experience
+              Prove your edge and risk, BlackProp will take care of the capital.
             </p>
           </div>
 
@@ -322,13 +438,14 @@ export function Footer() {
               does not serve in any way as a specific investment recommendation,
               business recommendation, investment opportunity analysis or
               similar general recommendation regarding the trading of investment
-              instruments. BlackProp only provides services of simulated trading
-              and educational tools. The information on this site is not directed
-              at residents in any country or jurisdiction where such distribution
-              or use would be contrary to local laws or regulations. BlackProp
-              does not act as a broker and does not accept any deposits. The
-              offered technical solution for the BlackProp platforms and data
-              feed is powered by liquidity providers.
+              instruments. BlackProp only provides services of simulated
+              trading and educational tools. The information on this site is
+              not directed at residents in any country or jurisdiction where
+              such distribution or use would be contrary to local laws or
+              regulations. BlackProp does not act as a broker and does not
+              accept any deposits. The offered technical solution for the
+              BlackProp platforms and data feed is powered by liquidity
+              providers.
             </p>
 
             <p className="mt-4">
@@ -420,3 +537,4 @@ export function Footer() {
 }
 
 export default Footer;
+
