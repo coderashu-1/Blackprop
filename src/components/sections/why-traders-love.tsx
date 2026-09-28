@@ -21,24 +21,24 @@ const leftFeatures: Feature[] = [
     icon: "capital",
   },
   {
-    title: "80% + Add-on up to 100%",
+    title: "80% Profit Split",
     description:
-      "Retain more of your profit curve with structured performance ladder steps reaching 100% net reward.",
+      "Lucrative profit split for your efforts.",
     icon: "split",
   },
   {
     title: "Add-on - Payout Protector",
     description:
-      "Trade with confidence knowing your profits are safeguarded with insurance coverage against platform risk.",
+      "Increase an extra layer of return through payout protector",
     icon: "reward",
   },
 ];
 
 const rightFeatures: Feature[] = [
   {
-    title: "Request Demo Accounts",
+    title: "Clearly defined rules",
     description:
-      "Test-drive with zero risk to refine your strategy before committing capital to live trading.",
+      "Read Faq and know what are the rules before trading your edge.",
     icon: "time",
   },
   {
@@ -50,7 +50,7 @@ const rightFeatures: Feature[] = [
   {
     title: "Crypto Deposits and Withdrawals",
     description:
-      "Fund instantly via Bitcoin, Ethereum, USDC, with transparent on-chain settlement.",
+      "Buy challenges with crypto and withdraw your profit split as well.",
     icon: "spread",
   },
 ];

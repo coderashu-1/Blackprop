@@ -434,12 +434,12 @@ const exactAddOnPricing: Record<
       200000: { "Remove Lock on Payout": "$400(25%)", "Payout Protector": "$400(25%)" },
     },
     "2 Step": {
-      5000: { "100% Payout": "$417.60 (20%)", "Remove Lock on Payout": "$522.00 (25%)", "Payout Protector": "$522.00 (25%)" },
-      10000: { "100% Payout": "$171.00 (20%)", "Remove Lock on Payout": "$213.75 (25%)", "Payout Protector": "$213.75 (25%)" },
-      25000: { "100% Payout": "$85.60 (20%)", "Remove Lock on Payout": "$107.00 (25%)", "Payout Protector": "$107.00 (25%)" },
-      50000: { "100% Payout": "$47.60 (20%)", "Remove Lock on Payout": "$59.50 (25%)", "Payout Protector": "$59.50 (25%)" },
-      100000: { "100% Payout": "$19.00 (20%)", "Remove Lock on Payout": "$23.75 (25%)", "Payout Protector": "$23.75 (25%)" },
-      200000: { "100% Payout": "$9.60 (20%)", "Remove Lock on Payout": "$12.00 (25%)", "Payout Protector": "$12.00 (25%)" },
+      5000: { "100% Payout": "$9.60 (20%)", "Remove Lock on Payout": "$12.00 (25%)", "Payout Protector": "$12.00 (25%)" },
+      10000: { "100% Payout": "$19.00 (20%)", "Remove Lock on Payout": "$23.75 (25%)", "Payout Protector": "$23.75 (25%)" },
+      25000: { "100% Payout": "$47.60 (20%)", "Remove Lock on Payout": "$59.50 (25%)", "Payout Protector": "$59.50 (25%)" },
+      50000: { "100% Payout": "$85.60 (20%)", "Remove Lock on Payout": "$107.00 (25%)", "Payout Protector": "$107.00 (25%)" },
+      100000: { "100% Payout": "$171.00 (20%)", "Remove Lock on Payout": "$213.75 (25%)", "Payout Protector": "$213.75 (25%)" },
+      200000: { "100% Payout": "$417.60 (20%)", "Remove Lock on Payout": "$522.00 (25%)", "Payout Protector": "$522.00 (25%)" },
     },
     Instant: {
       5000: { "Profit Share": "$18.00 (20%)", "Hold Weekend": "$9.00 (10%)", "Payout Protector": "$22.50 (25%)" },
@@ -879,10 +879,24 @@ export function Challenges() {
     [availableSizes]
   );
 
-  // Challenge fees use the exact 30% discounted values shown in the official Excel.
+  // FOREX / CFD — 2 STEPS: exact values from the supplied challenge sheet.
+  // Keep these values explicit so the UI always matches the sheet exactly.
+  const forexTwoStepSalePricing: Record<number, number> = {
+    200000: 1461.60,
+    100000: 598.50,
+    50000: 299.60,
+    25000: 166.60,
+    10000: 66.50,
+    5000: 33.60,
+  };
+
   function priceFor(value: number) {
     const original = getModelBasePrice(market, model, value);
-    const sale = Math.round(original * 0.7 * 100) / 100;
+
+    const sale =
+      market === "Forex" && model === "2 Step"
+        ? forexTwoStepSalePricing[value] ?? Math.round(original * 0.7 * 100) / 100
+        : Math.round(original * 0.7 * 100) / 100;
 
     return {
       original,
