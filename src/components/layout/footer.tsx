@@ -87,10 +87,10 @@ const socialLinks = [
     href: "https://discord.gg/AXU9YEd4T",
   },
 
-  // {
-  //   label: "Instagram",
-  //   href: "https://www.instagram.com/blackpropcom/",
-  // },
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/blackpropcom/",
+  },
   {
     label: "YouTube",
     href: "https://www.youtube.com/channel/UCvdMQKZnAI2-EmuG9a_MycA",
