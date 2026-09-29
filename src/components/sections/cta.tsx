@@ -6,7 +6,7 @@ export function CTA() {
         <p className="section-kicker">BlackProp</p>
         <h2 className="mx-auto mt-3 max-w-3xl text-4xl font-semibold tracking-[-0.05em] text-white sm:text-5xl">Your edge deserves more room to run.</h2>
         <p className="mx-auto mt-5 max-w-2xl text-sm leading-6 text-white/50 sm:text-base">Next we can turn this starter into the full production frontend: navigation, account configurator, FAQ, legal pages, testimonials, animations, dashboard previews, and responsive polish.</p>
-        <a href="#challenges" className="gold-button mt-8 inline-flex rounded-full px-6 py-3.5 text-sm font-semibold text-black">Explore Challenges</a>
+        <a href="https://blackpropfundingdashboard.propaccount.com/en/sign-up" className="gold-button mt-8 inline-flex rounded-full px-6 py-3.5 text-sm font-semibold text-black">Explore Challenges</a>
       </div>
     </section>
   );

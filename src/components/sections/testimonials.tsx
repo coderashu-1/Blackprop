@@ -831,7 +831,7 @@ export function Testimonials() {
             </div>
 
             <a
-              href="#challenges"
+              href="https://blackpropfundingdashboard.propaccount.com/en/sign-up"
               className="group relative inline-flex min-h-[54px] w-full items-center justify-center gap-2 overflow-hidden rounded-xl bg-[linear-gradient(135deg,#F6DE82,#D4AF37_50%,#956A11)] px-6 py-4 text-[15px] font-black uppercase text-black shadow-[0_16px_45px_rgba(212,175,55,.17)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_22px_55px_rgba(212,175,55,.27)] sm:w-auto sm:min-w-[210px] sm:text-base"
             >
               GET FUNDED

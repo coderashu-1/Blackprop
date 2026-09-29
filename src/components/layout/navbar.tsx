@@ -40,7 +40,7 @@ type Market = "Forex" | "Futures" | "Crypto";
 const markets: Market[] = ["Forex", "Futures", "Crypto"];
 
 const navLinks = [
-  { label: "Trading", href: "#challenges" },
+  { label: "Trading", href: "https://blackpropfundingdashboard.propaccount.com/en/sign-up" },
   { label: "Affiliate", href: "#affiliate" },
   { label: "Competition", href: "#competition" },
   { label: "Company", href: "#about" },
@@ -331,14 +331,14 @@ export function Navbar() {
         {/* RIGHT */}
         <div className="ml-auto hidden items-center gap-5 sm:flex">
           <a
-            href="#login"
+            href="https://blackpropfundingdashboard.propaccount.com/en/sign-in"
             className="text-[12px] font-medium text-white/82 transition hover:text-white lg:text-[13px]"
           >
             Login
           </a>
 
           <a
-            href="#challenges"
+            href="https://blackpropfundingdashboard.propaccount.com/en/sign-up"
             className="inline-flex min-h-[36px] items-center justify-center rounded-full bg-white px-5 text-[12px] font-bold text-[#17131c] shadow-[0_6px_20px_rgba(255,255,255,.13)] transition hover:-translate-y-0.5 hover:bg-[#f5f1f8] lg:min-h-[38px] lg:px-6 lg:text-[13px]"
           >
             Get Funded
@@ -373,14 +373,14 @@ export function Navbar() {
 
             <div className="mt-3 grid grid-cols-2 gap-2 border-t border-white/[0.08] pt-4">
               <a
-                href="#login"
+                href="https://blackpropfundingdashboard.propaccount.com/en/sign-in"
                 onClick={() => setMobileOpen(false)}
                 className="rounded-xl border border-white/[0.10] px-4 py-3 text-center text-[13px] font-semibold text-white/80"
               >
                 Login
               </a>
               <a
-                href="#challenges"
+                href="https://blackpropfundingdashboard.propaccount.com/en/sign-up"
                 onClick={() => setMobileOpen(false)}
                 className="rounded-xl bg-white px-4 py-3 text-center text-[13px] font-bold text-[#17131c]"
               >

@@ -48,7 +48,7 @@ function BPMark({
 const tradingLinks = [
   { label: "Home", href: "/" },
   { label: "How It Works", href: "/#how-it-works" },
-  { label: "Challenges", href: "/#challenges" },
+  { label: "Challenges", href: "/https://blackpropfundingdashboard.propaccount.com/en/sign-up" },
   { label: "Trader Stories", href: "/#testimonials" },
   { label: "Dashboard", href: "/#dashboard" },
   { label: "FAQ", href: "/#faq" },

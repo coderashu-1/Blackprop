@@ -510,7 +510,7 @@ export function WhyTradersLove() {
             </a>
 
             <a
-              href="#challenges"
+              href="https://blackpropfundingdashboard.propaccount.com/en/sign-up"
               className="
                 group
                 inline-flex

@@ -745,7 +745,7 @@ export function ProfitCalculator() {
 
             {/* CTA */}
             <a
-              href="#challenges"
+              href="https://blackpropfundingdashboard.propaccount.com/en/sign-up"
               className="
                 group
                 relative

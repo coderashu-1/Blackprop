@@ -389,7 +389,7 @@ export function Hero() {
 
           <div className="mt-6 flex justify-center sm:mt-7">
             <a
-              href="#challenges"
+              href="https://blackpropfundingdashboard.propaccount.com/en/sign-up"
               className="
                 inline-flex
                 min-h-[44px]
