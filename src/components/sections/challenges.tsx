@@ -908,13 +908,10 @@ export function Challenges() {
   function startCheckout(value: number) {
     setAccountSize(value);
 
-    const selectedSize =
-      availableSizes.find((item) => item.value === value) ?? account;
-
-    const selectedPrice = priceFor(value);
-
-    alert(
-      `BlackProp checkout selected:\n${market} · ${model} · ${platform} · ${selectedSize.label}\nPrice: $${selectedPrice.sale}`
+    window.open(
+      "https://blackpropfundingdashboard.propaccount.com/en/challenges",
+      "_blank",
+      "noopener,noreferrer"
     );
   }
 
