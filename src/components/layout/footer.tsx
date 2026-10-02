@@ -55,7 +55,7 @@ const tradingLinks = [
 ];
 
 const companyLinks = [
-  { label: "About BlackProp", href: "/#about" },
+  { label: "About BlackProp", href: "/company" },
   { label: "Affiliate", href: "/#affiliate" },
   { label: "Community", href: "/#community" },
   { label: "Contact", href: "/#contact" },

@@ -41,10 +41,10 @@ const markets: Market[] = ["Forex", "Futures", "Crypto"];
 
 const navLinks = [
   { label: "Trading", href: "https://blackpropfundingdashboard.propaccount.com/en/sign-up" },
-  { label: "Affiliate", href: "#affiliate" },
-  { label: "Competition", href: "#competition" },
-  { label: "Company", href: "#about" },
-  { label: "FAQ", href: "#faq" },
+  { label: "Affiliate", href: "/affiliate" },
+  { label: "Competition", href: "/#challenges" },
+  { label: "Company", href: "/company" },
+  { label: "FAQ", href: "/#faq" },
 ];
 
 function CopyIcon() {
@@ -300,7 +300,7 @@ export function Navbar() {
       >
         {/* LOGO */}
         <a
-          href="#home"
+          href="/"
           aria-label="BlackProp home"
           className="group flex shrink-0 items-center gap-2.5"
         >
