@@ -1036,27 +1036,30 @@ function PlatformMark({ platform }: { platform: Platform }) {
 
   const logoClass =
     platform === "DXTRADE" || platform === "DXFUTURE"
-      ? "h-7 w-8 object-contain"
+      ? "h-10 w-12 object-contain"
       : platform === "MatchTrader"
-        ? "h-7 w-[76px] object-contain"
+        ? "h-10 w-[104px] object-contain"
         : platform === "cTrader"
-          ? "h-6 w-[70px] object-contain"
-          : "h-7 w-[74px] object-contain";
+          ? "h-9 w-[94px] object-contain"
+          : "h-10 w-[100px] object-contain";
 
   return (
     <span
-      className={`flex h-8 shrink-0 items-center justify-center overflow-hidden rounded-[5px] bg-transparent ${
-        platform === "DXTRADE" || platform === "DXFUTURE" ? "w-9" : "px-0.5"
-      }`}
+      className="flex min-w-[92px] shrink-0 flex-col items-center justify-center gap-1.5"
       title={label}
       aria-label={label}
     >
-      <img
-        src={logo}
-        alt={`${label} logo`}
-        className={logoClass}
-        draggable={false}
-      />
+      <span className="flex h-10 items-center justify-center">
+        <img
+          src={logo}
+          alt={`${label} logo`}
+          className={logoClass}
+          draggable={false}
+        />
+      </span>
+      <span className="whitespace-nowrap text-[11px] font-bold leading-none tracking-[-0.01em] text-white/75 sm:text-[12px]">
+        {label}
+      </span>
     </span>
   );
 }
@@ -1184,7 +1187,19 @@ export function Challenges() {
 
       baseRows.push(
         { icon: "daily", label: "Max Daily Loss", value: r.maxDailyLoss },
-        { icon: "loss", label: "Max Loss", value: r.maxLoss },
+        market === "Futures"
+          ? {
+              icon: "loss",
+              label: "Max drawdown- Trailing",
+              values: {
+                150000: "3% ($4500)",
+                100000: "3% ($3000)",
+                75000: "3.33% ($2498)",
+                50000: "4% ($2000)",
+                25000: "6% ($1500)",
+              },
+            }
+          : { icon: "loss", label: "Max Loss", value: r.maxLoss },
       );
 
       if (r.maxDrawdown) {
@@ -1431,10 +1446,10 @@ export function Challenges() {
                   type="button"
                   onClick={() => setPlatform(item)}
                   title={platformLabels[item] ?? item}
-                  className={`flex shrink-0 items-center justify-center rounded-[7px] px-2 py-1 transition ${
+                  className={`flex min-h-[68px] shrink-0 items-center justify-center rounded-[9px] px-3 py-2 transition ${
                     selected
-                      ? "bg-[#2b183b] text-[#cf94ff]"
-                      : "text-white/48 hover:text-white/80"
+                      ? "bg-[#2b183b] text-[#cf94ff] shadow-[0_0_0_1px_rgba(166,72,255,.18)]"
+                      : "text-white/48 hover:bg-white/[0.035] hover:text-white/80"
                   }`}
                 >
                   <PlatformMark platform={item} />
@@ -1560,10 +1575,10 @@ export function Challenges() {
 
         {/* DESKTOP / TABLET COMPARISON TABLE — unchanged */}
         <div className="mt-9 hidden sm:block">
-          <div className="-mx-4 overflow-x-auto px-4 pb-2 [scrollbar-width:thin] sm:mx-0 sm:px-0">
-            <div className="flex min-w-max gap-2 sm:min-w-0 sm:gap-2">
+          <div className={`overflow-x-auto pb-2 [scrollbar-width:thin] ${market === "Futures" ? "overflow-visible" : "-mx-4 px-4 sm:mx-0 sm:px-0"}`}>
+            <div className={`flex gap-2 ${market === "Futures" ? "min-w-0" : "min-w-max sm:min-w-0"}`}>
               {/* LEFT LABEL COLUMN — same row heights as every account card */}
-              <div className="sticky left-0 z-20 w-[190px] shrink-0 bg-[#080a0e] pt-[109px] sm:relative sm:w-[190px] lg:w-[185px]">
+              <div className={`sticky left-0 z-20 shrink-0 bg-[#080a0e] pt-[109px] sm:relative ${market === "Futures" ? "w-[150px] lg:w-[155px]" : "w-[190px] lg:w-[185px]"}`}>
                 {rows.map((row, index) => (
                   <div
                     key={`${row.label}-${index}`}
@@ -1592,11 +1607,14 @@ export function Challenges() {
                 {sortedSizes.map((item) => {
                   const selected = item.value === accountSize;
                   const price = priceFor(item.value);
+                  const accountCardWidth = market === "Futures"
+                    ? "w-[180px] min-w-[180px] lg:w-[180px] lg:min-w-[180px]"
+                    : "w-[150px] min-w-[150px]";
 
                   return (
                     <div
                       key={item.value}
-                      className="relative w-[150px] min-w-[150px] shrink-0 pt-[14px]"
+                      className={`relative shrink-0 pt-[14px] ${accountCardWidth}`}
                     >
                       {isBestValue(market, model, item.value) && (
                         <span className="absolute left-1/2 top-0 z-30 -translate-x-1/2 whitespace-nowrap rounded-full bg-[linear-gradient(90deg,#9f4cff,#a83df0)] px-3.5 py-1.5 text-[9px] font-black uppercase tracking-[0.03em] text-white shadow-[0_6px_16px_rgba(158,63,241,.28)]">
@@ -1634,7 +1652,7 @@ export function Challenges() {
                                 : index === 0
                                   ? "min-h-[64px]"
                                   : "min-h-[58px]"
-                            } items-center justify-center border-b border-white/[0.045] px-3 text-center text-[10px] font-medium leading-[1.35] text-white/76 sm:px-3 sm:text-[11px] sm:leading-5 lg:text-[12px]`}
+                            } items-center justify-center border-b border-white/[0.045] px-3 text-center text-[10px] font-medium leading-[1.3] text-white/76 sm:px-2.5 sm:text-[10px] sm:leading-[1.35] lg:text-[11.5px]`}
                           >
                             {row.kind === "button" ? (
                               <button

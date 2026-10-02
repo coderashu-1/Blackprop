@@ -48,19 +48,16 @@ function BPMark({
 const tradingLinks = [
   { label: "Home", href: "/" },
   { label: "How It Works", href: "/#how-it-works" },
-  { label: "Challenges", href: "/https://blackpropfundingdashboard.propaccount.com/en/sign-up" },
-  { label: "Trader Stories", href: "/#testimonials" },
+  { label: "Challenges", href: "https://blackpropfundingdashboard.propaccount.com/en/sign-up" },
   { label: "Dashboard", href: "/#dashboard" },
   { label: "FAQ", href: "/#faq" },
 ];
 
 const companyLinks = [
   { label: "About BlackProp", href: "/company" },
-  { label: "Affiliate", href: "/#affiliate" },
-  { label: "Community", href: "/#community" },
-  { label: "Contact", href: "/#contact" },
-  { label: "Support", href: "/#support" },
-];
+  { label: "Affiliate", href: "/affiliate" },
+  { label: "Community", href: "/#faq" },
+  { label: "Contact", href: "/#contact" },];
 
 const legalLinks = [
   {

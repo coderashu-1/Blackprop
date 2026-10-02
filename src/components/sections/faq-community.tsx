@@ -430,6 +430,119 @@ export function FaqCommunity() {
           </div>
         </div>
 
+        {/* =====================================================
+            CONTACT
+        ====================================================== */}
+        <div
+          id="contact"
+          className="
+            relative
+            mx-auto
+            mt-16
+            overflow-hidden
+            rounded-[24px]
+            border border-white/[0.08]
+            bg-[#10131a]
+            px-5
+            py-8
+            shadow-[0_24px_70px_rgba(0,0,0,.28)]
+            sm:mt-20
+            sm:px-8
+            sm:py-10
+            md:mt-24
+            md:px-12
+            md:py-12
+            lg:rounded-[28px]
+          "
+        >
+          <div className="pointer-events-none absolute -right-28 -top-28 h-[260px] w-[260px] rounded-full bg-[#9e5aff]/[0.14] blur-[90px]" />
+          <div className="pointer-events-none absolute -bottom-32 -left-24 h-[260px] w-[260px] rounded-full bg-[#7a31d8]/[0.10] blur-[90px]" />
+
+          <div className="relative z-10 flex flex-col items-center justify-between gap-7 text-center md:flex-row md:text-left">
+            <div className="max-w-[650px]">
+              <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-[#a95df1]/25 bg-[#a95df1]/[0.08] px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.16em] text-[#d59cff] sm:text-[11px]">
+                <span className="h-1.5 w-1.5 rounded-full bg-[#b86cff] shadow-[0_0_10px_rgba(184,108,255,.8)]" />
+                Contact Support
+              </div>
+
+              <h3 className="text-[1.7rem] font-black leading-[1.05] tracking-[-0.045em] text-white sm:text-[2rem] md:text-[2.35rem]">
+                Need help? We&apos;re here for you.
+              </h3>
+
+              <p className="mt-3 max-w-[600px] text-[12px] leading-6 text-[#969daa] sm:text-[13px] md:text-[14px]">
+                Have a question about challenges, platforms, payments, or your
+                account? Reach out to the BlackProp support team.
+              </p>
+            </div>
+
+            <a
+              href="mailto:Support@blackpropfunding.com"
+              className="
+                group
+                inline-flex
+                min-h-[58px]
+                w-full
+                max-w-[390px]
+                items-center
+                justify-center
+                gap-3
+                rounded-[15px]
+                border
+                border-white/[0.10]
+                bg-white/[0.045]
+                px-5
+                text-left
+                shadow-[0_12px_35px_rgba(0,0,0,.18)]
+                transition-all
+                duration-200
+                hover:-translate-y-1
+                hover:border-[#a95df1]/45
+                hover:bg-[#a95df1]/[0.09]
+                hover:shadow-[0_18px_45px_rgba(126,54,196,.20)]
+                md:w-auto
+                md:min-w-[350px]
+              "
+              aria-label="Email BlackProp Support"
+            >
+              <span className="grid h-10 w-10 shrink-0 place-items-center rounded-[11px] border border-[#b86cff]/20 bg-[#a95df1]/[0.10] text-[#d59cff] transition group-hover:bg-[#a95df1]/[0.16]">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  className="h-5 w-5"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M4 6.5h16v11H4v-11Z"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="m4.5 7 7.5 6 7.5-6"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </span>
+
+              <span className="min-w-0">
+                <span className="block text-[9px] font-bold uppercase tracking-[0.14em] text-[#858c99]">
+                  Email us
+                </span>
+                <span className="mt-0.5 block break-all text-[13px] font-bold text-white sm:text-[14px]">
+                  Support@blackpropfunding.com
+                </span>
+              </span>
+
+              <span className="ml-auto hidden text-[#a95df1] transition-transform duration-200 group-hover:translate-x-1 sm:block">
+                <ArrowUpRight />
+              </span>
+            </a>
+          </div>
+        </div>
+
         {/* LOWER DARK SPACE */}
         <div className="relative h-[80px] sm:h-[100px] md:h-[130px] lg:h-[150px]">
           <div className="pointer-events-none absolute bottom-[-22px] left-1/2 h-[80px] w-[72%] -translate-x-1/2 rounded-full bg-[#8131dc]/[0.10] blur-[60px]" />
