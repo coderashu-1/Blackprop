@@ -243,8 +243,8 @@ export function Navbar() {
             </span> */}
 
             <span className="hidden text-[10px] font-black text-white md:inline lg:text-[14px]">
-  Start your BlackProp journey with{" "}
-  <strong className="font-black text-white">30% OFF</strong>
+  Launch offer  {" "}
+  <strong className="font-black text-white">40% OFF</strong>
 </span>
 
             <button
@@ -252,7 +252,7 @@ export function Navbar() {
               onClick={copyPromoCode}
               className="inline-flex items-center gap-1.5 rounded-full border border-[#9e5aff]/45 bg-[#15111b] px-3.5 py-1.5 text-[9px] font-black tracking-[0.14em] text-[#d7b0ff]"
             >
-              {copied ? "COPIED" : "BLACK30"}
+              {copied ? "COPIED" : "CORE40"}
               <CopyIcon />
             </button>
           </div>
@@ -262,7 +262,7 @@ export function Navbar() {
             onClick={copyPromoCode}
             className="inline-flex items-center gap-1.5 rounded-full border border-[#9e5aff]/35 bg-[#1d1428] px-3 py-1.5 text-[9px] font-black tracking-[0.1em] text-[#cda6ff] sm:hidden"
           >
-            {copied ? "COPIED" : "BLACK30"}
+            {copied ? "COPIED" : "CORE40"}
             <CopyIcon />
           </button>
         </div>

@@ -1107,24 +1107,13 @@ export function Challenges() {
     [availableSizes]
   );
 
-  // FOREX / CFD — 2 STEPS: exact values from the supplied challenge sheet.
-  // Keep these values explicit so the UI always matches the sheet exactly.
-  const forexTwoStepSalePricing: Record<number, number> = {
-    200000: 1461.60,
-    100000: 598.50,
-    50000: 299.60,
-    25000: 166.60,
-    10000: 66.50,
-    5000: 33.60,
-  };
-
+  // CHALLENGE FEE SALE PRICING
+  // All challenge fees use the supplied 40% discount.
+  // Sale price = original price - 40% = original price × 0.60.
+  // This applies to Forex / CFD, Futures, and Crypto across all models.
   function priceFor(value: number) {
     const original = getModelBasePrice(market, model, value);
-
-    const sale =
-      market === "Forex" && model === "2 Step"
-        ? forexTwoStepSalePricing[value] ?? Math.round(original * 0.7 * 100) / 100
-        : Math.round(original * 0.7 * 100) / 100;
+    const sale = Math.round(original * 0.6 * 100) / 100;
 
     return {
       original,
