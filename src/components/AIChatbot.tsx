@@ -46,9 +46,17 @@ const EVERY: PlanId[] = [...CFD, ...CRY, "futures"];
 
 const TERMS_URL = "https://dashboardanalytix.com/client-terms-and-policies/";
 
-/** Shown when someone asks for a human. Put your real support contact here. */
-const SUPPORT_HINT =
-  "I can't hand you over to a person from this chat, but our support team can help — reach them through the contact options on this site or in your trader dashboard.";
+/** Where visitors are sent when the bot can't help or they aren't happy with an answer. */
+const SUPPORT_EMAIL = "Support@blackpropfunding.com";
+
+/** Shown when someone asks for a human or for contact details. */
+const SUPPORT_HINT = `I can't hand you over to a person from this chat, but our support team can help. Email us at ${SUPPORT_EMAIL}`;
+
+/** Shown when someone says the answer didn't help. */
+const NOT_SATISFIED = [
+  `Sorry about that. Email us at ${SUPPORT_EMAIL} and our team will get you a proper answer.`,
+  "Or ask me again in different words — I may have misread the question.",
+];
 
 /* -------------------------------------------------------------------- */
 /*  KNOWLEDGE BASE                                                      */
@@ -1302,6 +1310,7 @@ const PHRASES: [RegExp, string][] = [
   [/\bterms (and|&) conditions\b/g, " terms "],
   [/\breal[- ]time\b/g, " realtime "],
   [/\bwhat can i trade\b/g, " product trade "],
+  [/\bwhat('?s| is| are)? not (allowed|permitted)\b/g, " prohibited "],
   [/\bhow much (is|are|does|for)\b/g, " price "],
   [/\bmanipulat\w*( the| my| your)? (price|prices|pricing)\b/g, " manipulate quotes "],
 ];
@@ -1592,8 +1601,8 @@ function answerQuery(query: string, plans: PlanId[] | null): Result {
       kind: "na",
       parts: [
         plansWithAnswer.length
-          ? `I don't have a specific answer on that for ${name}. I do have it for the plans below, if that helps.`
-          : `I don't have a specific answer on that for ${name}.`,
+          ? `I don't have a specific answer on that for ${name}. I do have it for the plans below — or email us at ${SUPPORT_EMAIL}`
+          : `I don't have a specific answer on that for ${name}. Email us at ${SUPPORT_EMAIL} and the team will help.`,
       ],
       chips: plansWithAnswer.map((p) => PLAN_LABEL[p]),
       score,
@@ -1631,15 +1640,18 @@ const RE = {
   affirm: /^(ok|okay|k|kk|cool|nice|great|got it|alright|all right|perfect|understood|makes sense|good|fine|sure|awesome)[\s!.,]*$/,
   identity: /\b(are|r) (you|u) (a |an )?(real|human|bot|ai|robot|person)\b|\bwho (are|r) (you|u)\b|\bwhat are (you|u)\b/,
   help: /^(help|menu|options|what can (you|u) (do|help( me)? with))[\s?!.]*$/,
-  human: /\b(human|live agent|real person|live chat|support team|customer (support|service|care)|(talk|speak|chat) (to|with) (someone|somebody|a person|an agent|support|a human)|contact (you|support|us)|phone number|whatsapp|telegram|discord)\b/,
+  human: /\b(human|live agent|real person|live chat|support|customer (service|care)|(talk|speak|chat) (to|with) (someone|somebody|a person|an agent|a human)|contact|get in touch|reach (you|out)|e-?mail|phone number|whatsapp|telegram|discord)\b/,
+  unhappy: /\b(not (helpful|helping|satisfied|happy|useful|clear|right|correct|the answer|what i (asked|meant|want|wanted|need|needed))|(didn'?t|doesn'?t|does not|did not|don'?t|do not) (help|answer|understand|get it|make sense)|wrong answer|that'?s wrong|this is wrong|useless|unsatisfied|dissatisfied|still (confused|unclear|not clear)|bad answer|no help)\b/,
   notSure: /^(i'?m |im |i am )?(not sure|unsure|no idea|not sure yet)\b|^(i )?(don'?t|do not) know\b|^idk\b|^general\b|^(any|either)( of them| one)?[\s!.]*$/,
   followUp: /^((and|so|ok|okay)[\s,]+)?((what|how) about|same for|for|on|in|with|and)\b/,
   aboutPlan: /\b(what|tell|explain|about|how|info|details?|overview|describe|rules?|have|offer|available|is there)\b/,
   howWork: /^(so[\s,]+)?(how (does|do) (it|this|that) work|explain( it| that)?|tell me more|more info|more details|details)[\s?!.]*$/,
 };
 
-const FALLBACK =
-  "Hmm, I don't have an answer for that one. I can help with plan rules — drawdown, daily loss limit, payouts, leverage, platforms, add-ons and so on. Could you put it another way?";
+const FALLBACK = [
+  "Hmm, I don't have an answer for that one. I can help with plan rules — drawdown, daily loss limit, payouts, leverage, platforms, add-ons and so on.",
+  `Try putting it another way, or email us at ${SUPPORT_EMAIL} and the team will help.`,
+];
 
 /**
  * Pure function: give it what the visitor typed plus the conversation
@@ -1661,7 +1673,10 @@ export function getBotReply(input: string, ctx: BotContext): BotReply {
         return { parts: ["No problem — here's the general rule:", ...r.parts], chips: [], ctx: next };
       }
       return {
-        parts: ["No problem. That one really does depend on the plan — you'll find your plan name in your dashboard or your purchase email."],
+        parts: [
+          "No problem. That one really does depend on the plan — you'll find your plan name in your dashboard or your purchase email.",
+          `If you can't find it, email us at ${SUPPORT_EMAIL} and we'll check for you.`,
+        ],
         chips: [],
         ctx: next,
       };
@@ -1673,6 +1688,12 @@ export function getBotReply(input: string, ctx: BotContext): BotReply {
   const mentioned = detectPlans(low, ctx.plans);
   if (mentioned) next.plans = mentioned;
   const content = tokenize(stripPlanWords(low)).filter((t) => !["crypto", "cryptocurrency", "forex", "fx", "how", "account", "general"].includes(t));
+
+  /* --- "that didn't help" -> point them to the support email --- */
+  if (RE.unhappy.test(low)) {
+    next.pending = null;
+    return { parts: NOT_SATISFIED, chips: [], ctx: next };
+  }
 
   /* --- small talk --- */
   if (!mentioned) {
@@ -1765,7 +1786,7 @@ export function getBotReply(input: string, ctx: BotContext): BotReply {
   if (useful.length === 0) {
     next.pending = null;
     if (RE.human.test(low)) return { parts: [SUPPORT_HINT], chips: [], ctx: next };
-    return { parts: [FALLBACK], chips: [], ctx: next };
+    return { parts: FALLBACK, chips: [], ctx: next };
   }
 
   const parts: string[] = [];
@@ -1832,26 +1853,28 @@ function TypingDots() {
   );
 }
 
-/** Message text with clickable links. */
+/** Message text with clickable links and email addresses. */
 function MessageText({ text }: { text: string }) {
-  const pieces = text.split(/(https?:\/\/[^\s]+)/g);
+  const pieces = text.split(/(https?:\/\/[^\s]+|[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)+)/g);
+  const linkClass =
+    "break-all font-semibold text-[#D3A3FF] underline decoration-[#BE6CFF]/40 underline-offset-2 hover:text-white";
   return (
     <>
-      {pieces.map((piece, i) =>
-        i % 2 === 1 ? (
-          <a
-            key={i}
-            href={piece}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="break-all text-[#D3A3FF] underline decoration-[#BE6CFF]/40 underline-offset-2 hover:text-white"
-          >
+      {pieces.map((piece, i) => {
+        if (i % 2 === 0) return <span key={i}>{piece}</span>;
+        if (piece.includes("@")) {
+          return (
+            <a key={i} href={`mailto:${piece}`} className={linkClass}>
+              {piece}
+            </a>
+          );
+        }
+        return (
+          <a key={i} href={piece} target="_blank" rel="noopener noreferrer" className={linkClass}>
             {piece}
           </a>
-        ) : (
-          <span key={i}>{piece}</span>
-        )
-      )}
+        );
+      })}
     </>
   );
 }
@@ -2115,7 +2138,15 @@ export function AIChatbot() {
               >
                 Restart conversation
               </button>
-              <span className="text-[10px] text-white/25">Automated answers from our FAQ</span>
+              <span className="text-[11px] font-medium text-white/35">
+                Not satisfied?{" "}
+                <a
+                  href={`mailto:${SUPPORT_EMAIL}`}
+                  className="font-bold text-[#D3A3FF] underline decoration-[#BE6CFF]/40 underline-offset-4 transition hover:text-white"
+                >
+                  Email us
+                </a>
+              </span>
             </div>
           </div>
         </div>
