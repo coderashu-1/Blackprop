@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Navbar from "@/components/layout/navbar";
+import Footer from "@/components/layout/footer";
 
 const commissionTiers = [
   {
@@ -516,17 +517,7 @@ export default function AffiliatePage() {
         </section>
       </div>
 
-      <footer className="border-t border-white/[0.07]">
-        <div className="mx-auto flex max-w-[1180px] flex-col gap-3 px-5 py-8 text-center sm:px-7 md:flex-row md:items-center md:justify-between md:text-left lg:px-10">
-          <div className="flex items-center justify-center gap-2 md:justify-start">
-            <BPMark width={15} height={20} />
-            <span className="text-sm font-bold">BlackProp</span>
-          </div>
-          <p className="text-[10px] uppercase tracking-[0.14em] text-white/25">
-            BlackProp Affiliates · Last updated 2026-06-16
-          </p>
-        </div>
-      </footer>
+      <Footer />
     </main>
   );
 }
