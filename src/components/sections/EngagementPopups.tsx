@@ -462,7 +462,18 @@ function EmailCaptureModal() {
       });
 
       if (!response.ok) {
-        throw new Error("Subscription failed");
+        let message = "Subscription failed";
+
+        try {
+          const data = await response.json();
+          if (typeof data?.error === "string") {
+            message = data.error;
+          }
+        } catch {
+          // Keep the generic message if the API does not return JSON.
+        }
+
+        throw new Error(message);
       }
 
       window.localStorage.setItem(SUBSCRIBED_KEY, "1");
