@@ -1191,7 +1191,7 @@ export function Challenges() {
           : { icon: "loss", label: "Max Loss", value: r.maxLoss },
       );
 
-      if (r.maxDrawdown) {
+      if (r.maxDrawdown && !(market === "Forex" && model === "1 Step")) {
         baseRows.push({
           icon: "loss",
           label: "Max Drawdown",
