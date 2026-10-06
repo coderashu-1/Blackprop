@@ -78,7 +78,7 @@ const ACTIVITY_FIRST_DELAY = 12000;
 const ACTIVITY_VISIBLE_TIME = 6000;
 const ACTIVITY_NEXT_DELAY_MIN = 12000;
 const ACTIVITY_NEXT_DELAY_MAX = 18000;
-const EMAIL_POPUP_DELAY = 6500;
+const EMAIL_POPUP_DELAY = 20000; // 20 seconds
 
 /* =========================================================
    ICONS
@@ -367,9 +367,9 @@ function ActivityPopup({
                 BlackProp • just now
               </p>
             </div>
+          </div>
         </div>
       </div>
-    </div>
     </div>
   );
 }
