@@ -124,8 +124,8 @@ type ComparisonRow = {
 
 /* =========================================================
    DATA
-   Source: BlackProp_Official_Challenges.xlsx
-   ("All Challenges" sheet — website data, 22 Sep 2026)
+   Source: BlackProp_Dicount_code-40.xlsx
+   ("All Challenges" sheet — 40% discount code pricing)
 ========================================================= */
 
 const markets: Market[] = [
@@ -432,12 +432,12 @@ function isPopular(market: Market, model: Model, accountValue: number) {
 
 /* ---------------------------------------------------------
    PRICING — taken directly from the "All Challenges" sheet
-   (Challenge fee / Challenge Fees rows), 22 Sep 2026.
+   (Challenge fee / Challenge Fees rows) — BlackProp_Dicount_code-40.xlsx.
    These are the ORIGINAL (pre-discount) fees.
 --------------------------------------------------------- */
 
-// Sheet: sale price = original fee minus 30% (used for the price maths only).
-const DISCOUNT_PERCENT = 30;
+// Sheet: sale price = original fee minus 40% (used for the price maths only).
+const DISCOUNT_PERCENT = 40;
 
 const cfdPricing: Record<"1 Step" | "2 Step" | "Instant", Record<number, number>> = {
   "1 Step": {
@@ -514,9 +514,9 @@ function getModelBasePrice(
   return cfdPricing[model][accountValue] ?? 0;
 }
 
-// Sale price = original − 30%.
-// Integer maths (original × 70 ÷ 100) so every result matches the sheet
-// to the cent: $375 → $262.50, $428 → $299.60, $2088 → $1461.60, etc.
+// Sale price = original − 40%.
+// Integer maths (original × 60 ÷ 100) so every result matches the sheet
+// to the cent: $375 → $225.00, $428 → $256.80, $2088 → $1252.80, etc.
 function getSalePrice(original: number): number {
   return Math.round(original * (100 - DISCOUNT_PERCENT)) / 100;
 }
@@ -678,8 +678,8 @@ const modelRulesByMarket: Record<Market, Record<Model, RuleSet>> = {
 };
 
 /* =========================================================
-   EXACT EXCEL PRICING — 22 SEP 2026
-   (original fees, before the 30% discount)
+   EXACT EXCEL PRICING — 40% DISCOUNT SHEET
+   (original fees, before the 40% discount)
 ========================================================= */
 
 const exactPricing: Record<
@@ -719,7 +719,7 @@ const exactPricing: Record<
 };
 
 /* =========================================================
-   EXACT EXCEL ADD-ON AMOUNTS — 22 SEP 2026
+   EXACT EXCEL ADD-ON AMOUNTS (calculated on the original fee)
    Keys must match the add-on titles in the rules above.
 ========================================================= */
 
@@ -987,23 +987,30 @@ function CryptoCoins({ size = 26 }: { size?: number }) {
   );
 }
 
-// RISE wordmark.
-function RiseWordmark() {
+// RISE logo — purple circle badge with a white up-right arrow, plus the "rise" wordmark.
+function RiseWordmark({ size = 26 }: { size?: number }) {
   return (
-    <svg viewBox="0 0 72 30" className="block h-auto w-[66px] max-w-full" role="img" aria-label="rise">
-      <text
-        x="36"
-        y="23"
-        textAnchor="middle"
-        fill="white"
-        fontSize="26"
-        fontWeight="800"
-        fontFamily="Arial, Helvetica, sans-serif"
-        letterSpacing="-0.6"
+    <span className="flex items-center gap-1.5" role="img" aria-label="Rise">
+      <svg
+        viewBox="0 0 100 100"
+        width={size}
+        height={size}
+        className="block shrink-0"
+        aria-hidden="true"
+      >
+        <circle cx="50" cy="50" r="48.2" fill="#5555E0" stroke="#D2D2D2" strokeWidth="3.2" />
+        <g transform="scale(0.1852)" fill="#F4F4FB">
+          <path d="M240 168H378V375H332V232L190 375H140L296 214H240Z" />
+          <path d="M244 168H205Q165 168 165 212V250Q165 262 176 254L222 214H244Z" />
+        </g>
+      </svg>
+      <span
+        className="text-[19px] font-extrabold leading-none tracking-[-0.03em] text-white"
+        style={{ fontFamily: "Arial, Helvetica, sans-serif" }}
       >
         rise
-      </text>
-    </svg>
+      </span>
+    </span>
   );
 }
 
@@ -1079,7 +1086,7 @@ function CryptoLogosMark({ payout = false }: { payout?: boolean }) {
 function RisePayoutMark() {
   return (
     <div className="flex min-w-0 items-center gap-3" aria-label="RISE payout">
-      <span className="flex h-9 w-[84px] shrink-0 items-center justify-center rounded-[10px] border border-[#7655ff]/30 bg-[#151515] px-2 shadow-[0_7px_22px_rgba(118,85,255,.16)]">
+      <span className="flex h-9 w-[96px] shrink-0 items-center justify-center rounded-[10px] border border-[#7655ff]/30 bg-[#151515] px-2 shadow-[0_7px_22px_rgba(118,85,255,.16)]">
         <RiseWordmark />
       </span>
       <span className="min-w-0 text-left">
@@ -1087,7 +1094,7 @@ function RisePayoutMark() {
           RISE
         </span>
         <span className="mt-0.5 block text-[9px] font-medium leading-4 text-white/42 sm:text-[10px]">
-          Secure payout network
+          Secure payout
         </span>
       </span>
     </div>
@@ -1330,8 +1337,8 @@ export function Challenges() {
   );
 
   // CHALLENGE FEE SALE PRICING
-  // All challenge fees use the 30% discount from the official sheet.
-  // Sale price = original price - 30% = original price × 0.70.
+  // All challenge fees use the 40% discount from the official sheet.
+  // Sale price = original price - 40% = original price × 0.60.
   // This applies to Forex / CFD, Futures, and Crypto across all models.
   function priceFor(value: number) {
     const original = getModelBasePrice(market, model, value);

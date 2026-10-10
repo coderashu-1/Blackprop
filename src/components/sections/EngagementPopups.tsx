@@ -76,9 +76,9 @@ const SNOOZE_DAYS = 7;
 // Popup timing controls
 const ACTIVITY_FIRST_DELAY = 12000;
 const ACTIVITY_VISIBLE_TIME = 6000;
-const ACTIVITY_NEXT_DELAY_MIN = 12000;
-const ACTIVITY_NEXT_DELAY_MAX = 18000;
-const EMAIL_POPUP_DELAY = 20000; // 20 seconds
+const ACTIVITY_NEXT_DELAY_MIN = 60000; // 1 minute gap between bottom-left popups
+const ACTIVITY_NEXT_DELAY_MAX = 60000; // same as MIN = exactly 1 minute
+const EMAIL_POPUP_DELAY = 0; // email popup opens instantly
 
 /* =========================================================
    ICONS
